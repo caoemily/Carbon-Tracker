@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">CarbonTracker</string>
+    <string name="pie_chart">Pie Chart</string>
+    <string name="go_to_main">Go to Main</string>
 </resources>
