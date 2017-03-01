@@ -9,7 +9,7 @@ public class Route {
     private int distance;
     private int highwayPer;
     private int cityPer;
-    private boolean saved;
+    private String date;
 
 
     // Set member data based on parameters.
@@ -28,7 +28,7 @@ public class Route {
         this.distance = distanceInKm;
         this.highwayPer = highwayPer;
         this.cityPer = cityPer;
-        this.saved = false;
+        this.date = "dd/MM/yyyy";
     }
 
     public int getCityPer() {
@@ -81,14 +81,32 @@ public class Route {
         else{
             this.rName = rName;
         }
-
     }
 
-    public boolean isSaved() {
-        return saved;
+    public String getDate() {return date;}
+
+    public void setDate(String rDate){
+        if(date.isEmpty()){
+            throw new IllegalArgumentException();
+        }
+        else{
+            this.date = rDate;
+        }
     }
 
-    public void setSaved(boolean saved) {
-        this.saved = saved;
+    public void setRoute(Route route){
+        this.setName(route.getName());
+        this.setDistance(route.getDistance());
+        this.setHighwayPer(route.getHighwayPer());
+        this.setCityPer(route.getCityPer());
+        this.setDate(route.getDate());
     }
+
+    public String getSingleRouteDes() {
+        String descriptions = "";
+        descriptions += this.getDate() + " - " + this.getName() + " - " + this.getDistance() + "km" + " - "
+                    + this.getHighwayPer() + "%" + " - " + this.getCityPer() + "%";
+        return descriptions;
+    }
+
 }

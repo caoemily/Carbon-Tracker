@@ -10,4 +10,25 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.sfu276assg1.yancao.carbontracker.MainActivity">
 
+    <Button
+        android:text="Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="44dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="78dp"
+        android:id="@+id/btn_main" />
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btn_main"
+        android:layout_alignLeft="@+id/btn_main"
+        android:layout_alignStart="@+id/btn_main"
+        android:layout_marginTop="60dp"
+        android:id="@+id/text_main" />
 </RelativeLayout>

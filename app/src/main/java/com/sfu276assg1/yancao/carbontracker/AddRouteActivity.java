@@ -9,6 +9,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class AddRouteActivity extends AppCompatActivity {
 
     @Override
@@ -16,7 +20,19 @@ public class AddRouteActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_route);
         setupAcceptButton();
-        setupCancelButton();
+        setupNoSaveButton();
+    }
+
+    private void setupNoSaveButton() {
+        Button accBtn = (Button) findViewById(R.id.btn_noSaveRoute);
+        accBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Route current = getRouteInfo();
+                CarbonModel.getInstance().getCurrentRoute().setRoute(current);
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            }
+        });
     }
 
     private void setupAcceptButton() {
@@ -24,14 +40,30 @@ public class AddRouteActivity extends AppCompatActivity {
         accBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                okButtonClick();
+                Intent returnValueIntent = getIntent();
+                int index = returnValueIntent.getIntExtra("routeIndex",-1);
+                Route current = getRouteInfo();
+                EditText routeNameEntry = (EditText) findViewById(R.id.editText_enterRouteName);
+                String routeName = routeNameEntry.getText().toString();
+                if(routeName.length()==0||routeName==null){
+                    Toast.makeText(getApplicationContext(),"Please enter a name for the route.",Toast.LENGTH_LONG).show();
+                }
+                else{
+                    current.setName(routeName);
+                    if(index == -1){
+                        CarbonModel.getInstance().getRouteCollection().addRoute(current);
+                    }
+                    else{
+                        CarbonModel.getInstance().getRouteCollection().changeRoute(current,index);
+                    }
+                    CarbonModel.getInstance().getCurrentRoute().setRoute(current);
+                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                }
             }
         });
     }
 
-    private void okButtonClick(){
-        EditText routeNameEntry = (EditText) findViewById(R.id.editText_enterRouteName);
-        String routeName = routeNameEntry.getText().toString();
+    private Route getRouteInfo() {
         EditText routeDistanceEntry = (EditText) findViewById(R.id.editView_enterDistance);
         String routeDistanceData = routeDistanceEntry.getText().toString();
         int routeDistance = Integer.parseInt(routeDistanceData);
@@ -41,51 +73,10 @@ public class AddRouteActivity extends AppCompatActivity {
         EditText cityPerEntry = (EditText) findViewById(R.id.editView_enterCityPer);
         String cityPerData = cityPerEntry.getText().toString();
         int cityPer = Integer.parseInt(cityPerData);
-
-
-        Intent returnValueIntent = new Intent();
-        returnValueIntent.putExtra("routeName", routeName);
-        returnValueIntent.putExtra("routeDistance", routeDistance);
-        returnValueIntent.putExtra("highwayPer", highwayPer);
-        returnValueIntent.putExtra("cityPer", cityPer);
-        setResult(Activity.RESULT_OK, returnValueIntent);
-        finish();
-
-
-//        int potWeight = validPositiveNum(routeDistanceData);
-//        String potName = validString(potNameData);
-//        if(potName==null|| potWeight <=0) {
-//            if (potName==null) {
-//                String message = "Pot name can't be left empty.";
-//                Toast.makeText(EnterNewPot.this, message, Toast.LENGTH_SHORT).show();
-//            }
-//            if (potWeight <= 0) {
-//                String message1 = "Pot weight must be positive number";
-//                Toast.makeText(EnterNewPot.this, message1, Toast.LENGTH_SHORT).show();
-//            }
-//        }
-//        else {
-//            Intent returnPotValueIntent = new Intent();
-//            returnPotValueIntent.putExtra(POT_NAME, potName);
-//            returnPotValueIntent.putExtra(POT_WEIGHT, potWeight);
-//            setResult(Activity.RESULT_OK, returnPotValueIntent);
-//            finish();
-//        }
-    }
-
-    private void setupCancelButton() {
-        Button noBtn = (Button) findViewById(R.id.btn_cancelRoute);
-        noBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                cancelButtonClick();
-            }
-        });
-    }
-
-    private void cancelButtonClick(){
-        Intent returnIntent = new Intent();
-        setResult(Activity.RESULT_CANCELED, returnIntent);
-        finish();
+        Route newRoute = new Route(routeDistance, highwayPer, cityPer);
+        DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        String date = formatter.format(new Date());
+        newRoute.setDate(date);
+        return newRoute;
     }
 }
