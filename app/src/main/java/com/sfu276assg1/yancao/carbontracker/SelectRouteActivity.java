@@ -1,14 +1,8 @@
 package com.sfu276assg1.yancao.carbontracker;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.NotificationCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -25,8 +19,24 @@ public class SelectRouteActivity extends AppCompatActivity {
         setContentView(R.layout.activity_select_route);
         setLaunchNewRoute();
         launchEditOrDelete();
-        registerClickListItem();
+        selectExistingRoute();
         populatePotListView();
+    }
+
+    private void selectExistingRoute(){
+        ListView routeList = (ListView) findViewById(R.id.listView_selectRoute);
+        routeList.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+            @Override
+            public void onItemClick(AdapterView<?> parent, View viewClicked, int position, long id) {
+                TextView textView = (TextView) viewClicked;
+                String message = "You have chosen:  " + textView.getText().toString();
+                Toast.makeText(getApplicationContext(),message,Toast.LENGTH_LONG).show();
+//                Route current = CarbonModel.getInstance().getRouteCollection().getRoute(position);
+//                CarbonModel.getInstance().getCurrentRoute().setRoute(current);
+                finish();
+                startActivity(new Intent(getApplicationContext(),MainActivity.class));
+            }
+        });
     }
 
     private void setLaunchNewRoute() {
@@ -73,20 +83,7 @@ public class SelectRouteActivity extends AppCompatActivity {
         routeList.setAdapter(routeAdapter);
     }
 
-    private void registerClickListItem(){
-        ListView routeList = (ListView) findViewById(R.id.listView_selectRoute);
-        routeList.setOnItemClickListener(new AdapterView.OnItemClickListener(){
-            @Override
-            public void onItemClick(AdapterView<?> parent, View viewClicked, int position, long id) {
-                TextView textView = (TextView) viewClicked;
-                String message = "You have chosen:  " + textView.getText().toString();
-                Toast.makeText(getApplicationContext(),message,Toast.LENGTH_LONG).show();
-                startActivity(new Intent(getApplicationContext(),MainActivity.class));
-                finish();
 
-            }
-        });
-    }
 
 }
 

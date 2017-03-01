@@ -8,7 +8,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SelectRouteActivity">
+        <activity android:name=".WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -18,7 +18,7 @@
         <activity android:name=".MainActivity" />
         <activity android:name=".SelectTransModeActivity" />
         <activity android:name=".AddCarActivity" />
-        <activity android:name=".WelcomeActivity" />
+        <activity android:name=".SelectRouteActivity" />
         <activity android:name=".AddRouteActivity" />
         <activity android:name=".CurrentJourneyActivity" />
         <activity android:name=".DisplayCarbonFootprintActivity"></activity>

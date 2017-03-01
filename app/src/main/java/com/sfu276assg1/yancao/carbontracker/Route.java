@@ -1,19 +1,14 @@
 package com.sfu276assg1.yancao.carbontracker;
 
-/**
- * Created by yancao on 2017-02-27.
- */
-
 public class Route {
     private String rName;
-    private int distance;
-    private int highwayPer;
-    private int cityPer;
-    private String date;
+    private double distance;
+    private double highwayPer;
+    private double cityPer;
 
 
     // Set member data based on parameters.
-    public Route(int distanceInKm, int highwayPer, int cityPer) {
+    public Route(double distanceInKm, double highwayPer, double cityPer) {
         if(distanceInKm<=0){
             throw new IllegalArgumentException();
         }
@@ -28,14 +23,13 @@ public class Route {
         this.distance = distanceInKm;
         this.highwayPer = highwayPer;
         this.cityPer = cityPer;
-        this.date = "dd/MM/yyyy";
     }
 
-    public int getCityPer() {
+    public double getCityPer() {
         return cityPer;
     }
 
-    public void setCityPer(int cityPer) {
+    public void setCityPer(double cityPer) {
         if(cityPer<0||cityPer>100){
             throw new IllegalArgumentException();
         }
@@ -44,11 +38,11 @@ public class Route {
         }
     }
 
-    public int getDistance() {
+    public double getDistance() {
         return distance;
     }
 
-    public void setDistance(int distance) {
+    public void setDistance(double distance) {
         if(distance<=0){
             throw new IllegalArgumentException();
         }
@@ -57,11 +51,11 @@ public class Route {
         }
     }
 
-    public int getHighwayPer() {
+    public double getHighwayPer() {
         return highwayPer;
     }
 
-    public void setHighwayPer(int highwayPer) {
+    public void setHighwayPer(double highwayPer) {
         if(highwayPer<0||highwayPer>100){
             throw new IllegalArgumentException();
         }
@@ -83,28 +77,17 @@ public class Route {
         }
     }
 
-    public String getDate() {return date;}
-
-    public void setDate(String rDate){
-        if(date.isEmpty()){
-            throw new IllegalArgumentException();
-        }
-        else{
-            this.date = rDate;
-        }
-    }
 
     public void setRoute(Route route){
         this.setName(route.getName());
         this.setDistance(route.getDistance());
         this.setHighwayPer(route.getHighwayPer());
         this.setCityPer(route.getCityPer());
-        this.setDate(route.getDate());
     }
 
     public String getSingleRouteDes() {
         String descriptions = "";
-        descriptions += this.getDate() + " - " + this.getName() + " - " + this.getDistance() + "km" + " - "
+        descriptions += this.getName() + " - " + this.getDistance() + "km" + " - "
                     + this.getHighwayPer() + "%" + " - " + this.getCityPer() + "%";
         return descriptions;
     }

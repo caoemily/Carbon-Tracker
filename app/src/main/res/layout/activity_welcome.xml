@@ -14,4 +14,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Group Peach~" />
+
+    <Button
+        android:text="@string/go_to_main"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:id="@+id/testing" />
 </RelativeLayout>

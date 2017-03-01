@@ -3,9 +3,6 @@ package com.sfu276assg1.yancao.carbontracker;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by yancao on 2017-02-27.
- */
 
 public class RouteCollection {
     private List<Route> routes = new ArrayList<>();
