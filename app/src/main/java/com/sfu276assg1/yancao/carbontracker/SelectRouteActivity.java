@@ -47,6 +47,7 @@ public class SelectRouteActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), AddRouteActivity.class);
                 intent.putExtra("routeIndex", -1);
+                finish();
                 startActivity(intent);
             }
         });
@@ -76,6 +77,7 @@ public class SelectRouteActivity extends AppCompatActivity {
 
                 Intent intent = new Intent(getApplicationContext(), AddRouteActivity.class);
                 intent.putExtra("routeIndex", position);
+                finish();
                 startActivity(intent);
                 return true;
             }

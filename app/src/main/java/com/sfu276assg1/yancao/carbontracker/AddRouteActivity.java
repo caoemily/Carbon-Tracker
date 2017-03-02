@@ -27,7 +27,7 @@ public class AddRouteActivity extends AppCompatActivity {
                 if(add!=null){
                     EditText routeNameEntry = (EditText) findViewById(R.id.editText_enterRouteName);
                     String routeName = routeNameEntry.getText().toString();
-                    if(routeName!=null){
+                    if(!routeName.isEmpty()){
                         add.setName(routeName);
                     }
                     CarbonModel.getInstance().addRouteToCollecton(add);
