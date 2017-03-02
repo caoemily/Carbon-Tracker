@@ -78,12 +78,12 @@ public class Route {
     }
 
 
-    public void setRoute(Route route){
-        this.setName(route.getName());
-        this.setDistance(route.getDistance());
-        this.setHighwayPer(route.getHighwayPer());
-        this.setCityPer(route.getCityPer());
-    }
+//    public void setRoute(Route route){
+//        this.setName(route.getName());
+//        this.setDistance(route.getDistance());
+//        this.setHighwayPer(route.getHighwayPer());
+//        this.setCityPer(route.getCityPer());
+//    }
 
     public String getSingleRouteDes() {
         String descriptions = "";

@@ -25,6 +25,12 @@ public class AddRouteActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Route add = isValidRouteInput();
                 if(add!=null){
+                    EditText routeNameEntry = (EditText) findViewById(R.id.editText_enterRouteName);
+                    String routeName = routeNameEntry.getText().toString();
+                    if(routeName!=null){
+                        add.setName(routeName);
+                    }
+                    CarbonModel.getInstance().addRouteToCollecton(add);
                     finish();
                     startActivity(new Intent(getApplicationContext(), MainActivity.class));
                 }
@@ -48,14 +54,12 @@ public class AddRouteActivity extends AppCompatActivity {
                     }
                     else{
                         add.setName(routeName);
-//                        CarbonModel.getInstance().getCurrentRoute().setName(routeName);
-//                        Route current = CarbonModel.getInstance().getCurrentRoute();
-
+                        CarbonModel.getInstance().addRouteToCollecton(add);
                         if(index == -1){
-                            CarbonModel.getInstance().getRouteCollection().addRoute(add);
+                            CarbonModel.getInstance().addRouteToCollecton(add);
                         }
                         else{
-                            CarbonModel.getInstance().getRouteCollection().changeRoute(add,index);
+                            CarbonModel.getInstance().changeRouteInCollection(add,index);
                         }
                         finish();
                         startActivity(new Intent(getApplicationContext(), MainActivity.class));
@@ -96,15 +100,15 @@ public class AddRouteActivity extends AppCompatActivity {
         }
         else{
             Route newRoute = new Route(routeDistance, highwayPer, cityPer);
-//            CarbonModel.getInstance().getCurrentRoute().setRoute(newRoute);
+
             return newRoute;
         }
         return null;
     }
 
-    public static double validPositiveNum(String text) {
+    public double validPositiveNum(String text) {
         int index =0;
-        double result = 0;
+        double result = -1;
         for(int i=0; i<text.length();i++){
             if (text.charAt(i)!=' '){
                 index = i;

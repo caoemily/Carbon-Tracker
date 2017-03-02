@@ -18,8 +18,9 @@ public class SelectRouteActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_route);
         setLaunchNewRoute();
-        launchEditOrDelete();
+        setLaunchEdit();
         selectExistingRoute();
+        setDelRoute();
         populatePotListView();
     }
 
@@ -31,8 +32,8 @@ public class SelectRouteActivity extends AppCompatActivity {
                 TextView textView = (TextView) viewClicked;
                 String message = "You have chosen:  " + textView.getText().toString();
                 Toast.makeText(getApplicationContext(),message,Toast.LENGTH_LONG).show();
-//                Route current = CarbonModel.getInstance().getRouteCollection().getRoute(position);
-//                CarbonModel.getInstance().getCurrentRoute().setRoute(current);
+                Route current = CarbonModel.getInstance().getRouteFromCollection(position);
+                CarbonModel.getInstance().addRouteToCollecton(current);
                 finish();
                 startActivity(new Intent(getApplicationContext(),MainActivity.class));
             }
@@ -51,7 +52,19 @@ public class SelectRouteActivity extends AppCompatActivity {
         });
     }
 
-    private void launchEditOrDelete(){
+    private void setDelRoute() {
+        Button newRouteBtn = (Button) findViewById(R.id.btn_delRoute);
+        newRouteBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), DeleteRouteActivity.class);
+                startActivity(intent);
+            }
+        });
+
+    }
+
+    private void setLaunchEdit(){
         ListView potsList = (ListView) findViewById(R.id.listView_selectRoute);
         potsList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
@@ -60,12 +73,6 @@ public class SelectRouteActivity extends AppCompatActivity {
 
                 String message = "You selected: " + textView.getText().toString();
                 Toast.makeText(getApplicationContext(),message,Toast.LENGTH_LONG).show();
-
-//                TextView tv = (TextView) findViewById(R.id.text_editOrDel);
-//                FragmentManager manager = getSupportFragmentManager();
-//                RouteDeleteDialog dialog = new RouteDeleteDialog();
-//                dialog.show(manager, "RouteMessage");
-//                String s = tv.getText().toString();
 
                 Intent intent = new Intent(getApplicationContext(), AddRouteActivity.class);
                 intent.putExtra("routeIndex", position);
@@ -82,8 +89,4 @@ public class SelectRouteActivity extends AppCompatActivity {
         final ListView routeList = (ListView) findViewById(R.id.listView_selectRoute);
         routeList.setAdapter(routeAdapter);
     }
-
-
-
 }
-

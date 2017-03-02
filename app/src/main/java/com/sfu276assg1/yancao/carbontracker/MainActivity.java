@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -18,6 +19,8 @@ public class MainActivity extends AppCompatActivity {
 
         setUpAddJourneytButton();
         setUpViewDataButton();
+
+        showRouteInfo();
     }
 
 //    private void generateArrayList() {
@@ -28,6 +31,16 @@ public class MainActivity extends AppCompatActivity {
 //            Log.d("DEBUGGG", journey.toString());
 //        }
 //    }
+
+    private void showRouteInfo() {
+        RouteCollection rc= CarbonModel.getInstance().getRouteCollection();
+        if(rc.countRoutes()>0){
+            Route last = CarbonModel.getInstance().getLastRouteFromCollection();
+            String s = last.getSingleRouteDes();
+            Toast.makeText(getApplicationContext(),s,Toast.LENGTH_LONG).show();
+            CarbonModel.getInstance().removeLastRouteFromCollection();
+        }
+    }
 //
     private void setUpAddJourneytButton() {
         Button button = (Button) findViewById(R.id.addJourneyBtn);
