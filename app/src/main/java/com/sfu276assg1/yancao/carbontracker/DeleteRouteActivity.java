@@ -16,7 +16,7 @@ public class DeleteRouteActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_delete_route);
-        populatePotListView();
+        populateJourneyListView();
         setClickToDelete();
     }
 
@@ -35,7 +35,7 @@ public class DeleteRouteActivity extends AppCompatActivity {
         });
     }
 
-    private void populatePotListView() {
+    private void populateJourneyListView() {
         ArrayAdapter<String> routeAdapter = new ArrayAdapter<String>
                 (this,R.layout.routedescription,
                         CarbonModel.getInstance().getRouteCollection().getRouteDescriptions());

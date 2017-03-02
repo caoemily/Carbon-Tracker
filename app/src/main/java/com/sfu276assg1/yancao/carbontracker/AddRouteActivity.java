@@ -30,9 +30,9 @@ public class AddRouteActivity extends AppCompatActivity {
                     if(!routeName.isEmpty()){
                         add.setName(routeName);
                     }
-                    CarbonModel.getInstance().addRouteToCollecton(add);
+                    CarbonModel.getInstance().addRouteToAllRoute(add);
                     finish();
-                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                    startActivity(new Intent(getApplicationContext(), TempActivity.class));
                 }
             }
         });
@@ -54,7 +54,7 @@ public class AddRouteActivity extends AppCompatActivity {
                     }
                     else{
                         add.setName(routeName);
-                        CarbonModel.getInstance().addRouteToCollecton(add);
+                        CarbonModel.getInstance().addRouteToAllRoute(add);
                         if(index == -1){
                             CarbonModel.getInstance().addRouteToCollecton(add);
                         }
@@ -62,7 +62,7 @@ public class AddRouteActivity extends AppCompatActivity {
                             CarbonModel.getInstance().changeRouteInCollection(add,index);
                         }
                         finish();
-                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                        startActivity(new Intent(getApplicationContext(), TempActivity.class));
                     }
                 }
             }

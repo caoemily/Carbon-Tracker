@@ -22,7 +22,8 @@
         <activity android:name=".AddRouteActivity" />
         <activity android:name=".CurrentJourneyActivity" />
         <activity android:name=".DisplayCarbonFootprintActivity" />
-        <activity android:name=".DeleteRouteActivity"></activity>
+        <activity android:name=".DeleteRouteActivity" />
+        <activity android:name=".TempActivity" />
     </application>
 
 </manifest>

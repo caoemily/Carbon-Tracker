@@ -21,7 +21,7 @@ public class SelectRouteActivity extends AppCompatActivity {
         setLaunchEdit();
         selectExistingRoute();
         setDelRoute();
-        populatePotListView();
+        populateRouteListView();
     }
 
     private void selectExistingRoute(){
@@ -33,9 +33,9 @@ public class SelectRouteActivity extends AppCompatActivity {
                 String message = "You have chosen:  " + textView.getText().toString();
                 Toast.makeText(getApplicationContext(),message,Toast.LENGTH_LONG).show();
                 Route current = CarbonModel.getInstance().getRouteFromCollection(position);
-                CarbonModel.getInstance().addRouteToCollecton(current);
+                CarbonModel.getInstance().addRouteToAllRoute(current);
                 finish();
-                startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                startActivity(new Intent(getApplicationContext(),TempActivity.class));
             }
         });
     }
@@ -84,7 +84,7 @@ public class SelectRouteActivity extends AppCompatActivity {
         });
     }
 
-    private void populatePotListView() {
+    private void populateRouteListView() {
         ArrayAdapter<String> routeAdapter = new ArrayAdapter<String>
                 (this,R.layout.routedescription,
                         CarbonModel.getInstance().getRouteCollection().getRouteDescriptions());

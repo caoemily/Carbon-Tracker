@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
         setUpAddJourneytButton();
         setUpViewDataButton();
 
-        showRouteInfo();
+
     }
 
 //    private void generateArrayList() {
@@ -32,15 +32,7 @@ public class MainActivity extends AppCompatActivity {
 //        }
 //    }
 
-    private void showRouteInfo() {
-        RouteCollection rc= CarbonModel.getInstance().getRouteCollection();
-        if(rc.countRoutes()>0){
-            Route last = CarbonModel.getInstance().getLastRouteFromCollection();
-            String s = last.getSingleRouteDes();
-            Toast.makeText(getApplicationContext(),s,Toast.LENGTH_LONG).show();
-            CarbonModel.getInstance().removeLastRouteFromCollection();
-        }
-    }
+
 //
     private void setUpAddJourneytButton() {
         Button button = (Button) findViewById(R.id.addJourneyBtn);
