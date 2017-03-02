@@ -11,14 +11,22 @@
     tools:context="com.sfu276assg1.yancao.carbontracker.MainActivity">
 
     <Button
-        android:text="@string/pie_chart"
+        android:text="@string/add_new_journey"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/addJourneyBtn"
+        android:layout_above="@+id/viewDataBtn"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="14dp" />
+
+    <Button
+        android:text="@string/view_current_carbon_footprint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:id="@+id/viewDataBtn"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginRight="14dp"
-        android:layout_marginEnd="14dp"
-        android:layout_marginBottom="15dp"
-        android:id="@+id/pieChartTest" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 </RelativeLayout>

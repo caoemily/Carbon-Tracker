@@ -2,36 +2,48 @@ package com.sfu276assg1.yancao.carbontracker;
 
 import java.io.Serializable;
 
-/**
- * Created by yancao on 2017-02-27.
- */
 
 public class Journey implements Serializable {
-    public Journey(float numCarbon, String carName, String routeName) {
-        this.numCarbon = numCarbon;
-        this.carName = carName;
+
+    private String date;
+    private String routeName;
+    private float distance;
+    private String carName;
+    private float numCarbon;
+
+    public Journey(String date, String routeName, float distance, String carName) {
+        this.date = date;
         this.routeName = routeName;
+        this.distance = distance;
+        this.carName = carName;
     }
 
-    public float getNumCarbon() {
-        return numCarbon;
-    }
-
-    public String getCarName() {
-        return carName;
+    public String getDate() {
+        return date;
     }
 
     public String getRouteName() {
         return routeName;
     }
 
-    @Override
-    public String toString() {
-        return carName + " " + routeName + " " + numCarbon;
+    public float getDistance() {
+        return distance;
     }
 
-    private float numCarbon;
-    private String carName;
-    private String routeName;
+    public String getCarName() {
+        return carName;
+    }
 
+    public void setNumCarbon(int numCarbon) {
+        if (numCarbon < 0) {
+            throw new IllegalArgumentException();
+        }
+        else {
+            this.numCarbon = numCarbon;
+        }
+    }
+
+    public float getNumCarbon() {
+        return numCarbon;
+    }
 }
