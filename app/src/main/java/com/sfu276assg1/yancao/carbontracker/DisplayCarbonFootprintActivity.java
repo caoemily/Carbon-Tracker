@@ -3,6 +3,7 @@ package com.sfu276assg1.yancao.carbontracker;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Description;
@@ -22,8 +23,8 @@ public class DisplayCarbonFootprintActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_carbon_footprint);
 
-//        generateDataForChart();
-//        generatePieChart();
+        generateDataForChart();
+        generatePieChart();
     }
 
     private void generatePieChart() {
