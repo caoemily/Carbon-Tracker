@@ -5,6 +5,8 @@ import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -20,6 +22,19 @@ public class DisplayTableActivity extends AppCompatActivity {
         setContentView(R.layout.activity_display_table);
         retrieveData();
         populateTable();
+        setUpPieChartButton();
+    }
+
+    private void setUpPieChartButton() {
+        Button button = (Button) findViewById(R.id.showPieChart);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DisplayTableActivity.this, DisplayCarbonFootprintActivity.class);
+                intent.putExtra("Array List", list);
+                startActivity(intent);
+            }
+        });
     }
 
     private void retrieveData() {
@@ -43,7 +58,7 @@ public class DisplayTableActivity extends AppCompatActivity {
                     1.0f);
             params.setMargins(1,1,1,1);
             textView.setLayoutParams(params);
-            textView.setBackgroundColor(Color.WHITE);
+            textView.setBackgroundColor(Color.GRAY);
             textView.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
             textView.setPadding(0, 0, 0, 0);
             if (i == 0) {
