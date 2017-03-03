@@ -23,7 +23,7 @@
         <activity android:name=".CurrentJourneyActivity" />
         <activity android:name=".DisplayCarbonFootprintActivity" />
         <activity android:name=".DisplayTableActivity"
-            android:screenOrientation="landscape"></activity>
+            ></activity>
     </application>
 
 </manifest>
