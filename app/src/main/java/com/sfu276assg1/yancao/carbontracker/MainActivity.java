@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void generateArrayList() {
-        for(int i = 1; i < 6; i++) {
+        for(int i = 1; i < 10; i++) {
             list.add(new Journey("Today is: " + i,"This is routes " + i, i, "Honda " + i));
         }
         int i = 0;
