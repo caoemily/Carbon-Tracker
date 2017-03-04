@@ -17,25 +17,24 @@ import java.util.List;
 
 public class DisplayCarbonFootprintActivity extends AppCompatActivity {
 
-    private ArrayList<Journey> list = new ArrayList<>();
+    private JourneyCollection journeyCollection = CarbonModel.getInstance().getJourneyCollection();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_carbon_footprint);
 
-        generateDataForChart();
         generatePieChart();
     }
 
-   /* private void generatePieChart() {
+    private void generatePieChart() {
         List<PieEntry> yEntries = new ArrayList<>();
         List<String> xEntries = new ArrayList<>();
-        for(int i = 0; i < list.size(); i++) {
-            yEntries.add(new PieEntry(list.get(i).getNumCarbon(), list.get(i).getCarName()));
+        for(int i = 0; i < journeyCollection.countJourneys(); i++) {
+            yEntries.add(new PieEntry((float)journeyCollection.getJourney(i).getNumCarbon(),journeyCollection.getJourney(i).getCarName()));
         }
 
-        for(int i = 0; i < list.size(); i++) {
-            xEntries.add(list.get(i).getCarName());
+        for(int i = 0; i < journeyCollection.countJourneys(); i++) {
+            xEntries.add(journeyCollection.getJourney(i).getCarName());
         }
 
 
@@ -56,9 +55,4 @@ public class DisplayCarbonFootprintActivity extends AppCompatActivity {
         chart.animateY(2000);
         chart.invalidate();
     }
-
-    private void generateDataForChart() {
-        Intent intent = getIntent();
-        list = (ArrayList<Journey>)intent.getSerializableExtra("Array List");
-    }*/
 }

@@ -15,12 +15,12 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class DisplayTableActivity extends AppCompatActivity {
-    private ArrayList<Journey> list = new ArrayList<>();
+
+    private JourneyCollection journeyCollection = CarbonModel.getInstance().getJourneyCollection();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_table);
-        retrieveData();
         populateTable();
         setUpPieChartButton();
     }
@@ -31,16 +31,12 @@ public class DisplayTableActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(DisplayTableActivity.this, DisplayCarbonFootprintActivity.class);
-                intent.putExtra("Array List", list);
                 startActivity(intent);
             }
         });
     }
 
-    private void retrieveData() {
-            Intent intent = getIntent();
-            list = (ArrayList<Journey>)intent.getSerializableExtra("Array List");
-    }
+
 
     private void populateTable() {
         TableLayout table = (TableLayout) findViewById(R.id.table);
@@ -78,7 +74,7 @@ public class DisplayTableActivity extends AppCompatActivity {
             }
             titleRow.addView(textView);
         }
-        for(int row = 0; row < list.size(); row++) {
+        for(int row = 0; row < journeyCollection.countJourneys(); row++) {
             TableRow tableRow = new TableRow(this);
             tableRow.setLayoutParams(new TableLayout.LayoutParams(
                     TableLayout.LayoutParams.MATCH_PARENT,
@@ -97,19 +93,19 @@ public class DisplayTableActivity extends AppCompatActivity {
                 textView.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
                 textView.setPadding(0, 0, 0, 0);
                 if (col == 0) {
-                    textView.setText(list.get(row).getDate());
+                    textView.setText(journeyCollection.getJourney(row).getDate());
                 }
                 if (col == 1) {
-                    textView.setText(list.get(row).getRouteName());
+                    textView.setText(journeyCollection.getJourney(row).getRouteName());
                 }
                 if (col == 2) {
-                    textView.setText("" + list.get(row).getDistance());
+                    textView.setText("" + journeyCollection.getJourney(row).getDistance());
                 }
                 if (col == 3) {
-                    textView.setText("" + list.get(row).getCarName());
+                    textView.setText(journeyCollection.getJourney(row).getCarName());
                 }
                 if (col == 4) {
-                    textView.setText("" + list.get(row).getNumCarbon());
+                    textView.setText("" + journeyCollection.getJourney(row).getNumCarbon());
                 }
 
                 tableRow.addView(textView);

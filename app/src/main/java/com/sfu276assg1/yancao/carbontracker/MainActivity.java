@@ -11,13 +11,10 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-//    ArrayList<Journey> list = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-//        generateArrayList();
 
         setUpAddJourneytButton();
         setUpViewDataButton();
@@ -39,8 +36,7 @@ public class MainActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, DisplayCarbonFootprintActivity.class);
-//                intent.putExtra("Array List", list);
+                Intent intent = new Intent(MainActivity.this, DisplayTableActivity.class);
                 startActivity(intent);
             }
         });
