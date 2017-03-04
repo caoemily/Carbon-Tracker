@@ -54,7 +54,7 @@ public class DisplayTableActivity extends AppCompatActivity {
             textView.setLayoutParams(params);
             textView.setBackgroundColor(Color.GRAY);
             textView.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
-            textView.setPadding(0, 0, 0, 0);
+            textView.setPadding(50, 50, 50, 50);
             if (i == 0) {
                 textView.setText("Date");
             }
@@ -89,7 +89,7 @@ public class DisplayTableActivity extends AppCompatActivity {
                 textView.setLayoutParams(params);
                 textView.setBackgroundColor(Color.WHITE);
                 textView.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
-                textView.setPadding(0, 0, 0, 0);
+                textView.setPadding(50, 50, 50, 50);
                 if (col == 0) {
                     textView.setText(journeyCollection.getJourney(row).getDate());
                 }

@@ -22,14 +22,17 @@
         android:layout_marginBottom="0dp"
         android:layout_above="@+id/showPieChart"
         android:layout_alignParentTop="true">
-        <TableLayout
-            android:layout_width="fill_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="0dp"
-            android:layout_marginBottom="0dp"
-            android:stretchColumns="*"
-            android:id="@+id/table">
-        </TableLayout>
+        <HorizontalScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="wrap_content" android:layout_height="fill_parent">
+            <TableLayout
+              android:layout_width="fill_parent"
+              android:layout_height="match_parent"
+              android:layout_marginTop="0dp"
+              android:layout_marginBottom="0dp"
+              android:stretchColumns="*"
+             android:id="@+id/table">
+            </TableLayout>
+        </HorizontalScrollView>
     </ScrollView>
     <Button
         android:text="@string/show_pie_chart"
