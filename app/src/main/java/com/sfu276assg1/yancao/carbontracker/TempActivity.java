@@ -14,9 +14,20 @@ public class TempActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_temp);
-        populatePotListView();
         setLaunchMain();
+        addJourney();
+        populatePotListView();
 
+    }
+
+    private void addJourney() {
+        Car curCar = CarbonModel.getInstance().getLastCarInList();
+        if(curCar == null){
+            curCar = new Car("myCar");
+        }
+        Route curRoute = CarbonModel.getInstance().getLastRoute();
+        Journey curJourney = new Journey(curCar,curRoute);
+        CarbonModel.getInstance().addJourney(curJourney);
     }
 
 
@@ -33,11 +44,10 @@ public class TempActivity extends AppCompatActivity {
     }
 
     private void populatePotListView() {
-            RouteCollection rc= CarbonModel.getInstance().getAllRoute();;
-
+        JourneyCollection jc= CarbonModel.getInstance().getAllJourney();;
         ArrayAdapter<String> routeAdapter = new ArrayAdapter<String>
                 (this,R.layout.routedescription,
-                        rc.getRouteDescriptions());
+                        jc.getJourneyDescriptions());
         final ListView routeList = (ListView) findViewById(R.id.listView_journey);
         routeList.setAdapter(routeAdapter);
     }

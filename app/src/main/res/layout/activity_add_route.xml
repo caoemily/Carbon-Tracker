@@ -45,7 +45,7 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:text="Highway (%): "
+                android:text="Highway (km): "
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -58,7 +58,7 @@
                 android:inputType="text"
                 android:id="@+id/editView_enterHighwayPer"
                 android:layout_marginTop="20dp"
-                android:hint="Percentage of highway driving."
+                android:hint="Highway driving distance in km"
                 android:textSize="14sp" />
 
         </TableRow>
@@ -68,7 +68,7 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:text="City (%):"
+                android:text="City (km):"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -81,7 +81,7 @@
                 android:inputType="text"
                 android:id="@+id/editView_enterCityPer"
                 android:layout_marginTop="20dp"
-                android:hint="Percentage of city driving."
+                android:hint="City driving distance in km"
                 android:textSize="14sp" />
 
         </TableRow>
@@ -96,7 +96,6 @@
         android:layout_alignParentStart="true">
 
         <Button
-            android:text="calculate without save"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="27dp"
@@ -104,7 +103,8 @@
             android:id="@+id/btn_noSaveRoute"
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
+            android:layout_alignParentEnd="true"
+            android:text="calculate without save" />
 
         <TextView
             android:text="Route Name:"

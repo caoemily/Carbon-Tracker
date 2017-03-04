@@ -69,6 +69,11 @@ public class AddRouteActivity extends AppCompatActivity {
         });
     }
 
+    private void setJourneyCollection(){
+
+
+    }
+
     private Route isValidRouteInput() {
         EditText routeDistanceEntry = (EditText) findViewById(R.id.editView_enterDistance);
         String routeDistanceData = routeDistanceEntry.getText().toString();
@@ -86,16 +91,16 @@ public class AddRouteActivity extends AppCompatActivity {
             String msg_1 = "Route distance must be positive.";
             Toast.makeText(getApplicationContext(), msg_1, Toast.LENGTH_SHORT).show();
         }
-        else if(highwayPer<0||highwayPer>100){
-            String msg_2 = "Highway% must be between 0 and 100";
+        else if(highwayPer<0){
+            String msg_2 = "Highway drive distance must be positive number.";
             Toast.makeText(getApplicationContext(), msg_2, Toast.LENGTH_SHORT).show();
         }
-        else if(cityPer<0||cityPer>100){
-            String msg_3 = "City% must be between 0 and 100";
+        else if(cityPer<0){
+            String msg_3 = "City drive distance must be positive number.";
             Toast.makeText(getApplicationContext(), msg_3, Toast.LENGTH_SHORT).show();
         }
-        else if(highwayPer+cityPer>100){
-            String msg_3 = "Highway% + City% must be less than 100";
+        else if(highwayPer+cityPer>routeDistance){
+            String msg_3 = "Highway plus city distance must be less than route distance.";
             Toast.makeText(getApplicationContext(), msg_3, Toast.LENGTH_SHORT).show();
         }
         else{

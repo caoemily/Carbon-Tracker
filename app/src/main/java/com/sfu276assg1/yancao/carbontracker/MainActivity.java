@@ -23,17 +23,8 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-//    private void generateArrayList() {
-//        for(int i = 1; i < 6; i++) {
-//            list.add(new Journey(i, "Honda " + i, "This is routes " + i));
-//        }
-//        for(Journey journey : list) {
-//            Log.d("DEBUGGG", journey.toString());
-//        }
-//    }
 
 
-//
     private void setUpAddJourneytButton() {
         Button button = (Button) findViewById(R.id.addJourneyBtn);
         button.setOnClickListener(new View.OnClickListener() {
