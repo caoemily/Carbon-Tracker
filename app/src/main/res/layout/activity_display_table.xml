@@ -37,13 +37,13 @@
     </ScrollView>
 
     <Button
-        android:text="@string/show_pie_chart"
+        android:id="@+id/showPieChart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginRight="12dp"
+        android:layout_alignParentRight="true"
         android:layout_marginEnd="12dp"
-        android:id="@+id/showPieChart" />
+        android:layout_marginRight="12dp"
+        android:text="@string/show_pie_chart" />
 </RelativeLayout>

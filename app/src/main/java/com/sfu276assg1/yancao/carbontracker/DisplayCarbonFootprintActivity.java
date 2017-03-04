@@ -1,9 +1,10 @@
 package com.sfu276assg1.yancao.carbontracker;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Button;
 
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Description;
@@ -24,6 +25,19 @@ public class DisplayCarbonFootprintActivity extends AppCompatActivity {
         setContentView(R.layout.activity_display_carbon_footprint);
 
         generatePieChart();
+        setUpShowPieChartButton();
+    }
+
+    private void setUpShowPieChartButton() {
+        Button button = (Button) findViewById(R.id.showTable);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DisplayCarbonFootprintActivity.this, DisplayTableActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 
     private void generatePieChart() {

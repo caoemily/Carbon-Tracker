@@ -23,5 +23,6 @@
     <string name="delete">Delete</string>
     <string name="view_current_carbon_footprint">View Current Carbon Footprint</string>
     <string name="add_new_journey">Add New Journey</string>
-    <string name="show_pie_chart">Pie Chart</string>
+    <string name="show_pie_chart">Show Pie Chart</string>
+    <string name="show_table">Show Table</string>
 </resources>

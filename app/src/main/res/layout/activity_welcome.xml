@@ -14,41 +14,46 @@
     android:clipToPadding="false">
 
 
-    <Button
-        android:text="@string/go_to_main"
+    <TextView
+        android:id="@+id/skipBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:id="@+id/testing" />
+        android:layout_alignParentRight="true"
+        android:clickable="true"
+        android:text="Skip >>"
+        android:textSize="16sp" />
 
     <ImageView
         android:layout_width="@android:dimen/app_icon_size"
         android:layout_height="wrap_content"
         app:srcCompat="@drawable/cloud1"
         android:id="@+id/cloud2"
-        android:layout_marginBottom="22dp"
+        android:layout_marginBottom="32dp"
         android:layout_alignBottom="@+id/cloud"
-        android:layout_alignLeft="@+id/testing"
-        android:layout_alignStart="@+id/testing" />
+        android:layout_toLeftOf="@+id/cloud"
+        android:layout_toStartOf="@+id/cloud" />
 
     <ImageView
         android:layout_width="@android:dimen/app_icon_size"
         android:layout_height="wrap_content"
         app:srcCompat="@drawable/cloud1"
         android:id="@+id/cloud"
+        android:layout_marginTop="82dp"
         android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/cloud2"
-        android:layout_toEndOf="@+id/cloud2"
-        android:layout_marginTop="100dp" />
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="14dp"
+        android:layout_marginEnd="14dp" />
 
     <ImageView
         android:layout_width="@android:dimen/thumbnail_height"
         android:layout_height="@android:dimen/thumbnail_height"
         app:srcCompat="@drawable/car"
         android:id="@+id/myCar"
-        android:layout_above="@+id/testing"
+        android:layout_marginBottom="33dp"
+        android:layout_above="@+id/skipBtn"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
