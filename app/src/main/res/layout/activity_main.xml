@@ -11,7 +11,7 @@
     tools:context="com.sfu276assg1.yancao.carbontracker.MainActivity">
 
     <Button
-        android:text="@string/add_new_journey"
+        android:text="@string/add_journey"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/addJourneyBtn"
@@ -21,7 +21,7 @@
         android:layout_marginBottom="14dp" />
 
     <Button
-        android:text="@string/view_current_carbon_footprint"
+        android:text="@string/view_footprint"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="12dp"

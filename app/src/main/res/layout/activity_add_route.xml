@@ -30,12 +30,12 @@
                 android:textSize="14sp" />
 
             <EditText
+                android:id="@+id/editView_enterDistance"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:inputType="text"
-                android:id="@+id/editView_enterDistance"
                 android:layout_marginTop="20dp"
                 android:hint="@string/distnace_in_km"
+                android:inputType="number"
                 android:textSize="14sp" />
 
         </TableRow>
@@ -53,12 +53,12 @@
                 android:textSize="14sp" />
 
             <EditText
+                android:id="@+id/editView_enterHighwayPer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:inputType="text"
-                android:id="@+id/editView_enterHighwayPer"
                 android:layout_marginTop="20dp"
                 android:hint="@string/highway_driving_distance_in_km"
+                android:inputType="number"
                 android:textSize="14sp" />
 
         </TableRow>
@@ -76,12 +76,12 @@
                 android:textSize="14sp" />
 
             <EditText
+                android:id="@+id/editView_enterCityPer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:inputType="text"
-                android:id="@+id/editView_enterCityPer"
                 android:layout_marginTop="20dp"
                 android:hint="@string/city_driving_distance_in_km"
+                android:inputType="number"
                 android:textSize="14sp" />
 
         </TableRow>

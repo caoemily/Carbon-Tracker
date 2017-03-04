@@ -10,12 +10,13 @@ public class CarbonModel {
     private RouteCollection routeCollection;
     private RouteCollection allRoute;
 
-    private CarCollection allCar;
     private CarCollection carCollection;
+    private CarCollection allCar;
 
     public static CarbonModel getInstance() {
         return ourInstance;
     }
+
     private CarbonModel() {
         journeyCollection = new JourneyCollection();
         routeCollection = new RouteCollection();
@@ -24,25 +25,59 @@ public class CarbonModel {
         carCollection = new CarCollection();
     }
 
-    public void addJourney(Journey journey){journeyCollection.addJourney(journey);}
-    public JourneyCollection getAllJourney(){return journeyCollection;}
+    // JourneyCollection
+    public JourneyCollection getJourneyCollection() {
+        return journeyCollection;
+    }
 
-    public CarCollection getCarCollection(){return carCollection;}
-    public CarCollection getAllCar(){return allCar;}
-    //more car related func goes here.
-    public Car getLastCarInList() {return carCollection.getLastOne();}
+    public void addJourney(Journey journey) {
+        journeyCollection.addJourney(journey);
+    }
 
+    public CarCollection getCarCollection(){
+        return carCollection;
+    }
 
-    public RouteCollection getRouteCollection(){return routeCollection;}
-    public RouteCollection getAllRoute(){return allRoute;}
-    public void addRouteToCollecton(Route route){ routeCollection.addRoute(route);}
-    public void addRouteToAllRoute(Route route){allRoute.addRoute(route);}
-    public void changeRouteInCollection(Route route, int indexOfChanging) {routeCollection.changeRoute(route, indexOfChanging);}
-    public Route getRouteFromCollection(int index){
+    public CarCollection getAllCar() {
+        return allCar;
+    }
+
+    // more car related func goes here.
+    public Car getLastCarInList() {
+        return carCollection.getLastOne();
+    }
+
+    // RouteCollection
+    public RouteCollection getRouteCollection() {
+        return routeCollection;
+    }
+
+    public void addRouteToCollecton(Route route) {
+        routeCollection.addRoute(route);
+    }
+
+    public Route getRouteFromCollection(int index) {
         return routeCollection.getRoute(index);
     }
-    public Route getLastRoute(){return allRoute.getLastRoute();}
-    public void removeRouteFromCollection(int index){
+
+    // AllRoute
+    public RouteCollection getAllRoute() {
+        return allRoute;
+    }
+
+    public void addRouteToAllRoute(Route route) {
+        allRoute.addRoute(route);
+    }
+
+    public void changeRouteInCollection(Route route, int indexOfChanging) {
+        routeCollection.changeRoute(route, indexOfChanging);
+    }
+
+    public Route getLastRoute() {
+        return allRoute.getLastRoute();
+    }
+
+    public void removeRouteFromCollection(int index) {
         routeCollection.remove(index);
     }
 }

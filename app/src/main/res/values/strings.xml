@@ -2,8 +2,6 @@
     <string name="app_name">Carbon Tracker</string>
     <string name="pie_chart">Pie Chart</string>
     <string name="go_to_main">Go to Main</string>
-    <string name="view_current_carbon_footprint">View Current Carbon Footprint</string>
-    <string name="add_new_journey">Add New Journey</string>
     <string name="distance_km">Distance (km):</string>
     <string name="distnace_in_km">Distnace in km</string>
     <string name="highway_km">Highway (km):</string>
@@ -20,4 +18,6 @@
     <string name="add_route">Add Route</string>
     <string name="delete">Delete</string>
     <string name="please_select_a_route_to_delete">Please select a route to delete</string>
+    <string name="view_footprint">View Footprint</string>
+    <string name="add_journey">Add Journey</string>
 </resources>
