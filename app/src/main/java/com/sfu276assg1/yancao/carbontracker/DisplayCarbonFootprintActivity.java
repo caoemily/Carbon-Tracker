@@ -3,6 +3,7 @@ package com.sfu276assg1.yancao.carbontracker;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Description;
@@ -16,25 +17,24 @@ import java.util.List;
 
 public class DisplayCarbonFootprintActivity extends AppCompatActivity {
 
-    private ArrayList<Journey> list = new ArrayList<>();
+    private JourneyCollection journeyCollection = CarbonModel.getInstance().getJourneyCollection();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_carbon_footprint);
 
-        generateDataForChart();
         generatePieChart();
     }
 
     private void generatePieChart() {
         List<PieEntry> yEntries = new ArrayList<>();
         List<String> xEntries = new ArrayList<>();
-        for(int i = 0; i < list.size(); i++) {
-            yEntries.add(new PieEntry(list.get(i).getNumCarbon(), list.get(i).getCarName()));
+        for(int i = 0; i < journeyCollection.countJourneys(); i++) {
+            yEntries.add(new PieEntry((float)journeyCollection.getJourney(i).getNumCarbon(),journeyCollection.getJourney(i).getCarName()));
         }
 
-        for(int i = 0; i < list.size(); i++) {
-            xEntries.add(list.get(i).getCarName());
+        for(int i = 0; i < journeyCollection.countJourneys(); i++) {
+            xEntries.add(journeyCollection.getJourney(i).getCarName());
         }
 
 
@@ -54,10 +54,5 @@ public class DisplayCarbonFootprintActivity extends AppCompatActivity {
         chart.setData(data);
         chart.animateY(2000);
         chart.invalidate();
-    }
-
-    private void generateDataForChart() {
-        Intent intent = getIntent();
-        list = (ArrayList<Journey>)intent.getSerializableExtra("Array List");
     }
 }

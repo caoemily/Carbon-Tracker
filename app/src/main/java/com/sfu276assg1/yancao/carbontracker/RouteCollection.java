@@ -3,6 +3,7 @@ package com.sfu276assg1.yancao.carbontracker;
 import java.util.ArrayList;
 import java.util.List;
 
+//RouteCollection Java Class
 
 public class RouteCollection {
     private List<Route> routes = new ArrayList<>();
@@ -30,13 +31,20 @@ public class RouteCollection {
         return routes.get(index);
     }
 
+    public Route getLastRoute(){
+        if(routes.size()==0) return null;
+        else {
+            return routes.get(routes.size()-1);
+        }
+    }
+
     // Useful for integrating with an ArrayAdapter
     public String[] getRouteDescriptions() {
         String[] descriptions = new String[countRoutes()];
         for (int i = 0; i < countRoutes(); i++) {
             Route route = getRoute(i);
             descriptions[i] = route.getName() + " - " + route.getDistance() + "km" + " - "
-                    + route.getHighwayPer() + "%" + " - " + route.getCityPer() + "%";
+                    + route.getHighwayPer() + "km" + " - " + route.getCityPer() + "km";
         }
         return descriptions;
     }
