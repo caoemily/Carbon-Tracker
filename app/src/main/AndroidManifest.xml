@@ -24,7 +24,6 @@
         <activity android:name=".DisplayCarbonFootprintActivity" />
         <activity android:name=".DisplayTableActivity"
             ></activity>
-        <activity android:name=".TempActivity" />
     </application>
 
 </manifest>
