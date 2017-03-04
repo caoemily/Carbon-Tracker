@@ -11,7 +11,7 @@
     tools:context="com.sfu276assg1.yancao.carbontracker.TempActivity">
 
     <TextView
-        android:text="Route Collection"
+        android:text="Jouney Collection"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"

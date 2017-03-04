@@ -11,6 +11,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+//show saved routes, let customer choose route, edit route, add route or delete route
+
 public class SelectRouteActivity extends AppCompatActivity {
 
     @Override

@@ -11,7 +11,7 @@
     tools:context="com.sfu276assg1.yancao.carbontracker.DeleteRouteActivity">
 
     <TextView
-        android:text="Please select a route to delete"
+        android:text="@string/please_select_a_route_to_delete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"

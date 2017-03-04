@@ -7,7 +7,8 @@ public class Route {
     private double cityPer;
 
 
-    // Set member data based on parameters.
+    // Route Java Class
+
     public Route(double distanceInKm, double highwayPer, double cityPer) {
         if(distanceInKm<=0){
             throw new IllegalArgumentException();

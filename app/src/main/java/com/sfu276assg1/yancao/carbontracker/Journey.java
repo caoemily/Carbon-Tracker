@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+//Journey Java Class
 
 public class Journey implements Serializable {
 

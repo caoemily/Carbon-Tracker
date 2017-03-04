@@ -1,5 +1,7 @@
 package com.sfu276assg1.yancao.carbontracker;
 
+//Singleton for seprating UI and java classes
+
 public class CarbonModel {
     private static CarbonModel ourInstance = new CarbonModel();
 

@@ -8,6 +8,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+//Customer can add or edit route in this activity. After editing/adding, goes to mainActivity.
+//Customer can choose to save the route, or not save the route, the carbon emission will be calculated in both cases.
+
 public class AddRouteActivity extends AppCompatActivity {
 
     @Override
@@ -67,11 +70,6 @@ public class AddRouteActivity extends AppCompatActivity {
                 }
             }
         });
-    }
-
-    private void setJourneyCollection(){
-
-
     }
 
     private Route isValidRouteInput() {
