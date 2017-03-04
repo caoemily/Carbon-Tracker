@@ -16,8 +16,9 @@
     <string name="please_select_a_route">Please select a route:</string>
     <string name="long_pressing_on_route_to_edit">Long-pressing on route to edit</string>
     <string name="add_route">Add Route</string>
-    <string name="delete">Delete</string>
     <string name="please_select_a_route_to_delete">Please select a route to delete</string>
     <string name="view_footprint">View Footprint</string>
     <string name="add_journey">Add Journey</string>
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
 </resources>

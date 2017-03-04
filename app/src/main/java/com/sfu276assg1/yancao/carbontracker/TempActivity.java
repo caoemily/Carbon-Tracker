@@ -46,7 +46,7 @@ public class TempActivity extends AppCompatActivity {
     private void populatePotListView() {
         JourneyCollection jc= CarbonModel.getInstance().getJourneyCollection();;
         ArrayAdapter<String> routeAdapter = new ArrayAdapter<String>
-                (this,R.layout.routedescription,
+                (this,R.layout.route_list,
                         jc.getJourneyDescriptions());
         final ListView routeList = (ListView) findViewById(R.id.listView_journey);
         routeList.setAdapter(routeAdapter);
