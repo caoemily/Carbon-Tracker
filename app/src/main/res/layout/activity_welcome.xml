@@ -6,7 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:background="@drawable/backgroundforvu"
@@ -29,20 +28,20 @@
         android:layout_height="wrap_content"
         app:srcCompat="@drawable/cloud1"
         android:id="@+id/cloud2"
+        android:layout_marginBottom="22dp"
         android:layout_alignBottom="@+id/cloud"
-        android:layout_toLeftOf="@+id/cloud"
-        android:layout_toStartOf="@+id/cloud"
-        android:layout_marginBottom="18dp" />
+        android:layout_alignLeft="@+id/testing"
+        android:layout_alignStart="@+id/testing" />
 
     <ImageView
         android:layout_width="@android:dimen/app_icon_size"
         android:layout_height="wrap_content"
         app:srcCompat="@drawable/cloud1"
         android:id="@+id/cloud"
-        android:layout_alignBottom="@+id/myCar"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginBottom="100dp" />
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/cloud2"
+        android:layout_toEndOf="@+id/cloud2"
+        android:layout_marginTop="100dp" />
 
     <ImageView
         android:layout_width="@android:dimen/thumbnail_height"

@@ -1,14 +1,13 @@
 package com.sfu276assg1.yancao.carbontracker;
 
-import android.animation.Animator;
-import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.view.Window;
-import android.widget.Button;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 public class WelcomeActivity extends AppCompatActivity {
 
@@ -16,47 +15,39 @@ public class WelcomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
+
         setUpAnimation();
-        setupTestingButton();
+        setupSkipButton();
     }
 
     private void setUpAnimation() {
-        final ImageView myCar = (ImageView) findViewById(R.id.myCar);
-        myCar.animate().translationX(1000).setDuration(25000).setStartDelay(0);
-        myCar.animate().setListener(new Animator.AnimatorListener() {
-            @Override
-            public void onAnimationStart(Animator animation) {
+        final ImageView cloud = (ImageView) findViewById(R.id.cloud);
+        final ImageView cloud2 = (ImageView) findViewById(R.id.cloud2);
+        Animation trans_cloud = AnimationUtils.loadAnimation(this, R.anim.custom_anim_cloud);
+        cloud.startAnimation(trans_cloud);
+        cloud2.startAnimation(trans_cloud);
 
-            }
+        final ImageView car = (ImageView) findViewById(R.id.myCar);
+        Animation trans_car = AnimationUtils.loadAnimation(this, R.anim.custom_anim_car);
+        car.startAnimation(trans_car);
 
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                Intent intent = new Intent(WelcomeActivity.this, MainActivity.class);
-                startActivity(intent);
+        trans_car.setAnimationListener(new Animation.AnimationListener() {
+            public void onAnimationEnd(Animation animation) {
+                startActivity(new Intent(WelcomeActivity.this, MainActivity.class));
                 finish();
             }
 
-            @Override
-            public void onAnimationCancel(Animator animation) {
-
+            public void onAnimationRepeat(Animation animation) {
             }
 
-            @Override
-            public void onAnimationRepeat(Animator animation) {
-
+            public void onAnimationStart(Animation animation) {
             }
         });
-        final ImageView cloud = (ImageView) findViewById(R.id.cloud);
-        cloud.animate().translationX(-1200).setDuration(25000).setStartDelay(0);
-
-        final ImageView cloud2 = (ImageView) findViewById(R.id.cloud2);
-        cloud2.animate().translationX(-1200).setDuration(25000).setStartDelay(0);
-
     }
 
-    private void setupTestingButton() {
-        Button button = (Button) findViewById(R.id.testing);
-        button.setOnClickListener(new View.OnClickListener() {
+    private void setupSkipButton() {
+        TextView skip = (TextView) findViewById(R.id.skipBtn);
+        skip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(WelcomeActivity.this, MainActivity.class);

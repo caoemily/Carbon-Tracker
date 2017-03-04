@@ -35,7 +35,7 @@ public class AddRouteActivity extends AppCompatActivity {
                     }
                     CarbonModel.getInstance().addRouteToAllRoute(add);
                     finish();
-                    startActivity(new Intent(getApplicationContext(), TempActivity.class));
+                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
                 }
             }
         });
@@ -65,7 +65,7 @@ public class AddRouteActivity extends AppCompatActivity {
                             CarbonModel.getInstance().changeRouteInCollection(add,index);
                         }
                         finish();
-                        startActivity(new Intent(getApplicationContext(), TempActivity.class));
+                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
                     }
                 }
             }

@@ -43,7 +43,7 @@ public class SelectRouteActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(),message,Toast.LENGTH_LONG).show();
                 Route route = CarbonModel.getInstance().getRouteFromCollection(position);
                 CarbonModel.getInstance().addRouteToAllRoute(route);
-                startActivity(new Intent(getApplicationContext(),TempActivity.class));
+                startActivity(new Intent(getApplicationContext(),MainActivity.class));
                 finish();
             }
         });
