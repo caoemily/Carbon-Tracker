@@ -36,8 +36,6 @@ public class DisplayTableActivity extends AppCompatActivity {
         });
     }
 
-
-
     private void populateTable() {
         TableLayout table = (TableLayout) findViewById(R.id.table);
         TableRow titleRow = new TableRow(this);
