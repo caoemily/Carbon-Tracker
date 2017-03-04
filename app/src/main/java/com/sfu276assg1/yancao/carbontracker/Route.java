@@ -7,15 +7,16 @@ public class Route {
     private double cityPer;
 
 
-    // Set member data based on parameters.
+    // Route Java Class
+
     public Route(double distanceInKm, double highwayPer, double cityPer) {
         if(distanceInKm<=0){
             throw new IllegalArgumentException();
         }
-        if(highwayPer<0||highwayPer>100){
+        if(highwayPer<0){
             throw new IllegalArgumentException();
         }
-        if(cityPer<0||cityPer>100){
+        if(cityPer<0){
             throw new IllegalArgumentException();
         }
 
@@ -30,7 +31,7 @@ public class Route {
     }
 
     public void setCityPer(double cityPer) {
-        if(cityPer<0||cityPer>100){
+        if(cityPer<0){
             throw new IllegalArgumentException();
         }
         else{
@@ -56,7 +57,7 @@ public class Route {
     }
 
     public void setHighwayPer(double highwayPer) {
-        if(highwayPer<0||highwayPer>100){
+        if(highwayPer<0){
             throw new IllegalArgumentException();
         }
         else{
@@ -78,12 +79,12 @@ public class Route {
     }
 
 
-    public void setRoute(Route route){
-        this.setName(route.getName());
-        this.setDistance(route.getDistance());
-        this.setHighwayPer(route.getHighwayPer());
-        this.setCityPer(route.getCityPer());
-    }
+//    public void setRoute(Route route){
+//        this.setName(route.getName());
+//        this.setDistance(route.getDistance());
+//        this.setHighwayPer(route.getHighwayPer());
+//        this.setCityPer(route.getCityPer());
+//    }
 
     public String getSingleRouteDes() {
         String descriptions = "";

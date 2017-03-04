@@ -11,29 +11,16 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    ArrayList<Journey> list = new ArrayList<>();
+//    ArrayList<Journey> list = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        generateArrayList();
+//        generateArrayList();
 
         setUpAddJourneytButton();
         setUpViewDataButton();
-    }
-
-    private void generateArrayList() {
-        for(int i = 1; i < 3; i++) {
-            list.add(new Journey("Today is: " + i,"This is routes " + i, i, "Honda " + i));
-        }
-        int i = 0;
-        for(Journey journey : list) {
-            journey.setNumCarbon(i = i + 10);
-        }
-        for(Journey journey : list) {
-            Log.d("DEBUGGG", "" + journey.getNumCarbon());
-        }
     }
 
     private void setUpAddJourneytButton() {
@@ -52,8 +39,8 @@ public class MainActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, DisplayTableActivity.class);
-                intent.putExtra("Array List", list);
+                Intent intent = new Intent(MainActivity.this, DisplayCarbonFootprintActivity.class);
+//                intent.putExtra("Array List", list);
                 startActivity(intent);
             }
         });

@@ -3,6 +3,8 @@ package com.sfu276assg1.yancao.carbontracker;
 import java.util.ArrayList;
 import java.util.List;
 
+// Store Car objects in ArrayList
+
 public class JourneyCollection {
     private List<Journey> journeys = new ArrayList<>();
 

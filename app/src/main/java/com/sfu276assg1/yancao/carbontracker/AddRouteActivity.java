@@ -8,6 +8,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+//Customer can add or edit route in this activity. After editing/adding, goes to mainActivity.
+//Customer can choose to save the route, or not save the route, the carbon emission will be calculated in both cases.
+
 public class AddRouteActivity extends AppCompatActivity {
 
     @Override
@@ -25,8 +28,14 @@ public class AddRouteActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Route add = isValidRouteInput();
                 if(add!=null){
+                    EditText routeNameEntry = (EditText) findViewById(R.id.editText_enterRouteName);
+                    String routeName = routeNameEntry.getText().toString();
+                    if(!routeName.isEmpty()){
+                        add.setName(routeName);
+                    }
+                    CarbonModel.getInstance().addRouteToAllRoute(add);
                     finish();
-                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                    startActivity(new Intent(getApplicationContext(), TempActivity.class));
                 }
             }
         });
@@ -42,23 +51,21 @@ public class AddRouteActivity extends AppCompatActivity {
                 EditText routeNameEntry = (EditText) findViewById(R.id.editText_enterRouteName);
                 String routeName = routeNameEntry.getText().toString();
                 Route add = isValidRouteInput();
-                if(add!=null){
-                    if(routeName.length()==0||routeName==null){
+                if(add != null){
+                    if(routeName.length()==0 || routeName==null){
                         Toast.makeText(getApplicationContext(),"Please enter a name for the route.",Toast.LENGTH_LONG).show();
                     }
                     else{
                         add.setName(routeName);
-//                        CarbonModel.getInstance().getCurrentRoute().setName(routeName);
-//                        Route current = CarbonModel.getInstance().getCurrentRoute();
-
+                        CarbonModel.getInstance().addRouteToAllRoute(add);
                         if(index == -1){
-                            CarbonModel.getInstance().getRouteCollection().addRoute(add);
+                            CarbonModel.getInstance().addRouteToCollecton(add);
                         }
                         else{
-                            CarbonModel.getInstance().getRouteCollection().changeRoute(add,index);
+                            CarbonModel.getInstance().changeRouteInCollection(add,index);
                         }
                         finish();
-                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                        startActivity(new Intent(getApplicationContext(), TempActivity.class));
                     }
                 }
             }
@@ -78,40 +85,40 @@ public class AddRouteActivity extends AppCompatActivity {
         String cityPerData = cityPerEntry.getText().toString();
         double cityPer = validPositiveNum(cityPerData);
 
-        if(routeDistance<=0){
+        if(routeDistance <= 0){
             String msg_1 = "Route distance must be positive.";
             Toast.makeText(getApplicationContext(), msg_1, Toast.LENGTH_SHORT).show();
         }
-        else if(highwayPer<0||highwayPer>100){
-            String msg_2 = "Highway% must be between 0 and 100";
+        else if(highwayPer < 0){
+            String msg_2 = "Highway drive distance must be positive number.";
             Toast.makeText(getApplicationContext(), msg_2, Toast.LENGTH_SHORT).show();
         }
-        else if(cityPer<0||cityPer>100){
-            String msg_3 = "City% must be between 0 and 100";
+        else if(cityPer < 0){
+            String msg_3 = "City drive distance must be positive number.";
             Toast.makeText(getApplicationContext(), msg_3, Toast.LENGTH_SHORT).show();
         }
-        else if(highwayPer+cityPer>100){
-            String msg_3 = "Highway% + City% must be less than 100";
+        else if(highwayPer+cityPer > routeDistance){
+            String msg_3 = "Highway plus city distance must be less than route distance.";
             Toast.makeText(getApplicationContext(), msg_3, Toast.LENGTH_SHORT).show();
         }
         else{
             Route newRoute = new Route(routeDistance, highwayPer, cityPer);
-//            CarbonModel.getInstance().getCurrentRoute().setRoute(newRoute);
+
             return newRoute;
         }
         return null;
     }
 
-    public static double validPositiveNum(String text) {
-        int index =0;
-        double result = 0;
-        for(int i=0; i<text.length();i++){
-            if (text.charAt(i)!=' '){
+    public double validPositiveNum(String text) {
+        int index = 0;
+        double result = -1;
+        for(int i = 0; i < text.length(); i++){
+            if (text.charAt(i) != ' '){
                 index = i;
                 break;
             }
         }
-        String subString = text.substring(index,text.length());
+        String subString = text.substring(index, text.length());
         try {
             result = Double.parseDouble(subString);
         } catch (NumberFormatException ex) {}

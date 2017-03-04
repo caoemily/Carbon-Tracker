@@ -22,7 +22,7 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:text="Distance (km): "
+                android:text="@string/distance_km"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -30,12 +30,12 @@
                 android:textSize="14sp" />
 
             <EditText
+                android:id="@+id/editView_enterDistance"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:inputType="text"
-                android:id="@+id/editView_enterDistance"
                 android:layout_marginTop="20dp"
-                android:hint="Distnace in km"
+                android:hint="@string/distnace_in_km"
+                android:inputType="number"
                 android:textSize="14sp" />
 
         </TableRow>
@@ -45,7 +45,7 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:text="Highway (%): "
+                android:text="@string/highway_km"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -53,12 +53,12 @@
                 android:textSize="14sp" />
 
             <EditText
+                android:id="@+id/editView_enterHighwayPer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:inputType="text"
-                android:id="@+id/editView_enterHighwayPer"
                 android:layout_marginTop="20dp"
-                android:hint="Percentage of highway driving."
+                android:hint="@string/highway_driving_distance_in_km"
+                android:inputType="number"
                 android:textSize="14sp" />
 
         </TableRow>
@@ -68,7 +68,7 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:text="City (%):"
+                android:text="@string/city_km"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -76,12 +76,12 @@
                 android:textSize="14sp" />
 
             <EditText
+                android:id="@+id/editView_enterCityPer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:inputType="text"
-                android:id="@+id/editView_enterCityPer"
                 android:layout_marginTop="20dp"
-                android:hint="Percentage of city driving."
+                android:hint="@string/city_driving_distance_in_km"
+                android:inputType="number"
                 android:textSize="14sp" />
 
         </TableRow>
@@ -96,7 +96,6 @@
         android:layout_alignParentStart="true">
 
         <Button
-            android:text="calculate without save"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="27dp"
@@ -104,10 +103,11 @@
             android:id="@+id/btn_noSaveRoute"
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
+            android:layout_alignParentEnd="true"
+            android:text="@string/calculate_without_save" />
 
         <TextView
-            android:text="Route Name:"
+            android:text="@string/route_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
@@ -122,14 +122,14 @@
             android:inputType="textPersonName"
             android:ems="10"
             android:id="@+id/editText_enterRouteName"
-            android:hint="Route Name"
+            android:hint="@string/route_name_1"
             android:textSize="14sp"
             android:layout_alignBaseline="@+id/text_routeName"
             android:layout_alignBottom="@+id/text_routeName"
             android:layout_centerHorizontal="true" />
 
         <TextView
-            android:text="If choose to save the route, please give it a name."
+            android:text="@string/if_choose_to_save_the_route_please_give_it_a_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/text_RouteSaveHint"
@@ -139,7 +139,7 @@
             android:layout_marginBottom="22dp" />
 
         <Button
-            android:text="save and calculate"
+            android:text="@string/save_and_calculate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/btn_accRoute"

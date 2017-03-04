@@ -3,6 +3,9 @@ package com.sfu276assg1.yancao.carbontracker;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.ContextMenu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -11,30 +14,37 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+//show saved routes, let customer choose route, edit route, add route or delete route
+
 public class SelectRouteActivity extends AppCompatActivity {
+
+    ArrayAdapter<String> adapter;
+    ListView list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_route);
+
+        list = (ListView) findViewById(R.id.listView_routeList);
+        registerForContextMenu(list);
         setLaunchNewRoute();
-        launchEditOrDelete();
         selectExistingRoute();
-        populatePotListView();
+        routeList();
     }
 
     private void selectExistingRoute(){
-        ListView routeList = (ListView) findViewById(R.id.listView_selectRoute);
-        routeList.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+        ListView list = (ListView) findViewById(R.id.listView_routeList);
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> parent, View viewClicked, int position, long id) {
                 TextView textView = (TextView) viewClicked;
                 String message = "You have chosen:  " + textView.getText().toString();
                 Toast.makeText(getApplicationContext(),message,Toast.LENGTH_LONG).show();
-//                Route current = CarbonModel.getInstance().getRouteCollection().getRoute(position);
-//                CarbonModel.getInstance().getCurrentRoute().setRoute(current);
+                Route route = CarbonModel.getInstance().getRouteFromCollection(position);
+                CarbonModel.getInstance().addRouteToAllRoute(route);
+                startActivity(new Intent(getApplicationContext(),TempActivity.class));
                 finish();
-                startActivity(new Intent(getApplicationContext(),MainActivity.class));
             }
         });
     }
@@ -47,43 +57,40 @@ public class SelectRouteActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), AddRouteActivity.class);
                 intent.putExtra("routeIndex", -1);
                 startActivity(intent);
+                finish();
             }
         });
     }
 
-    private void launchEditOrDelete(){
-        ListView potsList = (ListView) findViewById(R.id.listView_selectRoute);
-        potsList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                TextView textView = (TextView) view;
+    private void routeList() {
+        adapter = new ArrayAdapter<> (this,R.layout.route_list, CarbonModel.getInstance().getRouteCollection().getRouteDescriptions());
+        list = (ListView) findViewById(R.id.listView_routeList);
+        list.setAdapter(adapter);
+    }
 
-                String message = "You selected: " + textView.getText().toString();
-                Toast.makeText(getApplicationContext(),message,Toast.LENGTH_LONG).show();
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.select_route_context_menu, menu);
+    }
 
-//                TextView tv = (TextView) findViewById(R.id.text_editOrDel);
-//                FragmentManager manager = getSupportFragmentManager();
-//                RouteDeleteDialog dialog = new RouteDeleteDialog();
-//                dialog.show(manager, "RouteMessage");
-//                String s = tv.getText().toString();
-
-                Intent intent = new Intent(getApplicationContext(), AddRouteActivity.class);
-                intent.putExtra("routeIndex", position);
-                startActivity(intent);
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        switch (item.getItemId()) {
+            case R.id.delete:
+                CarbonModel.getInstance().removeRouteFromCollection(info.position);
+                adapter.notifyDataSetChanged();
+                routeList();
                 return true;
-            }
-        });
+            case R.id.edit:
+                Intent intent = new Intent(getApplicationContext(), AddRouteActivity.class);
+                intent.putExtra("routeIndex", info.position);
+                startActivity(intent);
+                finish();
+            default:
+                return super.onContextItemSelected(item);
+        }
     }
-
-    private void populatePotListView() {
-        ArrayAdapter<String> routeAdapter = new ArrayAdapter<String>
-                (this,R.layout.routedescription,
-                        CarbonModel.getInstance().getRouteCollection().getRouteDescriptions());
-        final ListView routeList = (ListView) findViewById(R.id.listView_selectRoute);
-        routeList.setAdapter(routeAdapter);
-    }
-
-
-
 }
-
