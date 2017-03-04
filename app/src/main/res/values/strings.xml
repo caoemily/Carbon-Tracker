@@ -4,4 +4,20 @@
     <string name="go_to_main">Go to Main</string>
     <string name="view_current_carbon_footprint">View Current Carbon Footprint</string>
     <string name="add_new_journey">Add New Journey</string>
+    <string name="distance_km">Distance (km):</string>
+    <string name="distnace_in_km">Distnace in km</string>
+    <string name="highway_km">Highway (km):</string>
+    <string name="highway_driving_distance_in_km">Highway driving distance in km</string>
+    <string name="city_km">City (km):</string>
+    <string name="city_driving_distance_in_km">City driving distance in km</string>
+    <string name="calculate_without_save">calculate without save</string>
+    <string name="route_name">Route Name:</string>
+    <string name="route_name_1">Route Name</string>
+    <string name="if_choose_to_save_the_route_please_give_it_a_name">If choose to save the route, please give it a name.</string>
+    <string name="save_and_calculate">save and calculate</string>
+    <string name="please_select_a_route">Please select a route:</string>
+    <string name="long_pressing_on_route_to_edit">Long-pressing on route to edit</string>
+    <string name="add_route">Add Route</string>
+    <string name="delete">Delete</string>
+    <string name="please_select_a_route_to_delete">Please select a route to delete</string>
 </resources>

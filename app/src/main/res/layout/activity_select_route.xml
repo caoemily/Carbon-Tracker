@@ -11,7 +11,7 @@
     tools:context="com.sfu276assg1.yancao.carbontracker.SelectRouteActivity">
 
     <TextView
-        android:text="Please select a route:"
+        android:text="@string/please_select_a_route"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -19,19 +19,8 @@
         android:layout_alignParentStart="true"
         android:id="@+id/text_selectRoute" />
 
-    <Button
-        android:text="Add Route"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginRight="10dp"
-        android:layout_marginEnd="10dp"
-        android:id="@+id/btn_addRoute" />
-
     <TextView
-        android:text="Long-pressing on route to edit"
+        android:text="@string/long_pressing_on_route_to_edit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/text_hintEditRoute"
@@ -49,16 +38,26 @@
         android:layout_marginBottom="11dp"
         android:id="@+id/listView_selectRoute" />
 
-    <TextView
-        android:text="TextView"
+    <Button
+        android:text="@string/delete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/text_editOrDel"
-        android:layout_alignBaseline="@+id/btn_addRoute"
-        android:layout_alignBottom="@+id/btn_addRoute"
-        android:layout_alignRight="@+id/btn_addRoute"
-        android:layout_alignEnd="@+id/btn_addRoute"
-        android:layout_marginRight="16dp"
-        android:layout_marginEnd="16dp" />
+        android:id="@+id/btn_delRoute"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="11dp"
+        android:layout_marginStart="11dp" />
+
+    <Button
+        android:text="@string/add_route"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="18dp"
+        android:layout_marginEnd="18dp"
+        android:id="@+id/btn_addRoute"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>

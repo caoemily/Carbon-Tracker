@@ -1,37 +1,54 @@
 package com.sfu276assg1.yancao.carbontracker;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
+//Journey Java Class
 
 public class Journey implements Serializable {
 
     private String date;
     private String routeName;
-    private float distance;
+    private double distance;
     private String carName;
-    private float numCarbon;
+    private double numCarbon;
 
-    public Journey(String date, String routeName, float distance, String carName) {
-        this.date = date;
-        this.routeName = routeName;
-        this.distance = distance;
-        this.carName = carName;
+    public Journey(Car car, Route route) {
+        this.date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+        this.routeName = route.getName();
+        this.distance = route.getDistance();
+        this.carName = car.getName();
+        this.numCarbon = calculateCarbon(car, route);
     }
+
+
 
     public String getDate() {
         return date;
     }
-
-    public String getRouteName() {
-        return routeName;
+    public void setDate(String jdate){
+        if(jdate==null||jdate.length()==0) throw new IllegalArgumentException();
+        else this.date = jdate;
     }
 
-    public float getDistance() {
+    public String getRouteName() {return routeName;}
+    public void setRouteName(String rname){
+        if(rname==null||rname.length()==0) throw new IllegalArgumentException();
+        else this.routeName = rname;
+    }
+
+    public double getDistance() {
         return distance;
     }
+    public void setDistance(double rdistance){this.distance = rdistance;}
 
     public String getCarName() {
         return carName;
+    }
+    public void setCarName(String cname) {
+        if(cname==null||cname.length()==0) throw new IllegalArgumentException();
+        else this.carName=cname;
     }
 
     public void setNumCarbon(int numCarbon) {
@@ -43,7 +60,15 @@ public class Journey implements Serializable {
         }
     }
 
-    public float getNumCarbon() {
+    public double getNumCarbon() {
         return numCarbon;
+    }
+
+    private double calculateCarbon(Car car, Route route) {
+        double highway = route.getHighwayPer();
+        double city = route.getCityPer();
+        //here, emission data should be passed from car, will use fake data here;
+        double carbonEmission = 100*highway + 150*city;
+        return carbonEmission;
     }
 }

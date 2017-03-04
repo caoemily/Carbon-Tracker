@@ -26,7 +26,7 @@ public class DisplayCarbonFootprintActivity extends AppCompatActivity {
 //        generatePieChart();
     }
 
-    private void generatePieChart() {
+   /* private void generatePieChart() {
         List<PieEntry> yEntries = new ArrayList<>();
         List<String> xEntries = new ArrayList<>();
         for(int i = 0; i < list.size(); i++) {
@@ -59,5 +59,5 @@ public class DisplayCarbonFootprintActivity extends AppCompatActivity {
     private void generateDataForChart() {
         Intent intent = getIntent();
         list = (ArrayList<Journey>)intent.getSerializableExtra("Array List");
-    }
+    }*/
 }
