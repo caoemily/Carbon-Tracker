@@ -21,4 +21,7 @@
     <string name="add_journey">Add Journey</string>
     <string name="edit">Edit</string>
     <string name="delete">Delete</string>
+    <string name="view_current_carbon_footprint">View Current Carbon Footprint</string>
+    <string name="add_new_journey">Add New Journey</string>
+    <string name="show_pie_chart">Pie Chart</string>
 </resources>
