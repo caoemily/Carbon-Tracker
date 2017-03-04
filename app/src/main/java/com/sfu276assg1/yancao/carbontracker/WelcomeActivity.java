@@ -1,5 +1,6 @@
 package com.sfu276assg1.yancao.carbontracker;
 
+import android.animation.Animator;
 import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -22,7 +23,29 @@ public class WelcomeActivity extends AppCompatActivity {
     private void setUpAnimation() {
         final ImageView myCar = (ImageView) findViewById(R.id.myCar);
         myCar.animate().translationX(1000).setDuration(25000).setStartDelay(0);
+        myCar.animate().setListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation) {
 
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                Intent intent = new Intent(WelcomeActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+
+            }
+        });
         final ImageView cloud = (ImageView) findViewById(R.id.cloud);
         cloud.animate().translationX(-1200).setDuration(25000).setStartDelay(0);
 
@@ -38,6 +61,7 @@ public class WelcomeActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(WelcomeActivity.this, MainActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
     }
