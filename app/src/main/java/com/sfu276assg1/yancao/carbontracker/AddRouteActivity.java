@@ -68,7 +68,6 @@ public class AddRouteActivity extends AppCompatActivity {
                         finish();
                         startActivity(new Intent(getApplicationContext(), MainActivity.class));
                         addJourney();
-                        finish();
                     }
                 }
             }
@@ -130,9 +129,6 @@ public class AddRouteActivity extends AppCompatActivity {
 
     private void addJourney() {
         Car car = CarbonModel.getInstance().getLastCarInList();
-        if(car == null){
-            car = new Car("myCar");
-        }
         Route route = CarbonModel.getInstance().getLastRoute();
         Journey journey = new Journey(car,route);
         CarbonModel.getInstance().addJourney(journey);

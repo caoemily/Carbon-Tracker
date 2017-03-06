@@ -18,7 +18,7 @@ public class Journey implements Serializable {
         this.date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
         this.routeName = route.getName();
         this.distance = route.getDistance();
-        this.carName = car.getName();
+        this.carName = car.getNickname();
         this.numCarbon = calculateCarbon(car, route);
     }
 
