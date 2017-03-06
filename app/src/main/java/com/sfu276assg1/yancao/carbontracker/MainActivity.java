@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ImageButton;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -14,27 +14,38 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         setUpAddJourneytButton();
-        setUpViewDataButton();
-
+        setUpShowTableButton();
+        setUpShowChartButton();
     }
 
     private void setUpAddJourneytButton() {
-        Button button = (Button) findViewById(R.id.addJourneyBtn);
+        ImageButton button = (ImageButton) findViewById(R.id.addJourneyBtn);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, SelectRouteActivity.class);
+                Intent intent = new Intent(MainActivity.this, SelectTransModeActivity.class);
                 startActivity(intent);
             }
         });
     }
 
-    private void setUpViewDataButton() {
-        Button button = (Button) findViewById(R.id.viewDataBtn);
+    private void setUpShowTableButton() {
+        ImageButton button = (ImageButton) findViewById(R.id.showTableBtn);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, DisplayTableActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+    private void setUpShowChartButton() {
+        ImageButton button = (ImageButton) findViewById(R.id.showChartBtn);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, DisplayCarbonFootprintActivity.class);
                 startActivity(intent);
             }
         });

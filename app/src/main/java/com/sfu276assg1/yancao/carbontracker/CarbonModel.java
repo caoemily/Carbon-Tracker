@@ -29,54 +29,52 @@ public class CarbonModel {
     public JourneyCollection getJourneyCollection() {
         return journeyCollection;
     }
-
     public void addJourney(Journey journey) {
         journeyCollection.addJourney(journey);
     }
 
+
     public CarCollection getCarCollection(){
         return carCollection;
     }
-
-    public CarCollection getAllCar() {
-        return allCar;
+    public CarCollection getAllCar() {return allCar;}
+    public void addCarToCollecton(Car car) {carCollection.addCar(car);}
+    public Car getCarFromCollection(int index) {return carCollection.getCar(index);}
+    public void addCarToAllCar(Car car) {
+        allCar.addCar(car);
     }
-
-    // more car related func goes here.
+    public void changeCarInCollection(Car car, int indexOfChanging) {
+        carCollection.changeCar(car, indexOfChanging);
+    }
+    public void removeCarFromCollection(int index) {
+        carCollection.remove(index);
+    }
     public Car getLastCarInList() {
-        return carCollection.getLastOne();
+        return carCollection.getLastCar();
     }
 
     // RouteCollection
     public RouteCollection getRouteCollection() {
         return routeCollection;
     }
-
     public void addRouteToCollecton(Route route) {
         routeCollection.addRoute(route);
     }
-
     public Route getRouteFromCollection(int index) {
         return routeCollection.getRoute(index);
     }
-
-    // AllRoute
     public RouteCollection getAllRoute() {
         return allRoute;
     }
-
     public void addRouteToAllRoute(Route route) {
         allRoute.addRoute(route);
     }
-
     public void changeRouteInCollection(Route route, int indexOfChanging) {
         routeCollection.changeRoute(route, indexOfChanging);
     }
-
     public Route getLastRoute() {
         return allRoute.getLastRoute();
     }
-
     public void removeRouteFromCollection(int index) {
         routeCollection.remove(index);
     }

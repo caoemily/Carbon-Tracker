@@ -36,11 +36,8 @@ public class WelcomeActivity extends AppCompatActivity {
                 startActivity(new Intent(WelcomeActivity.this, MainActivity.class));
                 finish();
             }
-            public void onAnimationRepeat(Animation animation) {
-            }
-
-            public void onAnimationStart(Animation animation) {
-            }
+            public void onAnimationRepeat(Animation animation) {}
+            public void onAnimationStart(Animation animation) {}
         });
     }
 
