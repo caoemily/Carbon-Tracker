@@ -2,6 +2,8 @@ package com.sfu276assg1.yancao.carbontracker;
 
 //Singleton for seprating UI and java classes
 
+import java.util.ArrayList;
+
 public class CarbonModel {
     private static CarbonModel ourInstance = new CarbonModel();
 
@@ -12,6 +14,7 @@ public class CarbonModel {
 
     private CarCollection carCollection;
     private CarCollection allCar;
+    private CarFamily carFromFile;
 
     public static CarbonModel getInstance() {
         return ourInstance;
@@ -23,6 +26,12 @@ public class CarbonModel {
         allRoute = new RouteCollection();
         allCar = new CarCollection();
         carCollection = new CarCollection();
+        carFromFile = new CarFamily();
+    }
+
+    //carFamily
+    public CarFamily getCarFromFile(){
+        return carFromFile;
     }
 
     // JourneyCollection
@@ -33,7 +42,7 @@ public class CarbonModel {
         journeyCollection.addJourney(journey);
     }
 
-
+    //CarCollection
     public CarCollection getCarCollection(){
         return carCollection;
     }

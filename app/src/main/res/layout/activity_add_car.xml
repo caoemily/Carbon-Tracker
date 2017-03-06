@@ -101,6 +101,8 @@
         android:layout_height="wrap_content"
         android:text="year"
         android:layout_above="@+id/car_year"
-        android:layout_toRightOf="@+id/editNickname"
-        android:layout_toEndOf="@+id/editNickname" />
+        android:layout_toLeftOf="@+id/car_year"
+        android:layout_toStartOf="@+id/car_year"
+        android:layout_marginRight="15dp"
+        android:layout_marginEnd="15dp" />
 </RelativeLayout>
