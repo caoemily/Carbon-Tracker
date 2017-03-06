@@ -7,11 +7,11 @@ public class CarbonModel {
 
     private JourneyCollection journeyCollection;
 
-    private RouteCollection routeCollection;
-    private RouteCollection allRoute;
-
     private CarCollection carCollection;
+    private RouteCollection routeCollection;
+
     private CarCollection allCar;
+    private RouteCollection allRoute;
 
     public static CarbonModel getInstance() {
         return ourInstance;
@@ -33,15 +33,15 @@ public class CarbonModel {
         journeyCollection.addJourney(journey);
     }
 
-
+    // CarCollection
     public CarCollection getCarCollection(){
         return carCollection;
     }
-    public CarCollection getAllCar() {return allCar;}
-    public void addCarToCollecton(Car car) {carCollection.addCar(car);}
-    public Car getCarFromCollection(int index) {return carCollection.getCar(index);}
-    public void addCarToAllCar(Car car) {
-        allCar.addCar(car);
+    public void addCarToCollecton(Car car) {
+        carCollection.addCar(car);
+    }
+    public Car getCarFromCollection(int index) {
+        return carCollection.getCar(index);
     }
     public void changeCarInCollection(Car car, int indexOfChanging) {
         carCollection.changeCar(car, indexOfChanging);
@@ -51,6 +51,12 @@ public class CarbonModel {
     }
     public Car getLastCarInList() {
         return carCollection.getLastCar();
+    }
+    public CarCollection getAllCar() {
+        return allCar;
+    }
+    public void addCarToAllCar(Car car) {
+        allCar.addCar(car);
     }
 
     // RouteCollection
@@ -63,6 +69,9 @@ public class CarbonModel {
     public Route getRouteFromCollection(int index) {
         return routeCollection.getRoute(index);
     }
+    public void removeRouteFromCollection(int index) {
+        routeCollection.remove(index);
+    }
     public RouteCollection getAllRoute() {
         return allRoute;
     }
@@ -74,8 +83,5 @@ public class CarbonModel {
     }
     public Route getLastRoute() {
         return allRoute.getLastRoute();
-    }
-    public void removeRouteFromCollection(int index) {
-        routeCollection.remove(index);
     }
 }
