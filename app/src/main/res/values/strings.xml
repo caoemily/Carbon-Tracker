@@ -14,7 +14,7 @@
     <string name="if_choose_to_save_the_route_please_give_it_a_name">If choose to save the route, please give it a name.</string>
     <string name="save_and_calculate">save and calculate</string>
     <string name="please_select_a_route">Please select a route:</string>
-    <string name="long_pressing_on_route_to_edit">Long-pressing on route to edit</string>
+    <string name="long_pressing_on_route_to_edit">Long-pressing on route to edit or delete</string>
     <string name="add_route">Add Route</string>
     <string name="please_select_a_route_to_delete">Please select a route to delete</string>
     <string name="view_footprint">View Footprint</string>

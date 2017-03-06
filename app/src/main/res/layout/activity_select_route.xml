@@ -23,7 +23,7 @@
         android:text="@string/long_pressing_on_route_to_edit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/text_hintEditRoute"
+        android:id="@+id/text_hintEditCar"
         android:layout_above="@+id/btn_addRoute"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="11dp" />
@@ -31,7 +31,7 @@
     <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/text_hintEditRoute"
+        android:layout_above="@+id/text_hintEditCar"
         android:layout_marginTop="30dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
