@@ -67,7 +67,7 @@ public class Journey implements Serializable {
     private double calculateCarbon(Car car, Route route) {
         double highway = route.getHighwayPer();
         double city = route.getCityPer();
-        //here, emission data should be passed from car, will use fake data here;
+        //need correct calculation method.
         double carbonEmission = car.getHighwayE()*highway + car.getCityE()*city;
         return carbonEmission;
     }

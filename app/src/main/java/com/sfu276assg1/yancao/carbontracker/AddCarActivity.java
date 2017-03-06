@@ -19,16 +19,13 @@ public class AddCarActivity extends AppCompatActivity {
     ArrayList<String> carMake = carFamily.getMake();
     ArrayList<String> carModel = new ArrayList<String>();
     ArrayList<String> carYear = new ArrayList<String>();
-    String make;
-    String model;
-    String year;
+    String make,model,year;
     Car currentCar = new Car();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_car);
-
         setupAcceptButton();
         setupMakeSpinner();
         setupModelSpinner();
@@ -37,7 +34,6 @@ public class AddCarActivity extends AppCompatActivity {
 
 
     private void setupMakeSpinner() {
-
         Spinner makeSpin = (Spinner) findViewById(R.id.car_make);
         ArrayAdapter<String> makeAdapter = new ArrayAdapter<String>(getApplicationContext(),
                 android.R.layout.simple_list_item_1, carMake);
@@ -57,13 +53,10 @@ public class AddCarActivity extends AppCompatActivity {
                 currentCar.setMake(make);
             }
         });
-
     }
 
     private void setupModelSpinner() {
-
         carModel = carFamily.getModel(make);
-
         Spinner modelSpin = (Spinner) findViewById(R.id.car_model);
         ArrayAdapter<String> modelAdapter = new ArrayAdapter<String>(getApplicationContext(),
                 android.R.layout.simple_list_item_1, carModel);
@@ -77,17 +70,13 @@ public class AddCarActivity extends AppCompatActivity {
                 currentCar.setModel(model);
                 setupYearSpinner();
             }
-
             @Override
-
             public void onNothingSelected(AdapterView<?> arg0) {
                 model = carModel.get(0);
                 currentCar.setModel(model);
-
             }
         });
     }
-
 
     private void setupYearSpinner() {
         carYear = carFamily.getYear(make, model);
@@ -103,12 +92,10 @@ public class AddCarActivity extends AppCompatActivity {
                 year = carYear.get(pos);
                 currentCar.setYear(year);
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> arg0) {
                 year = carYear.get(0);
                 currentCar.setYear(year);
-
             }
         });
     }
