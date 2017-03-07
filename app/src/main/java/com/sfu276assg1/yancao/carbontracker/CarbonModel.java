@@ -33,6 +33,7 @@ public class CarbonModel {
     public CarFamily getCarFromFile(){
         return carFromFile;
     }
+    public void setCarFamily(ArrayList<Car> cars){carFromFile.setCars(cars);}
 
     // JourneyCollection
     public JourneyCollection getJourneyCollection() {
