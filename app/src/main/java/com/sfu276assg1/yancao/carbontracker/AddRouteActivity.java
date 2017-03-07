@@ -3,9 +3,12 @@ package com.sfu276assg1.yancao.carbontracker;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 //Customer can add or edit route in this activity. After editing/adding, goes to mainActivity.
@@ -13,12 +16,64 @@ import android.widget.Toast;
 
 public class AddRouteActivity extends AppCompatActivity {
 
+    double cityDriv = 0, highwayDriv=0, totalDis=0;
+    Route newRoute = new Route(0, 0, 0);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_route);
+        setHighwayDis();
         setupAcceptButton();
         setupNoSaveButton();
+    }
+
+    public void setHighwayDis() {
+        final EditText highwayPerEntry = (EditText) findViewById(R.id.editView_enterHighwayPer);
+        highwayPerEntry.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                String highwayPerData = highwayPerEntry.getText().toString();
+                highwayDriv = validPositiveNum(highwayPerData);
+                if (highwayDriv < 0) {
+                    String msg_1 = "Highway drive distance must be positive number.";
+                    Toast.makeText(getApplicationContext(), msg_1, Toast.LENGTH_SHORT).show();
+                }
+                totalDis = highwayDriv + cityDriv;
+                final TextView distance = (TextView) findViewById(R.id.text_enterDis);
+                distance.setText(""+totalDis);
+            }
+        });
+
+        final EditText cityPerEntry = (EditText) findViewById(R.id.editView_enterCityPer);
+        cityPerEntry.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+            @Override
+            public void afterTextChanged(Editable s) {
+                String cityPerData = cityPerEntry.getText().toString();
+                cityDriv = validPositiveNum(cityPerData);
+                if (cityDriv < 0) {
+                    String msg_2 = "City drive distance must be positive number.";
+                    Toast.makeText(getApplicationContext(), msg_2, Toast.LENGTH_SHORT).show();
+                }
+                totalDis = highwayDriv + cityDriv;
+                final TextView distance = (TextView) findViewById(R.id.text_enterDis);
+                distance.setText(""+totalDis);
+            }
+        });
     }
 
     private void setupNoSaveButton() {
@@ -54,7 +109,8 @@ public class AddRouteActivity extends AppCompatActivity {
                 Route add = isValidRouteInput();
                 if(add != null){
                     if(routeName.length()==0 || routeName==null){
-                        Toast.makeText(getApplicationContext(),"Please enter a name for the route.",Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(),"Please enter a name for the route.",
+                                Toast.LENGTH_SHORT).show();
                     }
                     else{
                         add.setName(routeName);
@@ -75,7 +131,7 @@ public class AddRouteActivity extends AppCompatActivity {
     }
 
     private Route isValidRouteInput() {
-        EditText routeDistanceEntry = (EditText) findViewById(R.id.editView_enterDistance);
+        TextView routeDistanceEntry = (TextView) findViewById(R.id.text_enterDis);
         String routeDistanceData = routeDistanceEntry.getText().toString();
         double routeDistance = validPositiveNum(routeDistanceData);
 
@@ -91,16 +147,12 @@ public class AddRouteActivity extends AppCompatActivity {
             String msg_1 = "Route distance must be positive.";
             Toast.makeText(getApplicationContext(), msg_1, Toast.LENGTH_SHORT).show();
         }
-        else if(highwayPer < 0){
+        if(highwayPer < 0){
             String msg_2 = "Highway drive distance must be positive number.";
             Toast.makeText(getApplicationContext(), msg_2, Toast.LENGTH_SHORT).show();
         }
         else if(cityPer < 0){
             String msg_3 = "City drive distance must be positive number.";
-            Toast.makeText(getApplicationContext(), msg_3, Toast.LENGTH_SHORT).show();
-        }
-        else if(highwayPer+cityPer > routeDistance){
-            String msg_3 = "Highway plus city distance must be less than route distance.";
             Toast.makeText(getApplicationContext(), msg_3, Toast.LENGTH_SHORT).show();
         }
         else{

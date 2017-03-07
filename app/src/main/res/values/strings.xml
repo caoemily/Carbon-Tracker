@@ -25,4 +25,7 @@
     <string name="add_new_journey">Add New Journey</string>
     <string name="show_pie_chart">Show Pie Chart</string>
     <string name="show_table">Show Table</string>
+    <string name="total_distance">Total distance</string>
+    <string name="route_name_2">Route Name:</string>
+    <string name="distance_km_2">Distance (km):</string>
 </resources>
