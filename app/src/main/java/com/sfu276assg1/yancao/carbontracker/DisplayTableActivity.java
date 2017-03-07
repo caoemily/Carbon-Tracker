@@ -11,6 +11,7 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+
 public class DisplayTableActivity extends AppCompatActivity {
 
     private JourneyCollection journeyCollection = CarbonModel.getInstance().getJourneyCollection();
@@ -45,6 +46,7 @@ public class DisplayTableActivity extends AppCompatActivity {
         table.addView(titleRow);
         for(int i = 0; i < 5; i++) {
             TextView textView = new TextView(this);
+            textView.setTextSize(8);
             TableRow.LayoutParams params = new TableRow.LayoutParams(
                     TableRow.LayoutParams.MATCH_PARENT,
                     TableRow.LayoutParams.MATCH_PARENT,
@@ -80,6 +82,7 @@ public class DisplayTableActivity extends AppCompatActivity {
             table.addView(tableRow);
             for(int col = 0; col < 5; col++) {
                 TextView textView = new TextView(this);
+                textView.setTextSize(8);
                 TableRow.LayoutParams params = new TableRow.LayoutParams(
                         TableRow.LayoutParams.MATCH_PARENT,
                         TableRow.LayoutParams.MATCH_PARENT,
