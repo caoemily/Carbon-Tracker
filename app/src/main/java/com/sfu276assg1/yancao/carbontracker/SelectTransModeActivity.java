@@ -24,7 +24,7 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 
 public class SelectTransModeActivity extends AppCompatActivity {
-    static public ArrayList<Car> cars = new ArrayList<>();
+    private ArrayList<Car> cars = new ArrayList<>();
     ArrayAdapter<String> adapter;
     ListView list;
 

@@ -18,7 +18,7 @@ import java.util.HashSet;
 public class CarFamily {
     private ArrayList<Car> cars = new ArrayList<>();
 
-    public CarFamily(ArrayList<Car> cars){
+    public void setCars(ArrayList<Car> cars){
         this.cars = cars;
     }
 
