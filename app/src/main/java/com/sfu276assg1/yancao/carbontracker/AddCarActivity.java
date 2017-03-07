@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public class AddCarActivity extends AppCompatActivity {
 
     CarFamily carFamily = CarbonModel.getInstance().getCarFromFile();
-    ArrayList<String> carMake = carFamily.getMake();
+    ArrayList<String> carMake = carFamily.defaultForGetMake();
     ArrayList<String> carModel = new ArrayList<String>();
     ArrayList<String> carYear = new ArrayList<String>();
     String make,model,year;
@@ -27,15 +27,10 @@ public class AddCarActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_car);
 
-        readCarData();
         setupAcceptButton();
         setupMakeSpinner();
         setupModelSpinner();
         setupYearSpinner();
-    }
-
-    private void readCarData() {
-
     }
 
 
@@ -63,6 +58,7 @@ public class AddCarActivity extends AppCompatActivity {
 
     private void setupModelSpinner() {
         carModel = carFamily.getModel(make);
+        java.util.Collections.sort(carModel);
         Spinner modelSpin = (Spinner) findViewById(R.id.car_model);
         ArrayAdapter<String> modelAdapter = new ArrayAdapter<String>(getApplicationContext(),
                 android.R.layout.simple_list_item_1, carModel);
@@ -86,6 +82,7 @@ public class AddCarActivity extends AppCompatActivity {
 
     private void setupYearSpinner() {
         carYear = carFamily.getYear(make, model);
+        java.util.Collections.sort(carYear);
         Spinner yearSpin = (Spinner) findViewById(R.id.car_year);
         ArrayAdapter<String> yearAdapter = new ArrayAdapter<String>(getApplicationContext(),
                 android.R.layout.simple_list_item_1, carYear);

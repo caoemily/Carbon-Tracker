@@ -26,7 +26,7 @@ public class CarbonModel {
         allRoute = new RouteCollection();
         allCar = new CarCollection();
         carCollection = new CarCollection();
-        carFromFile = new CarFamily();
+        carFromFile = new CarFamily(SelectTransModeActivity.cars);
     }
 
     //carFamily

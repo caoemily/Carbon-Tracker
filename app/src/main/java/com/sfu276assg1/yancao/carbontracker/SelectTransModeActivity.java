@@ -24,7 +24,7 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 
 public class SelectTransModeActivity extends AppCompatActivity {
-    private ArrayList<Car> cars = new ArrayList<>();
+    static public ArrayList<Car> cars = new ArrayList<>();
     ArrayAdapter<String> adapter;
     ListView list;
 
@@ -51,7 +51,6 @@ public class SelectTransModeActivity extends AppCompatActivity {
         try {
             reader.readLine();
             while ( (line = reader.readLine()) != null) {
-                Log.d("DEBUGGGGGGGGGGG!!!!", "line: " + line);
                 String[] tokens = line.split(",");
 
                 Car carData = new Car();
