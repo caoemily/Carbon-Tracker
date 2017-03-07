@@ -3,6 +3,7 @@ package com.sfu276assg1.yancao.carbontracker;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -14,8 +15,16 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class SelectTransModeActivity extends AppCompatActivity {
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.DoubleBuffer;
+import java.nio.charset.Charset;
+import java.util.ArrayList;
 
+public class SelectTransModeActivity extends AppCompatActivity {
+    private ArrayList<Car> cars = new ArrayList<>();
     ArrayAdapter<String> adapter;
     ListView list;
 
@@ -26,9 +35,58 @@ public class SelectTransModeActivity extends AppCompatActivity {
 
         list = (ListView) findViewById(R.id.listView_carList);
         registerForContextMenu(list);
+        readDataFromFile();
         setLaunchNewCar();
         selectExistingCar();
         routeList();
+    }
+
+    private void readDataFromFile() {
+        InputStream is = getResources().openRawResource(R.raw.vehicles1);
+        BufferedReader reader = new BufferedReader(
+                new InputStreamReader(is, Charset.forName("UTF-8"))
+        );
+
+        String line = "";
+        try {
+            reader.readLine();
+            while ( (line = reader.readLine()) != null) {
+                Log.d("DEBUGGGGGGGGGGG!!!!", "line: " + line);
+                String[] tokens = line.split(",");
+
+                Car carData = new Car();
+                carData.setMake(tokens[0]);
+                carData.setModel(tokens[1]);
+                carData.setYear(tokens[2]);
+                carData.setCityE(Integer.parseInt(tokens[3]));
+                carData.setHighwayE(Integer.parseInt(tokens[4]));
+                if (tokens[5].length() > 0 && !tokens[5].equals("NA")) {
+                    carData.setCylinders(Integer.parseInt(tokens[5]));
+                }else{
+                    carData.setCylinders(0);
+                }
+                if (tokens[6].length() > 0 && !tokens[6].equals("NA")) {
+                    carData.setDisplacement(Double.parseDouble(tokens[6]));
+                }else {
+                    carData.setDisplacement(0);
+                }
+                if (tokens[7].length() > 0) {
+                    carData.setDrive(tokens[7]);
+                }else{
+                    carData.setDrive("");
+                }
+                carData.setFuelType(tokens[8]);
+                if (tokens[9].length() > 0) {
+                    carData.setTransmission(tokens[9]);
+                }else{
+                    carData.setTransmission("");
+                }
+                cars.add(carData);
+            }
+        } catch (IOException e) {
+            Log.d("ERORRRRRR FILE", "NO GOOOOOODDDDD");
+            e.printStackTrace();
+        }
     }
 
     private void selectExistingCar(){
@@ -91,4 +149,5 @@ public class SelectTransModeActivity extends AppCompatActivity {
                 return super.onContextItemSelected(item);
         }
     }
+
 }
