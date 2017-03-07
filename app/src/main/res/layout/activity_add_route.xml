@@ -15,30 +15,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
-
-        <TableRow
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:text="@string/distance_km"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:id="@+id/textView_routeDistance"
-                android:textSize="14sp" />
-
-            <EditText
-                android:id="@+id/editView_enterDistance"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:hint="@string/distnace_in_km"
-                android:inputType="number"
-                android:textSize="14sp" />
-
-        </TableRow>
+        android:layout_alignParentStart="true"
+        android:id="@+id/tableLayout">
 
         <TableRow
             android:layout_width="wrap_content"
@@ -58,7 +36,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:hint="@string/highway_driving_distance_in_km"
-                android:inputType="number"
+                android:inputType="text"
                 android:textSize="14sp" />
 
         </TableRow>
@@ -81,7 +59,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:hint="@string/city_driving_distance_in_km"
-                android:inputType="number"
+                android:inputType="text"
                 android:textSize="14sp" />
 
         </TableRow>
@@ -91,9 +69,22 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="12dp"
+        android:layout_marginEnd="12dp">
+
+        <TextView
+            android:id="@+id/text_enterDis"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/textView_routeDistance"
+            android:layout_alignBottom="@+id/textView_routeDistance"
+            android:layout_toEndOf="@+id/textView_routeDistance"
+            android:layout_toRightOf="@+id/textView_routeDistance"
+            android:text="@string/total_distance"
+            android:textSize="16sp" />
 
         <Button
             android:layout_width="wrap_content"
@@ -107,14 +98,14 @@
             android:text="@string/calculate_without_save" />
 
         <TextView
-            android:text="@string/route_name"
+            android:id="@+id/text_routeName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_marginBottom="104dp"
-            android:id="@+id/text_routeName" />
+            android:text="@string/route_name_2" />
 
         <EditText
             android:layout_width="wrap_content"
@@ -126,7 +117,8 @@
             android:textSize="14sp"
             android:layout_alignBaseline="@+id/text_routeName"
             android:layout_alignBottom="@+id/text_routeName"
-            android:layout_centerHorizontal="true" />
+            android:layout_alignLeft="@+id/btn_noSaveRoute"
+            android:layout_alignStart="@+id/btn_noSaveRoute" />
 
         <TextView
             android:text="@string/if_choose_to_save_the_route_please_give_it_a_name"
@@ -147,6 +139,17 @@
             android:layout_below="@+id/editText_enterRouteName"
             android:layout_alignRight="@+id/btn_noSaveRoute"
             android:layout_alignEnd="@+id/btn_noSaveRoute" />
+
+        <TextView
+            android:id="@+id/textView_routeDistance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/btn_noSaveRoute"
+            android:layout_alignLeft="@+id/editText_enterRouteName"
+            android:layout_alignStart="@+id/editText_enterRouteName"
+            android:layout_marginBottom="60dp"
+            android:text="@string/distance_km_2"
+            android:textSize="16sp" />
 
     </RelativeLayout>
 

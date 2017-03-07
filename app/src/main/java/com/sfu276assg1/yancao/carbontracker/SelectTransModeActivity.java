@@ -87,6 +87,7 @@ public class SelectTransModeActivity extends AppCompatActivity {
             Log.d("ERORRRRRR FILE", "NO GOOOOOODDDDD");
             e.printStackTrace();
         }
+        CarbonModel.getInstance().setCarFamily(cars);
     }
 
     private void selectExistingCar(){
