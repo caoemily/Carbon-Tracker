@@ -80,7 +80,9 @@ public class SelectTransModeActivity extends AppCompatActivity {
                 }else{
                     carData.setTransmission("");
                 }
-                cars.add(carData);
+                if (!carData.getFuelType().equals("CNG") && !carData.getFuelType().equals("Gasoline or natural gas")) {
+                    cars.add(carData);
+                }
             }
         } catch (IOException e) {
             Log.d("ERORRRRRR FILE", "NO GOOOOOODDDDD");
