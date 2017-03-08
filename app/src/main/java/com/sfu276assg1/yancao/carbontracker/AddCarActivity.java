@@ -13,6 +13,10 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+//This is the activity that manipulates the screen after the user hits 'add car' on the Select Transport Mode page.
+//setupMakeSpinner(), setupModelSpinner(), setyearSpinner() sets up all the spinner for Make, Model and Year
+//setupAcceptButton() is the button that the user clicks after they're done filling in everything.
+
 public class AddCarActivity extends AppCompatActivity {
 
     CarFamily carFamily = CarbonModel.getInstance().getCarFromFile();
