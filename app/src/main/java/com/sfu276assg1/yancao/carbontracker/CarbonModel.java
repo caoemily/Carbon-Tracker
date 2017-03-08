@@ -44,6 +44,7 @@ public class CarbonModel {
     public void addJourney(Journey journey) {
         journeyCollection.addJourney(journey);
     }
+    public Journey getLastJourney(){return journeyCollection.getLastJourney();}
 
     //CarCollection
     public CarCollection getCarCollection(){

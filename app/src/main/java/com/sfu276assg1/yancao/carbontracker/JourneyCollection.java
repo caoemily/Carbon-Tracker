@@ -26,6 +26,10 @@ public class JourneyCollection {
         validateIndexWithException(index);
         return journeys.get(index);
     }
+    public Journey getLastJourney(){
+        if(journeys.size()==0) return null;
+        else return getJourney(countJourneys()-1);
+    }
 
     public String[] getJourneyDescriptions() {
         String[] descriptions = new String[countJourneys()];

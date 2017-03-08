@@ -10,91 +10,114 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.sfu276assg1.yancao.carbontracker.AddCarActivity">
 
-    <TextView
-        android:id="@+id/give_Nickname"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="@string/nickname"
-        android:text="@string/nickname"
-        android:layout_alignBottom="@+id/editNickname"
-        android:layout_toLeftOf="@+id/editNickname"
-        android:layout_toStartOf="@+id/editNickname"
-        android:layout_marginRight="13dp"
-        android:layout_marginEnd="13dp" />
-
-    <Button
-        android:id="@+id/btnOkAddCar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/car_year"
-        android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/car_year"
-        android:layout_marginBottom="37dp"
-        android:layout_marginEnd="23dp"
-        android:layout_marginRight="23dp"
-        android:text="@string/ok" />
-
     <Spinner
-        android:id="@+id/car_make"
+        android:id="@+id/car_year"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="100dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignTop="@+id/text_year"
+        android:layout_marginTop="22dp" />
+
+    <TextView
+        android:id="@+id/text_model"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
-        android:layout_below="@+id/give_Nickname"
-        android:layout_alignLeft="@+id/give_Nickname"
-        android:layout_alignStart="@+id/give_Nickname" />
+        android:text="model"
+        android:textSize="18sp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:id="@+id/text_make"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/tableRow4"
+        android:layout_marginTop="68dp"
+        android:text="make"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/text_year"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="44dp"
+        android:text="year"
+        android:textSize="18sp"
+        android:layout_below="@+id/car_model"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <Spinner
         android:id="@+id/car_model"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="69dp"
-        android:layout_below="@+id/car_make"
-        android:layout_alignLeft="@+id/car_make"
-        android:layout_alignStart="@+id/car_make" />
+        android:layout_marginLeft="100dp"
+        android:layout_alignTop="@+id/text_model"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="27dp" />
 
     <Spinner
-        android:id="@+id/car_year"
+        android:id="@+id/car_make"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/car_model"
+        android:layout_marginLeft="100dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignTop="@+id/text_make"
+        android:layout_marginTop="24dp" />
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tableRow4">
+
+        <TextView
+            android:id="@+id/give_Nickname"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="30dp"
+            android:hint="Nickname"
+            android:text="Nickname:" />
+
+        <EditText
+            android:id="@+id/editNickname"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="19dp"
+            android:ems="10"
+            android:hint="Please enter a nickname for the car"
+            android:inputType="textPersonName"
+            android:textSize="14sp" />
+
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:id="@+id/tableRow2">
+
+    </TableRow>
+
+    <Button
+        android:id="@+id/btnOkAddCar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="22dp"
+        android:layout_marginRight="22dp"
+        android:text="OK"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="80dp"
-        android:layout_alignLeft="@+id/car_model"
-        android:layout_alignStart="@+id/car_model" />
-
-
-    <EditText
-        android:id="@+id/editNickname"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="@string/please_enter_a_nickname_for_the_car"
-        android:inputType="textPersonName"
-        android:textSize="14sp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        tools:ignore="RelativeOverlap" />
-
-    <TextView
-        android:id="@+id/makeTxt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/car_make"
-        android:layout_alignLeft="@+id/car_make"
-        android:layout_alignStart="@+id/car_make"
-        android:layout_marginBottom="23dp"
-        android:text="@string/make" />
-
-    <TextView
-        android:id="@+id/modelTxt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/car_model"
-        android:layout_alignLeft="@+id/car_model"
-        android:layout_alignStart="@+id/car_model"
-        android:layout_marginBottom="25dp"
-        android:text="@string/model" />
-
+        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>

@@ -88,6 +88,7 @@ public class AddRouteActivity extends AppCompatActivity {
                     }
                     CarbonModel.getInstance().addRouteToAllRoute(add);
                     addJourney();
+                    showCurrentJouney();
                     startActivity(new Intent(getApplicationContext(), MainActivity.class));
                     finish();
                 }
@@ -120,12 +121,20 @@ public class AddRouteActivity extends AppCompatActivity {
                             CarbonModel.getInstance().changeRouteInCollection(add,index);
                         }
                         addJourney();
+                        showCurrentJouney();
                         startActivity(new Intent(getApplicationContext(), MainActivity.class));
                         finish();
                     }
                 }
             }
         });
+    }
+
+    private void showCurrentJouney(){
+        Journey curJourney = CarbonModel.getInstance().getLastJourney();
+        String msg = curJourney.getJourneyDes();
+        Toast.makeText(getApplicationContext(),msg,
+                Toast.LENGTH_LONG).show();
     }
 
     private Route isValidRouteInput() {

@@ -44,6 +44,7 @@ public class SelectRouteActivity extends AppCompatActivity {
                 Route route = CarbonModel.getInstance().getRouteFromCollection(position);
                 CarbonModel.getInstance().addRouteToAllRoute(route);
                 addJourney();
+                showCurrentJouney();
                 startActivity(new Intent(getApplicationContext(),MainActivity.class));
                 finish();
             }
@@ -99,5 +100,11 @@ public class SelectRouteActivity extends AppCompatActivity {
             default:
                 return super.onContextItemSelected(item);
         }
+    }
+    private void showCurrentJouney(){
+        Journey curJourney = CarbonModel.getInstance().getLastJourney();
+        String msg = curJourney.getJourneyDes();
+        Toast.makeText(getApplicationContext(),msg,
+                Toast.LENGTH_LONG).show();
     }
 }
