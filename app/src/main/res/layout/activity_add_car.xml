@@ -20,24 +20,8 @@
         android:layout_marginLeft="15dp"
         android:layout_marginStart="15dp"
         android:layout_marginTop="30dp"
-        android:hint="Nickname"
+        android:hint="@string/nickname"
         android:text="Nickname:" />
-
-    <EditText
-        android:id="@+id/editNickname"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="19dp"
-        android:layout_toRightOf="@+id/give_Nickname"
-        android:ems="10"
-        android:hint="Please enter a nickname for the car"
-        android:inputType="textPersonName"
-        android:textSize="14sp"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
 
     <Button
         android:id="@+id/btnOkAddCar"
@@ -52,57 +36,44 @@
         android:text="OK" />
 
     <Spinner
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="53dp"
+        android:layout_marginTop="29dp"
         android:id="@+id/car_make"
         android:layout_below="@+id/editNickname"
         android:layout_alignLeft="@+id/give_Nickname"
         android:layout_alignStart="@+id/give_Nickname" />
 
     <Spinner
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="38dp"
         android:id="@+id/car_year"
-        android:layout_alignTop="@+id/car_model"
+        android:layout_below="@+id/car_model"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginRight="15dp"
-        android:layout_marginEnd="15dp" />
+        android:layout_alignLeft="@+id/car_model"
+        android:layout_alignStart="@+id/car_model" />
 
     <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="38dp"
+        android:id="@+id/car_model"
+        android:layout_below="@+id/car_make"
+        android:layout_alignLeft="@+id/car_make"
+        android:layout_alignStart="@+id/car_make" />
+
+    <EditText
+        android:id="@+id/editNickname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/car_model"
-        android:layout_alignTop="@+id/car_make"
+        android:ems="10"
+        android:hint="Please enter a nickname for the car"
+        android:inputType="textPersonName"
+        android:textSize="14sp"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
-    <TextView
-        android:id="@+id/text_make"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/car_model"
-        android:layout_alignLeft="@+id/car_make"
-        android:layout_alignStart="@+id/car_make"
-        android:text="make" />
 
-    <TextView
-        android:id="@+id/text_model"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="model"
-        android:layout_above="@+id/car_model"
-        android:layout_toLeftOf="@+id/car_model"
-        android:layout_toStartOf="@+id/car_model" />
-
-    <TextView
-        android:id="@+id/text_year"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="year"
-        android:layout_above="@+id/car_year"
-        android:layout_toLeftOf="@+id/car_year"
-        android:layout_toStartOf="@+id/car_year"
-        android:layout_marginRight="15dp"
-        android:layout_marginEnd="15dp" />
 </RelativeLayout>

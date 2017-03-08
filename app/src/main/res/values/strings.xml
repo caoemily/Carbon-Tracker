@@ -28,4 +28,5 @@
     <string name="total_distance">Total distance</string>
     <string name="route_name_2">Route Name:</string>
     <string name="distance_km_2">Distance (km):</string>
+    <string name="nickname">Nickname</string>
 </resources>
