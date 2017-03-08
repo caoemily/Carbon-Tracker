@@ -1,5 +1,6 @@
 package com.sfu276assg1.yancao.carbontracker;
 
+//The car class gets all the nickname, make, model, year, highwayE etc. They are then stored for easier use throughout the code
 public class Car {
 
     private String nickname, make, model, year;
