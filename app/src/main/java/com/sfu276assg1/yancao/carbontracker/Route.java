@@ -10,7 +10,7 @@ public class Route {
     // Route Java Class
 
     public Route(double distanceInKm, double highwayPer, double cityPer) {
-        if(distanceInKm<=0){
+        if(distanceInKm<0){
             throw new IllegalArgumentException();
         }
         if(highwayPer<0){
@@ -44,7 +44,7 @@ public class Route {
     }
 
     public void setDistance(double distance) {
-        if(distance<=0){
+        if(distance<0){
             throw new IllegalArgumentException();
         }
         else {
@@ -77,14 +77,6 @@ public class Route {
             this.rName = rName;
         }
     }
-
-
-//    public void setRoute(Route route){
-//        this.setName(route.getName());
-//        this.setDistance(route.getDistance());
-//        this.setHighwayPer(route.getHighwayPer());
-//        this.setCityPer(route.getCityPer());
-//    }
 
     public String getSingleRouteDes() {
         String descriptions = "";
