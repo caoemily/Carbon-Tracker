@@ -16,7 +16,7 @@ import android.widget.Toast;
 
 public class AddRouteActivity extends AppCompatActivity {
 
-    double cityDriv = 0, highwayDriv=0, totalDis=0;
+    double cityDriv = 0, highwayDriv = 0, totalDis = 0;
     Route newRoute = new Route(0, 0, 0);
 
     @Override
@@ -34,11 +34,9 @@ public class AddRouteActivity extends AppCompatActivity {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
-
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
             }
-
             @Override
             public void afterTextChanged(Editable s) {
                 String highwayPerData = highwayPerEntry.getText().toString();
@@ -49,7 +47,7 @@ public class AddRouteActivity extends AppCompatActivity {
                 }
                 totalDis = highwayDriv + cityDriv;
                 final TextView distance = (TextView) findViewById(R.id.text_enterDis);
-                distance.setText(""+totalDis);
+                distance.setText("" + totalDis);
             }
         });
 
@@ -71,7 +69,7 @@ public class AddRouteActivity extends AppCompatActivity {
                 }
                 totalDis = highwayDriv + cityDriv;
                 final TextView distance = (TextView) findViewById(R.id.text_enterDis);
-                distance.setText(""+totalDis);
+                distance.setText("" + totalDis);
             }
         });
     }
@@ -89,8 +87,8 @@ public class AddRouteActivity extends AppCompatActivity {
                         add.setName(routeName);
                     }
                     CarbonModel.getInstance().addRouteToAllRoute(add);
-                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
                     addJourney();
+                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
                     finish();
                 }
             }
@@ -108,7 +106,7 @@ public class AddRouteActivity extends AppCompatActivity {
                 String routeName = routeNameEntry.getText().toString();
                 Route add = isValidRouteInput();
                 if(add != null){
-                    if(routeName.length()==0 || routeName==null){
+                    if(routeName.length()==0 || routeName == null){
                         Toast.makeText(getApplicationContext(),"Please enter a name for the route.",
                                 Toast.LENGTH_SHORT).show();
                     }
@@ -121,9 +119,9 @@ public class AddRouteActivity extends AppCompatActivity {
                         else{
                             CarbonModel.getInstance().changeRouteInCollection(add,index);
                         }
-                        finish();
-                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
                         addJourney();
+                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                        finish();
                     }
                 }
             }
@@ -157,7 +155,6 @@ public class AddRouteActivity extends AppCompatActivity {
         }
         else{
             Route newRoute = new Route(routeDistance, highwayPer, cityPer);
-
             return newRoute;
         }
         return null;

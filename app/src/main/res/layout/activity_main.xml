@@ -56,6 +56,7 @@
         android:layout_alignLeft="@+id/car1"
         android:layout_alignStart="@+id/car1"
         android:layout_marginBottom="50dp"
+        android:layout_marginLeft="330dp"
         android:layout_marginStart="330dp"
         android:layout_marginTop="-20dp"
         android:background="@android:color/transparent"

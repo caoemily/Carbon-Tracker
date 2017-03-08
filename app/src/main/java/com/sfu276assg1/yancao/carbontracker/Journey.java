@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-//Journey Java Class
+// Journey class
 
 public class Journey implements Serializable {
 
@@ -21,36 +21,46 @@ public class Journey implements Serializable {
         this.carName = car.getNickname();
         this.numCarbon = calculateCarbon(car, route);
     }
-
-
-
     public String getDate() {
         return date;
     }
     public void setDate(String jdate){
-        if(jdate==null||jdate.length()==0) throw new IllegalArgumentException();
-        else this.date = jdate;
+        if(jdate == null || jdate.length() == 0) {
+            throw new IllegalArgumentException();
+        }
+        else {
+            this.date = jdate;
+        }
     }
-
-    public String getRouteName() {return routeName;}
+    public String getRouteName() {
+        return routeName;
+    }
     public void setRouteName(String rname){
-        if(rname==null||rname.length()==0) throw new IllegalArgumentException();
-        else this.routeName = rname;
+        if(rname == null || rname.length() == 0) {
+            throw new IllegalArgumentException();
+        }
+        else {
+            this.routeName = rname;
+        }
     }
 
     public double getDistance() {
         return distance;
     }
-    public void setDistance(double rdistance){this.distance = rdistance;}
-
+    public void setDistance(double rdistance) {
+        this.distance = rdistance;
+    }
     public String getCarName() {
         return carName;
     }
     public void setCarName(String cname) {
-        if(cname==null||cname.length()==0) throw new IllegalArgumentException();
-        else this.carName=cname;
+        if(cname == null || cname.length() == 0) {
+            throw new IllegalArgumentException();
+        }
+        else {
+            this.carName=cname;
+        }
     }
-
     public void setNumCarbon(int numCarbon) {
         if (numCarbon < 0) {
             throw new IllegalArgumentException();
@@ -59,16 +69,23 @@ public class Journey implements Serializable {
             this.numCarbon = numCarbon;
         }
     }
-
     public double getNumCarbon() {
         return numCarbon;
     }
-
     private double calculateCarbon(Car car, Route route) {
-        double highway = route.getHighwayPer();
-        double city = route.getCityPer();
-        //need correct calculation method.
-        double carbonEmission = car.getHighwayE()*highway + car.getCityE()*city;
+        double highway = route.getHighway() * 0.621371;
+        double city = route.getCity() * 0.621371;
+        double gasUsed = highway * car.getHighwayE()  + city * car.getHighwayE();
+        double carbonEmission = -1;
+        if (car.getFuelType() == "Gasoline") {
+            carbonEmission = 8.89 * gasUsed;
+        }
+        else if (car.getFuelType() == "Diesel") {
+            carbonEmission = 10.16 * gasUsed;
+        }
+        else if (car.getFuelType() == "Electric"){
+            carbonEmission = 0 * gasUsed;
+        }
         return carbonEmission;
     }
 }

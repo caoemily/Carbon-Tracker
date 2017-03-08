@@ -2,8 +2,8 @@
     <string name="app_name">Carbon Tracker</string>
     <string name="pie_chart">Pie Chart</string>
     <string name="go_to_main">Go to Main</string>
-    <string name="distance_km">Distance (km):</string>
-    <string name="distnace_in_km">Distnace in km</string>
+    <string name="distance_km">Distance (km): </string>
+    <string name="distance_in_km">Distance in km</string>
     <string name="highway_km">Highway (km):</string>
     <string name="highway_driving_distance_in_km">Highway driving distance in km</string>
     <string name="city_km">City (km):</string>
@@ -27,10 +27,13 @@
     <string name="show_table">Show Table</string>
     <string name="total_distance">Total distance</string>
     <string name="route_name_2">Route Name:</string>
-    <string name="distance_km_2">Distance (km):</string>
-    <string name="nickname">Nickname</string>
+    <string name="nickname">Nickname: </string>
     <string name="model">Model</string>
     <string name="make">Make</string>
     <string name="ok">OK</string>
     <string name="please_enter_a_nickname_for_the_car">Please enter a nickname for the car</string>
+    <string name="skip"><![CDATA[Skip >>]]></string>
+    <string name="please_select_a_car">Please select a car:</string>
+    <string name="long_pressing_on_car_to_edit_or_delete">Long-pressing on car to edit or delete</string>
+    <string name="add_car">add car</string>
 </resources>

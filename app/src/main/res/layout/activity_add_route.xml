@@ -36,7 +36,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:hint="@string/highway_driving_distance_in_km"
-                android:inputType="text"
+                android:inputType="text|number"
                 android:textSize="14sp" />
 
         </TableRow>
@@ -59,7 +59,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:hint="@string/city_driving_distance_in_km"
-                android:inputType="text"
+                android:inputType="number"
                 android:textSize="14sp" />
 
         </TableRow>
@@ -148,7 +148,7 @@
             android:layout_alignLeft="@+id/editText_enterRouteName"
             android:layout_alignStart="@+id/editText_enterRouteName"
             android:layout_marginBottom="60dp"
-            android:text="@string/distance_km_2"
+            android:text="@string/distance_km"
             android:textSize="16sp" />
 
     </RelativeLayout>

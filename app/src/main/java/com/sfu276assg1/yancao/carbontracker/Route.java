@@ -3,39 +3,39 @@ package com.sfu276assg1.yancao.carbontracker;
 public class Route {
     private String rName;
     private double distance;
-    private double highwayPer;
-    private double cityPer;
+    private double highway;
+    private double city;
 
 
     // Route Java Class
 
-    public Route(double distanceInKm, double highwayPer, double cityPer) {
+    public Route(double distanceInKm, double highway, double city) {
         if(distanceInKm<0){
             throw new IllegalArgumentException();
         }
-        if(highwayPer<0){
+        if(highway < 0){
             throw new IllegalArgumentException();
         }
-        if(cityPer<0){
+        if(city < 0){
             throw new IllegalArgumentException();
         }
 
         this.rName = " ";
         this.distance = distanceInKm;
-        this.highwayPer = highwayPer;
-        this.cityPer = cityPer;
+        this.highway = highway;
+        this.city = city;
     }
 
-    public double getCityPer() {
-        return cityPer;
+    public double getCity() {
+        return city;
     }
 
-    public void setCityPer(double cityPer) {
-        if(cityPer<0){
+    public void setCityPer(double city) {
+        if(city < 0){
             throw new IllegalArgumentException();
         }
         else{
-            this.cityPer=cityPer;
+            this.city = city;
         }
     }
 
@@ -44,7 +44,7 @@ public class Route {
     }
 
     public void setDistance(double distance) {
-        if(distance<0){
+        if(distance < 0){
             throw new IllegalArgumentException();
         }
         else {
@@ -52,16 +52,16 @@ public class Route {
         }
     }
 
-    public double getHighwayPer() {
-        return highwayPer;
+    public double getHighway() {
+        return highway;
     }
 
-    public void setHighwayPer(double highwayPer) {
-        if(highwayPer<0){
+    public void setHighway(double highway) {
+        if(highway < 0){
             throw new IllegalArgumentException();
         }
         else{
-            this.highwayPer=highwayPer;
+            this.highway = highway;
         }
     }
 
@@ -81,7 +81,7 @@ public class Route {
     public String getSingleRouteDes() {
         String descriptions = "";
         descriptions += this.getName() + " - " + this.getDistance() + "km" + " - "
-                    + this.getHighwayPer() + "%" + " - " + this.getCityPer() + "%";
+                    + this.getHighway() + "%" + " - " + this.getCity() + "%";
         return descriptions;
     }
 

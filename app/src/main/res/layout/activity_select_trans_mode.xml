@@ -17,14 +17,14 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:text="Please select a car:" />
+        android:text="@string/please_select_a_car" />
 
     <TextView
         android:id="@+id/text_hintEditCar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="11dp"
-        android:text="Long-pressing on car to edit or delete"
+        android:text="@string/long_pressing_on_car_to_edit_or_delete"
         android:layout_above="@+id/btn_addCar"
         android:layout_centerHorizontal="true" />
 
@@ -48,7 +48,7 @@
         android:layout_alignParentRight="true"
         android:layout_marginEnd="19dp"
         android:layout_marginRight="19dp"
-        android:text="add car" />
+        android:text="@string/add_car" />
 
 </RelativeLayout>
 

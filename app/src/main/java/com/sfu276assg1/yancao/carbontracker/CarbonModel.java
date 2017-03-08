@@ -33,7 +33,9 @@ public class CarbonModel {
     public CarFamily getCarFromFile(){
         return carFromFile;
     }
-    public void setCarFamily(ArrayList<Car> cars){carFromFile.setCars(cars);}
+    public void setCarFamily(ArrayList<Car> cars) {
+        carFromFile.setCars(cars);
+    }
 
     // JourneyCollection
     public JourneyCollection getJourneyCollection() {
@@ -48,7 +50,9 @@ public class CarbonModel {
         return carCollection;
     }
     public CarCollection getAllCar() {return allCar;}
-    public void addCarToCollecton(Car car) {carCollection.addCar(car);}
+    public void addCarToCollecton(Car car) {
+        carCollection.addCar(car);
+    }
     public Car getCarFromCollection(int index) {return carCollection.getCar(index);}
     public void addCarToAllCar(Car car) {
         allCar.addCar(car);
