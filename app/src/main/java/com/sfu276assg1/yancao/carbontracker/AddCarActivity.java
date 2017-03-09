@@ -25,9 +25,9 @@ public class AddCarActivity extends AppCompatActivity {
     ArrayList<String> carMake = carFamily.defaultForGetMake();
     ArrayList<String> carModel = new ArrayList<String>();
     ArrayList<String> carYear = new ArrayList<String>();
-    ArrayList<Car> carDescription = new ArrayList<>();
+    static  public ArrayList<Car> carDescription = new ArrayList<>();
     String make,model,year;
-    Car currentCar = new Car();
+    //Car currentCar = new Car();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,14 +59,14 @@ public class AddCarActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
                 make = carMake.get(pos);
-                currentCar.setMake(make);
+                //currentCar.setMake(make);
                 setupModelSpinner();
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> arg0) {
                 make = carMake.get(0);
-                currentCar.setMake(make);
+                //currentCar.setMake(make);
             }
         });
     }
@@ -84,13 +84,13 @@ public class AddCarActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
                 model = carModel.get(pos);
-                currentCar.setModel(model);
+                //currentCar.setModel(model);
                 setupYearSpinner();
             }
             @Override
             public void onNothingSelected(AdapterView<?> arg0) {
                 model = carModel.get(0);
-                currentCar.setModel(model);
+                //currentCar.setModel(model);
             }
         });
     }
@@ -108,12 +108,13 @@ public class AddCarActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
                 year = carYear.get(pos);
-                currentCar.setYear(year);
+                //currentCar.setYear(year);
+                setupPossibleCar();
             }
             @Override
             public void onNothingSelected(AdapterView<?> arg0) {
                 year = carYear.get(0);
-                currentCar.setYear(year);
+                //currentCar.setYear(year);
             }
         });
     }
@@ -130,41 +131,45 @@ public class AddCarActivity extends AppCompatActivity {
                 if (carName.length() == 0 || carName == null) {
                     Toast.makeText(getApplicationContext(), "Please enter a Nickname for the car.", Toast.LENGTH_LONG).show();
                 } else {
-                    currentCar.setNickname(carName);
-                    setCurrentCar();
-                    setupPossibleCar();
-                    CarbonModel.getInstance().addCarToAllCar(currentCar);
-                    if (index == -1) {
-                        CarbonModel.getInstance().addCarToCollecton(currentCar);
-                    } else {
-                        CarbonModel.getInstance().changeCarInCollection(currentCar, index);
-                    }
+                    //currentCar.setNickname(carName);
+                    //setCurrentCar();
+                    //CarbonModel.getInstance().addCarToAllCar(currentCar);
+                  if (index == -1) {
+                      Intent intent = new Intent(getApplicationContext(), DisplayPossibleCars.class);
+                      intent.putExtra("car nickname", carName);
+                      intent.putExtra("edit mode", 0);
+                      intent.putExtra("index", -1);
+                      startActivity(intent);
+                      finish();
+                  } else {
+                      Intent intent = new Intent(getApplicationContext(), DisplayPossibleCars.class);
+                      intent.putExtra("car nickname", carName);
+                      intent.putExtra("edit mode", 1);
+                      intent.putExtra("index", index);
+                      startActivity(intent);
+                      finish();
+                  }
+//                    } else {
+//                        CarbonModel.getInstance().changeCarInCollection(currentCar, index);
+//                    }
 
 
-                    finish();
-                    startActivity(new Intent(getApplicationContext(), SelectRouteActivity.class));
+
+                    //startActivity(new Intent(getApplicationContext(), SelectRouteActivity.class));
+
                 }
             }
         });
     }
 
-    private void setUpPopUp()
-    {
-        AlertDialog.Builder fullCar = new AlertDialog.Builder(this);
-        fullCar.setTitle("Select your corresponding car: ");
 
-
-        final ArrayAdapter<String> fullCarList = new ArrayAdapter<String>(this, android.R.layout.simple_selectable_list_item);
-
-    }
-
-    private void setCurrentCar() {
-        ArrayList<Integer> emission = carFamily.getEmission(make, model, year);
-        int highwayE = emission.get(0);
-        int cityE = emission.get(1);
-        currentCar.setHighwayE(highwayE);
-        currentCar.setCityE(cityE);
-    }
+//    private void setCurrentCar() {
+//        ArrayList<Integer> emission = carFamily.getEmission(make, model, year);
+//        int highwayE = emission.get(0);
+//        int cityE = emission.get(1);
+//        currentCar.setHighwayE(highwayE);
+//        currentCar.setCityE(cityE);
+//    }
 
 }
 

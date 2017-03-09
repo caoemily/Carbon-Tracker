@@ -85,6 +85,7 @@ public class CarFamily {
                 int cityE = car.getCityE();
                 emission.add(highwayE);
                 emission.add(cityE);
+
                 break;
             }
         }
@@ -97,7 +98,7 @@ public class CarFamily {
             if (car.getMake().equals(make) && car.getModel().equals(model) && car.getYear().equals(year) ){
                 carDescription.add(new Car(car.getMake(), car.getModel(), car.getYear(),
                                             car.getHighwayE(), car.getCityE(),
-                                            car.getTransmission(), car.getDisplacement()));
+                                            car.getTransmission(), car.getDisplacement(), car.getFuelType()));
             }
         }
         return carDescription;

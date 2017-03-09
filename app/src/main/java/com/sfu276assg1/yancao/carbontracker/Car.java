@@ -3,7 +3,6 @@ package com.sfu276assg1.yancao.carbontracker;
 //The car class gets all the nickname, make, model, year, highwayE etc.
 // They are then stored for easier use throughout the code
 public class Car {
-
     private String nickname, make, model, year;
     private int highwayE, cityE;
     private int cylinders;
@@ -23,7 +22,7 @@ public class Car {
         cityE = 0;
     }
 
-    public Car(String make,String model, String year, int highwayE, int cityE, String transmission, double displacement){
+    public Car(String make,String model, String year, int highwayE, int cityE, String transmission, double displacement, String fuelType){
         this.nickname = " ";
         this.make = make;
         this.model = model;
@@ -32,6 +31,7 @@ public class Car {
         this.cityE = cityE;
         this.transmission = transmission;
         this.displacement = displacement;
+        this.fuelType = fuelType;
     }
 
     public void setHighwayE(int highwayE) {
@@ -128,13 +128,6 @@ public class Car {
 
     @Override
     public String toString() {
-        return "Car{" +
-                "nickname='" + nickname + '\'' +
-                ", make='" + make + '\'' +
-                ", model='" + model + '\'' +
-                ", year='" + year + '\'' +
-                ", displacement=" + displacement +
-                ", transmission='" + transmission + '\'' +
-                '}';
+        return make + ", " + model + ", " + year + ", " + displacement + ", " + transmission;
     }
 }

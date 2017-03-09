@@ -36,4 +36,5 @@
     <string name="please_select_a_car">Please select a car:</string>
     <string name="long_pressing_on_car_to_edit_or_delete">Long-pressing on car to edit or delete</string>
     <string name="add_car">add car</string>
+    <string name="please_select_your_car">Please Select Your Car</string>
 </resources>

@@ -28,7 +28,6 @@ public class CarbonModel {
         carCollection = new CarCollection();
         carFromFile = new CarFamily();
     }
-
     //carFamily
     public CarFamily getCarFromFile(){
         return carFromFile;

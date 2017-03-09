@@ -76,18 +76,16 @@ public class Journey implements Serializable {
         double highway = route.getHighway() * 0.621371;
         double city = route.getCity() * 0.621371;
         double gasUsed = highway * car.getHighwayE()  + city * car.getHighwayE();
-        double carbonEmission = 8.89*gasUsed;
-        carbonEmission = (double)Math.round(carbonEmission * 10) / 10;
-//        double carbonEmission = -1;
-//        if (car.getFuelType() == "Gasoline") {
-//            carbonEmission = 8.89 * gasUsed;
-//        }
-//        else if (car.getFuelType() == "Diesel") {
-//            carbonEmission = 10.16 * gasUsed;
-//        }
-//        else if (car.getFuelType() == "Electric"){
-//            carbonEmission = 0 * gasUsed;
-//        }
+        double carbonEmission = -1;
+        if (car.getFuelType().equals("Gasoline") || car.getFuelType().equals("Regular") || car.getFuelType().equals("Premium")) {
+            carbonEmission = 8.89 * gasUsed;
+        }
+        else if (car.getFuelType().equals("Diesel")) {
+            carbonEmission = 10.16 * gasUsed;
+        }
+        else if (car.getFuelType().equals("Electric")){
+            carbonEmission = 0 * gasUsed;
+        }
         return carbonEmission;
     }
     public String getJourneyDes(){

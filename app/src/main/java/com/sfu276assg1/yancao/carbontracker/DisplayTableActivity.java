@@ -46,7 +46,7 @@ public class DisplayTableActivity extends AppCompatActivity {
         table.addView(titleRow);
         for(int i = 0; i < 5; i++) {
             TextView textView = new TextView(this);
-            textView.setTextSize(8);
+            textView.setTextSize(10);
             TableRow.LayoutParams params = new TableRow.LayoutParams(
                     TableRow.LayoutParams.MATCH_PARENT,
                     TableRow.LayoutParams.MATCH_PARENT,
@@ -63,13 +63,13 @@ public class DisplayTableActivity extends AppCompatActivity {
                 textView.setText("Route");
             }
             if (i == 2) {
-                textView.setText("Distance");
+                textView.setText("Distance" + " (km)");
             }
             if (i == 3) {
                 textView.setText("Car");
             }
             if (i == 4) {
-                textView.setText("Carbon Footprint");
+                textView.setText("Carbon Footprint" + " (kg)");
             }
             titleRow.addView(textView);
         }
@@ -82,7 +82,7 @@ public class DisplayTableActivity extends AppCompatActivity {
             table.addView(tableRow);
             for(int col = 0; col < 5; col++) {
                 TextView textView = new TextView(this);
-                textView.setTextSize(8);
+                textView.setTextSize(10);
                 TableRow.LayoutParams params = new TableRow.LayoutParams(
                         TableRow.LayoutParams.MATCH_PARENT,
                         TableRow.LayoutParams.MATCH_PARENT,
