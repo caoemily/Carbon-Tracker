@@ -3,6 +3,7 @@ package com.sfu276assg1.yancao.carbontracker;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -23,6 +24,7 @@ public class AddCarActivity extends AppCompatActivity {
     ArrayList<String> carMake = carFamily.defaultForGetMake();
     ArrayList<String> carModel = new ArrayList<String>();
     ArrayList<String> carYear = new ArrayList<String>();
+    ArrayList<Car> carDescription = new ArrayList<>();
     String make,model,year;
     Car currentCar = new Car();
 
@@ -35,6 +37,14 @@ public class AddCarActivity extends AppCompatActivity {
         setupMakeSpinner();
         setupModelSpinner();
         setupYearSpinner();
+    }
+
+    private void setupPossibleCar() {
+        carDescription = carFamily.getDescription(make, model, year);
+        for(Car car : carDescription) {
+            Log.i("DEBUGGGGGG", car.toString());
+        }
+
     }
 
 
@@ -121,6 +131,7 @@ public class AddCarActivity extends AppCompatActivity {
                 } else {
                     currentCar.setNickname(carName);
                     setCurrentCar();
+                    setupPossibleCar();
                     CarbonModel.getInstance().addCarToAllCar(currentCar);
                     if (index == -1) {
                         CarbonModel.getInstance().addCarToCollecton(currentCar);
