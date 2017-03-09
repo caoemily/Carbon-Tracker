@@ -23,13 +23,15 @@ public class Car {
         cityE = 0;
     }
 
-    public Car(String make,String model, String year, String highwayE, String cityE){
+    public Car(String make,String model, String year, int highwayE, int cityE, String transmission, double displacement){
         this.nickname = " ";
         this.make = make;
         this.model = model;
         this.year = year;
-        this.highwayE = Integer.parseInt(highwayE);
-        this.cityE =  Integer.parseInt(cityE);
+        this.highwayE = highwayE;
+        this.cityE = cityE;
+        this.transmission = transmission;
+        this.displacement = displacement;
     }
 
     public void setHighwayE(int highwayE) {
@@ -122,5 +124,17 @@ public class Car {
 
     public void setTransmission(String transmission) {
         this.transmission = transmission;
+    }
+
+    @Override
+    public String toString() {
+        return "Car{" +
+                "nickname='" + nickname + '\'' +
+                ", make='" + make + '\'' +
+                ", model='" + model + '\'' +
+                ", year='" + year + '\'' +
+                ", displacement=" + displacement +
+                ", transmission='" + transmission + '\'' +
+                '}';
     }
 }

@@ -91,4 +91,15 @@ public class CarFamily {
         return emission;
     }
 
+    public ArrayList<Car> getDescription(String make, String model, String year) {
+        ArrayList<Car> carDescription = new ArrayList<>();
+        for (Car car : cars) {
+            if (car.getMake().equals(make) && car.getModel().equals(model) && car.getYear().equals(year) ){
+                carDescription.add(new Car(car.getMake(), car.getModel(), car.getYear(),
+                                            car.getHighwayE(), car.getCityE(),
+                                            car.getTransmission(), car.getDisplacement()));
+            }
+        }
+        return carDescription;
+    }
 }
