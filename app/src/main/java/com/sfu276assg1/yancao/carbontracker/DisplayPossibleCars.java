@@ -64,13 +64,13 @@ public class DisplayPossibleCars extends AppCompatActivity {
                 if (mode == 0) {
                     CarbonModel.getInstance().addCarToCollecton(currentCar);
                 }else{
-                    CarbonModel.getInstance().changeCarInCollection(currentCar, indexOfArray);
                     String origCarName = CarbonModel.getInstance().getCarCollection().getCar(indexOfArray).getNickname();
                     for(int i=0; i<CarbonModel.getInstance().getJourneyCollection().countJourneys();i++){
                         if(CarbonModel.getInstance().getJourneyCollection().getJourney(i).getCarName().equals(origCarName)){
                             CarbonModel.getInstance().getJourneyCollection().getJourney(i).changeCarInJourney(carNickname,currentCar);
                         }
                     }
+                    CarbonModel.getInstance().changeCarInCollection(currentCar, indexOfArray);
                 }
                 startActivity(new Intent(getApplicationContext(), SelectRouteActivity.class));
                 CarbonModel.getInstance().addCarToAllCar(currentCar);
