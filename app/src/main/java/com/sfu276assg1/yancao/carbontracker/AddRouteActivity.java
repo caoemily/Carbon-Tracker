@@ -17,7 +17,6 @@ import android.widget.Toast;
 public class AddRouteActivity extends AppCompatActivity {
 
     double cityDriv = 0, highwayDriv = 0, totalDis = 0;
-    Route newRoute = new Route(0, 0, 0);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,15 +38,19 @@ public class AddRouteActivity extends AppCompatActivity {
             }
             @Override
             public void afterTextChanged(Editable s) {
-                String highwayPerData = highwayPerEntry.getText().toString();
-                highwayDriv = validPositiveNum(highwayPerData);
-                if (highwayDriv < 0) {
-                    String msg_1 = "Highway drive distance must be positive number.";
-                    Toast.makeText(getApplicationContext(), msg_1, Toast.LENGTH_SHORT).show();
+                try {
+                    String highwayPerData = highwayPerEntry.getText().toString();
+                    if (highwayPerData.matches("")){
+                        highwayDriv = 0;
+                    }
+                    else{
+                        highwayDriv = Double.parseDouble(highwayPerData);
+                    }
+                    totalDis = highwayDriv + cityDriv;
+                    final TextView distance = (TextView) findViewById(R.id.text_enterDis);
+                    distance.setText("" + totalDis);
                 }
-                totalDis = highwayDriv + cityDriv;
-                final TextView distance = (TextView) findViewById(R.id.text_enterDis);
-                distance.setText("" + totalDis);
+                catch(NumberFormatException e){}
             }
         });
 
@@ -61,15 +64,19 @@ public class AddRouteActivity extends AppCompatActivity {
             }
             @Override
             public void afterTextChanged(Editable s) {
-                String cityPerData = cityPerEntry.getText().toString();
-                cityDriv = validPositiveNum(cityPerData);
-                if (cityDriv < 0) {
-                    String msg_2 = "City drive distance must be positive number.";
-                    Toast.makeText(getApplicationContext(), msg_2, Toast.LENGTH_SHORT).show();
+                try {
+                    String cityPerData = cityPerEntry.getText().toString();
+                    if (cityPerData.matches("")){
+                        cityDriv = 0;
+                    }
+                    else{
+                        cityDriv = Double.parseDouble(cityPerData);
+                    }
+                    totalDis = highwayDriv + cityDriv;
+                    final TextView distance = (TextView) findViewById(R.id.text_enterDis);
+                    distance.setText("" + totalDis);
                 }
-                totalDis = highwayDriv + cityDriv;
-                final TextView distance = (TextView) findViewById(R.id.text_enterDis);
-                distance.setText("" + totalDis);
+                catch(NumberFormatException e){}
             }
         });
     }
@@ -79,14 +86,13 @@ public class AddRouteActivity extends AppCompatActivity {
         accBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Route add = isValidRouteInput();
-                if(add!=null){
-                    EditText routeNameEntry = (EditText) findViewById(R.id.editText_enterRouteName);
-                    String routeName = routeNameEntry.getText().toString();
-                    if(!routeName.isEmpty()){
-                        add.setName(routeName);
-                    }
-                    CarbonModel.getInstance().addRouteToAllRoute(add);
+                if(totalDis <= 0){
+                    Toast.makeText(getApplicationContext(),"Total distance must be positive.",
+                            Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    Route route = new Route(totalDis, highwayDriv, cityDriv);
+                    CarbonModel.getInstance().addRouteToAllRoute(route);
                     addJourney();
                     showCurrentJouney();
                     startActivity(new Intent(getApplicationContext(), MainActivity.class));
@@ -101,31 +107,33 @@ public class AddRouteActivity extends AppCompatActivity {
         accBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent returnValueIntent = getIntent();
-                int index = returnValueIntent.getIntExtra("routeIndex",-1);
-                EditText routeNameEntry = (EditText) findViewById(R.id.editText_enterRouteName);
-                String routeName = routeNameEntry.getText().toString();
-                Route add = isValidRouteInput();
-                if(add != null){
-                    if(routeName.length()==0 || routeName == null){
-                        Toast.makeText(getApplicationContext(),"Please enter a name for the route.",
-                                Toast.LENGTH_SHORT).show();
-                    }
-                    else{
-                        add.setName(routeName);
-                        CarbonModel.getInstance().addRouteToAllRoute(add);
-                        if(index == -1){
-                            CarbonModel.getInstance().addRouteToCollecton(add);
-                        }
-                        else{
-                            CarbonModel.getInstance().changeRouteInCollection(add,index);
-                        }
-                        addJourney();
-                        showCurrentJouney();
-                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                        finish();
-                    }
+            Intent returnValueIntent = getIntent();
+            int index = returnValueIntent.getIntExtra("routeIndex", -1);
+            EditText routeNameEntry = (EditText) findViewById(R.id.editText_enterRouteName);
+            String routeName = routeNameEntry.getText().toString();
+            if(routeName.isEmpty()) {
+                Toast.makeText(getApplicationContext(),"Please enter a name for the route.",
+                        Toast.LENGTH_SHORT).show();
+            }
+            else {
+                if (totalDis <= 0) {
+                    Toast.makeText(getApplicationContext(), "Total distance must be positive.",
+                            Toast.LENGTH_SHORT).show();
                 }
+                else {
+                    Route route = new Route(totalDis, highwayDriv, cityDriv);
+                    route.setName(routeName);
+                    if (index == -1) {
+                        CarbonModel.getInstance().addRouteToCollecton(route);
+                    } else {
+                        CarbonModel.getInstance().changeRouteInCollection(route, index);
+                    }
+                    addJourney();
+                    showCurrentJouney();
+                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                    finish();
+                }
+            }
             }
         });
     }
@@ -135,54 +143,8 @@ public class AddRouteActivity extends AppCompatActivity {
         String msg = curJourney.getJourneyDes();
         Toast.makeText(getApplicationContext(),msg,
                 Toast.LENGTH_LONG).show();
-    }
-
-    private Route isValidRouteInput() {
-        TextView routeDistanceEntry = (TextView) findViewById(R.id.text_enterDis);
-        String routeDistanceData = routeDistanceEntry.getText().toString();
-        double routeDistance = validPositiveNum(routeDistanceData);
-
-        EditText highwayPerEntry = (EditText) findViewById(R.id.editView_enterHighwayPer);
-        String highwayPerData = highwayPerEntry.getText().toString();
-        double highwayPer = validPositiveNum(highwayPerData);
-
-        EditText cityPerEntry = (EditText) findViewById(R.id.editView_enterCityPer);
-        String cityPerData = cityPerEntry.getText().toString();
-        double cityPer = validPositiveNum(cityPerData);
-
-        if(routeDistance <= 0){
-            String msg_1 = "Route distance must be positive.";
-            Toast.makeText(getApplicationContext(), msg_1, Toast.LENGTH_SHORT).show();
-        }
-        if(highwayPer < 0){
-            String msg_2 = "Highway drive distance must be positive number.";
-            Toast.makeText(getApplicationContext(), msg_2, Toast.LENGTH_SHORT).show();
-        }
-        else if(cityPer < 0){
-            String msg_3 = "City drive distance must be positive number.";
-            Toast.makeText(getApplicationContext(), msg_3, Toast.LENGTH_SHORT).show();
-        }
-        else{
-            Route newRoute = new Route(routeDistance, highwayPer, cityPer);
-            return newRoute;
-        }
-        return null;
-    }
-
-    public double validPositiveNum(String text) {
-        int index = 0;
-        double result = -1;
-        for(int i = 0; i < text.length(); i++){
-            if (text.charAt(i) != ' '){
-                index = i;
-                break;
-            }
-        }
-        String subString = text.substring(index, text.length());
-        try {
-            result = Double.parseDouble(subString);
-        } catch (NumberFormatException ex) {}
-        return result;
+        Toast.makeText(getApplicationContext(),msg,
+                Toast.LENGTH_LONG).show();
     }
 
     private void addJourney() {

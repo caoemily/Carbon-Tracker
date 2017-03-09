@@ -98,7 +98,7 @@ public class Journey implements Serializable {
         if(route.equals(" ")) route = "no name";
         String distance = ""+getDistance();
         des = "Current Journey Info: Emission: "+emission+
-                "; Car: "+car+"; Route: "+route+"; Distance: "+distance;
+                "; Car: "+car+"; Route: "+route+"; Distance: "+distance+"km.";
         return des;
     }
 }
