@@ -15,6 +15,8 @@ public class Journey implements Serializable {
     private double distance;
     private String carName;
     private double numCarbon;
+    private Route route;
+
 
     public Journey(Car car, Route route) {
         this.date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
@@ -22,6 +24,7 @@ public class Journey implements Serializable {
         this.distance = route.getDistance();
         this.carName = car.getNickname();
         this.numCarbon = calculateCarbon(car, route);
+        this.route = route;
     }
     public String getDate() {
         return date;
@@ -71,6 +74,18 @@ public class Journey implements Serializable {
             this.numCarbon = numCarbon;
         }
     }
+
+    public void changeCarInJourney(String name, Car car){
+        this.carName = car.getNickname();
+        this.numCarbon = calculateCarbon(car, this.route);
+
+    }
+
+    public void changeRouteInJourney(String name, Route route){
+        this.routeName = route.getName();
+        this.distance = route.getDistance();
+    }
+
     public double getNumCarbon() {
         return numCarbon;
     }

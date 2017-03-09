@@ -127,6 +127,12 @@ public class AddRouteActivity extends AppCompatActivity {
                         CarbonModel.getInstance().addRouteToCollecton(route);
                     } else {
                         CarbonModel.getInstance().changeRouteInCollection(route, index);
+                        String origRouteName = CarbonModel.getInstance().getRouteCollection().getRoute(index).getName();
+                        for(int i=0; i<CarbonModel.getInstance().getJourneyCollection().countJourneys();i++){
+                            if(CarbonModel.getInstance().getJourneyCollection().getJourney(i).getRouteName().equals(origRouteName)){
+                                CarbonModel.getInstance().getJourneyCollection().getJourney(i).changeRouteInJourney(routeName,route);
+                            }
+                        }
                     }
                     CarbonModel.getInstance().addRouteToAllRoute(route);
                     addJourney();

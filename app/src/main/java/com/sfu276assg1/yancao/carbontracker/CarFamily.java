@@ -41,7 +41,6 @@ public class CarFamily {
                 makeSet.add(theMake);
                 makeList.add(theMake);
             }
-
         }
         return makeList;
     }

@@ -33,15 +33,6 @@ public class JourneyCollection {
         else return getJourney(countJourneys()-1);
     }
 
-    public String[] getJourneyDescriptions() {
-        String[] descriptions = new String[countJourneys()];
-        for (int i = 0; i < countJourneys(); i++) {
-            Journey journey = getJourney(i);
-            descriptions[i] = journey.getDate() + " - " + journey.getRouteName() + " - " + journey.getDistance() + " - " + journey.getCarName() + " - " + journey.getNumCarbon();
-        }
-        return descriptions;
-    }
-
     private void validateIndexWithException(int index) {
         if (index < 0 || index >= countJourneys()) {
             throw new IllegalArgumentException();

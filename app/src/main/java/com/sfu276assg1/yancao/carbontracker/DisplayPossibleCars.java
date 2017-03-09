@@ -12,6 +12,10 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+/**
+ * Let user choose their car - the exact model, transmission mode.
+ */
+
 public class DisplayPossibleCars extends AppCompatActivity {
     Car currentCar = new Car();
     private String carNickname;
@@ -61,8 +65,15 @@ public class DisplayPossibleCars extends AppCompatActivity {
                     CarbonModel.getInstance().addCarToCollecton(currentCar);
                 }else{
                     CarbonModel.getInstance().changeCarInCollection(currentCar, indexOfArray);
+                    String origCarName = CarbonModel.getInstance().getCarCollection().getCar(indexOfArray).getNickname();
+                    for(int i=0; i<CarbonModel.getInstance().getJourneyCollection().countJourneys();i++){
+                        if(CarbonModel.getInstance().getJourneyCollection().getJourney(i).getCarName().equals(origCarName)){
+                            CarbonModel.getInstance().getJourneyCollection().getJourney(i).changeCarInJourney(carNickname,currentCar);
+                        }
+                    }
                 }
                 startActivity(new Intent(getApplicationContext(), SelectRouteActivity.class));
+                CarbonModel.getInstance().addCarToAllCar(currentCar);
                 finish();
 
             }

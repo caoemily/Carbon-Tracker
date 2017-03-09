@@ -55,7 +55,6 @@ public class DisplayCarbonFootprintActivity extends AppCompatActivity {
             xEntries.add(journeyCollection.getJourney(i).getCarName());
         }
 
-
         PieDataSet dataSet = new PieDataSet(yEntries, "Car Type");
         dataSet.setSliceSpace(2);
         dataSet.setValueTextSize(12);
