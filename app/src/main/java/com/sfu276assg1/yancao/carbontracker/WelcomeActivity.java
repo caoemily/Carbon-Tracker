@@ -9,6 +9,10 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+/**
+ * welcome animation
+ */
+
 public class WelcomeActivity extends AppCompatActivity {
 
     @Override

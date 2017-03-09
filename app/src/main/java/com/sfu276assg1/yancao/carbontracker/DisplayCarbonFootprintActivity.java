@@ -16,6 +16,10 @@ import com.github.mikephil.charting.utils.ColorTemplate;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Display pie chart of all travelled journeys.
+ */
+
 public class DisplayCarbonFootprintActivity extends AppCompatActivity {
 
     private JourneyCollection journeyCollection = CarbonModel.getInstance().getJourneyCollection();

@@ -3,7 +3,9 @@ package com.sfu276assg1.yancao.carbontracker;
 import java.util.ArrayList;
 import java.util.List;
 
-// RouteCollection Java Class
+/**
+ * Class to manage a collection of routes.
+ */
 
 public class RouteCollection {
     private List<Route> routes = new ArrayList<>();

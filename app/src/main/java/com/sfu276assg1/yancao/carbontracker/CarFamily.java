@@ -13,7 +13,7 @@ import java.util.Collections;
 import java.util.HashSet;
 
 /**
- * Created by yancao on 2017-03-06.
+ * Class to manage a collection of cars from csv file.
  */
 
 public class CarFamily {

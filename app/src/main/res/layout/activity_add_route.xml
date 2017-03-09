@@ -36,7 +36,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:hint="@string/highway_driving_distance_in_km"
-                android:inputType="text|number"
+                android:inputType="number"
                 android:textSize="14sp" />
 
         </TableRow>

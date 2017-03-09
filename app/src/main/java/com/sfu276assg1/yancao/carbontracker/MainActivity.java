@@ -6,6 +6,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageButton;
 
+/**
+ * Choose to add journey OR show carbon footprint in table or chart
+ */
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
