@@ -3,6 +3,9 @@ package com.sfu276assg1.yancao.carbontracker;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class to manage a collection of cars.
+ */
 public class CarCollection {
     private List<Car> cars = new ArrayList<>();
 

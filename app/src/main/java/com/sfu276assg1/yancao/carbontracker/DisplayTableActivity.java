@@ -11,6 +11,9 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+/**
+ * Display table of all travelled journeys.
+ */
 
 public class DisplayTableActivity extends AppCompatActivity {
 

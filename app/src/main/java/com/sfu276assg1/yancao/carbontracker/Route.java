@@ -1,13 +1,14 @@
 package com.sfu276assg1.yancao.carbontracker;
 
+/**
+ * Store information about a single route
+ */
+
 public class Route {
     private String rName;
     private double distance;
     private double highway;
     private double city;
-
-
-    // Route Java Class
 
     public Route(double distanceInKm, double highway, double city) {
         if(distanceInKm<0){

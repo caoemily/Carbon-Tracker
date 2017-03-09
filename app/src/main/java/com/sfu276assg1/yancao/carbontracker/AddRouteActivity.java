@@ -128,6 +128,7 @@ public class AddRouteActivity extends AppCompatActivity {
                     } else {
                         CarbonModel.getInstance().changeRouteInCollection(route, index);
                     }
+                    CarbonModel.getInstance().addRouteToAllRoute(route);
                     addJourney();
                     showCurrentJouney();
                     startActivity(new Intent(getApplicationContext(), MainActivity.class));

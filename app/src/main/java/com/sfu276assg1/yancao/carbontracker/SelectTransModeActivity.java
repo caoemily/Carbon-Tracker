@@ -23,6 +23,10 @@ import java.nio.DoubleBuffer;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 
+/**
+ * show saved cars, let customer choose car, edit car, add car or delete car
+ */
+
 public class SelectTransModeActivity extends AppCompatActivity {
     private ArrayList<Car> cars = new ArrayList<>();
     ArrayAdapter<String> adapter;

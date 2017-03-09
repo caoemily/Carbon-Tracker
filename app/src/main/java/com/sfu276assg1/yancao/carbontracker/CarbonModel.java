@@ -1,7 +1,8 @@
 package com.sfu276assg1.yancao.carbontracker;
 
-//Singleton for seprating UI and java classes
-
+/**
+ * Singleton for seprating UI and java classes
+ */
 import java.util.ArrayList;
 
 public class CarbonModel {
@@ -29,7 +30,6 @@ public class CarbonModel {
         carFromFile = new CarFamily();
     }
 
-    //carFamily
     public CarFamily getCarFromFile(){
         return carFromFile;
     }
@@ -37,7 +37,6 @@ public class CarbonModel {
         carFromFile.setCars(cars);
     }
 
-    // JourneyCollection
     public JourneyCollection getJourneyCollection() {
         return journeyCollection;
     }
@@ -46,7 +45,6 @@ public class CarbonModel {
     }
     public Journey getLastJourney(){return journeyCollection.getLastJourney();}
 
-    //CarCollection
     public CarCollection getCarCollection(){
         return carCollection;
     }
@@ -68,7 +66,6 @@ public class CarbonModel {
         return carCollection.getLastCar();
     }
 
-    // RouteCollection
     public RouteCollection getRouteCollection() {
         return routeCollection;
     }
