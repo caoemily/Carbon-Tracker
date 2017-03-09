@@ -1,6 +1,7 @@
 package com.sfu276assg1.yancao.carbontracker;
 
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -138,11 +139,23 @@ public class AddCarActivity extends AppCompatActivity {
                     } else {
                         CarbonModel.getInstance().changeCarInCollection(currentCar, index);
                     }
+
+
                     finish();
                     startActivity(new Intent(getApplicationContext(), SelectRouteActivity.class));
                 }
             }
         });
+    }
+
+    private void setUpPopUp()
+    {
+        AlertDialog.Builder fullCar = new AlertDialog.Builder(this);
+        fullCar.setTitle("Select your corresponding car: ");
+
+
+        final ArrayAdapter<String> fullCarList = new ArrayAdapter<String>(this, android.R.layout.simple_selectable_list_item);
+
     }
 
     private void setCurrentCar() {
