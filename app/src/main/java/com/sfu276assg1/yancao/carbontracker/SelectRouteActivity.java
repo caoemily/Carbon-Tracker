@@ -35,6 +35,13 @@ public class SelectRouteActivity extends AppCompatActivity {
         routeList();
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(SelectRouteActivity.this, SelectTransModeActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
     private void selectExistingRoute(){
         ListView list = (ListView) findViewById(R.id.listView_routeList);
         list.setOnItemClickListener(new AdapterView.OnItemClickListener(){

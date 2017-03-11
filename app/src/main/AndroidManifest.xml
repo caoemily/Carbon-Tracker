@@ -22,7 +22,6 @@
         <activity android:name=".AddRouteActivity" />
         <activity android:name=".DisplayCarbonFootprintActivity" />
         <activity android:name=".DisplayTableActivity" />
-        <activity android:name=".DisplayPossibleCars"></activity>
     </application>
 
 </manifest>
