@@ -37,6 +37,9 @@ public class SelectRouteActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        // Need to remove the last item in CarCollection
+
+
         Intent intent = new Intent(SelectRouteActivity.this, SelectTransModeActivity.class);
         startActivity(intent);
         finish();

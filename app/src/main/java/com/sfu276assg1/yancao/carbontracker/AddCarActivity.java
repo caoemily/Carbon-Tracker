@@ -11,7 +11,6 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
-
 import java.util.ArrayList;
 
 //This is the activity that manipulates the screen after the user hits 'add car' on the Select Transport Mode page.

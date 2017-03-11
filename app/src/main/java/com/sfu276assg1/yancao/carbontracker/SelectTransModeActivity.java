@@ -1,8 +1,8 @@
 package com.sfu276assg1.yancao.carbontracker;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.MenuInflater;
@@ -14,12 +14,10 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.nio.DoubleBuffer;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 
@@ -43,6 +41,26 @@ public class SelectTransModeActivity extends AppCompatActivity {
         setLaunchNewCar();
         selectExistingCar();
         routeList();
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(SelectTransModeActivity.this, MainActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+    private void setLaunchNewCar() {
+        Button newRouteBtn = (Button) findViewById(R.id.btn_addCar);
+        newRouteBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), AddCarActivity.class);
+                intent.putExtra("carIndex", -1);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 
     private void readDataFromFile() {
@@ -106,19 +124,6 @@ public class SelectTransModeActivity extends AppCompatActivity {
                 Car car = CarbonModel.getInstance().getCarFromCollection(position);
                 CarbonModel.getInstance().addCarToAllCar(car);
                 startActivity(new Intent(getApplicationContext(),SelectRouteActivity.class));
-                finish();
-            }
-        });
-    }
-
-    private void setLaunchNewCar() {
-        Button newRouteBtn = (Button) findViewById(R.id.btn_addCar);
-        newRouteBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), AddCarActivity.class);
-                intent.putExtra("carIndex", -1);
-                startActivity(intent);
                 finish();
             }
         });
