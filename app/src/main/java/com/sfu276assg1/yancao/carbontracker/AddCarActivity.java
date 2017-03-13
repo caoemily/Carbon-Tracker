@@ -3,6 +3,8 @@ package com.sfu276assg1.yancao.carbontracker;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -11,6 +13,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
+
 import java.util.ArrayList;
 
 //This is the activity that manipulates the screen after the user hits 'add car' on the Select Transport Mode page.
@@ -24,20 +27,30 @@ public class AddCarActivity extends AppCompatActivity {
     ArrayList<String> carModel = new ArrayList<>();
     ArrayList<String> carYear = new ArrayList<>();
     private static ArrayList<Car> carDescription;
-    String make, model, year, fuelType;
+    String carName = "", make, model, year, fuelType;
     int highWayE, cityE;
+    int carChangePosition;
+    Car tempCar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_car);
 
+        if( getIntent().getExtras() != null)
+        {
+            extractDataFromIntent();
+        }
+
+        setCarName();
         setupAcceptButton();
         setupMakeSpinner();
         setupModelSpinner();
         setupYearSpinner();
         generateListView();
         registerClickOnListViewItems();
+
+
     }
 
     @Override
@@ -45,6 +58,30 @@ public class AddCarActivity extends AppCompatActivity {
         Intent intent = new Intent(AddCarActivity.this, SelectTransModeActivity.class);
         startActivity(intent);
         finish();
+    }
+
+    public void setCarName() {
+        EditText carNameEntry = (EditText) findViewById(R.id.editNickname);
+        carNameEntry.setText(carName);
+        carNameEntry.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {}
+            @Override
+            public void afterTextChanged(Editable s) {
+                try {
+                    String str = s.toString();
+                    if (str.matches("")){
+                        carName = "";
+                    }
+                    else{
+                        carName = s.toString();
+                    }
+                }
+                catch(NumberFormatException e){}
+            }
+        });
     }
 
     private void setupMakeSpinner() {
@@ -140,8 +177,6 @@ public class AddCarActivity extends AppCompatActivity {
         accBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EditText carNameEntry = (EditText) findViewById(R.id.editNickname);
-                String carName = carNameEntry.getText().toString();
                 if (carName.length() == 0 || carName == null) {
                     Toast.makeText(getApplicationContext(), "Please enter a Nickname for the car.", Toast.LENGTH_SHORT).show();
                 }
@@ -158,14 +193,35 @@ public class AddCarActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Please select car.", Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    // Store car in CarCollection
-
-                    Intent intent = new Intent(AddCarActivity.this, SelectRouteActivity.class);
+                    Car car = new Car(make, model, year, highWayE, cityE, fuelType, carName);
+                    Intent intent;
+                    if(getIntent().getExtras() == null)
+                    {
+                        CarbonModel.getInstance().addCar(car);
+                        Journey journey = new Journey(car);
+                        CarbonModel.getInstance().addJourney(journey);
+                        intent = new Intent(AddCarActivity.this, SelectRouteActivity.class);
+                    }
+                    else {
+                        CarbonModel.getInstance().changeCar(car, carChangePosition);
+                        CarbonModel.getInstance().changeCarInJourney(tempCar, car);
+                        intent = new Intent(AddCarActivity.this, SelectTransModeActivity.class);
+                    }
                     startActivity(intent);
                     finish();
                 }
             }
         });
+    }
+
+    private void extractDataFromIntent() {
+        tempCar = new Car();
+        tempCar = CarbonModel.getInstance().getCar(carChangePosition);
+        carChangePosition = getIntent().getIntExtra("carIndex", 0);
+        carName = CarbonModel.getInstance().getCar(carChangePosition).getNickname();
+        //make = CarbonModel.getInstance().getCar(position).getMake();
+        //model = CarbonModel.getInstance().getCar(position).getModel();
+        //year = CarbonModel.getInstance().getCar(position).getYear();
     }
 }
 

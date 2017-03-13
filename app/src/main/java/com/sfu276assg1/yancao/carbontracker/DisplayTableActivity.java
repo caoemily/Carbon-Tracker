@@ -99,16 +99,17 @@ public class DisplayTableActivity extends AppCompatActivity {
                     textView.setText(journeyCollection.getJourney(row).getDate());
                 }
                 if (col == 1) {
-                    textView.setText(journeyCollection.getJourney(row).getRouteName());
+                    textView.setText(journeyCollection.getJourney(row).getRoute().getName());
                 }
                 if (col == 2) {
-                    textView.setText("" + journeyCollection.getJourney(row).getDistance());
+                    String distance = Double.toString(journeyCollection.getJourney(row).getRoute().getDistance());
+                    textView.setText(distance);
                 }
                 if (col == 3) {
-                    textView.setText(journeyCollection.getJourney(row).getCarName());
+                    textView.setText(journeyCollection.getJourney(row).getCar().getNickname());
                 }
                 if (col == 4) {
-                    textView.setText("" + journeyCollection.getJourney(row).getNumCarbon());
+                    textView.setText("" + journeyCollection.getJourney(row).calculateCarbon());
                 }
 
                 tableRow.addView(textView);

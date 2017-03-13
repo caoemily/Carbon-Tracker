@@ -11,109 +11,71 @@ import java.util.Date;
 public class Journey implements Serializable {
 
     private String date;
-    private String routeName;
-    private double distance;
-    private String carName;
-    private double numCarbon;
+    private Car car;
     private Route route;
 
-
-    public Journey(Car car, Route route) {
+    public Journey (Car car, Route route) {
         this.date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
-        this.routeName = route.getName();
-        this.distance = route.getDistance();
-        this.carName = car.getNickname();
-        this.numCarbon = calculateCarbon(car, route);
+        this.car = car;
         this.route = route;
     }
+
+    public Journey (Car car) {
+        this.date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+        this.car = car;
+    }
+
     public String getDate() {
         return date;
     }
-    public void setDate(String jdate){
-        if(jdate == null || jdate.length() == 0) {
-            throw new IllegalArgumentException();
-        }
-        else {
-            this.date = jdate;
-        }
-    }
-    public String getRouteName() {
-        return routeName;
-    }
-    public void setRouteName(String rname){
-        if(rname == null || rname.length() == 0) {
-            throw new IllegalArgumentException();
-        }
-        else {
-            this.routeName = rname;
-        }
+
+    public Car getCar() {
+        return this.car;
     }
 
-    public double getDistance() {
-        return distance;
-    }
-    public void setDistance(double rdistance) {
-        this.distance = rdistance;
-    }
-    public String getCarName() {
-        return carName;
-    }
-    public void setCarName(String cname) {
-        if(cname == null || cname.length() == 0) {
-            throw new IllegalArgumentException();
-        }
-        else {
-            this.carName=cname;
-        }
-    }
-    public void setNumCarbon(int numCarbon) {
-        if (numCarbon < 0) {
-            throw new IllegalArgumentException();
-        }
-        else {
-            this.numCarbon = numCarbon;
-        }
+    public void changeCar(Car car) {
+        this.car = car;
     }
 
-    public void changeCarInJourney(String name, Car car){
-        this.carName = car.getNickname();
-        this.numCarbon = calculateCarbon(car, this.route);
-
+    public Route getRoute(){
+        return this.route;
     }
 
-    public void changeRouteInJourney(String name, Route route){
-        this.routeName = route.getName();
-        this.distance = route.getDistance();
+    public void changeRoute(Route route) {
+        this.route = route;
     }
 
-    public double getNumCarbon() {
-        return numCarbon;
+    public void setRoute(Route route) {
+        this.route = route;
     }
-    private double calculateCarbon(Car car, Route route) {
-        double highway = route.getHighway() * 0.621371;
-        double city = route.getCity() * 0.621371;
-        double gasUsed = highway * car.getHighwayE()  + city * car.getHighwayE();
+
+    public String calculateCarbon() {
+        double highway = this.route.getHighway() * 0.621371;
+        double city = this.route.getCity() * 0.621371;
+        double gasUsed = highway * this.car.getHighwayE()  + city * this.car.getHighwayE();
         double carbonEmission = -1;
-        if (car.getFuelType().equals("Gasoline") || car.getFuelType().equals("Regular") || car.getFuelType().equals("Premium")) {
+        if (this.car.getFuelType().equals("Gasoline") || this.car.getFuelType().equals("Regular") || this.car.getFuelType().equals("Premium")) {
             carbonEmission = 8.89 * gasUsed;
         }
-        else if (car.getFuelType().equals("Diesel")) {
+        else if (this.car.getFuelType().equals("Diesel")) {
             carbonEmission = 10.16 * gasUsed;
         }
-        else if (car.getFuelType().equals("Electric")){
+        else if (this.car.getFuelType().equals("Electric")){
             carbonEmission = 0 * gasUsed;
         }
-        return carbonEmission;
+        return String.format("%.2f", carbonEmission);
     }
+
     public String getJourneyDes(){
         String des = "";
-        String emission = ""+getNumCarbon();
-        String car = getCarName();
-        String route = getRouteName();
-        if(route.equals(" ")) route = "no name";
-        String distance = ""+getDistance();
-        des = "Current Journey Info: Emission: " + emission + " kg"+
-                "; Car: " + car + "; Route: " + route + "; Distance: " + distance + " km.";
+        String carName = this.car.getNickname();
+        String routeName = this.route.getName();
+        if(routeName.equals(" ")) {
+            routeName = "no name";
+        }
+        String distance = Double.toString(this.route.getDistance());
+        des = "Current Journey Info: Emission: " + calculateCarbon() + " kg"+
+                "; Car: " + carName + "; Route: " + routeName + "; Distance: " + distance + " km.";
         return des;
     }
 }

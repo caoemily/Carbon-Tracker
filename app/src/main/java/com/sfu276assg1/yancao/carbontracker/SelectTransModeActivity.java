@@ -56,7 +56,6 @@ public class SelectTransModeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), AddCarActivity.class);
-                intent.putExtra("carIndex", -1);
                 startActivity(intent);
                 finish();
             }
@@ -113,22 +112,6 @@ public class SelectTransModeActivity extends AppCompatActivity {
         CarbonModel.getInstance().setCarFamily(cars);
     }
 
-    private void selectExistingCar(){
-        ListView list = (ListView) findViewById(R.id.listView_carList);
-        list.setOnItemClickListener(new AdapterView.OnItemClickListener(){
-            @Override
-            public void onItemClick(AdapterView<?> parent, View viewClicked, int position, long id) {
-                TextView textView = (TextView) viewClicked;
-                String message = "You have chosen:  " + textView.getText().toString();
-                Toast.makeText(getApplicationContext(),message,Toast.LENGTH_LONG).show();
-                Car car = CarbonModel.getInstance().getCarFromCollection(position);
-                CarbonModel.getInstance().addCarToAllCar(car);
-                startActivity(new Intent(getApplicationContext(),SelectRouteActivity.class));
-                finish();
-            }
-        });
-    }
-
     private void routeList() {
         adapter = new ArrayAdapter<>(this,R.layout.route_list, CarbonModel.getInstance().getCarCollection().getCarDescription());
         list = (ListView) findViewById(R.id.listView_carList);
@@ -147,7 +130,7 @@ public class SelectTransModeActivity extends AppCompatActivity {
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
         switch (item.getItemId()) {
             case R.id.delete:
-                CarbonModel.getInstance().removeCarFromCollection(info.position);
+                CarbonModel.getInstance().removeCar(info.position);
                 adapter.notifyDataSetChanged();
                 routeList();
                 return true;
@@ -159,6 +142,23 @@ public class SelectTransModeActivity extends AppCompatActivity {
             default:
                 return super.onContextItemSelected(item);
         }
+    }
+
+    private void selectExistingCar(){
+        ListView list = (ListView) findViewById(R.id.listView_carList);
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+            @Override
+            public void onItemClick(AdapterView<?> parent, View viewClicked, int position, long id) {
+                TextView textView = (TextView) viewClicked;
+                String message = "You have chosen:  " + textView.getText().toString();
+                Toast.makeText(getApplicationContext(),message,Toast.LENGTH_LONG).show();
+                Car car = CarbonModel.getInstance().getCar(position);
+                Journey journey = new Journey(car);
+                CarbonModel.getInstance().addJourney(journey);
+                startActivity(new Intent(getApplicationContext(),SelectRouteActivity.class));
+                finish();
+            }
+        });
     }
 
 }

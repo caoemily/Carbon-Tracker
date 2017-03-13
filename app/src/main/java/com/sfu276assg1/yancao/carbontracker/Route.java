@@ -11,7 +11,7 @@ public class Route {
     private double city;
 
     public Route(double distanceInKm, double highway, double city) {
-        if(distanceInKm<0){
+        if(distanceInKm < 0){
             throw new IllegalArgumentException();
         }
         if(highway < 0){
@@ -71,12 +71,8 @@ public class Route {
     }
 
     public void setName(String rName) {
-        if(rName.isEmpty()){
-            throw new IllegalArgumentException();
-        }
-        else{
-            this.rName = rName;
-        }
+        this.rName = rName;
+
     }
 
     public String getSingleRouteDes() {
@@ -86,4 +82,7 @@ public class Route {
         return descriptions;
     }
 
+    public boolean equals(Route route) {
+        return (route.rName == rName) && (route.distance == distance) && (route.highway == highway) && (route.city == city);
+    }
 }
