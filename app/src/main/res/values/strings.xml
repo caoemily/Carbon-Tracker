@@ -28,8 +28,8 @@
     <string name="total_distance">Total distance</string>
     <string name="route_name_2">Route Name:</string>
     <string name="nickname">Nickname: </string>
-    <string name="model">Model</string>
-    <string name="make">Make</string>
+    <string name="model">Model: </string>
+    <string name="make">Make: </string>
     <string name="ok">OK</string>
     <string name="please_enter_a_nickname_for_the_car">Please enter a nickname for the car</string>
     <string name="skip"><![CDATA[Skip >>]]></string>
@@ -37,4 +37,5 @@
     <string name="long_pressing_on_car_to_edit_or_delete">Long-pressing on car to edit or delete</string>
     <string name="add_car">add car</string>
     <string name="please_select_your_car">Please Select Your Car</string>
+    <string name="year">Year: </string>
 </resources>

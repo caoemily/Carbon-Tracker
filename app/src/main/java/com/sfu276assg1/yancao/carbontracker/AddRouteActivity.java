@@ -27,6 +27,13 @@ public class AddRouteActivity extends AppCompatActivity {
         setupNoSaveButton();
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(AddRouteActivity.this, SelectRouteActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
     public void setHighwayDis() {
         final EditText highwayPerEntry = (EditText) findViewById(R.id.editView_enterHighwayPer);
         highwayPerEntry.addTextChangedListener(new TextWatcher() {
