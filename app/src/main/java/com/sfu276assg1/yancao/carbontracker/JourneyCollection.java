@@ -21,16 +21,36 @@ public class JourneyCollection {
         journeys.add(indexOfJourneyEditing, journey);
     }
 
+    public void removeLastJourney() {
+        journeys.remove(journeys.size() - 1);
+    }
+
     public int countJourneys() {
         return journeys.size();
     }
+
     public Journey getJourney(int index) {
-        validateIndexWithException(index);
         return journeys.get(index);
     }
+
     public Journey getLastJourney(){
-        if(journeys.size()==0) return null;
-        else return getJourney(countJourneys()-1);
+        return getJourney(journeys.size() - 1);
+    }
+
+    public void changeCar(Car tempCar, Car car){
+        for (Journey journey : journeys){
+            if(journey.getCar().equals(tempCar)) {
+                journey.changeCar(car);
+            }
+        }
+    }
+
+    public void changeRoute(Route tempRoute, Route route){
+        for (int i = 0; i < countJourneys() - 1; i++) {
+            if(getJourney(i).getRoute().equals(tempRoute)) {
+                getJourney(i).changeRoute(route);
+            }
+        }
     }
 
     private void validateIndexWithException(int index) {

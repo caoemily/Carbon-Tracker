@@ -16,15 +16,25 @@ import android.widget.Toast;
 
 public class AddRouteActivity extends AppCompatActivity {
 
-    double cityDriv = 0, highwayDriv = 0, totalDis = 0;
+    String routeName = "";
+    double cityDriv, highwayDriv, totalDis;
+    int routeChangePosition;
+    Route tempRoute;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_route);
+
+        if( getIntent().getExtras() != null)
+        {
+            extractDataFromIntent();
+        }
+
         setHighwayDis();
-        setupAcceptButton();
-        setupNoSaveButton();
+        setTotalDistance();
+        setRouteName();
+        setupOkButton();
     }
 
     @Override
@@ -35,7 +45,11 @@ public class AddRouteActivity extends AppCompatActivity {
     }
 
     public void setHighwayDis() {
-        final EditText highwayPerEntry = (EditText) findViewById(R.id.editView_enterHighwayPer);
+        EditText highwayPerEntry = (EditText) findViewById(R.id.editView_enterHighwayPer);
+        String highWay = Double.toString(highwayDriv);
+        if (highwayDriv > 0) {
+            highwayPerEntry.setText(highWay);
+        }
         highwayPerEntry.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -46,7 +60,7 @@ public class AddRouteActivity extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 try {
-                    String highwayPerData = highwayPerEntry.getText().toString();
+                    String highwayPerData = s.toString();
                     if (highwayPerData.matches("")){
                         highwayDriv = 0;
                     }
@@ -54,14 +68,18 @@ public class AddRouteActivity extends AppCompatActivity {
                         highwayDriv = Double.parseDouble(highwayPerData);
                     }
                     totalDis = highwayDriv + cityDriv;
-                    final TextView distance = (TextView) findViewById(R.id.text_enterDis);
-                    distance.setText("" + totalDis);
+                    TextView distance = (TextView) findViewById(R.id.text_enterDis);
+                    distance.setText(" " + totalDis);
                 }
                 catch(NumberFormatException e){}
             }
         });
 
-        final EditText cityPerEntry = (EditText) findViewById(R.id.editView_enterCityPer);
+        EditText cityPerEntry = (EditText) findViewById(R.id.editView_enterCityPer);
+        String city = Double.toString(cityDriv);
+        if (cityDriv > 0 ) {
+            cityPerEntry.setText(city);
+        }
         cityPerEntry.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -72,7 +90,7 @@ public class AddRouteActivity extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 try {
-                    String cityPerData = cityPerEntry.getText().toString();
+                    String cityPerData = s.toString();
                     if (cityPerData.matches("")){
                         cityDriv = 0;
                     }
@@ -80,74 +98,94 @@ public class AddRouteActivity extends AppCompatActivity {
                         cityDriv = Double.parseDouble(cityPerData);
                     }
                     totalDis = highwayDriv + cityDriv;
-                    final TextView distance = (TextView) findViewById(R.id.text_enterDis);
-                    distance.setText("" + totalDis);
+                    TextView distance = (TextView) findViewById(R.id.text_enterDis);
+                    distance.setText(" " + totalDis);
                 }
                 catch(NumberFormatException e){}
             }
         });
     }
 
-    private void setupNoSaveButton() {
-        Button accBtn = (Button) findViewById(R.id.btn_noSaveRoute);
-        accBtn.setOnClickListener(new View.OnClickListener() {
+    public void setTotalDistance() {
+        TextView distance = (TextView) findViewById(R.id.text_enterDis);
+        if (cityDriv > 0 ) {
+            totalDis = cityDriv;
+            distance.setText(" " + totalDis);
+        }
+        else if (highwayDriv > 0 ) {
+            totalDis = highwayDriv;
+            distance.setText(" " + totalDis);
+        }
+        if (cityDriv > 0 && highwayDriv > 0) {
+            totalDis = highwayDriv + cityDriv;
+            distance.setText(" " + totalDis);
+        }
+    }
+
+    public void setRouteName() {
+        EditText routeNameEntry = (EditText) findViewById(R.id.editText_enterRouteName);
+        routeNameEntry.setText(routeName);
+        routeNameEntry.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onClick(View v) {
-                if(totalDis <= 0){
-                    Toast.makeText(getApplicationContext(),"Total distance must be positive.",
-                            Toast.LENGTH_SHORT).show();
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {}
+            @Override
+            public void afterTextChanged(Editable s) {
+                try {
+                    String str = s.toString();
+                    if (str.matches("")){
+                        routeName = "";
+                    }
+                    else{
+                        routeName = s.toString();
+                    }
                 }
-                else{
-                    Route route = new Route(totalDis, highwayDriv, cityDriv);
-                    CarbonModel.getInstance().addRouteToAllRoute(route);
-                    addJourney();
-                    showCurrentJouney();
-                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                    finish();
-                }
+                catch(NumberFormatException e){}
             }
         });
     }
 
-    private void setupAcceptButton() {
-        Button accBtn = (Button) findViewById(R.id.btn_accRoute);
-        accBtn.setOnClickListener(new View.OnClickListener() {
+    private void setupOkButton() {
+        Button okBtn = (Button) findViewById(R.id.ok_btn);
+        okBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            Intent returnValueIntent = getIntent();
-            int index = returnValueIntent.getIntExtra("routeIndex", -1);
-            EditText routeNameEntry = (EditText) findViewById(R.id.editText_enterRouteName);
-            String routeName = routeNameEntry.getText().toString();
-            if(routeName.isEmpty()) {
-                Toast.makeText(getApplicationContext(),"Please enter a name for the route.",
+            if (totalDis <= 0) {
+                Toast.makeText(getApplicationContext(), "Total distance must be positive.",
                         Toast.LENGTH_SHORT).show();
             }
             else {
-                if (totalDis <= 0) {
-                    Toast.makeText(getApplicationContext(), "Total distance must be positive.",
-                            Toast.LENGTH_SHORT).show();
+                Route route = new Route(totalDis, highwayDriv, cityDriv);
+                Intent intent;
+                if(getIntent().getExtras() == null)
+                {
+                    if (routeName != "") {
+                        route.setName(routeName);
+                        CarbonModel.getInstance().addRoute(route);
+                    }
+                    CarbonModel.getInstance().getLastJourney().setRoute(route);
+                    intent = new Intent(AddRouteActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                    showCurrentJouney();
                 }
                 else {
-                    Route route = new Route(totalDis, highwayDriv, cityDriv);
-                    route.setName(routeName);
-                    if (index == -1) {
-                        CarbonModel.getInstance().addRouteToCollecton(route);
-                    } else {
-                        String origRouteName = CarbonModel.getInstance().getRouteCollection().getRoute(index).getName();
-                        for(int i=0; i<CarbonModel.getInstance().getJourneyCollection().countJourneys();i++){
-                            if(CarbonModel.getInstance().getJourneyCollection().getJourney(i).getRouteName().equals(origRouteName)){
-                                CarbonModel.getInstance().getJourneyCollection().getJourney(i).changeRouteInJourney(routeName,route);
-                            }
-                        }
-                        CarbonModel.getInstance().changeRouteInCollection(route, index);
+                    if(routeName.isEmpty()) {
+                        Toast.makeText(getApplicationContext(),"Please enter a name for the route.",
+                                Toast.LENGTH_SHORT).show();
                     }
-                    CarbonModel.getInstance().addRouteToAllRoute(route);
-                    addJourney();
-                    showCurrentJouney();
-                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                    finish();
+                    else{
+                        route.setName(routeName);
+                        CarbonModel.getInstance().changeRoute(route, routeChangePosition);
+                        CarbonModel.getInstance().changeRouteInJourney(tempRoute, route);
+                        intent = new Intent(AddRouteActivity.this, SelectRouteActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
                 }
             }
+
             }
         });
     }
@@ -161,10 +199,13 @@ public class AddRouteActivity extends AppCompatActivity {
                 Toast.LENGTH_LONG).show();
     }
 
-    private void addJourney() {
-        Car car = CarbonModel.getInstance().getLastCarInList();
-        Route route = CarbonModel.getInstance().getLastRoute();
-        Journey journey = new Journey(car,route);
-        CarbonModel.getInstance().addJourney(journey);
+    private void extractDataFromIntent() {
+        tempRoute = new Route();
+        tempRoute = CarbonModel.getInstance().getRoute(routeChangePosition);
+        routeChangePosition = getIntent().getIntExtra("carIndex", 0);
+        routeName = CarbonModel.getInstance().getRoute(routeChangePosition).getName();
+        cityDriv = CarbonModel.getInstance().getRoute(routeChangePosition).getCity();
+        highwayDriv = CarbonModel.getInstance().getRoute(routeChangePosition).getHighway();
+
     }
 }

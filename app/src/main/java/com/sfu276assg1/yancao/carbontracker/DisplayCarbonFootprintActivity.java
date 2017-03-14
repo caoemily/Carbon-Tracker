@@ -48,11 +48,11 @@ public class DisplayCarbonFootprintActivity extends AppCompatActivity {
         List<PieEntry> yEntries = new ArrayList<>();
         List<String> xEntries = new ArrayList<>();
         for(int i = 0; i < journeyCollection.countJourneys(); i++) {
-            yEntries.add(new PieEntry((float)journeyCollection.getJourney(i).getNumCarbon(),journeyCollection.getJourney(i).getCarName()));
+            yEntries.add(new PieEntry((float)Float.valueOf(journeyCollection.getJourney(i).calculateCarbon()),journeyCollection.getJourney(i).getCar().getNickname()));
         }
 
         for(int i = 0; i < journeyCollection.countJourneys(); i++) {
-            xEntries.add(journeyCollection.getJourney(i).getCarName());
+            xEntries.add(journeyCollection.getJourney(i).getCar().getNickname());
         }
 
         PieDataSet dataSet = new PieDataSet(yEntries, "Car Type");

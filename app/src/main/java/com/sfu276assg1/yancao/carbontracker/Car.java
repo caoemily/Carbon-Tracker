@@ -35,6 +35,16 @@ public class Car {
         this.fuelType = fuelType;
     }
 
+    public Car(String make, String model, String year, int highwayE, int cityE, String fuelType, String nickname){
+        this.make = make;
+        this.model = model;
+        this.year = year;
+        this.highwayE = highwayE;
+        this.cityE = cityE;
+        this.fuelType = fuelType;
+        this.nickname = nickname;
+    }
+
     public void setHighwayE(int highwayE) {
         this.highwayE = highwayE;
     }
@@ -130,5 +140,10 @@ public class Car {
     @Override
     public String toString() {
         return make + ", " + model + ", " + year + ", " + displacement + ", " + transmission;
+    }
+
+    public boolean equals(Car car) {
+        return (car.nickname == nickname) && (car.make == make) && (car.model == model) && (car.year == year) &&
+                (car.highwayE == highwayE) && (car.cityE == cityE) && (car.fuelType == fuelType);
     }
 }

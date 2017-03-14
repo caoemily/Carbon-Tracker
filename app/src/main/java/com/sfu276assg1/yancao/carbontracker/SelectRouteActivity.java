@@ -37,9 +37,7 @@ public class SelectRouteActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        // Need to remove the last item in CarCollection
-
-
+        CarbonModel.getInstance().removeLastJourney();
         Intent intent = new Intent(SelectRouteActivity.this, SelectTransModeActivity.class);
         startActivity(intent);
         finish();
@@ -53,20 +51,13 @@ public class SelectRouteActivity extends AppCompatActivity {
                 TextView textView = (TextView) viewClicked;
                 String message = "You have chosen:  " + textView.getText().toString();
                 Toast.makeText(getApplicationContext(),message,Toast.LENGTH_LONG).show();
-                Route route = CarbonModel.getInstance().getRouteFromCollection(position);
-                CarbonModel.getInstance().addRouteToAllRoute(route);
-                addJourney();
+                Route route = CarbonModel.getInstance().getRoute(position);
+                CarbonModel.getInstance().getLastJourney().setRoute(route);
                 showCurrentJouney();
                 startActivity(new Intent(getApplicationContext(),MainActivity.class));
                 finish();
             }
         });
-    }
-    private void addJourney() {
-        Car car = CarbonModel.getInstance().getLastCarInList();
-        Route route = CarbonModel.getInstance().getLastRoute();
-        Journey journey = new Journey(car,route);
-        CarbonModel.getInstance().addJourney(journey);
     }
 
     private void setLaunchNewRoute() {
@@ -75,7 +66,6 @@ public class SelectRouteActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), AddRouteActivity.class);
-                intent.putExtra("routeIndex", -1);
                 startActivity(intent);
                 finish();
             }
@@ -100,7 +90,7 @@ public class SelectRouteActivity extends AppCompatActivity {
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
         switch (item.getItemId()) {
             case R.id.delete:
-                CarbonModel.getInstance().removeRouteFromCollection(info.position);
+                CarbonModel.getInstance().removeRoute(info.position);
                 adapter.notifyDataSetChanged();
                 routeList();
                 return true;
