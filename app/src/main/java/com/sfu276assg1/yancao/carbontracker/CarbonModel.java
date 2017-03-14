@@ -50,8 +50,6 @@ public class CarbonModel {
         journeyCollection.changeRoute(tempRoute, route);
     }
 
-
-    //CarCollection
     public CarCollection getCarCollection(){
         return carCollection;
     }
@@ -66,7 +64,6 @@ public class CarbonModel {
         carCollection.changeCar(car, indexOfChanging);
     }
 
-    //
     public RouteCollection getRouteCollection() {
         return routeCollection;
     }

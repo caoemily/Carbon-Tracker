@@ -200,11 +200,12 @@ public class AddRouteActivity extends AppCompatActivity {
     }
 
     private void extractDataFromIntent() {
+        tempRoute = new Route();
+        tempRoute = CarbonModel.getInstance().getRoute(routeChangePosition);
         routeChangePosition = getIntent().getIntExtra("carIndex", 0);
         routeName = CarbonModel.getInstance().getRoute(routeChangePosition).getName();
         cityDriv = CarbonModel.getInstance().getRoute(routeChangePosition).getCity();
         highwayDriv = CarbonModel.getInstance().getRoute(routeChangePosition).getHighway();
-        tempRoute = new Route(totalDis, highwayDriv, cityDriv);
-        tempRoute.setName(routeName);
+
     }
 }

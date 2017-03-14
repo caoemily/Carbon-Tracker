@@ -10,17 +10,15 @@ public class Route {
     private double highway;
     private double city;
 
-    public Route(double distanceInKm, double highway, double city) {
-        if(distanceInKm < 0){
-            throw new IllegalArgumentException();
-        }
-        if(highway < 0){
-            throw new IllegalArgumentException();
-        }
-        if(city < 0){
-            throw new IllegalArgumentException();
-        }
+    public Route() {
+        this.rName = " ";
+        this.distance = 0;
+        this.highway = 0;
+        this.city = 0;
 
+    }
+
+    public Route(double distanceInKm, double highway, double city) {
         this.rName = " ";
         this.distance = distanceInKm;
         this.highway = highway;
