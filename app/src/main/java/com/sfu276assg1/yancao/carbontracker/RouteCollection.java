@@ -47,9 +47,20 @@ public class RouteCollection {
         String[] descriptions = new String[countRoutes()];
         for (int i = 0; i < countRoutes(); i++) {
             Route route = getRoute(i);
-            descriptions[i] = route.getName() + " - " + route.getDistance() + "km" + " - "
-                    + route.getHighway() + "km" + " - " + route.getCity() + "km";
+            if(route.getType().equals("drive")){
+                descriptions[i] = route.getName() + " - " + route.getDistance() + "km" + " - "
+                        +"Highway:" +  route.getLowEDis() + "km" + " - " + "City:" + route.getHighEDis() + "km";
+            }
+            else if (route.getType().equals("public")){
+                descriptions[i] = route.getName() + " - " + route.getDistance() + "km" + " - "
+                        +"Skytrain:" +  route.getLowEDis() + "km" + " - " + "Bus:" + route.getHighEDis() + "km";
+            }
+            else {
+                descriptions[i] = route.getName() + " - " + route.getDistance() + "km" + " - "
+                        +"Walk:" +  route.getLowEDis() + "km" + " - " + "Bike:" + route.getHighEDis() + "km";
+            }
         }
+
         return descriptions;
     }
 

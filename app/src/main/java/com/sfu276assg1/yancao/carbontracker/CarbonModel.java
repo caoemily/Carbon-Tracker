@@ -11,6 +11,11 @@ public class CarbonModel {
     private JourneyCollection journeyCollection;
 
     private RouteCollection routeCollection;
+    private RouteCollection busRouteCollection;
+    private RouteCollection walkRouteCollection;
+
+
+
     private CarCollection carCollection;
 
     private CarFamily carFromFile;
@@ -22,6 +27,8 @@ public class CarbonModel {
     private CarbonModel() {
         journeyCollection = new JourneyCollection();
         routeCollection = new RouteCollection();
+        busRouteCollection = new RouteCollection();
+        walkRouteCollection = new RouteCollection();
         carCollection = new CarCollection();
         carFromFile = new CarFamily();
     }
@@ -49,6 +56,7 @@ public class CarbonModel {
     public void changeRouteInJourney(Route tempRoute, Route route) {
         journeyCollection.changeRoute(tempRoute, route);
     }
+    public void addNoCarJourney(Route route){journeyCollection.addJourney(new Journey(route));}
 
     public CarCollection getCarCollection(){
         return carCollection;
@@ -67,16 +75,42 @@ public class CarbonModel {
     public RouteCollection getRouteCollection() {
         return routeCollection;
     }
+    public RouteCollection getBusRouteCollection() {
+        return busRouteCollection;
+    }
+    public RouteCollection getWalkRouteCollection() {
+        return walkRouteCollection;
+    }
     public void addRoute(Route route) {
         routeCollection.addRoute(route);
+    }
+    public void addBusRoute(Route route) {
+        busRouteCollection.addRoute(route);
+    }
+    public void addWalkRoute(Route route) {
+        walkRouteCollection.addRoute(route);
     }
     public Route getRoute(int index) {
         return routeCollection.getRoute(index);
     }
+    public Route getBusRoute(int index){return busRouteCollection.getRoute(index);}
+    public Route getWalkRoute(int index){return walkRouteCollection.getRoute(index);}
     public void changeRoute(Route route, int indexOfChanging) {
         routeCollection.changeRoute(route, indexOfChanging);
     }
+    public void changeBusRoute(Route route, int indexOfChanging) {
+        busRouteCollection.changeRoute(route, indexOfChanging);
+    }
+    public void changeWalkRoute(Route route, int indexOfChanging) {
+        walkRouteCollection.changeRoute(route, indexOfChanging);
+    }
     public void removeRoute(int index) {
         routeCollection.remove(index);
+    }
+    public void removeBusRoute(int index) {
+        busRouteCollection.remove(index);
+    }
+    public void removeWalkRoute(int index) {
+        walkRouteCollection.remove(index);
     }
 }

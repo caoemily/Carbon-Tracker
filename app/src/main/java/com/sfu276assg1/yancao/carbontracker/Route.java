@@ -5,36 +5,39 @@ package com.sfu276assg1.yancao.carbontracker;
  */
 
 public class Route {
+    private String type;
     private String rName;
     private double distance;
-    private double highway;
-    private double city;
+    private double lowEDis;
+    private double highEDis;
 
     public Route() {
+        this.type = " ";
         this.rName = " ";
         this.distance = 0;
-        this.highway = 0;
-        this.city = 0;
+        this.lowEDis = 0;
+        this.highEDis = 0;
 
     }
 
-    public Route(double distanceInKm, double highway, double city) {
+    public Route(double distanceInKm, double lowEDis, double city) {
+        this.type = " ";
         this.rName = " ";
         this.distance = distanceInKm;
-        this.highway = highway;
-        this.city = city;
+        this.lowEDis = lowEDis;
+        this.highEDis = highEDis;
     }
 
-    public double getCity() {
-        return city;
+    public double getHighEDis() {
+        return highEDis;
     }
 
-    public void setCityPer(double city) {
-        if(city < 0){
+    public void setHighEDis(double highEDis) {
+        if(highEDis < 0){
             throw new IllegalArgumentException();
         }
         else{
-            this.city = city;
+            this.highEDis = highEDis;
         }
     }
 
@@ -51,16 +54,16 @@ public class Route {
         }
     }
 
-    public double getHighway() {
-        return highway;
+    public double getLowEDis() {
+        return lowEDis;
     }
 
-    public void setHighway(double highway) {
-        if(highway < 0){
+    public void setLowEDis(double lowEDis) {
+        if(lowEDis < 0){
             throw new IllegalArgumentException();
         }
         else{
-            this.highway = highway;
+            this.lowEDis = lowEDis;
         }
     }
 
@@ -73,14 +76,19 @@ public class Route {
 
     }
 
-    public String getSingleRouteDes() {
-        String descriptions = "";
-        descriptions += this.getName() + " - " + this.getDistance() + "km" + " - "
-                    + this.getHighway() + "%" + " - " + this.getCity() + "%";
-        return descriptions;
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public boolean equals(Route route) {
-        return (route.rName == rName) && (route.distance == distance) && (route.highway == highway) && (route.city == city);
+        return (route.getName().equals(this.rName)) &&
+                (route.getDistance()== this.distance) &&
+                (route.getLowEDis()== this.lowEDis) &&
+                (route.getHighEDis() == this.highEDis)&&
+                (route.getType().equals(this.type));
     }
 }

@@ -25,7 +25,7 @@ import java.util.ArrayList;
  * show saved cars, let customer choose car, edit car, add car or delete car
  */
 
-public class SelectTransModeActivity extends AppCompatActivity {
+public class SelectCarActivity extends AppCompatActivity {
     private ArrayList<Car> cars = new ArrayList<>();
     ArrayAdapter<String> adapter;
     ListView list;
@@ -40,12 +40,12 @@ public class SelectTransModeActivity extends AppCompatActivity {
         readDataFromFile();
         setLaunchNewCar();
         selectExistingCar();
-        routeList();
+        carList();
     }
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(SelectTransModeActivity.this, MainActivity.class);
+        Intent intent = new Intent(SelectCarActivity.this, MainActivity.class);
         startActivity(intent);
         finish();
     }
@@ -112,7 +112,7 @@ public class SelectTransModeActivity extends AppCompatActivity {
         CarbonModel.getInstance().setCarFamily(cars);
     }
 
-    private void routeList() {
+    private void carList() {
         adapter = new ArrayAdapter<>(this,R.layout.route_list, CarbonModel.getInstance().getCarCollection().getCarDescription());
         list = (ListView) findViewById(R.id.listView_carList);
         list.setAdapter(adapter);
@@ -132,7 +132,7 @@ public class SelectTransModeActivity extends AppCompatActivity {
             case R.id.delete:
                 CarbonModel.getInstance().removeCar(info.position);
                 adapter.notifyDataSetChanged();
-                routeList();
+                carList();
                 return true;
             case R.id.edit:
                 Intent intent = new Intent(getApplicationContext(), AddCarActivity.class);

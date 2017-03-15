@@ -16,12 +16,13 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity" />
-        <activity android:name=".SelectTransModeActivity" />
+        <activity android:name=".SelectCarActivity" />
         <activity android:name=".AddCarActivity" />
         <activity android:name=".SelectRouteActivity" />
         <activity android:name=".AddRouteActivity" />
         <activity android:name=".DisplayCarbonFootprintActivity" />
         <activity android:name=".DisplayTableActivity" />
+        <activity android:name=".SelectTranModeActivity"></activity>
     </application>
 
 </manifest>

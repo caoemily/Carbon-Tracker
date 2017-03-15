@@ -55,7 +55,7 @@ public class AddCarActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(AddCarActivity.this, SelectTransModeActivity.class);
+        Intent intent = new Intent(AddCarActivity.this, SelectCarActivity.class);
         startActivity(intent);
         finish();
     }
@@ -205,7 +205,7 @@ public class AddCarActivity extends AppCompatActivity {
                     else {
                         CarbonModel.getInstance().changeCar(car, carChangePosition);
                         CarbonModel.getInstance().changeCarInJourney(tempCar, car);
-                        intent = new Intent(AddCarActivity.this, SelectTransModeActivity.class);
+                        intent = new Intent(AddCarActivity.this, SelectCarActivity.class);
                     }
                     startActivity(intent);
                     finish();
@@ -219,9 +219,6 @@ public class AddCarActivity extends AppCompatActivity {
         tempCar = CarbonModel.getInstance().getCar(carChangePosition);
         carChangePosition = getIntent().getIntExtra("carIndex", 0);
         carName = CarbonModel.getInstance().getCar(carChangePosition).getNickname();
-        //make = CarbonModel.getInstance().getCar(position).getMake();
-        //model = CarbonModel.getInstance().getCar(position).getModel();
-        //year = CarbonModel.getInstance().getCar(position).getYear();
     }
 }
 

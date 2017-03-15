@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, SelectTransModeActivity.class);
+                Intent intent = new Intent(MainActivity.this, SelectTranModeActivity.class);
                 startActivity(intent);
                 finish();
             }

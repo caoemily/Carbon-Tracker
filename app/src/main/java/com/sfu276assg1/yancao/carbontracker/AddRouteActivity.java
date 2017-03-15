@@ -17,40 +17,52 @@ import android.widget.Toast;
 public class AddRouteActivity extends AppCompatActivity {
 
     String routeName = "";
-    double cityDriv, highwayDriv, totalDis;
+    double higherEDis, lowerEDis, totalDis;
     int routeChangePosition;
     Route tempRoute;
+    Route currentRoute = new Route();
+    int mode = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_route);
-
-        if( getIntent().getExtras() != null)
-        {
-            extractDataFromIntent();
-        }
-
-        setHighwayDis();
+        mode = getIntent().getIntExtra("TransMode",0);
+        setIndividualDis();
         setTotalDistance();
         setRouteName();
         setupOkButton();
+        setRouteType();
     }
 
     @Override
     public void onBackPressed() {
         Intent intent = new Intent(AddRouteActivity.this, SelectRouteActivity.class);
+        intent.putExtra("TransMode",mode);
         startActivity(intent);
         finish();
     }
 
-    public void setHighwayDis() {
-        EditText highwayPerEntry = (EditText) findViewById(R.id.editView_enterHighwayPer);
-        String highWay = Double.toString(highwayDriv);
-        if (highwayDriv > 0) {
-            highwayPerEntry.setText(highWay);
+    public void setIndividualDis() {
+        TextView textViewL = (TextView) findViewById(R.id.textView_lowerEDis);
+        TextView textViewH = (TextView) findViewById(R.id.textView_higherEDis);
+        switch(mode){
+            case 1:
+                textViewL.setText(""+"Skytrain (km):");
+                textViewH.setText(""+"Bus (km):");
+                break;
+            case 2:
+                textViewL.setText(""+"Walk (km):");
+                textViewH.setText(""+"Bike (km):");
+                break;
         }
-        highwayPerEntry.addTextChangedListener(new TextWatcher() {
+
+        EditText lowEDisEntry = (EditText) findViewById(R.id.editView_enterLowEDis);
+        String lowEmission = Double.toString(lowerEDis);
+        if (lowerEDis > 0) {
+            lowEDisEntry.setText(lowEmission);
+        }
+        lowEDisEntry.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
@@ -60,14 +72,14 @@ public class AddRouteActivity extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 try {
-                    String highwayPerData = s.toString();
-                    if (highwayPerData.matches("")){
-                        highwayDriv = 0;
+                    String lowEData = s.toString();
+                    if (lowEData.matches("")){
+                        lowerEDis = 0;
                     }
                     else{
-                        highwayDriv = Double.parseDouble(highwayPerData);
+                        lowerEDis = Double.parseDouble(lowEData);
                     }
-                    totalDis = highwayDriv + cityDriv;
+                    totalDis = lowerEDis + higherEDis;
                     TextView distance = (TextView) findViewById(R.id.text_enterDis);
                     distance.setText(" " + totalDis);
                 }
@@ -75,12 +87,12 @@ public class AddRouteActivity extends AppCompatActivity {
             }
         });
 
-        EditText cityPerEntry = (EditText) findViewById(R.id.editView_enterCityPer);
-        String city = Double.toString(cityDriv);
-        if (cityDriv > 0 ) {
-            cityPerEntry.setText(city);
+        EditText highEDisEntry = (EditText) findViewById(R.id.editView_enterHighEDis);
+        String highEmission = Double.toString(higherEDis);
+        if (higherEDis > 0 ) {
+            highEDisEntry.setText(highEmission);
         }
-        cityPerEntry.addTextChangedListener(new TextWatcher() {
+        highEDisEntry.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
@@ -90,14 +102,14 @@ public class AddRouteActivity extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 try {
-                    String cityPerData = s.toString();
-                    if (cityPerData.matches("")){
-                        cityDriv = 0;
+                    String highEData = s.toString();
+                    if (highEData.matches("")){
+                        higherEDis = 0;
                     }
                     else{
-                        cityDriv = Double.parseDouble(cityPerData);
+                        higherEDis = Double.parseDouble(highEData);
                     }
-                    totalDis = highwayDriv + cityDriv;
+                    totalDis = lowerEDis + higherEDis;
                     TextView distance = (TextView) findViewById(R.id.text_enterDis);
                     distance.setText(" " + totalDis);
                 }
@@ -108,16 +120,16 @@ public class AddRouteActivity extends AppCompatActivity {
 
     public void setTotalDistance() {
         TextView distance = (TextView) findViewById(R.id.text_enterDis);
-        if (cityDriv > 0 ) {
-            totalDis = cityDriv;
+        if (higherEDis > 0 ) {
+            totalDis = higherEDis;
             distance.setText(" " + totalDis);
         }
-        else if (highwayDriv > 0 ) {
-            totalDis = highwayDriv;
+        else if (lowerEDis > 0 ) {
+            totalDis = lowerEDis;
             distance.setText(" " + totalDis);
         }
-        if (cityDriv > 0 && highwayDriv > 0) {
-            totalDis = highwayDriv + cityDriv;
+        if (higherEDis > 0 && lowerEDis > 0) {
+            totalDis = lowerEDis + higherEDis;
             distance.setText(" " + totalDis);
         }
     }
@@ -156,30 +168,57 @@ public class AddRouteActivity extends AppCompatActivity {
                         Toast.LENGTH_SHORT).show();
             }
             else {
-                Route route = new Route(totalDis, highwayDriv, cityDriv);
+                currentRoute.setHighEDis(higherEDis);
+                currentRoute.setLowEDis(lowerEDis);
+                currentRoute.setDistance(totalDis);
                 Intent intent;
-                if(getIntent().getExtras() == null)
+                routeChangePosition = getIntent().getIntExtra("routeIndex", -1);
+                if(routeChangePosition==-1)
                 {
                     if (routeName != "") {
-                        route.setName(routeName);
-                        CarbonModel.getInstance().addRoute(route);
+                        currentRoute.setName(routeName);
                     }
-                    CarbonModel.getInstance().getLastJourney().setRoute(route);
+                    switch(mode){
+                        case 0:
+                            CarbonModel.getInstance().addRoute(currentRoute);
+                            CarbonModel.getInstance().getLastJourney().setRoute(currentRoute);
+                            break;
+                        case 1:
+                            CarbonModel.getInstance().addBusRoute(currentRoute);
+                            CarbonModel.getInstance().getJourneyCollection().addJourney(new Journey(currentRoute));
+                            break;
+                        case 2:
+                            CarbonModel.getInstance().addWalkRoute(currentRoute);
+                            CarbonModel.getInstance().getJourneyCollection().addJourney(new Journey(currentRoute));
+                            break;
+                    }
                     intent = new Intent(AddRouteActivity.this, MainActivity.class);
                     startActivity(intent);
                     finish();
                     showCurrentJouney();
                 }
                 else {
+                    extractDataFromIntent();
                     if(routeName.isEmpty()) {
                         Toast.makeText(getApplicationContext(),"Please enter a name for the route.",
                                 Toast.LENGTH_SHORT).show();
                     }
                     else{
-                        route.setName(routeName);
-                        CarbonModel.getInstance().changeRoute(route, routeChangePosition);
-                        CarbonModel.getInstance().changeRouteInJourney(tempRoute, route);
+                        currentRoute.setName(routeName);
+                        switch(mode){
+                            case 0:
+                                CarbonModel.getInstance().changeRoute(currentRoute, routeChangePosition);
+                                break;
+                            case 1:
+                                CarbonModel.getInstance().changeBusRoute(currentRoute, routeChangePosition);
+                                break;
+                            case 2:
+                                CarbonModel.getInstance().changeWalkRoute(currentRoute, routeChangePosition);
+                                break;
+                        }
+                        CarbonModel.getInstance().changeRouteInJourney(tempRoute, currentRoute);
                         intent = new Intent(AddRouteActivity.this, SelectRouteActivity.class);
+                        intent.putExtra("TransMode",mode);
                         startActivity(intent);
                         finish();
                     }
@@ -199,13 +238,31 @@ public class AddRouteActivity extends AppCompatActivity {
                 Toast.LENGTH_LONG).show();
     }
 
+
+    private void setRouteType(){
+        switch(mode){
+            case 0:
+                currentRoute.setType("drive");
+                break;
+            case 1:
+                currentRoute.setType("public");
+                break;
+            case 2:
+                currentRoute.setType("walk");
+                break;
+        }
+    }
+
     private void extractDataFromIntent() {
         tempRoute = new Route();
-        tempRoute = CarbonModel.getInstance().getRoute(routeChangePosition);
-        routeChangePosition = getIntent().getIntExtra("carIndex", 0);
-        routeName = CarbonModel.getInstance().getRoute(routeChangePosition).getName();
-        cityDriv = CarbonModel.getInstance().getRoute(routeChangePosition).getCity();
-        highwayDriv = CarbonModel.getInstance().getRoute(routeChangePosition).getHighway();
-
+        routeChangePosition = getIntent().getIntExtra("routeIndex", -1);
+        switch(mode){
+            case 0: tempRoute = CarbonModel.getInstance().getRoute(routeChangePosition);
+                break;
+            case 1: tempRoute = CarbonModel.getInstance().getBusRoute(routeChangePosition);
+                break;
+            case 2: tempRoute = CarbonModel.getInstance().getWalkRoute(routeChangePosition);
+                break;
+        }
     }
 }
