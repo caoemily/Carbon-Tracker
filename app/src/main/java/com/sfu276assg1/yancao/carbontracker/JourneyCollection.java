@@ -59,4 +59,12 @@ public class JourneyCollection {
         }
 
     }
+
+    public ArrayList<String> journeyCollectionDescription() {
+        ArrayList<String> journeyDescription = new ArrayList<>();
+        for (Journey journey : journeys) {
+            journeyDescription.add(journey.getJourneyDes());
+        }
+        return journeyDescription;
+    }
 }

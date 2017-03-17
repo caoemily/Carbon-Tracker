@@ -78,4 +78,5 @@ public class Journey implements Serializable {
                 "; Car: " + carName + "; Route: " + routeName + "; Distance: " + distance + " km.";
         return des;
     }
+
 }
