@@ -31,7 +31,7 @@ public class DisplayTable extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_display_table2);
+        setContentView(R.layout.activity_display_table_listview);
 
         list = (ListView) findViewById(R.id.listViewTable);
         registerForContextMenu(list);
