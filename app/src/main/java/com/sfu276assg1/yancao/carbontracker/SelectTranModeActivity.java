@@ -32,6 +32,7 @@ public class SelectTranModeActivity extends AppCompatActivity {
     }
 
     private void setupSelectPubTranButton() {
+        CarbonModel.getInstance().setBusRouteCollection(MainActivity.db.getBusRouteList());
         Button button = (Button)findViewById(R.id.btn_selectPubTran);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,6 +46,7 @@ public class SelectTranModeActivity extends AppCompatActivity {
     }
 
     private void setupSelectWalkButton() {
+        CarbonModel.getInstance().setWalkRouteCollection(MainActivity.db.getWalkRouteList());
         Button button = (Button)findViewById(R.id.btn_selectWalk);
         button.setOnClickListener(new View.OnClickListener() {
             @Override

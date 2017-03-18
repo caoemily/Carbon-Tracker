@@ -94,14 +94,16 @@ public class SelectRouteActivity extends AppCompatActivity {
                         route = CarbonModel.getInstance().getRoute(position);
                         CarbonModel.getInstance().getLastJourney().setRoute(route);
                         break;
-                    case 1: route = CarbonModel.getInstance().getBusRoute(position);
-                        CarbonModel.getInstance().addNoCarJourney(route);
+                    case 1:
+                        route = CarbonModel.getInstance().getBusRoute(position);
+                        CarbonModel.getInstance().getJourneyCollection().addJourney(new Journey(route));
                         break;
-                    case 2: route = CarbonModel.getInstance().getWalkRoute(position);
-                        CarbonModel.getInstance().addNoCarJourney(route);
+                    case 2:
+                        route = CarbonModel.getInstance().getWalkRoute(position);
+                        CarbonModel.getInstance().getJourneyCollection().addJourney(new Journey(route));
                         break;
                 }
-
+                MainActivity.db.insertRowJourney(CarbonModel.getInstance().getLastJourney());
                 showCurrentJouney();
                 startActivity(new Intent(getApplicationContext(),MainActivity.class));
                 finish();
@@ -134,17 +136,24 @@ public class SelectRouteActivity extends AppCompatActivity {
     @Override
     public boolean onContextItemSelected(MenuItem item) {
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        String routeName="";
         switch (item.getItemId()) {
             case R.id.delete:
                 switch(mode){
                     case 0:
-                        String routeName = CarbonModel.getInstance().getRoute(info.position).getName();
+                        routeName = CarbonModel.getInstance().getRoute(info.position).getName();
                         MainActivity.db.deleteRouteRow(routeName);
                         CarbonModel.getInstance().removeRoute(info.position);
                         break;
-                    case 1: CarbonModel.getInstance().removeBusRoute(info.position);
+                    case 1:
+                        routeName = CarbonModel.getInstance().getBusRoute(info.position).getName();
+                        MainActivity.db.deleteBusRouteRow(routeName);
+                        CarbonModel.getInstance().removeBusRoute(info.position);
                         break;
-                    case 2: CarbonModel.getInstance().removeWalkRoute(info.position);
+                    case 2:
+                        routeName = CarbonModel.getInstance().getWalkRoute(info.position).getName();
+                        MainActivity.db.deleteWalkRouteRow(routeName);
+                        CarbonModel.getInstance().removeWalkRoute(info.position);
                         break;
                 }
                 adapter.notifyDataSetChanged();

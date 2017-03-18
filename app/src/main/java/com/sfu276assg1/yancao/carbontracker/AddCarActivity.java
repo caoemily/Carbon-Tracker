@@ -49,8 +49,6 @@ public class AddCarActivity extends AppCompatActivity {
         setupYearSpinner();
         generateListView();
         registerClickOnListViewItems();
-
-
     }
 
     @Override
@@ -198,12 +196,15 @@ public class AddCarActivity extends AppCompatActivity {
                     if(getIntent().getExtras() == null)
                     {
                         CarbonModel.getInstance().addCar(car);
+                        MainActivity.db.insertCarRow(car);
                         Journey journey = new Journey(car);
                         CarbonModel.getInstance().addJourney(journey);
                         intent = new Intent(AddCarActivity.this, SelectRouteActivity.class);
                     }
                     else {
+                        String originalName = CarbonModel.getInstance().getCar(carChangePosition).getNickname();
                         CarbonModel.getInstance().changeCar(car, carChangePosition);
+                        MainActivity.db.updateCarRow(originalName,car);
                         CarbonModel.getInstance().changeCarInJourney(tempCar, car);
                         intent = new Intent(AddCarActivity.this, SelectCarActivity.class);
                     }

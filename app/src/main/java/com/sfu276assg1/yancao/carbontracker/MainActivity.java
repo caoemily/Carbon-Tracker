@@ -19,12 +19,18 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        db = new DBAdapter(getApplicationContext());
-        db.open();
+        setupDatabase();
 
         setUpAddJourneytButton();
         setUpShowTableButton();
         setUpShowChartButton();
+    }
+
+    private void setupDatabase() {
+        db = new DBAdapter(getApplicationContext());
+        db.open();
+        CarbonModel.getInstance().setJourneyCollection(db.getJourneyList());
+        CarbonModel.getInstance().setCarCollection(db.getCarList());
     }
 
     private void setUpAddJourneytButton() {

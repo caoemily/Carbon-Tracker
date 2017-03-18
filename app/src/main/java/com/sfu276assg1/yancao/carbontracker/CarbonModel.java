@@ -43,6 +43,7 @@ public class CarbonModel {
     public JourneyCollection getJourneyCollection() {
         return journeyCollection;
     }
+    public void setJourneyCollection(JourneyCollection collection) {this.journeyCollection = collection;}
     public void addJourney(Journey journey) {
         journeyCollection.addJourney(journey);
     }
@@ -56,11 +57,12 @@ public class CarbonModel {
     public void changeRouteInJourney(Route tempRoute, Route route) {
         journeyCollection.changeRoute(tempRoute, route);
     }
-    public void addNoCarJourney(Route route){journeyCollection.addJourney(new Journey(route));}
+
 
     public CarCollection getCarCollection(){
         return carCollection;
     }
+    public void setCarCollection(CarCollection collection) {this.carCollection = collection;}
     public void addCar(Car car) {
         carCollection.addCar(car);
     }
@@ -79,9 +81,12 @@ public class CarbonModel {
     public RouteCollection getBusRouteCollection() {
         return busRouteCollection;
     }
+    public void setBusRouteCollection(RouteCollection collection){this.busRouteCollection = collection;}
     public RouteCollection getWalkRouteCollection() {
         return walkRouteCollection;
     }
+    public void setWalkRouteCollection(RouteCollection collection){this.walkRouteCollection = collection;}
+
     public void addRoute(Route route) {
         routeCollection.addRoute(route);
     }

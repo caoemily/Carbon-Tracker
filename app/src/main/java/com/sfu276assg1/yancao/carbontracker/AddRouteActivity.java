@@ -186,13 +186,17 @@ public class AddRouteActivity extends AppCompatActivity {
                             break;
                         case 1:
                             CarbonModel.getInstance().addBusRoute(currentRoute);
+                            MainActivity.db.insertBusRouteRow(currentRoute);
                             CarbonModel.getInstance().getJourneyCollection().addJourney(new Journey(currentRoute));
                             break;
                         case 2:
                             CarbonModel.getInstance().addWalkRoute(currentRoute);
+                            MainActivity.db.insertWalkRouteRow(currentRoute);
                             CarbonModel.getInstance().getJourneyCollection().addJourney(new Journey(currentRoute));
                             break;
                     }
+
+                    MainActivity.db.insertRowJourney(CarbonModel.getInstance().getLastJourney());
                     intent = new Intent(AddRouteActivity.this, MainActivity.class);
                     startActivity(intent);
                     finish();
@@ -213,13 +217,17 @@ public class AddRouteActivity extends AppCompatActivity {
                                 CarbonModel.getInstance().changeRoute(currentRoute, routeChangePosition);
                                 break;
                             case 1:
+                                MainActivity.db.updateBusRouteRow(tempRoute.getName(),currentRoute);
                                 CarbonModel.getInstance().changeBusRoute(currentRoute, routeChangePosition);
                                 break;
                             case 2:
+                                MainActivity.db.updateWalkRouteRow(tempRoute.getName(),currentRoute);
                                 CarbonModel.getInstance().changeWalkRoute(currentRoute, routeChangePosition);
                                 break;
                         }
                         CarbonModel.getInstance().changeRouteInJourney(tempRoute, currentRoute);
+                        //update database for journeyCollection
+
                         intent = new Intent(AddRouteActivity.this, SelectRouteActivity.class);
                         intent.putExtra("TransMode",mode);
                         startActivity(intent);

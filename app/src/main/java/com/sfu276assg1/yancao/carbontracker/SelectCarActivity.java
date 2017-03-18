@@ -130,6 +130,8 @@ public class SelectCarActivity extends AppCompatActivity {
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
         switch (item.getItemId()) {
             case R.id.delete:
+                String carName = CarbonModel.getInstance().getCar(info.position).getNickname();
+                MainActivity.db.deleteCarRow(carName);
                 CarbonModel.getInstance().removeCar(info.position);
                 adapter.notifyDataSetChanged();
                 carList();
