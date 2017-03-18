@@ -8,22 +8,22 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".WelcomeActivity">
+        <activity android:name="com.sfu276assg1.yancao.UI.WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" />
-        <activity android:name=".SelectTransModeActivity" />
-        <activity android:name=".AddCarActivity" />
-        <activity android:name=".SelectRouteActivity" />
-        <activity android:name=".AddRouteActivity" />
-        <activity android:name=".DisplayCarbonFootprintActivity" />
-        <activity android:name=".DisplayTableActivity" />
-        <activity android:name=".DisplayTable" />
-        <activity android:name=".EditJourneyActivity"></activity>
+        <activity android:name="com.sfu276assg1.yancao.UI.MainActivity" />
+        <activity android:name="com.sfu276assg1.yancao.UI.SelectTransModeActivity" />
+        <activity android:name="com.sfu276assg1.yancao.UI.AddCarActivity" />
+        <activity android:name="com.sfu276assg1.yancao.UI.SelectRouteActivity" />
+        <activity android:name="com.sfu276assg1.yancao.UI.AddRouteActivity" />
+        <activity android:name="com.sfu276assg1.yancao.UI.DisplayCarbonFootprintActivity" />
+        <activity android:name="com.sfu276assg1.yancao.UI.DisplayTableActivity" />
+        <activity android:name="com.sfu276assg1.yancao.UI.DisplayTable" />
+        <activity android:name="com.sfu276assg1.yancao.UI.EditJourneyActivity"></activity>
     </application>
 
 </manifest>

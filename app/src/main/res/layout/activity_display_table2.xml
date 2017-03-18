@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.sfu276assg1.yancao.carbontracker.DisplayTable">
+    tools:context="com.sfu276assg1.yancao.carbontracker.com.sfu276assg1.yancao.UI.DisplayTable">
 
     <ListView
         android:id="@+id/listViewTable"

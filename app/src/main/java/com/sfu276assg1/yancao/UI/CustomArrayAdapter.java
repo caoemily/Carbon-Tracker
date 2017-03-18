@@ -1,4 +1,4 @@
-package com.sfu276assg1.yancao.carbontracker;
+package com.sfu276assg1.yancao.UI;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,8 +7,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import com.sfu276assg1.yancao.carbontracker.R;
+
 import java.util.List;
 
 
@@ -16,11 +16,11 @@ import java.util.List;
  * Created by vu on 2017-03-16.
  */
 
-public class CustomArrayAdapter extends ArrayAdapter<JourneyInfo> {
+public class CustomArrayAdapter extends ArrayAdapter<JourneyInfoForListView> {
     private Context context;
     private int layoutID;
 
-    public CustomArrayAdapter(Context context, int layoutId, List<JourneyInfo> items) {
+    public CustomArrayAdapter(Context context, int layoutId, List<JourneyInfoForListView> items) {
         super(context, layoutId, items);
         this.context = context;
         this.layoutID = layoutId;
@@ -28,7 +28,7 @@ public class CustomArrayAdapter extends ArrayAdapter<JourneyInfo> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        JourneyInfo item = getItem(position);
+        JourneyInfoForListView item = getItem(position);
 
         String name = item.getJourneyName();
         String journeyDate = item.getJourneyDate();

@@ -38,4 +38,6 @@
     <string name="add_car">add car</string>
     <string name="please_select_your_car">Please Select Your Car</string>
     <string name="year">Year: </string>
+    <string name="edit_date">Edit Date</string>
+    <string name="edit_journey">Edit Journey</string>
 </resources>

@@ -1,24 +1,42 @@
-package com.sfu276assg1.yancao.carbontracker;
+package com.sfu276assg1.yancao.UI;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.view.ActionMode;
-import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.CalendarView;
-import android.widget.EditText;
-import android.widget.Toast;
+
+import com.sfu276assg1.yancao.carbontracker.CarbonModel;
+import com.sfu276assg1.yancao.carbontracker.Journey;
+import com.sfu276assg1.yancao.carbontracker.JourneyCollection;
+import com.sfu276assg1.yancao.carbontracker.R;
 
 public class EditJourneyActivity extends AppCompatActivity {
     CalendarView calender;
-    private JourneyCollection journeyCollection = CarbonModel.getInstance().getJourneyCollection();
+    private String journeyDate;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_journey);
 
         generateCalendar();
+        setupOkButton();
+    }
+
+    private void setupOkButton() {
+        Button button = (Button) findViewById(R.id.selectDateOk);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Journey journey = new Journey(journeyDate);
+                CarbonModel.getInstance().addJourney(journey);
+                Intent intent = new Intent(EditJourneyActivity.this, SelectTransModeActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 
     private void generateCalendar() {
@@ -30,10 +48,7 @@ public class EditJourneyActivity extends AppCompatActivity {
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
                 String monthEdited = String.format("%02d", month + 1);
                 String dayEdited = String.format("%02d", dayOfMonth);
-                String date = "" + year + "-" + monthEdited + "-" + dayEdited;
-                journeyCollection.getJourney(position).setDate(date);
-                startActivity(new Intent(EditJourneyActivity.this, MainActivity.class));
-                finish();
+                journeyDate = "" + year + "-" + monthEdited + "-" + dayEdited;
             }
         });
     }

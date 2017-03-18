@@ -1,4 +1,4 @@
-package com.sfu276assg1.yancao.carbontracker;
+package com.sfu276assg1.yancao.UI;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -10,6 +10,10 @@ import android.widget.Button;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+
+import com.sfu276assg1.yancao.carbontracker.CarbonModel;
+import com.sfu276assg1.yancao.carbontracker.JourneyCollection;
+import com.sfu276assg1.yancao.carbontracker.R;
 
 /**
  * Display table of all travelled journeys.

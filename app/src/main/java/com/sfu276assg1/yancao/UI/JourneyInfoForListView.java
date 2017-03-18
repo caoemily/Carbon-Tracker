@@ -1,4 +1,4 @@
-package com.sfu276assg1.yancao.carbontracker;
+package com.sfu276assg1.yancao.UI;
 
 import java.util.Date;
 
@@ -6,13 +6,13 @@ import java.util.Date;
  * Created by vu on 2017-03-16.
  */
 
-public class JourneyInfo {
+public class JourneyInfoForListView {
     String journeyName;
     String journeyDate;
 
-    public JourneyInfo(){}
+    public JourneyInfoForListView(){}
 
-    public JourneyInfo(String journeyName, String journeyDate)
+    public JourneyInfoForListView(String journeyName, String journeyDate)
     {
         this.journeyName = journeyName;
         this.journeyDate = journeyDate;

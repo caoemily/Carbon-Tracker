@@ -1,4 +1,4 @@
-package com.sfu276assg1.yancao.carbontracker;
+package com.sfu276assg1.yancao.UI;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +12,9 @@ import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.utils.ColorTemplate;
+import com.sfu276assg1.yancao.carbontracker.CarbonModel;
+import com.sfu276assg1.yancao.carbontracker.JourneyCollection;
+import com.sfu276assg1.yancao.carbontracker.R;
 
 import java.util.ArrayList;
 import java.util.List;

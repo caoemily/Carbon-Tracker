@@ -1,4 +1,4 @@
-package com.sfu276assg1.yancao.carbontracker;
+package com.sfu276assg1.yancao.UI;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,6 +14,12 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.sfu276assg1.yancao.carbontracker.Car;
+import com.sfu276assg1.yancao.carbontracker.CarbonModel;
+import com.sfu276assg1.yancao.carbontracker.Journey;
+import com.sfu276assg1.yancao.carbontracker.R;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -45,6 +51,7 @@ public class SelectTransModeActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        CarbonModel.getInstance().removeLastJourney();
         Intent intent = new Intent(SelectTransModeActivity.this, MainActivity.class);
         startActivity(intent);
         finish();
@@ -153,8 +160,7 @@ public class SelectTransModeActivity extends AppCompatActivity {
                 String message = "You have chosen:  " + textView.getText().toString();
                 Toast.makeText(getApplicationContext(),message,Toast.LENGTH_LONG).show();
                 Car car = CarbonModel.getInstance().getCar(position);
-                Journey journey = new Journey(car);
-                CarbonModel.getInstance().addJourney(journey);
+                CarbonModel.getInstance().getLastJourney().setCar(car);
                 startActivity(new Intent(getApplicationContext(),SelectRouteActivity.class));
                 finish();
             }

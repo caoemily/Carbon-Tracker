@@ -1,4 +1,4 @@
-package com.sfu276assg1.yancao.carbontracker;
+package com.sfu276assg1.yancao.UI;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,6 +13,11 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.sfu276assg1.yancao.carbontracker.CarbonModel;
+import com.sfu276assg1.yancao.carbontracker.Journey;
+import com.sfu276assg1.yancao.carbontracker.R;
+import com.sfu276assg1.yancao.carbontracker.Route;
 
 /**
  *show saved routes, let customer choose route, edit route, add route or delete route
@@ -37,7 +42,6 @@ public class SelectRouteActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        CarbonModel.getInstance().removeLastJourney();
         Intent intent = new Intent(SelectRouteActivity.this, SelectTransModeActivity.class);
         startActivity(intent);
         finish();
