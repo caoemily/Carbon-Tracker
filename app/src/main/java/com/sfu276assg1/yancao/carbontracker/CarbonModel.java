@@ -80,4 +80,6 @@ public class CarbonModel {
         routeCollection.remove(index);
     }
 
+    public void removeJourney(int index) {journeyCollection.remove(index);}
+
 }

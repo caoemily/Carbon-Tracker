@@ -17,7 +17,6 @@ import android.widget.Toast;
 
 import com.sfu276assg1.yancao.carbontracker.Car;
 import com.sfu276assg1.yancao.carbontracker.CarbonModel;
-import com.sfu276assg1.yancao.carbontracker.Journey;
 import com.sfu276assg1.yancao.carbontracker.R;
 
 import java.io.BufferedReader;

@@ -37,6 +37,10 @@ public class JourneyCollection {
         return getJourney(journeys.size() - 1);
     }
 
+    public void remove(int index) {
+        journeys.remove(index);
+    }
+
     public void changeCar(Car tempCar, Car car){
         for (Journey journey : journeys){
             if(journey.getCar().equals(tempCar)) {

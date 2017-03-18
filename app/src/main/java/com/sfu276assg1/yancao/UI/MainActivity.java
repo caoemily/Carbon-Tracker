@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //Intent intent = new Intent(MainActivity.this, SelectTransModeActivity.class);
-                Intent intent = new Intent(MainActivity.this, EditJourneyActivity.class);
+                Intent intent = new Intent(MainActivity.this, CalendarForJourney.class);
                 startActivity(intent);
                 finish();
             }

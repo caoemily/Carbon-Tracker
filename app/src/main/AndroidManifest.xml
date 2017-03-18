@@ -23,7 +23,7 @@
         <activity android:name="com.sfu276assg1.yancao.UI.DisplayCarbonFootprintActivity" />
         <activity android:name="com.sfu276assg1.yancao.UI.DisplayTableActivity" />
         <activity android:name="com.sfu276assg1.yancao.UI.DisplayTable" />
-        <activity android:name="com.sfu276assg1.yancao.UI.EditJourneyActivity"></activity>
+        <activity android:name="com.sfu276assg1.yancao.UI.CalendarForJourney"></activity>
     </application>
 
 </manifest>

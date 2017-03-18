@@ -10,10 +10,9 @@ import android.widget.CalendarView;
 
 import com.sfu276assg1.yancao.carbontracker.CarbonModel;
 import com.sfu276assg1.yancao.carbontracker.Journey;
-import com.sfu276assg1.yancao.carbontracker.JourneyCollection;
 import com.sfu276assg1.yancao.carbontracker.R;
 
-public class EditJourneyActivity extends AppCompatActivity {
+public class CalendarForJourney extends AppCompatActivity {
     CalendarView calender;
     private String journeyDate;
     @Override
@@ -32,7 +31,7 @@ public class EditJourneyActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Journey journey = new Journey(journeyDate);
                 CarbonModel.getInstance().addJourney(journey);
-                Intent intent = new Intent(EditJourneyActivity.this, SelectTransModeActivity.class);
+                Intent intent = new Intent(CalendarForJourney.this, SelectTransModeActivity.class);
                 startActivity(intent);
                 finish();
             }
