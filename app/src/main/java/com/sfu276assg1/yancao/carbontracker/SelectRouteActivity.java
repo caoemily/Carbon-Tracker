@@ -67,7 +67,8 @@ public class SelectRouteActivity extends AppCompatActivity {
     private void routeList() {
         String[] temp = {""};
         switch(mode){
-            case 0: temp = CarbonModel.getInstance().getRouteCollection().getRouteDescriptions();
+            case 0:
+                temp = CarbonModel.getInstance().getRouteCollection().getRouteDescriptions();
                 break;
             case 1: temp = CarbonModel.getInstance().getBusRouteCollection().getRouteDescriptions();
                 break;
@@ -136,7 +137,10 @@ public class SelectRouteActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.delete:
                 switch(mode){
-                    case 0: CarbonModel.getInstance().removeRoute(info.position);
+                    case 0:
+                        String routeName = CarbonModel.getInstance().getRoute(info.position).getName();
+                        MainActivity.db.deleteRouteRow(routeName);
+                        CarbonModel.getInstance().removeRoute(info.position);
                         break;
                     case 1: CarbonModel.getInstance().removeBusRoute(info.position);
                         break;

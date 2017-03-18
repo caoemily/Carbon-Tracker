@@ -181,6 +181,7 @@ public class AddRouteActivity extends AppCompatActivity {
                     switch(mode){
                         case 0:
                             CarbonModel.getInstance().addRoute(currentRoute);
+                            MainActivity.db.insertRouteRow(currentRoute);
                             CarbonModel.getInstance().getLastJourney().setRoute(currentRoute);
                             break;
                         case 1:
@@ -205,8 +206,10 @@ public class AddRouteActivity extends AppCompatActivity {
                     }
                     else{
                         currentRoute.setName(routeName);
+                        int index;
                         switch(mode){
                             case 0:
+                                MainActivity.db.updateRouteRow(tempRoute.getName(),currentRoute);
                                 CarbonModel.getInstance().changeRoute(currentRoute, routeChangePosition);
                                 break;
                             case 1:

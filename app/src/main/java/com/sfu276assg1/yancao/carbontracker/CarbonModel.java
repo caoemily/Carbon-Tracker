@@ -75,6 +75,7 @@ public class CarbonModel {
     public RouteCollection getRouteCollection() {
         return routeCollection;
     }
+    public void setRouteCollection(RouteCollection collection){this.routeCollection = collection;}
     public RouteCollection getBusRouteCollection() {
         return busRouteCollection;
     }

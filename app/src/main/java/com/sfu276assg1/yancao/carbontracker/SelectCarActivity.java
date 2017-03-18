@@ -33,7 +33,7 @@ public class SelectCarActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_select_trans_mode);
+        setContentView(R.layout.activity_select_car);
 
         list = (ListView) findViewById(R.id.listView_carList);
         registerForContextMenu(list);

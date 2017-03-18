@@ -18,6 +18,7 @@ public class SelectTranModeActivity extends AppCompatActivity {
     }
 
     private void setupSelectCarButton() {
+        CarbonModel.getInstance().setRouteCollection(MainActivity.db.getRouteList());
         Button button = (Button)findViewById(R.id.btn_selectCar);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
