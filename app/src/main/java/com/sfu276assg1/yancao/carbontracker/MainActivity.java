@@ -12,14 +12,25 @@ import android.widget.ImageButton;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static DBAdapter db;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        setupDatabase();
+
         setUpAddJourneytButton();
         setUpShowTableButton();
         setUpShowChartButton();
+    }
+
+    private void setupDatabase() {
+        db = new DBAdapter(getApplicationContext());
+        db.open();
+        CarbonModel.getInstance().setJourneyCollection(db.getJourneyList());
+        CarbonModel.getInstance().setCarCollection(db.getCarList());
     }
 
     private void setUpAddJourneytButton() {
@@ -27,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, SelectTransModeActivity.class);
+                Intent intent = new Intent(MainActivity.this, SelectTranModeActivity.class);
                 startActivity(intent);
                 finish();
             }
