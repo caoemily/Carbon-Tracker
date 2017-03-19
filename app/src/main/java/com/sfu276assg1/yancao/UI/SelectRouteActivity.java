@@ -1,4 +1,4 @@
-package com.sfu276assg1.yancao.carbontracker;
+package com.sfu276assg1.yancao.UI;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,8 +14,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.sfu276assg1.yancao.UI.SelectCarActivity;
-import com.sfu276assg1.yancao.UI.SelectTranModeActivity;
+import com.sfu276assg1.yancao.carbontracker.CarbonModel;
+import com.sfu276assg1.yancao.carbontracker.Journey;
+import com.sfu276assg1.yancao.carbontracker.R;
+import com.sfu276assg1.yancao.carbontracker.Route;
 
 /**
  *show saved routes, let customer choose route, edit route, add route or delete route
@@ -32,7 +34,8 @@ public class SelectRouteActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_route);
-        mode = getIntent().getIntExtra("TransMode",0);
+
+        mode = getIntent().getIntExtra("TransMode", 0);
         list = (ListView) findViewById(R.id.listView_routeList);
         registerForContextMenu(list);
         setLaunchNewRoute();
@@ -61,7 +64,7 @@ public class SelectRouteActivity extends AppCompatActivity {
             finish();
         }
         else{
-            Intent intent = new Intent(SelectRouteActivity.this, SelectTranModeActivity.class);
+            Intent intent = new Intent(SelectRouteActivity.this, SelectTransModeActivity.class);
             startActivity(intent);
             finish();
         }
@@ -126,8 +129,6 @@ public class SelectRouteActivity extends AppCompatActivity {
             }
         });
     }
-
-
 
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {

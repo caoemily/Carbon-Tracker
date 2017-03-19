@@ -8,7 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.sfu276assg1.yancao.carbontracker.com.sfu276assg1.yancao.UI.AddRouteActivity">
+    tools:context="com.sfu276assg1.yancao.UI.AddRouteActivity">
 
     <TableLayout
         android:layout_width="wrap_content"
@@ -79,7 +79,9 @@
             android:layout_alignBaseline="@+id/text_routeName"
             android:layout_alignBottom="@+id/text_routeName"
             android:layout_toRightOf="@+id/text_routeName"
-            android:layout_toEndOf="@+id/text_routeName" />
+            android:layout_toEndOf="@+id/text_routeName"
+            android:layout_marginLeft="9dp"
+            android:layout_marginStart="9dp" />
 
         <TextView
             android:text="@string/if_choose_to_save_the_route_please_give_it_a_name"
@@ -109,7 +111,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="13dp"
-            android:hint="                                               "
             android:inputType="number"
             android:textSize="14sp"
             android:layout_above="@+id/text_enterDis"
@@ -123,11 +124,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
             android:layout_marginTop="11dp"
-            android:hint="                                        "
             android:inputType="number"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignLeft="@+id/textView_routeDistance"
+            android:layout_alignStart="@+id/textView_routeDistance" />
 
         <TextView
             android:id="@+id/textView_higherEDis"

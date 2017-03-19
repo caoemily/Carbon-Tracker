@@ -192,12 +192,12 @@ public class AddRouteActivity extends AppCompatActivity {
                         case 1:
                             CarbonModel.getInstance().addBusRoute(currentRoute);
                             MainActivity.db.insertBusRouteRow(currentRoute);
-                            CarbonModel.getInstance().getJourneyCollection().addJourney(new Journey(currentRoute));
+//                            CarbonModel.getInstance().getJourneyCollection().addJourney(new Journey(currentRoute));
                             break;
                         case 2:
                             CarbonModel.getInstance().addWalkRoute(currentRoute);
                             MainActivity.db.insertWalkRouteRow(currentRoute);
-                            CarbonModel.getInstance().getJourneyCollection().addJourney(new Journey(currentRoute));
+//                            CarbonModel.getInstance().getJourneyCollection().addJourney(new Journey(currentRoute));
                             break;
                     }
 

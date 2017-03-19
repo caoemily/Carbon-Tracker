@@ -8,7 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.sfu276assg1.yancao.carbontracker.com.sfu276assg1.yancao.UI.SelectRouteActivity">
+    tools:context="com.sfu276assg1.yancao.UI.SelectRouteActivity">
 
     <TextView
         android:text="@string/please_select_a_route"

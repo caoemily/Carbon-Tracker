@@ -1,11 +1,5 @@
 package com.sfu276assg1.yancao.UI;
 
-import java.util.Date;
-
-/**
- * Created by vu on 2017-03-16.
- */
-
 public class JourneyInfoForListView {
     String journeyName;
     String journeyDate;

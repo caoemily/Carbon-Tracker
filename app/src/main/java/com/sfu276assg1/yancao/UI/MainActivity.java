@@ -1,4 +1,4 @@
-package com.sfu276assg1.yancao.carbontracker;
+package com.sfu276assg1.yancao.UI;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageButton;
 
+import com.sfu276assg1.yancao.carbontracker.CarbonModel;
+import com.sfu276assg1.yancao.carbontracker.DBAdapter;
 import com.sfu276assg1.yancao.carbontracker.R;
 
 /**
@@ -40,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, SelectTranModeActivity.class);
+                Intent intent = new Intent(MainActivity.this, SelectTransModeActivity.class);
                 startActivity(intent);
                 finish();
             }
@@ -52,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, DisplayTableActivity.class);
+                Intent intent = new Intent(MainActivity.this, DisplayTable.class);
                 startActivity(intent);
             }
         });

@@ -8,7 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.sfu276assg1.yancao.carbontracker.com.sfu276assg1.yancao.UI.AddCarActivity">
+    tools:context="com.sfu276assg1.yancao.UI.AddCarActivity">
 
     <TableRow
         android:layout_width="match_parent"
@@ -19,11 +19,8 @@
             android:id="@+id/give_Nickname"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
             android:layout_marginTop="30dp"
-            android:hint="Nickname"
-            android:text="Nickname:"
+            android:text="@string/nickname"
             android:textStyle="bold" />
 
         <EditText
@@ -34,7 +31,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginTop="19dp"
             android:ems="10"
-            android:hint="Please enter a nickname for the car"
+            android:hint="@string/please_enter_a_nickname_for_the_car"
             android:inputType="textPersonName"
             android:textSize="14sp" />
 
@@ -44,7 +41,7 @@
         android:id="@+id/btnOkAddCar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="OK"
+        android:text="@string/ok"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
@@ -96,7 +93,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tableRow4"
             android:minWidth="110dp"
             android:orientation="vertical">
 
@@ -128,7 +124,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/linearLayout"
         android:layout_marginTop="10dp"
-        android:text="Here is a list of car" />
+        android:text="@string/here_is_a_list_of_car" />
 
     <ListView
         android:id="@+id/listViewPosCar"

@@ -1,4 +1,4 @@
-package com.sfu276assg1.yancao.carbontracker;
+package com.sfu276assg1.yancao.UI;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,7 +17,6 @@ import android.widget.Toast;
 import com.sfu276assg1.yancao.carbontracker.Car;
 import com.sfu276assg1.yancao.carbontracker.CarFamily;
 import com.sfu276assg1.yancao.carbontracker.CarbonModel;
-import com.sfu276assg1.yancao.carbontracker.Journey;
 import com.sfu276assg1.yancao.carbontracker.R;
 
 import java.util.ArrayList;
@@ -199,12 +198,9 @@ public class AddCarActivity extends AppCompatActivity {
                 else {
                     Car car = new Car(make, model, year, highWayE, cityE, fuelType, carName);
                     Intent intent;
-                    if(getIntent().getExtras() == null)
-                    {
+                    if(getIntent().getExtras() == null) {
                         CarbonModel.getInstance().addCar(car);
                         MainActivity.db.insertCarRow(car);
-                        Journey journey = new Journey(car);
-                        CarbonModel.getInstance().addJourney(journey);
                         CarbonModel.getInstance().getLastJourney().setCar(car);
                         intent = new Intent(AddCarActivity.this, SelectRouteActivity.class);
                     }
