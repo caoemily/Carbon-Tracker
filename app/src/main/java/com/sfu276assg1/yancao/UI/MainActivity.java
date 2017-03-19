@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageButton;
 
+import com.sfu276assg1.yancao.carbontracker.R;
+
 /**
  * Choose to add journey OR show carbon footprint in table or chart
  */

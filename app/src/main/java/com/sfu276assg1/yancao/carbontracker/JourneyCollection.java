@@ -37,6 +37,10 @@ public class JourneyCollection {
         return getJourney(journeys.size() - 1);
     }
 
+    public void remove(int index) {
+        journeys.remove(index);
+    }
+
     public void changeCar(Car tempCar, Car car){
         for (Journey journey : journeys){
             if(journey.getCar().equals(tempCar)) {
@@ -58,5 +62,13 @@ public class JourneyCollection {
             throw new IllegalArgumentException();
         }
 
+    }
+
+    public ArrayList<String> journeyCollectionDescription() {
+        ArrayList<String> journeyDescription = new ArrayList<>();
+        for (Journey journey : journeys) {
+            journeyDescription.add(journey.getJourneyDes());
+        }
+        return journeyDescription;
     }
 }

@@ -15,12 +15,12 @@ public class Car {
     //set member data based on parameter
     public Car()
     {
-        nickname = " ";
-        make = " ";
-        model = " ";
-        year = " ";
-        highwayE = 0;
-        cityE = 0;
+        this.nickname = " ";
+        this.make = " ";
+        this.model = " ";
+        this.year = " ";
+        this.highwayE = 0;
+        this.cityE = 0;
     }
 
     public Car(String make,String model, String year, int highwayE, int cityE, String transmission, double displacement, String fuelType){

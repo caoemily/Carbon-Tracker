@@ -2,7 +2,10 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/edit"
-        android:title="@string/edit" />
+        android:title="@string/edit_journey" />
+
+    <item android:title="@string/edit_date"
+        android:id="@+id/changeDate" />
 
     <item android:title="@string/delete"
         android:id="@+id/delete" />

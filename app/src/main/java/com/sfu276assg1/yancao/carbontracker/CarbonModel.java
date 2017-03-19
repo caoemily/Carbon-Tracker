@@ -119,4 +119,7 @@ public class CarbonModel {
     public void removeWalkRoute(int index) {
         walkRouteCollection.remove(index);
     }
+
+    public void removeJourney(int index) {journeyCollection.remove(index);}
+
 }

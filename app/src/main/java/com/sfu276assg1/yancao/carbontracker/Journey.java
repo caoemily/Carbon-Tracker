@@ -20,9 +20,13 @@ public class Journey implements Serializable {
         this.route = route;
     }
 
-    public Journey (Car car) {
-        this.date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
-        this.car = car;
+    public Journey (String date) {
+        if (date == null){
+            this.date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+        }
+        else {
+            this.date = date;
+        }
     }
 
     public Journey (Route route){
@@ -34,6 +38,10 @@ public class Journey implements Serializable {
 
     public String getDate() {
         return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public Car getCar() {
@@ -50,6 +58,10 @@ public class Journey implements Serializable {
 
     public void changeRoute(Route route) {
         this.route = route;
+    }
+
+    public void setCar(Car car) {
+        this.car = car;
     }
 
     public void setRoute(Route route) {
@@ -100,4 +112,5 @@ public class Journey implements Serializable {
         }
         return des;
     }
+
 }

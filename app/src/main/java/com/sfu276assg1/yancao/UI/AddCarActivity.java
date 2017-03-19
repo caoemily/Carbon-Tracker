@@ -14,6 +14,12 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.sfu276assg1.yancao.carbontracker.Car;
+import com.sfu276assg1.yancao.carbontracker.CarFamily;
+import com.sfu276assg1.yancao.carbontracker.CarbonModel;
+import com.sfu276assg1.yancao.carbontracker.Journey;
+import com.sfu276assg1.yancao.carbontracker.R;
+
 import java.util.ArrayList;
 
 //This is the activity that manipulates the screen after the user hits 'add car' on the Select Transport Mode page.
@@ -199,6 +205,7 @@ public class AddCarActivity extends AppCompatActivity {
                         MainActivity.db.insertCarRow(car);
                         Journey journey = new Journey(car);
                         CarbonModel.getInstance().addJourney(journey);
+                        CarbonModel.getInstance().getLastJourney().setCar(car);
                         intent = new Intent(AddCarActivity.this, SelectRouteActivity.class);
                     }
                     else {
@@ -220,6 +227,9 @@ public class AddCarActivity extends AppCompatActivity {
         tempCar = CarbonModel.getInstance().getCar(carChangePosition);
         carChangePosition = getIntent().getIntExtra("carIndex", 0);
         carName = CarbonModel.getInstance().getCar(carChangePosition).getNickname();
+        //make = CarbonModel.getInstance().getCar(position).getMake();
+        //model = CarbonModel.getInstance().getCar(position).getModel();
+        //year = CarbonModel.getInstance().getCar(position).getYear();
     }
 }
 

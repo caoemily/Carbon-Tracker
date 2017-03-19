@@ -5,7 +5,7 @@
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.sfu276assg1.yancao.carbontracker.MainActivity">
+    tools:context="com.sfu276assg1.yancao.carbontracker.com.sfu276assg1.yancao.UI.MainActivity">
 
     <ImageView
         android:id="@+id/city"

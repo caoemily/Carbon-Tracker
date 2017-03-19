@@ -1,4 +1,4 @@
-package com.sfu276assg1.yancao.carbontracker;
+package com.sfu276assg1.yancao.UI;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +10,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.sfu276assg1.yancao.carbontracker.CarbonModel;
+import com.sfu276assg1.yancao.carbontracker.Journey;
+import com.sfu276assg1.yancao.carbontracker.R;
+import com.sfu276assg1.yancao.carbontracker.Route;
 
 //Customer can add or edit route in this activity. After editing/adding, goes to mainActivity.
 //Customer can choose to save the route, or not save the route, the carbon emission will be calculated in both cases.
