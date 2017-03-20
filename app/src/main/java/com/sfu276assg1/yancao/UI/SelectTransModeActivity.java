@@ -51,6 +51,7 @@ public class SelectTransModeActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Journey journey = new Journey(journeyDate);
                 CarbonModel.getInstance().addJourney(journey);
 

@@ -34,6 +34,8 @@ public class Journey implements Serializable {
         else {
             this.date = date;
         }
+        Car car = new Car();
+        this.car = car;
     }
 
     public String getDate() {

@@ -98,17 +98,15 @@ public class SelectRouteActivity extends AppCompatActivity {
                 switch(mode){
                     case 0:
                         route = CarbonModel.getInstance().getRoute(position);
-                        CarbonModel.getInstance().getLastJourney().setRoute(route);
                         break;
                     case 1:
                         route = CarbonModel.getInstance().getBusRoute(position);
-                        CarbonModel.getInstance().getJourneyCollection().addJourney(new Journey(route));
                         break;
                     case 2:
                         route = CarbonModel.getInstance().getWalkRoute(position);
-                        CarbonModel.getInstance().getJourneyCollection().addJourney(new Journey(route));
                         break;
                 }
+                CarbonModel.getInstance().getLastJourney().setRoute(route);
                 CarbonModel.getInstance().getDb().insertRowJourney(CarbonModel.getInstance().getLastJourney());
                 showCurrentJouney();
                 startActivity(new Intent(getApplicationContext(),MainActivity.class));
@@ -140,20 +138,19 @@ public class SelectRouteActivity extends AppCompatActivity {
     @Override
     public boolean onContextItemSelected(MenuItem item) {
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
-        String routeName="";
         switch (item.getItemId()) {
             case R.id.delete:
                 switch(mode){
                     case 0:
-                        CarbonModel.getInstance().getDb().deleteRouteRow(CarbonModel.getInstance().getRoute(info.position));
+                        CarbonModel.getInstance().getDb().deleteRouteRow((info.position+1));
                         CarbonModel.getInstance().removeRoute(info.position);
                         break;
                     case 1:
-                        CarbonModel.getInstance().getDb().deleteBusRouteRow(CarbonModel.getInstance().getBusRoute(info.position));
+                        CarbonModel.getInstance().getDb().deleteBusRouteRow((info.position+1));
                         CarbonModel.getInstance().removeBusRoute(info.position);
                         break;
                     case 2:
-                        CarbonModel.getInstance().getDb().deleteWalkRouteRow(CarbonModel.getInstance().getWalkRoute(info.position));
+                        CarbonModel.getInstance().getDb().deleteWalkRouteRow((info.position+1));
                         CarbonModel.getInstance().removeWalkRoute(info.position);
                         break;
                 }

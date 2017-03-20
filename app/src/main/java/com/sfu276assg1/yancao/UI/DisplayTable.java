@@ -63,6 +63,7 @@ public class DisplayTable extends AppCompatActivity {
         final AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
         if (item.getItemId() == R.id.delete) {
             CarbonModel.getInstance().removeJourney(info.position);
+            CarbonModel.getInstance().getDb().deleteJourneyRow((info.position+1));
             adapter.notifyDataSetChanged();
             populateListView();
             return true;
@@ -102,6 +103,7 @@ public class DisplayTable extends AppCompatActivity {
             String dayEdited = String.format("%02d", day);
             String dateEdited = "" + year + "-" + monthEdited + "-" + dayEdited;
             CarbonModel.getInstance().getJourneyCollection().getJourney(position).setDate(dateEdited);
+            CarbonModel.getInstance().getDb().updateDateInJourney((position+1),dateEdited);
             getActivity().finish();
             startActivity(new Intent(getActivity(), DisplayTable.class));
         }

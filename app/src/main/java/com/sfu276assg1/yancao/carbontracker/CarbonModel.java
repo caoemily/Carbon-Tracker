@@ -6,16 +6,13 @@ public class CarbonModel {
     private static CarbonModel ourInstance = new CarbonModel();
 
     private JourneyCollection journeyCollection;
-
     private RouteCollection routeCollection;
     private RouteCollection busRouteCollection;
     private RouteCollection walkRouteCollection;
-    private DBAdapter db;
-
     private CarCollection carCollection;
     private CarFamily carFromFile;
-
     private BillCollection billCollection;
+    private DBAdapter db;
 
     public static CarbonModel getInstance() {
         return ourInstance;
@@ -88,7 +85,6 @@ public class CarbonModel {
         return walkRouteCollection;
     }
     public void setWalkRouteCollection(RouteCollection collection){this.walkRouteCollection = collection;}
-
     public void addRoute(Route route) {
         routeCollection.addRoute(route);
     }
@@ -98,23 +94,14 @@ public class CarbonModel {
     public void addWalkRoute(Route route) {
         walkRouteCollection.addRoute(route);
     }
-
     public Route getRoute(int index) {
         return routeCollection.getRoute(index);
     }
     public Route getBusRoute(int index){return busRouteCollection.getRoute(index);}
     public Route getWalkRoute(int index){return walkRouteCollection.getRoute(index);}
-
-    public void changeRoute(Route route, int indexOfChanging) {
-        routeCollection.changeRoute(route, indexOfChanging);
-    }
-    public void changeBusRoute(Route route, int indexOfChanging) {
-        busRouteCollection.changeRoute(route, indexOfChanging);
-    }
-    public void changeWalkRoute(Route route, int indexOfChanging) {
-        walkRouteCollection.changeRoute(route, indexOfChanging);
-    }
-
+    public void changeRoute(Route route, int indexOfChanging) {routeCollection.changeRoute(route, indexOfChanging);}
+    public void changeBusRoute(Route route, int indexOfChanging) {busRouteCollection.changeRoute(route, indexOfChanging);}
+    public void changeWalkRoute(Route route, int indexOfChanging) {walkRouteCollection.changeRoute(route, indexOfChanging);}
     public void removeRoute(int index) {
         routeCollection.remove(index);
     }

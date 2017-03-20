@@ -107,6 +107,7 @@ public class MonthlyUtilitiesActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.delete:
                 CarbonModel.getInstance().removeBill(info.position);
+                CarbonModel.getInstance().getDb().deleteBillRow((info.position+1));
                 adapter.notifyDataSetChanged();
                 populateListView();
                 return true;
