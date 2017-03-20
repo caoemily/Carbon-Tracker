@@ -61,6 +61,7 @@ public class DisplayTable extends AppCompatActivity {
         final AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
         if (item.getItemId() == R.id.delete) {
             CarbonModel.getInstance().removeJourney(info.position);
+            CarbonModel.getInstance().getDb().deleteJourneyRow((info.position+1));
             adapter.notifyDataSetChanged();
             populateListView();
             return true;

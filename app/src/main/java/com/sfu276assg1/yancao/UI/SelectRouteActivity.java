@@ -138,20 +138,19 @@ public class SelectRouteActivity extends AppCompatActivity {
     @Override
     public boolean onContextItemSelected(MenuItem item) {
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
-        String routeName="";
         switch (item.getItemId()) {
             case R.id.delete:
                 switch(mode){
                     case 0:
-                        CarbonModel.getInstance().getDb().deleteRouteRow(CarbonModel.getInstance().getRoute(info.position));
+                        CarbonModel.getInstance().getDb().deleteRouteRow((info.position+1));
                         CarbonModel.getInstance().removeRoute(info.position);
                         break;
                     case 1:
-                        CarbonModel.getInstance().getDb().deleteBusRouteRow(CarbonModel.getInstance().getBusRoute(info.position));
+                        CarbonModel.getInstance().getDb().deleteBusRouteRow((info.position+1));
                         CarbonModel.getInstance().removeBusRoute(info.position);
                         break;
                     case 2:
-                        CarbonModel.getInstance().getDb().deleteWalkRouteRow(CarbonModel.getInstance().getWalkRoute(info.position));
+                        CarbonModel.getInstance().getDb().deleteWalkRouteRow((info.position+1));
                         CarbonModel.getInstance().removeWalkRoute(info.position);
                         break;
                 }

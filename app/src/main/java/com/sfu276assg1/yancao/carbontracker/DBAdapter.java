@@ -25,7 +25,8 @@ public class DBAdapter {
 
     // DB Fields
     public static final String KEY_ROWID = "_id";
-    public static final int COL_ROWID = 0;
+    // Track DB version if a new version of your app changes the format.
+    public static final int DATABASE_VERSION = 10;
     /*
      * CHANGE 1:
      */
@@ -62,8 +63,7 @@ public class DBAdapter {
     private static final String TABLE_JOURNEY = "journey";
     //private static final String TABLE_UTILITY = "utility";
 
-    // Track DB version if a new version of your app changes the format.
-    public static final int DATABASE_VERSION = 9;
+
 
     private static final String CREATE_TABLE_CAR = "CREATE TABLE "
             + TABLE_CAR + "(" + KEY_ROWID + " INTEGER PRIMARY KEY," +
@@ -229,42 +229,30 @@ public class DBAdapter {
     }
 
 
-    public void deleteCarRow(Car car) {
-        String where = CAR_NICKNAME + "='" + car.getNickname() +
-                "'and "+ CAR_MAKE + "='" + car.getMake() +
-                "'and "+ CAR_MODEL + "='" + car.getModel() +
-                "'and "+ CAR_YEAR + "='" + car.getYear()+ "'";
+    public void deleteCarRow(int index) {
+        String where = KEY_ROWID + "='" + index +"'";
         db.delete(TABLE_CAR, where,null);
     }
 
-    public void deleteRouteRow(Route route) {
-        String where = ROUTE_NAME + "='" + route.getName() +
-                "'and "+ ROUTE_TYPE + "='" + route.getType()+
-                "'and "+ ROUTE_DISTANCE + "='" + route.getDistance()+
-                "'and "+ ROUTE_LOWE + "='" + route.getLowEDis()+
-                "'and "+ ROUTE_HIGHE + "='" + route.getHighEDis() +"'";
+    public void deleteRouteRow(int index) {
+        String where = KEY_ROWID + "='" + index +"'";
         db.delete(TABLE_ROUTE, where, null);
     }
 
-    public void deleteBusRouteRow(Route route) {
-        String where = ROUTE_NAME + "='" + route.getName() +
-                "'and "+ ROUTE_TYPE + "='" + route.getType()+
-                "'and "+ ROUTE_DISTANCE + "='" + route.getDistance()+
-                "'and "+ ROUTE_LOWE + "='" + route.getLowEDis()+
-                "'and "+ ROUTE_HIGHE + "='" + route.getHighEDis() +"'";
+    public void deleteBusRouteRow(int index) {
+        String where = KEY_ROWID + "='" + index +"'";
         db.delete(TABLE_BUSROUTE, where, null);
     }
 
-    public void deleteWalkRouteRow(Route route) {
-        String where = ROUTE_NAME + "='" + route.getName() +
-                "'and "+ ROUTE_TYPE + "='" + route.getType()+
-                "'and "+ ROUTE_DISTANCE + "='" + route.getDistance()+
-                "'and "+ ROUTE_LOWE + "='" + route.getLowEDis()+
-                "'and "+ ROUTE_HIGHE + "='" + route.getHighEDis() +"'";
+    public void deleteWalkRouteRow(int index) {
+        String where = KEY_ROWID + "='" + index +"'";
         db.delete(TABLE_WALKROUTE, where, null);
     }
 
-    //DELETE JOURNEY
+    public void deleteJourneyRow (int index) {
+        String where = KEY_ROWID + "='" + index +"'";
+        db.delete(TABLE_JOURNEY,where,null);
+    }
 
 
     public void updateCarRow(Car oldCar, Car update){
