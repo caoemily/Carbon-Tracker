@@ -6,16 +6,13 @@ public class CarbonModel {
     private static CarbonModel ourInstance = new CarbonModel();
 
     private JourneyCollection journeyCollection;
-
     private RouteCollection routeCollection;
     private RouteCollection busRouteCollection;
     private RouteCollection walkRouteCollection;
-    private DBAdapter db;
-
     private CarCollection carCollection;
     private CarFamily carFromFile;
-
     private BillCollection billCollection;
+    private DBAdapter db;
 
     public static CarbonModel getInstance() {
         return ourInstance;

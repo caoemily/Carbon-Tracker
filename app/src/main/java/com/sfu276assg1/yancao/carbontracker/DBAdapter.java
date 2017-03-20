@@ -116,8 +116,8 @@ public class DBAdapter {
             BILL_STARTDATE + " STRING," +
             BILL_ENDDATE + " STRING," +
             BILL_ELECTRICITY + " DOUBLE," +
-            BILL_GAS + " DOUBLE, "+
-            BILL_PEOPLENUM + " INT "+")";
+            BILL_GAS + " DOUBLE," +
+            BILL_PEOPLENUM + " INT" +")";
 
     // Context of application who uses us.
     private final Context context;
@@ -352,15 +352,22 @@ public class DBAdapter {
         db.update(TABLE_JOURNEY, updateRoute, where, null);
     }
 
+    public void updateDateInJourney(int index, String s){
+        String where = KEY_ROWID + "='" + index +"'";
+        ContentValues updateDate = new ContentValues();
+        updateDate.put(JOURNEY_DATE,s);
+        db.update(TABLE_JOURNEY,updateDate,where,null);
+    }
+
     public void updateBillRow(int index, Bill update){
         String where = KEY_ROWID + "='" + index +"'";
-        ContentValues updateRoute = new ContentValues();
-        updateRoute.put(BILL_STARTDATE, update.getStartDate());
-        updateRoute.put(BILL_ENDDATE, update.getEndDate());
-        updateRoute.put(BILL_ELECTRICITY,update.getElectricity());
-        updateRoute.put(BILL_GAS, update.getGas());
-        updateRoute.put(BILL_PEOPLENUM, update.getPeople());
-        db.update(TABLE_BILL, updateRoute, where, null);
+        ContentValues updateBill = new ContentValues();
+        updateBill.put(BILL_STARTDATE, update.getStartDate());
+        updateBill.put(BILL_ENDDATE, update.getEndDate());
+        updateBill.put(BILL_ELECTRICITY,update.getElectricity());
+        updateBill.put(BILL_GAS, update.getGas());
+        updateBill.put(BILL_PEOPLENUM, update.getPeople());
+        db.update(TABLE_BILL, updateBill, where, null);
     }
 
     //get Lists for populate listview

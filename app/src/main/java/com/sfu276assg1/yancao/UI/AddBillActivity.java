@@ -20,7 +20,6 @@ public class AddBillActivity extends AppCompatActivity {
     double gas, electricity;
     int people;
     int position;
-    Bill bill;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -208,8 +207,8 @@ public class AddBillActivity extends AppCompatActivity {
                 }
                 else {
                     Intent intent;
+                    Bill bill = new Bill(startDate, endDate, electricity, gas, people);
                     if(getIntent().getExtras() == null) {
-                        Bill bill = new Bill(startDate, endDate, electricity, gas, people);
                         CarbonModel.getInstance().addBill(bill);
                         CarbonModel.getInstance().getDb().insertBillRow(bill);
                         intent = new Intent(AddBillActivity.this, MonthlyUtilitiesActivity.class);
@@ -220,6 +219,7 @@ public class AddBillActivity extends AppCompatActivity {
                         CarbonModel.getInstance().getBill(position).setElectricity(electricity);
                         CarbonModel.getInstance().getBill(position).setGas(gas);
                         CarbonModel.getInstance().getBill(position).setPeople(people);
+                        position = getIntent().getIntExtra("billIndex", 0);
                         CarbonModel.getInstance().getDb().updateBillRow((position+1),bill);
                         intent = new Intent(AddBillActivity.this, MonthlyUtilitiesActivity.class);
                     }
@@ -237,6 +237,5 @@ public class AddBillActivity extends AppCompatActivity {
         electricity = CarbonModel.getInstance().getBill(position).getElectricity();
         gas = CarbonModel.getInstance().getBill(position).getGas();
         people = CarbonModel.getInstance().getBill(position).getPeople();
-        bill = new Bill (startDate,endDate,electricity,gas,people);
     }
 }

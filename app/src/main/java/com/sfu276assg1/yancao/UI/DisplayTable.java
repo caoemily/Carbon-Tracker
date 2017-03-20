@@ -103,6 +103,7 @@ public class DisplayTable extends AppCompatActivity {
             String dayEdited = String.format("%02d", day);
             String dateEdited = "" + year + "-" + monthEdited + "-" + dayEdited;
             CarbonModel.getInstance().getJourneyCollection().getJourney(position).setDate(dateEdited);
+            CarbonModel.getInstance().getDb().updateDateInJourney((position+1),dateEdited);
             getActivity().finish();
             startActivity(new Intent(getActivity(), DisplayTable.class));
         }
