@@ -1,4 +1,4 @@
-package com.sfu276assg1.yancao.UI;
+package com.sfu276assg1.yancao.carbontracker;
 
 public class JourneyInfoForListView {
     String journeyName;

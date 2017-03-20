@@ -1,4 +1,4 @@
-package com.sfu276assg1.yancao.UI;
+package com.sfu276assg1.yancao.carbontracker;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,14 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import com.sfu276assg1.yancao.carbontracker.R;
-
 import java.util.List;
-
-
-/**
- * Created by vu on 2017-03-16.
- */
 
 public class CustomArrayAdapter extends ArrayAdapter<JourneyInfoForListView> {
     private Context context;
