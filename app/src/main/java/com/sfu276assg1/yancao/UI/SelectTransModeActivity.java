@@ -67,19 +67,19 @@ public class SelectTransModeActivity extends AppCompatActivity {
                     switch (mode) {
                         case "Car": {
                             Intent intent = new Intent(SelectTransModeActivity.this, SelectCarActivity.class);
-                            intent.putExtra("TransMode", 0);
+                            intent.putExtra(getResources().getString(R.string.TRANS_MODE), 0);
                             startActivity(intent);
                             break;
                         }
                         case "Bike / Walk": {
                             Intent intent = new Intent(SelectTransModeActivity.this, SelectRouteActivity.class);
-                            intent.putExtra("TransMode", 2);
+                            intent.putExtra(getResources().getString(R.string.TRANS_MODE), 2);
                             startActivity(intent);
                             break;
                         }
                         case "Public Transit": {
                             Intent intent = new Intent(SelectTransModeActivity.this, SelectRouteActivity.class);
-                            intent.putExtra("TransMode", 1);
+                            intent.putExtra(getResources().getString(R.string.TRANS_MODE), 1);
                             startActivity(intent);
                             break;
                         }

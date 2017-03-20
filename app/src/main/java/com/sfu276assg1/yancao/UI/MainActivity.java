@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageButton;
 
+import com.sfu276assg1.yancao.carbontracker.Car;
 import com.sfu276assg1.yancao.carbontracker.CarbonModel;
 import com.sfu276assg1.yancao.carbontracker.DBAdapter;
 import com.sfu276assg1.yancao.carbontracker.R;
@@ -15,8 +16,6 @@ import com.sfu276assg1.yancao.carbontracker.R;
  */
 
 public class MainActivity extends AppCompatActivity {
-
-    public static DBAdapter db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,13 +30,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupDatabase() {
-        db = new DBAdapter(getApplicationContext());
+        DBAdapter db = new DBAdapter(getApplicationContext());
         db.open();
-        CarbonModel.getInstance().setJourneyCollection(db.getJourneyList());
-        CarbonModel.getInstance().setCarCollection(db.getCarList());
-        CarbonModel.getInstance().setRouteCollection(db.getRouteList());
-        CarbonModel.getInstance().setBusRouteCollection(db.getBusRouteList());
-        CarbonModel.getInstance().setWalkRouteCollection(db.getWalkRouteList());
+        CarbonModel.getInstance().setDb(db);
+        CarbonModel.getInstance().setJourneyCollection(CarbonModel.getInstance().getDb().getJourneyList());
+        CarbonModel.getInstance().setCarCollection(CarbonModel.getInstance().getDb().getCarList());
+        CarbonModel.getInstance().setRouteCollection(CarbonModel.getInstance().getDb().getRouteList());
+        CarbonModel.getInstance().setBusRouteCollection(CarbonModel.getInstance().getDb().getBusRouteList());
+        CarbonModel.getInstance().setWalkRouteCollection(CarbonModel.getInstance().getDb().getWalkRouteList());
     }
 
     private void setUpAddJourneytButton() {

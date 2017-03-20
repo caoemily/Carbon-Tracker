@@ -1,0 +1,5 @@
+<resources>
+    <integer name="DRIVE">0</integer>
+    <integer name="PUBLIC">1</integer>
+    <integer name="WALK">2</integer>
+</resources>

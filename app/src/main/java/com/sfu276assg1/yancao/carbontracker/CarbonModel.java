@@ -10,13 +10,10 @@ public class CarbonModel {
     private RouteCollection routeCollection;
     private RouteCollection busRouteCollection;
     private RouteCollection walkRouteCollection;
-
-
+    private DBAdapter db;
 
     private CarCollection carCollection;
-
     private CarFamily carFromFile;
-
     public static CarbonModel getInstance() {
         return ourInstance;
     }
@@ -29,6 +26,9 @@ public class CarbonModel {
         carCollection = new CarCollection();
         carFromFile = new CarFamily();
     }
+
+    public void setDb(DBAdapter db){this.db = db;}
+    public DBAdapter getDb(){return this.db;}
 
     public CarFamily getCarFromFile(){
         return carFromFile;
