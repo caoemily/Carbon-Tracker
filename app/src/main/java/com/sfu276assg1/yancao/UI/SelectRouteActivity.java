@@ -57,7 +57,7 @@ public class SelectRouteActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if(mode==0){
+        if(mode == 0){
             CarbonModel.getInstance().removeLastJourney();
             Intent intent = new Intent(SelectRouteActivity.this, SelectCarActivity.class);
             startActivity(intent);
@@ -132,7 +132,7 @@ public class SelectRouteActivity extends AppCompatActivity {
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.select_route_context_menu, menu);
+        inflater.inflate(R.menu.edit_delete_context_menu, menu);
     }
 
     @Override

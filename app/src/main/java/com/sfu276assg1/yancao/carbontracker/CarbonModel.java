@@ -14,6 +14,9 @@ public class CarbonModel {
 
     private CarCollection carCollection;
     private CarFamily carFromFile;
+
+    private BillCollection billCollection;
+
     public static CarbonModel getInstance() {
         return ourInstance;
     }
@@ -25,6 +28,7 @@ public class CarbonModel {
         walkRouteCollection = new RouteCollection();
         carCollection = new CarCollection();
         carFromFile = new CarFamily();
+        billCollection = new BillCollection();
     }
 
     public void setDb(DBAdapter db){this.db = db;}
@@ -54,6 +58,7 @@ public class CarbonModel {
     public void changeRouteInJourney(Route tempRoute, Route route) {
         journeyCollection.changeRoute(tempRoute, route);
     }
+    public void removeJourney(int index) {journeyCollection.remove(index);}
 
 
     public CarCollection getCarCollection(){
@@ -93,11 +98,13 @@ public class CarbonModel {
     public void addWalkRoute(Route route) {
         walkRouteCollection.addRoute(route);
     }
+
     public Route getRoute(int index) {
         return routeCollection.getRoute(index);
     }
     public Route getBusRoute(int index){return busRouteCollection.getRoute(index);}
     public Route getWalkRoute(int index){return walkRouteCollection.getRoute(index);}
+
     public void changeRoute(Route route, int indexOfChanging) {
         routeCollection.changeRoute(route, indexOfChanging);
     }
@@ -107,6 +114,7 @@ public class CarbonModel {
     public void changeWalkRoute(Route route, int indexOfChanging) {
         walkRouteCollection.changeRoute(route, indexOfChanging);
     }
+
     public void removeRoute(int index) {
         routeCollection.remove(index);
     }
@@ -117,6 +125,20 @@ public class CarbonModel {
         walkRouteCollection.remove(index);
     }
 
-    public void removeJourney(int index) {journeyCollection.remove(index);}
-
+    public BillCollection getBillCollection() {
+        return billCollection;
+    }
+    public void setBillCollection(BillCollection collection){this.billCollection = collection;}
+    public void addBill(Bill bill) {
+        billCollection.addBill(bill);
+    }
+    public Bill getBill(int index) {
+        return billCollection.getBill(index);
+    }
+    public void changeBill(Bill bill, int indexOfChanging) {
+        billCollection.changeBill(bill, indexOfChanging);
+    }
+    public void removeBill(int index) {
+        billCollection.remove(index);
+    }
 }

@@ -17,7 +17,9 @@ import android.widget.DatePicker;
 import android.widget.ListView;
 
 import com.sfu276assg1.yancao.carbontracker.CarbonModel;
+import com.sfu276assg1.yancao.carbontracker.CustomArrayAdapter;
 import com.sfu276assg1.yancao.carbontracker.JourneyCollection;
+import com.sfu276assg1.yancao.carbontracker.JourneyInfoForListView;
 import com.sfu276assg1.yancao.carbontracker.R;
 
 import java.util.ArrayList;

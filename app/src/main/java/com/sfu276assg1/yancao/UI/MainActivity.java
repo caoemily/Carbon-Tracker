@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 
 import com.sfu276assg1.yancao.carbontracker.Car;
@@ -27,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
         setUpAddJourneytButton();
         setUpShowTableButton();
         setUpShowChartButton();
+        setUpUtilitiesButton();
     }
 
     private void setupDatabase() {
@@ -70,6 +72,18 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, DisplayCarbonFootprintActivity.class);
                 startActivity(intent);
+            }
+        });
+    }
+
+    private void setUpUtilitiesButton() {
+        ImageButton button = (ImageButton) findViewById(R.id.utilitiesBtn);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, MonthlyUtilitiesActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
     }

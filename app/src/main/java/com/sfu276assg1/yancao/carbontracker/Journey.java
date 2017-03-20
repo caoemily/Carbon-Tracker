@@ -20,11 +20,6 @@ public class Journey implements Serializable {
         this.route = route;
     }
 
-    public Journey (Car car) {
-        this.date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
-        this.car = car;
-    }
-
     public Journey (Route route){
         this.date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
         this.route = route;

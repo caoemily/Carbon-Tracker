@@ -43,5 +43,10 @@
     <string name="here_is_a_list_of_car">Here is a list of car</string>
     <string name="date_for_your_journey">Date For Your Journey</string>
     <string name="select_transpotation_mode">Select Transpotation Mode</string>
+    <string name="date">Date</string>
+    <string name="people"># People</string>
+    <string name="electricity_gwh">Electricity (GWh)</string>
+    <string name="add_bill">Add Bill</string>
+    <string name="natural_gas_gj">Natural Gas (GJ)</string>
     <string name="TRANS_MODE">TransMode</string>
 </resources>

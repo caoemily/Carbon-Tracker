@@ -127,7 +127,7 @@ public class SelectCarActivity extends AppCompatActivity {
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.select_route_context_menu, menu);
+        inflater.inflate(R.menu.edit_delete_context_menu, menu);
     }
 
     @Override

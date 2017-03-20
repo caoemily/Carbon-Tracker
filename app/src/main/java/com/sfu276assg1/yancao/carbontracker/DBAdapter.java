@@ -1,9 +1,5 @@
 package com.sfu276assg1.yancao.carbontracker;
 
-/**
- * Created by yancao on 2017-03-17.
- */
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
