@@ -145,18 +145,15 @@ public class SelectRouteActivity extends AppCompatActivity {
             case R.id.delete:
                 switch(mode){
                     case 0:
-                        routeName = CarbonModel.getInstance().getRoute(info.position).getName();
-                        MainActivity.db.deleteRouteRow(routeName);
+                        MainActivity.db.deleteRouteRow(CarbonModel.getInstance().getRoute(info.position));
                         CarbonModel.getInstance().removeRoute(info.position);
                         break;
                     case 1:
-                        routeName = CarbonModel.getInstance().getBusRoute(info.position).getName();
-                        MainActivity.db.deleteBusRouteRow(routeName);
+                        MainActivity.db.deleteBusRouteRow(CarbonModel.getInstance().getBusRoute(info.position));
                         CarbonModel.getInstance().removeBusRoute(info.position);
                         break;
                     case 2:
-                        routeName = CarbonModel.getInstance().getWalkRoute(info.position).getName();
-                        MainActivity.db.deleteWalkRouteRow(routeName);
+                        MainActivity.db.deleteWalkRouteRow(CarbonModel.getInstance().getWalkRoute(info.position));
                         CarbonModel.getInstance().removeWalkRoute(info.position);
                         break;
                 }

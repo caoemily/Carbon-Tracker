@@ -35,6 +35,9 @@ public class MainActivity extends AppCompatActivity {
         db.open();
         CarbonModel.getInstance().setJourneyCollection(db.getJourneyList());
         CarbonModel.getInstance().setCarCollection(db.getCarList());
+        CarbonModel.getInstance().setRouteCollection(db.getRouteList());
+        CarbonModel.getInstance().setBusRouteCollection(db.getBusRouteList());
+        CarbonModel.getInstance().setWalkRouteCollection(db.getWalkRouteList());
     }
 
     private void setUpAddJourneytButton() {

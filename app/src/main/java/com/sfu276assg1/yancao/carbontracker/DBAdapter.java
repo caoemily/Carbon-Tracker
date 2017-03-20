@@ -40,6 +40,7 @@ public class DBAdapter {
     public static final String CAR_DISPLACEMENT = "displacement";
     public static final String CAR_FUELTYPE = "fueltype";
     public static final String CAR_DRIVE = "drive";
+    public static final String CAR_TRANS = "transmission";
 
     public static final String ROUTE_TYPE = "type";
     public static final String ROUTE_NAME = "rName";
@@ -60,7 +61,7 @@ public class DBAdapter {
     //private static final String TABLE_UTILITY = "utility";
 
     // Track DB version if a new version of your app changes the format.
-    public static final int DATABASE_VERSION = 6;
+    public static final int DATABASE_VERSION = 7;
 
     private static final String CREATE_TABLE_CAR = "CREATE TABLE "
             + TABLE_CAR + "(" + KEY_ROWID + " INTEGER PRIMARY KEY," +
@@ -73,6 +74,7 @@ public class DBAdapter {
             CAR_CYLINDER + " INT," +
             CAR_DISPLACEMENT + " DOUBLE," +
             CAR_FUELTYPE + " STRING," +
+            CAR_TRANS + " STRING," +
             CAR_DRIVE + " DOUBLE "+")";
 
     private static final String CREATE_TABLE_ROUTE = "CREATE TABLE "
@@ -110,6 +112,7 @@ public class DBAdapter {
             CAR_CYLINDER + " INT," +
             CAR_DISPLACEMENT + " DOUBLE," +
             CAR_FUELTYPE + " STRING," +
+            CAR_TRANS + " STRING," +
             CAR_DRIVE + " DOUBLE,"+
             ROUTE_TYPE + " STRING," +
             ROUTE_NAME + " STRING," +
@@ -158,7 +161,7 @@ public class DBAdapter {
         initialValues.put(CAR_DISPLACEMENT, car.getDisplacement());
         initialValues.put(CAR_DRIVE, car.getDrive());
         initialValues.put(CAR_FUELTYPE, car.getFuelType());
-        initialValues.put(CAR_DRIVE, car.getTransmission());
+        initialValues.put(CAR_TRANS, car.getTransmission());
 
         return db.insert(TABLE_CAR, null, initialValues);
     }
@@ -210,7 +213,7 @@ public class DBAdapter {
         initialValues.put(CAR_DISPLACEMENT, car.getDisplacement());
         initialValues.put(CAR_DRIVE, car.getDrive());
         initialValues.put(CAR_FUELTYPE, car.getFuelType());
-        initialValues.put(CAR_DRIVE, car.getTransmission());
+        initialValues.put(CAR_TRANS, car.getTransmission());
 
         initialValues.put(ROUTE_TYPE, route.getType());
         initialValues.put(ROUTE_NAME, route.getName());
@@ -222,82 +225,153 @@ public class DBAdapter {
     }
 
 
-    public void deleteCarRow(String s) {
-        db.delete(TABLE_CAR, CAR_NICKNAME + "= ?", new String[] { s });
+    public void deleteCarRow(Car car) {
+        String where = CAR_NICKNAME + "='" + car.getNickname() +
+                "'and "+ CAR_MAKE + "='" + car.getMake() +
+                "'and "+ CAR_MODEL + "='" + car.getModel() +
+                "'and "+ CAR_YEAR + "='" + car.getYear()+ "'";
+        db.delete(TABLE_CAR, where,null);
     }
 
-    public void deleteRouteRow(String s) {
-        db.delete(TABLE_ROUTE, ROUTE_NAME + "= ?", new String[] { s });
+    public void deleteRouteRow(Route route) {
+        String where = ROUTE_NAME + "='" + route.getName() +
+                "'and "+ ROUTE_TYPE + "='" + route.getType()+
+                "'and "+ ROUTE_DISTANCE + "='" + route.getDistance()+
+                "'and "+ ROUTE_LOWE + "='" + route.getLowEDis()+
+                "'and "+ ROUTE_HIGHE + "='" + route.getHighEDis() +"'";
+        db.delete(TABLE_ROUTE, where, null);
     }
 
-    public void deleteBusRouteRow(String s) {
-        db.delete(TABLE_BUSROUTE, ROUTE_NAME + "= ?", new String[] { s });
+    public void deleteBusRouteRow(Route route) {
+        String where = ROUTE_NAME + "='" + route.getName() +
+                "'and "+ ROUTE_TYPE + "='" + route.getType()+
+                "'and "+ ROUTE_DISTANCE + "='" + route.getDistance()+
+                "'and "+ ROUTE_LOWE + "='" + route.getLowEDis()+
+                "'and "+ ROUTE_HIGHE + "='" + route.getHighEDis() +"'";
+        db.delete(TABLE_BUSROUTE, where, null);
     }
 
-    public void deleteWalkRouteRow(String s) {
-        db.delete(TABLE_WALKROUTE, ROUTE_NAME + "= ?", new String[] { s });
+    public void deleteWalkRouteRow(Route route) {
+        String where = ROUTE_NAME + "='" + route.getName() +
+                "'and "+ ROUTE_TYPE + "='" + route.getType()+
+                "'and "+ ROUTE_DISTANCE + "='" + route.getDistance()+
+                "'and "+ ROUTE_LOWE + "='" + route.getLowEDis()+
+                "'and "+ ROUTE_HIGHE + "='" + route.getHighEDis() +"'";
+        db.delete(TABLE_WALKROUTE, where, null);
     }
 
     //DELETE JOURNEY
 
 
-    public void updateCarRow(String s, Car car){
-        String where = CAR_NICKNAME + "=" + s;
+    public void updateCarRow(Car oldCar, Car update){
+        String where = CAR_NICKNAME + "='" + oldCar.getNickname() +
+                "'and "+ CAR_MAKE + "='" + oldCar.getMake() +
+                "'and "+ CAR_MODEL + "='" + oldCar.getModel() +
+                "'and "+ CAR_YEAR + "='" + oldCar.getYear()+ "'";
         ContentValues updateCar = new ContentValues();
-        updateCar.put(CAR_NICKNAME, car.getNickname());
-        updateCar.put(CAR_MAKE, car.getMake());
-        updateCar.put(CAR_MODEL, car.getModel());
-        updateCar.put(CAR_YEAR, car.getYear());
-        updateCar.put(CAR_HIGHWAYE, car.getHighwayE());
-        updateCar.put(CAR_CITYE, car.getCityE());
-        updateCar.put(CAR_CYLINDER, car.getCylinders());
-        updateCar.put(CAR_DISPLACEMENT, car.getDisplacement());
-        updateCar.put(CAR_DRIVE, car.getDrive());
-        updateCar.put(CAR_FUELTYPE, car.getFuelType());
-        updateCar.put(CAR_DRIVE, car.getTransmission());
+        updateCar.put(CAR_NICKNAME, update.getNickname());
+        updateCar.put(CAR_MAKE, update.getMake());
+        updateCar.put(CAR_MODEL, update.getModel());
+        updateCar.put(CAR_YEAR, update.getYear());
+        updateCar.put(CAR_HIGHWAYE, update.getHighwayE());
+        updateCar.put(CAR_CITYE, update.getCityE());
+        updateCar.put(CAR_CYLINDER, update.getCylinders());
+        updateCar.put(CAR_DISPLACEMENT, update.getDisplacement());
+        updateCar.put(CAR_DRIVE, update.getDrive());
+        updateCar.put(CAR_FUELTYPE, update.getFuelType());
+        updateCar.put(CAR_DRIVE, update.getTransmission());
 
         // Insert it into the database.
         db.update(TABLE_CAR, updateCar, where, null);
     }
 
-    public void updateRouteRow(String s, Route route){
-        String where = ROUTE_NAME + "=" + s;
+    public void updateRouteRow(Route route, Route update){
+        String where = ROUTE_NAME + "='" + route.getName() +
+                "'and "+ ROUTE_TYPE + "='" + route.getType()+
+                "'and "+ ROUTE_DISTANCE + "='" + route.getDistance()+
+                "'and "+ ROUTE_LOWE + "='" + route.getLowEDis()+
+                "'and "+ ROUTE_HIGHE + "='" + route.getHighEDis() +"'";
+
         ContentValues updateRoute = new ContentValues();
-        updateRoute.put(ROUTE_TYPE, route.getType());
-        updateRoute.put(ROUTE_NAME, route.getName());
-        updateRoute.put(ROUTE_DISTANCE,route.getDistance());
-        updateRoute.put(ROUTE_LOWE, route.getLowEDis());
-        updateRoute.put(ROUTE_HIGHE, route.getHighEDis());
+        updateRoute.put(ROUTE_TYPE, update.getType());
+        updateRoute.put(ROUTE_NAME, update.getName());
+        updateRoute.put(ROUTE_DISTANCE,update.getDistance());
+        updateRoute.put(ROUTE_LOWE, update.getLowEDis());
+        updateRoute.put(ROUTE_HIGHE, update.getHighEDis());
 
         // Insert it into the database.
         db.update(TABLE_ROUTE, updateRoute, where, null);
     }
 
-    public void updateBusRouteRow(String s, Route route){
-        String where = ROUTE_NAME + "=" + s;
+    public void updateBusRouteRow(Route route, Route update){
+        String where = ROUTE_NAME + "='" + route.getName() +
+                "'and "+ ROUTE_TYPE + "='" + route.getType()+
+                "'and "+ ROUTE_DISTANCE + "='" + route.getDistance()+
+                "'and "+ ROUTE_LOWE + "='" + route.getLowEDis()+
+                "'and "+ ROUTE_HIGHE + "='" + route.getHighEDis() +"'";
         ContentValues updateRoute = new ContentValues();
-        updateRoute.put(ROUTE_TYPE, route.getType());
-        updateRoute.put(ROUTE_NAME, route.getName());
-        updateRoute.put(ROUTE_DISTANCE,route.getDistance());
-        updateRoute.put(ROUTE_LOWE, route.getLowEDis());
-        updateRoute.put(ROUTE_HIGHE, route.getHighEDis());
-
+        updateRoute.put(ROUTE_TYPE, update.getType());
+        updateRoute.put(ROUTE_NAME, update.getName());
+        updateRoute.put(ROUTE_DISTANCE,update.getDistance());
+        updateRoute.put(ROUTE_LOWE, update.getLowEDis());
+        updateRoute.put(ROUTE_HIGHE, update.getHighEDis());
         // Insert it into the database.
         db.update(TABLE_BUSROUTE, updateRoute, where, null);
     }
 
-    public void updateWalkRouteRow(String s, Route route){
-        String where = ROUTE_NAME + "=" + s;
+    public void updateWalkRouteRow(Route route, Route update){
+        String where = ROUTE_NAME + "='" + route.getName() +
+                "'and "+ ROUTE_TYPE + "='" + route.getType()+
+                "'and "+ ROUTE_DISTANCE + "='" + route.getDistance()+
+                "'and "+ ROUTE_LOWE + "='" + route.getLowEDis()+
+                "'and "+ ROUTE_HIGHE + "='" + route.getHighEDis() +"'";
         ContentValues updateRoute = new ContentValues();
-        updateRoute.put(ROUTE_TYPE, route.getType());
-        updateRoute.put(ROUTE_NAME, route.getName());
-        updateRoute.put(ROUTE_DISTANCE,route.getDistance());
-        updateRoute.put(ROUTE_LOWE, route.getLowEDis());
-        updateRoute.put(ROUTE_HIGHE, route.getHighEDis());
+        updateRoute.put(ROUTE_TYPE, update.getType());
+        updateRoute.put(ROUTE_NAME, update.getName());
+        updateRoute.put(ROUTE_DISTANCE,update.getDistance());
+        updateRoute.put(ROUTE_LOWE, update.getLowEDis());
+        updateRoute.put(ROUTE_HIGHE, update.getHighEDis());
 
         // Insert it into the database.
         db.update(TABLE_WALKROUTE, updateRoute, where, null);
     }
+
+    public void updateCarInJourney(Car oldCar, Car update){
+        String where = CAR_NICKNAME + "='" + oldCar.getNickname() +
+                "'and "+ CAR_MAKE + "='" + oldCar.getMake() +
+                "'and "+ CAR_MODEL + "='" + oldCar.getModel() +
+                "'and "+ CAR_YEAR + "='" + oldCar.getYear()+ "'";
+        ContentValues updateCar = new ContentValues();
+        updateCar.put(CAR_NICKNAME, update.getNickname());
+        updateCar.put(CAR_MAKE, update.getMake());
+        updateCar.put(CAR_MODEL, update.getModel());
+        updateCar.put(CAR_YEAR, update.getYear());
+        updateCar.put(CAR_HIGHWAYE, update.getHighwayE());
+        updateCar.put(CAR_CITYE, update.getCityE());
+        updateCar.put(CAR_CYLINDER, update.getCylinders());
+        updateCar.put(CAR_DISPLACEMENT, update.getDisplacement());
+        updateCar.put(CAR_DRIVE, update.getDrive());
+        updateCar.put(CAR_FUELTYPE, update.getFuelType());
+        updateCar.put(CAR_DRIVE, update.getTransmission());
+        db.update(TABLE_JOURNEY,updateCar,where,null);
+    }
+
+    public void updateRouteInJourney(Route oldRoute,Route update){
+        String where = ROUTE_NAME + "='" + oldRoute.getName() +
+                "'and "+ ROUTE_TYPE + "='" + oldRoute.getType()+
+                "'and "+ ROUTE_DISTANCE + "='" + oldRoute.getDistance()+
+                "'and "+ ROUTE_LOWE + "='" + oldRoute.getLowEDis()+
+                "'and "+ ROUTE_HIGHE + "='" + oldRoute.getHighEDis() +"'";
+        ContentValues updateRoute = new ContentValues();
+        updateRoute.put(ROUTE_TYPE, update.getType());
+        updateRoute.put(ROUTE_NAME, update.getName());
+        updateRoute.put(ROUTE_DISTANCE,update.getDistance());
+        updateRoute.put(ROUTE_LOWE, update.getLowEDis());
+        updateRoute.put(ROUTE_HIGHE, update.getHighEDis());
+
+        db.update(TABLE_JOURNEY, updateRoute, where, null);
+    }
+
 
     public CarCollection getCarList() {
         CarCollection carCollection = new CarCollection();
@@ -317,6 +391,7 @@ public class DBAdapter {
                 car.setDisplacement(c.getDouble(c.getColumnIndex(CAR_DISPLACEMENT)));
                 car.setFuelType(c.getString(c.getColumnIndex(CAR_FUELTYPE)));
                 car.setDrive(c.getString(c.getColumnIndex(CAR_DRIVE)));
+                car.setTransmission(c.getString(c.getColumnIndex(CAR_TRANS)));
 
                 carCollection.addCar(car);
             } while (c.moveToNext());
@@ -410,6 +485,7 @@ public class DBAdapter {
                 car.setDisplacement(c.getDouble(c.getColumnIndex(CAR_DISPLACEMENT)));
                 car.setFuelType(c.getString(c.getColumnIndex(CAR_FUELTYPE)));
                 car.setDrive(c.getString(c.getColumnIndex(CAR_DRIVE)));
+                car.setTransmission(c.getString(c.getColumnIndex(CAR_TRANS)));
                 Route route = new Route();
                 route.setName(c.getString(c.getColumnIndex(ROUTE_NAME)));
                 route.setType(c.getString(c.getColumnIndex(ROUTE_TYPE)));

@@ -207,8 +207,9 @@ public class AddCarActivity extends AppCompatActivity {
                     else {
                         String originalName = CarbonModel.getInstance().getCar(carChangePosition).getNickname();
                         CarbonModel.getInstance().changeCar(car, carChangePosition);
-                        MainActivity.db.updateCarRow(originalName,car);
-                        CarbonModel.getInstance().changeCarInJourney(tempCar, car);
+                        MainActivity.db.updateCarRow(tempCar,car);
+                        MainActivity.db.updateCarInJourney(tempCar,car);
+                        //CarbonModel.getInstance().changeCarInJourney(tempCar, car);
                         intent = new Intent(AddCarActivity.this, SelectCarActivity.class);
                     }
                     startActivity(intent);
@@ -220,12 +221,8 @@ public class AddCarActivity extends AppCompatActivity {
 
     private void extractDataFromIntent() {
         tempCar = new Car();
-        tempCar = CarbonModel.getInstance().getCar(carChangePosition);
         carChangePosition = getIntent().getIntExtra("carIndex", 0);
-        carName = CarbonModel.getInstance().getCar(carChangePosition).getNickname();
-        //make = CarbonModel.getInstance().getCar(position).getMake();
-        //model = CarbonModel.getInstance().getCar(position).getModel();
-        //year = CarbonModel.getInstance().getCar(position).getYear();
+        tempCar = CarbonModel.getInstance().getCar(carChangePosition);
     }
 }
 

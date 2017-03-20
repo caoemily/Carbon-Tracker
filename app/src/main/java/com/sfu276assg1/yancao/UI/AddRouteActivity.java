@@ -192,12 +192,12 @@ public class AddRouteActivity extends AppCompatActivity {
                         case 1:
                             CarbonModel.getInstance().addBusRoute(currentRoute);
                             MainActivity.db.insertBusRouteRow(currentRoute);
-//                            CarbonModel.getInstance().getJourneyCollection().addJourney(new Journey(currentRoute));
+                            CarbonModel.getInstance().getJourneyCollection().addJourney(new Journey(currentRoute));
                             break;
                         case 2:
                             CarbonModel.getInstance().addWalkRoute(currentRoute);
                             MainActivity.db.insertWalkRouteRow(currentRoute);
-//                            CarbonModel.getInstance().getJourneyCollection().addJourney(new Journey(currentRoute));
+                            CarbonModel.getInstance().getJourneyCollection().addJourney(new Journey(currentRoute));
                             break;
                     }
 
@@ -218,20 +218,20 @@ public class AddRouteActivity extends AppCompatActivity {
                         int index;
                         switch(mode){
                             case 0:
-                                MainActivity.db.updateRouteRow(tempRoute.getName(),currentRoute);
+                                MainActivity.db.updateRouteRow(tempRoute,currentRoute);
                                 CarbonModel.getInstance().changeRoute(currentRoute, routeChangePosition);
                                 break;
                             case 1:
-                                MainActivity.db.updateBusRouteRow(tempRoute.getName(),currentRoute);
+                                MainActivity.db.updateBusRouteRow(tempRoute,currentRoute);
                                 CarbonModel.getInstance().changeBusRoute(currentRoute, routeChangePosition);
                                 break;
                             case 2:
-                                MainActivity.db.updateWalkRouteRow(tempRoute.getName(),currentRoute);
+                                MainActivity.db.updateWalkRouteRow(tempRoute,currentRoute);
                                 CarbonModel.getInstance().changeWalkRoute(currentRoute, routeChangePosition);
                                 break;
                         }
                         CarbonModel.getInstance().changeRouteInJourney(tempRoute, currentRoute);
-                        //update database for journeyCollection
+                        MainActivity.db.updateRouteInJourney(tempRoute,currentRoute);
 
                         intent = new Intent(AddRouteActivity.this, SelectRouteActivity.class);
                         intent.putExtra("TransMode",mode);
