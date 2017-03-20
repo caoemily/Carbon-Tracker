@@ -95,4 +95,14 @@
         app:srcCompat="@drawable/car"
         android:layout_marginLeft="200dp" />
 
+    <Button
+        android:id="@+id/utilitiesBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/showChartBtn"
+        android:layout_alignStart="@+id/showChartBtn"
+        android:layout_below="@+id/addJourneyBtn"
+        android:text="Utilities"
+        android:textAllCaps="false" />
+
 </RelativeLayout>
