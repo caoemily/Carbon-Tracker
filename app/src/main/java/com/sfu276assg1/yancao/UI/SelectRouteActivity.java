@@ -35,7 +35,7 @@ public class SelectRouteActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_route);
 
-        mode = getIntent().getIntExtra("TransMode", 0);
+        mode = getIntent().getIntExtra(getResources().getString(R.string.TRANS_MODE), 0);
         list = (ListView) findViewById(R.id.listView_routeList);
         registerForContextMenu(list);
         setLaunchNewRoute();
@@ -109,7 +109,7 @@ public class SelectRouteActivity extends AppCompatActivity {
                         CarbonModel.getInstance().getJourneyCollection().addJourney(new Journey(route));
                         break;
                 }
-                MainActivity.db.insertRowJourney(CarbonModel.getInstance().getLastJourney());
+                CarbonModel.getInstance().getDb().insertRowJourney(CarbonModel.getInstance().getLastJourney());
                 showCurrentJouney();
                 startActivity(new Intent(getApplicationContext(),MainActivity.class));
                 finish();
@@ -123,7 +123,7 @@ public class SelectRouteActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), AddRouteActivity.class);
-                intent.putExtra("TransMode", mode);
+                intent.putExtra(getResources().getString(R.string.TRANS_MODE), mode);
                 startActivity(intent);
                 finish();
             }
@@ -145,18 +145,15 @@ public class SelectRouteActivity extends AppCompatActivity {
             case R.id.delete:
                 switch(mode){
                     case 0:
-                        routeName = CarbonModel.getInstance().getRoute(info.position).getName();
-                        MainActivity.db.deleteRouteRow(routeName);
+                        CarbonModel.getInstance().getDb().deleteRouteRow(CarbonModel.getInstance().getRoute(info.position));
                         CarbonModel.getInstance().removeRoute(info.position);
                         break;
                     case 1:
-                        routeName = CarbonModel.getInstance().getBusRoute(info.position).getName();
-                        MainActivity.db.deleteBusRouteRow(routeName);
+                        CarbonModel.getInstance().getDb().deleteBusRouteRow(CarbonModel.getInstance().getBusRoute(info.position));
                         CarbonModel.getInstance().removeBusRoute(info.position);
                         break;
                     case 2:
-                        routeName = CarbonModel.getInstance().getWalkRoute(info.position).getName();
-                        MainActivity.db.deleteWalkRouteRow(routeName);
+                        CarbonModel.getInstance().getDb().deleteWalkRouteRow(CarbonModel.getInstance().getWalkRoute(info.position));
                         CarbonModel.getInstance().removeWalkRoute(info.position);
                         break;
                 }
@@ -166,7 +163,7 @@ public class SelectRouteActivity extends AppCompatActivity {
             case R.id.edit:
                 Intent intent = new Intent(getApplicationContext(), AddRouteActivity.class);
                 intent.putExtra("routeIndex", info.position);
-                intent.putExtra("TransMode", mode);
+                intent.putExtra(getResources().getString(R.string.TRANS_MODE), mode);
                 startActivity(intent);
                 finish();
             default:

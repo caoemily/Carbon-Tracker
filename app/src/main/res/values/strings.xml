@@ -43,4 +43,5 @@
     <string name="here_is_a_list_of_car">Here is a list of car</string>
     <string name="date_for_your_journey">Date For Your Journey</string>
     <string name="select_transpotation_mode">Select Transpotation Mode</string>
+    <string name="TRANS_MODE">TransMode</string>
 </resources>

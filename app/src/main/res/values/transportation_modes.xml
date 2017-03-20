@@ -2,8 +2,8 @@
 <resources>
     <string-array name = "transportations">
         <item>"Car"</item>
-        <item>"Bike / Walk"</item>
         <item>"Public Transit"</item>
+        <item>"Bike / Walk"</item>
     </string-array>
 </resources>
 

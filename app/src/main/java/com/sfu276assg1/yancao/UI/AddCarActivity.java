@@ -200,15 +200,16 @@ public class AddCarActivity extends AppCompatActivity {
                     Intent intent;
                     if(getIntent().getExtras() == null) {
                         CarbonModel.getInstance().addCar(car);
-                        MainActivity.db.insertCarRow(car);
+                        CarbonModel.getInstance().getDb().insertCarRow(car);
                         CarbonModel.getInstance().getLastJourney().setCar(car);
                         intent = new Intent(AddCarActivity.this, SelectRouteActivity.class);
                     }
                     else {
                         String originalName = CarbonModel.getInstance().getCar(carChangePosition).getNickname();
                         CarbonModel.getInstance().changeCar(car, carChangePosition);
-                        MainActivity.db.updateCarRow(originalName,car);
-                        CarbonModel.getInstance().changeCarInJourney(tempCar, car);
+                        CarbonModel.getInstance().getDb().updateCarRow(tempCar,car);
+                        CarbonModel.getInstance().getDb().updateCarInJourney(tempCar,car);
+                        //CarbonModel.getInstance().changeCarInJourney(tempCar, car);
                         intent = new Intent(AddCarActivity.this, SelectCarActivity.class);
                     }
                     startActivity(intent);
@@ -220,12 +221,8 @@ public class AddCarActivity extends AppCompatActivity {
 
     private void extractDataFromIntent() {
         tempCar = new Car();
-        tempCar = CarbonModel.getInstance().getCar(carChangePosition);
         carChangePosition = getIntent().getIntExtra("carIndex", 0);
-        carName = CarbonModel.getInstance().getCar(carChangePosition).getNickname();
-        //make = CarbonModel.getInstance().getCar(position).getMake();
-        //model = CarbonModel.getInstance().getCar(position).getModel();
-        //year = CarbonModel.getInstance().getCar(position).getYear();
+        tempCar = CarbonModel.getInstance().getCar(carChangePosition);
     }
 }
 

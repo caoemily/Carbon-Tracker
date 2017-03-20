@@ -32,7 +32,7 @@ public class AddRouteActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_route);
-        mode = getIntent().getIntExtra("TransMode",0);
+        mode = getIntent().getIntExtra(getResources().getString(R.string.TRANS_MODE),0);
         setIndividualDis();
         setTotalDistance();
         setRouteName();
@@ -43,7 +43,7 @@ public class AddRouteActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         Intent intent = new Intent(AddRouteActivity.this, SelectRouteActivity.class);
-        intent.putExtra("TransMode",mode);
+        intent.putExtra(getResources().getString(R.string.TRANS_MODE),mode);
         startActivity(intent);
         finish();
     }
@@ -186,22 +186,22 @@ public class AddRouteActivity extends AppCompatActivity {
                     switch(mode){
                         case 0:
                             CarbonModel.getInstance().addRoute(currentRoute);
-                            MainActivity.db.insertRouteRow(currentRoute);
+                            CarbonModel.getInstance().getDb().insertRouteRow(currentRoute);
                             CarbonModel.getInstance().getLastJourney().setRoute(currentRoute);
                             break;
                         case 1:
                             CarbonModel.getInstance().addBusRoute(currentRoute);
-                            MainActivity.db.insertBusRouteRow(currentRoute);
-//                            CarbonModel.getInstance().getJourneyCollection().addJourney(new Journey(currentRoute));
+                            CarbonModel.getInstance().getDb().insertBusRouteRow(currentRoute);
+                            CarbonModel.getInstance().getJourneyCollection().addJourney(new Journey(currentRoute));
                             break;
                         case 2:
                             CarbonModel.getInstance().addWalkRoute(currentRoute);
-                            MainActivity.db.insertWalkRouteRow(currentRoute);
-//                            CarbonModel.getInstance().getJourneyCollection().addJourney(new Journey(currentRoute));
+                            CarbonModel.getInstance().getDb().insertWalkRouteRow(currentRoute);
+                            CarbonModel.getInstance().getJourneyCollection().addJourney(new Journey(currentRoute));
                             break;
                     }
 
-                    MainActivity.db.insertRowJourney(CarbonModel.getInstance().getLastJourney());
+                    CarbonModel.getInstance().getDb().insertRowJourney(CarbonModel.getInstance().getLastJourney());
                     intent = new Intent(AddRouteActivity.this, MainActivity.class);
                     startActivity(intent);
                     finish();
@@ -218,23 +218,23 @@ public class AddRouteActivity extends AppCompatActivity {
                         int index;
                         switch(mode){
                             case 0:
-                                MainActivity.db.updateRouteRow(tempRoute.getName(),currentRoute);
+                                CarbonModel.getInstance().getDb().updateRouteRow(tempRoute,currentRoute);
                                 CarbonModel.getInstance().changeRoute(currentRoute, routeChangePosition);
                                 break;
                             case 1:
-                                MainActivity.db.updateBusRouteRow(tempRoute.getName(),currentRoute);
+                                CarbonModel.getInstance().getDb().updateBusRouteRow(tempRoute,currentRoute);
                                 CarbonModel.getInstance().changeBusRoute(currentRoute, routeChangePosition);
                                 break;
                             case 2:
-                                MainActivity.db.updateWalkRouteRow(tempRoute.getName(),currentRoute);
+                                CarbonModel.getInstance().getDb().updateWalkRouteRow(tempRoute,currentRoute);
                                 CarbonModel.getInstance().changeWalkRoute(currentRoute, routeChangePosition);
                                 break;
                         }
-                        CarbonModel.getInstance().changeRouteInJourney(tempRoute, currentRoute);
-                        //update database for journeyCollection
+                        //CarbonModel.getInstance().changeRouteInJourney(tempRoute, currentRoute);
+                        CarbonModel.getInstance().getDb().updateRouteInJourney(tempRoute,currentRoute);
 
                         intent = new Intent(AddRouteActivity.this, SelectRouteActivity.class);
-                        intent.putExtra("TransMode",mode);
+                        intent.putExtra(getResources().getString(R.string.TRANS_MODE),mode);
                         startActivity(intent);
                         finish();
                     }
