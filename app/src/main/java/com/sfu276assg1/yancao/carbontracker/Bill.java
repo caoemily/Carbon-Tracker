@@ -18,6 +18,13 @@ public class Bill {
         this.gas = gas;
         this.people = people;
     }
+    public Bill(){
+        this.startDate = " ";
+        this.endDate = " ";
+        this.electricity = 0;
+        this.gas = 0;
+        this.people = 0;
+    }
 
     public String getStartDate() {
         return startDate;

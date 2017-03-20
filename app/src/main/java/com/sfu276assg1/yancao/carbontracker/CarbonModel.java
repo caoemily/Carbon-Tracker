@@ -88,7 +88,6 @@ public class CarbonModel {
         return walkRouteCollection;
     }
     public void setWalkRouteCollection(RouteCollection collection){this.walkRouteCollection = collection;}
-
     public void addRoute(Route route) {
         routeCollection.addRoute(route);
     }
@@ -98,23 +97,14 @@ public class CarbonModel {
     public void addWalkRoute(Route route) {
         walkRouteCollection.addRoute(route);
     }
-
     public Route getRoute(int index) {
         return routeCollection.getRoute(index);
     }
     public Route getBusRoute(int index){return busRouteCollection.getRoute(index);}
     public Route getWalkRoute(int index){return walkRouteCollection.getRoute(index);}
-
-    public void changeRoute(Route route, int indexOfChanging) {
-        routeCollection.changeRoute(route, indexOfChanging);
-    }
-    public void changeBusRoute(Route route, int indexOfChanging) {
-        busRouteCollection.changeRoute(route, indexOfChanging);
-    }
-    public void changeWalkRoute(Route route, int indexOfChanging) {
-        walkRouteCollection.changeRoute(route, indexOfChanging);
-    }
-
+    public void changeRoute(Route route, int indexOfChanging) {routeCollection.changeRoute(route, indexOfChanging);}
+    public void changeBusRoute(Route route, int indexOfChanging) {busRouteCollection.changeRoute(route, indexOfChanging);}
+    public void changeWalkRoute(Route route, int indexOfChanging) {walkRouteCollection.changeRoute(route, indexOfChanging);}
     public void removeRoute(int index) {
         routeCollection.remove(index);
     }

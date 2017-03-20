@@ -8,25 +8,18 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 
-// TO USE:
-// Change the package (at top) to match your project.
-// Search for "TODO", and make the appropriate changes.
 public class DBAdapter {
 
-    /////////////////////////////////////////////////////////////////////
-    //	Constants & Data
-    /////////////////////////////////////////////////////////////////////
     // For logging:
     private static final String TAG = "DBAdapter";
 
     // DB Fields
     public static final String KEY_ROWID = "_id";
     // Track DB version if a new version of your app changes the format.
-    public static final int DATABASE_VERSION = 10;
-    /*
-     * CHANGE 1:
-     */
-    // TODO: Setup your fields here:
+    public static final int DATABASE_VERSION = 11;
+
+
+    public static final String JOURNEY_DATE = "date";
     public static final String CAR_NICKNAME = "cName";
     public static final String CAR_MAKE = "make";
     public static final String CAR_MODEL = "model";
@@ -45,22 +38,21 @@ public class DBAdapter {
     public static final String ROUTE_LOWE = "lowEDis";
     public static final String ROUTE_HIGHE = "highEDis";
 
-    public static final String JOURNEY_DATE = "date";
+    public static final String BILL_STARTDATE = "startDate";
+    public static final String BILL_ENDDATE = "endDate";
+    public static final String BILL_ELECTRICITY = "electricity";
+    public static final String BILL_GAS = "gas";
+    public static final String BILL_PEOPLENUM = "peopleNum";
 
-
-    //public static final String[] ALL_KEYS = new String[] {KEY_ROWID, ROUTE_TYPE, ROUTE_NAME, ROUTE_DISTANCE, ROUTE_LOWE, ROUTE_HIGHE};
-
-    // DB info: it's name, and the table we are using (just one).
     public static final String DATABASE_NAME = "MyDb";
     private static final String TABLE_CAR = "car";
     private static final String TABLE_ROUTE = "route";
     private static final String TABLE_BUSROUTE = "busroute";
     private static final String TABLE_WALKROUTE = "walkroute";
     private static final String TABLE_JOURNEY = "journey";
-    //private static final String TABLE_UTILITY = "utility";
+    private static final String TABLE_BILL = "bill";
 
-
-
+    //create tables
     private static final String CREATE_TABLE_CAR = "CREATE TABLE "
             + TABLE_CAR + "(" + KEY_ROWID + " INTEGER PRIMARY KEY," +
             CAR_NICKNAME + " STRING," +
@@ -119,7 +111,13 @@ public class DBAdapter {
             ROUTE_LOWE + " DOUBLE," +
             ROUTE_HIGHE + " DOUBLE" +")";
 
-    //UTILITY TABLE
+    private static final String CREATE_TABLE_BILL = "CREATE TABLE "
+            + TABLE_BILL + "(" + KEY_ROWID + " INTEGER PRIMARY KEY," +
+            BILL_STARTDATE + " STRING," +
+            BILL_ENDDATE + " STRING," +
+            BILL_ELECTRICITY + " DOUBLE," +
+            BILL_GAS + " DOUBLE, "+
+            BILL_PEOPLENUM + " INT "+")";
 
     // Context of application who uses us.
     private final Context context;
@@ -127,27 +125,20 @@ public class DBAdapter {
     private DatabaseHelper myDBHelper;
     private SQLiteDatabase db;
 
-    /////////////////////////////////////////////////////////////////////
-    //	Public methods:
-    /////////////////////////////////////////////////////////////////////
-
     public DBAdapter(Context ctx) {
         this.context = ctx;
         myDBHelper = new DatabaseHelper(context);
     }
 
-    // Open the database connection.
     public DBAdapter open() {
         db = myDBHelper.getWritableDatabase();
         return this;
     }
-
-    // Close the database connection.
     public void close() {
         myDBHelper.close();
     }
 
-    // Add a new set of values to the database.
+    //insert rows
     public long insertCarRow(Car car) {
         ContentValues initialValues = new ContentValues();
         initialValues.put(CAR_NICKNAME, car.getNickname());
@@ -161,7 +152,6 @@ public class DBAdapter {
         initialValues.put(CAR_DRIVE, car.getDrive());
         initialValues.put(CAR_FUELTYPE, car.getFuelType());
         initialValues.put(CAR_TRANS, car.getTransmission());
-
         return db.insert(TABLE_CAR, null, initialValues);
     }
 
@@ -172,7 +162,6 @@ public class DBAdapter {
         initialValues.put(ROUTE_DISTANCE, route.getDistance());
         initialValues.put(ROUTE_LOWE, route.getLowEDis());
         initialValues.put(ROUTE_HIGHE, route.getHighEDis());
-
         return db.insert(TABLE_ROUTE, null, initialValues);
     }
 
@@ -183,7 +172,6 @@ public class DBAdapter {
         initialValues.put(ROUTE_DISTANCE, route.getDistance());
         initialValues.put(ROUTE_LOWE, route.getLowEDis());
         initialValues.put(ROUTE_HIGHE, route.getHighEDis());
-
         return db.insert(TABLE_BUSROUTE, null, initialValues);
     }
 
@@ -194,7 +182,6 @@ public class DBAdapter {
         initialValues.put(ROUTE_DISTANCE, route.getDistance());
         initialValues.put(ROUTE_LOWE, route.getLowEDis());
         initialValues.put(ROUTE_HIGHE, route.getHighEDis());
-
         return db.insert(TABLE_WALKROUTE, null, initialValues);
     }
 
@@ -214,17 +201,25 @@ public class DBAdapter {
         initialValues.put(CAR_DRIVE, car.getDrive());
         initialValues.put(CAR_FUELTYPE, car.getFuelType());
         initialValues.put(CAR_TRANS, car.getTransmission());
-
         initialValues.put(ROUTE_TYPE, route.getType());
         initialValues.put(ROUTE_NAME, route.getName());
         initialValues.put(ROUTE_DISTANCE, route.getDistance());
         initialValues.put(ROUTE_LOWE, route.getLowEDis());
         initialValues.put(ROUTE_HIGHE, route.getHighEDis());
-
         return db.insert(TABLE_JOURNEY, null, initialValues);
     }
 
+    public long insertBillRow(Bill bill) {
+        ContentValues initialValues = new ContentValues();
+        initialValues.put(BILL_STARTDATE, bill.getStartDate());
+        initialValues.put(BILL_ENDDATE, bill.getEndDate());
+        initialValues.put(BILL_ELECTRICITY, bill.getElectricity());
+        initialValues.put(BILL_GAS, bill.getGas());
+        initialValues.put(BILL_PEOPLENUM, bill.getPeople());
+        return db.insert(TABLE_BILL, null, initialValues);
+    }
 
+    //delete rows
     public void deleteCarRow(int index) {
         String where = KEY_ROWID + "='" + index +"'";
         db.delete(TABLE_CAR, where,null);
@@ -250,7 +245,12 @@ public class DBAdapter {
         db.delete(TABLE_JOURNEY,where,null);
     }
 
+    public void deleteBillRow (int index) {
+        String where = KEY_ROWID + "='" + index +"'";
+        db.delete(TABLE_BILL,where,null);
+    }
 
+    //update rows (for editing car/route)
     public void updateCarRow(Car oldCar, Car update){
         String where = CAR_NICKNAME + "='" + oldCar.getNickname() +
                 "'and "+ CAR_MAKE + "='" + oldCar.getMake() +
@@ -268,8 +268,6 @@ public class DBAdapter {
         updateCar.put(CAR_DRIVE, update.getDrive());
         updateCar.put(CAR_FUELTYPE, update.getFuelType());
         updateCar.put(CAR_DRIVE, update.getTransmission());
-
-        // Insert it into the database.
         db.update(TABLE_CAR, updateCar, where, null);
     }
 
@@ -286,8 +284,6 @@ public class DBAdapter {
         updateRoute.put(ROUTE_DISTANCE,update.getDistance());
         updateRoute.put(ROUTE_LOWE, update.getLowEDis());
         updateRoute.put(ROUTE_HIGHE, update.getHighEDis());
-
-        // Insert it into the database.
         db.update(TABLE_ROUTE, updateRoute, where, null);
     }
 
@@ -303,7 +299,6 @@ public class DBAdapter {
         updateRoute.put(ROUTE_DISTANCE,update.getDistance());
         updateRoute.put(ROUTE_LOWE, update.getLowEDis());
         updateRoute.put(ROUTE_HIGHE, update.getHighEDis());
-        // Insert it into the database.
         db.update(TABLE_BUSROUTE, updateRoute, where, null);
     }
 
@@ -319,8 +314,6 @@ public class DBAdapter {
         updateRoute.put(ROUTE_DISTANCE,update.getDistance());
         updateRoute.put(ROUTE_LOWE, update.getLowEDis());
         updateRoute.put(ROUTE_HIGHE, update.getHighEDis());
-
-        // Insert it into the database.
         db.update(TABLE_WALKROUTE, updateRoute, where, null);
     }
 
@@ -356,16 +349,25 @@ public class DBAdapter {
         updateRoute.put(ROUTE_DISTANCE,update.getDistance());
         updateRoute.put(ROUTE_LOWE, update.getLowEDis());
         updateRoute.put(ROUTE_HIGHE, update.getHighEDis());
-
         db.update(TABLE_JOURNEY, updateRoute, where, null);
     }
 
+    public void updateBillRow(int index, Bill update){
+        String where = KEY_ROWID + "='" + index +"'";
+        ContentValues updateRoute = new ContentValues();
+        updateRoute.put(BILL_STARTDATE, update.getStartDate());
+        updateRoute.put(BILL_ENDDATE, update.getEndDate());
+        updateRoute.put(BILL_ELECTRICITY,update.getElectricity());
+        updateRoute.put(BILL_GAS, update.getGas());
+        updateRoute.put(BILL_PEOPLENUM, update.getPeople());
+        db.update(TABLE_BILL, updateRoute, where, null);
+    }
 
+    //get Lists for populate listview
     public CarCollection getCarList() {
         CarCollection carCollection = new CarCollection();
         String selectQuery = "SELECT  * FROM " + TABLE_CAR;
         Cursor c = db.rawQuery(selectQuery, null);
-        // return all cars in ListView
         if (c.moveToFirst()) {
             do {
                 Car car = new Car();
@@ -393,8 +395,6 @@ public class DBAdapter {
         RouteCollection routeCollection = new RouteCollection();
         String selectQuery = "SELECT  * FROM " + TABLE_ROUTE;
         Cursor c = db.rawQuery(selectQuery, null);
-
-        // looping through all rows and adding to list
         if (c.moveToFirst()) {
             do {
                 Route route = new Route();
@@ -415,8 +415,6 @@ public class DBAdapter {
         RouteCollection routeCollection = new RouteCollection();
         String selectQuery = "SELECT  * FROM " + TABLE_BUSROUTE;
         Cursor c = db.rawQuery(selectQuery, null);
-
-        // looping through all rows and adding to list
         if (c.moveToFirst()) {
             do {
                 Route route = new Route();
@@ -437,8 +435,6 @@ public class DBAdapter {
         RouteCollection routeCollection = new RouteCollection();
         String selectQuery = "SELECT  * FROM " + TABLE_WALKROUTE;
         Cursor c = db.rawQuery(selectQuery, null);
-
-        // looping through all rows and adding to list
         if (c.moveToFirst()) {
             do {
                 Route route = new Route();
@@ -459,7 +455,6 @@ public class DBAdapter {
         JourneyCollection journeyCollection = new JourneyCollection();
         String selectQuery = "SELECT  * FROM " + TABLE_JOURNEY;
         Cursor c = db.rawQuery(selectQuery, null);
-        // return all cars in ListView
         if (c.moveToFirst()) {
             do {
                 String date = c.getString(c.getColumnIndex(JOURNEY_DATE));
@@ -492,6 +487,27 @@ public class DBAdapter {
         return journeyCollection;
     }
 
+    public BillCollection getBillList() {
+        BillCollection billCollection = new BillCollection();
+        String selectQuery = "SELECT  * FROM " + TABLE_BILL;
+        Cursor c = db.rawQuery(selectQuery, null);
+        if (c.moveToFirst()) {
+            do {
+                Bill bill = new Bill();
+                bill.setStartDate(c.getString(c.getColumnIndex(BILL_STARTDATE)));
+                bill.setEndDate(c.getString(c.getColumnIndex(BILL_ENDDATE)));
+                bill.setElectricity(c.getDouble(c.getColumnIndex(BILL_ELECTRICITY)));
+                bill.setGas(c.getDouble(c.getColumnIndex(BILL_GAS)));
+                bill.setPeople(c.getInt(c.getColumnIndex(BILL_PEOPLENUM)));
+                billCollection.addBill(bill);
+            } while (c.moveToNext());
+        }
+        c.close();
+        return billCollection;
+    }
+
+
+
     /////////////////////////////////////////////////////////////////////
     //	Private Helper Classes:
     /////////////////////////////////////////////////////////////////////
@@ -513,6 +529,7 @@ public class DBAdapter {
             _db.execSQL(CREATE_TABLE_BUSROUTE);
             _db.execSQL(CREATE_TABLE_WALKROUTE);
             _db.execSQL(CREATE_TABLE_JOURNEY);
+            _db.execSQL(CREATE_TABLE_BILL);
         }
 
         @Override
@@ -526,6 +543,7 @@ public class DBAdapter {
             _db.execSQL("DROP TABLE IF EXISTS " + TABLE_BUSROUTE);
             _db.execSQL("DROP TABLE IF EXISTS " + TABLE_WALKROUTE);
             _db.execSQL("DROP TABLE IF EXISTS " + TABLE_JOURNEY);
+            _db.execSQL("DROP TABLE IF EXISTS " + TABLE_BILL);
 
             // Recreate new database:
             onCreate(_db);
