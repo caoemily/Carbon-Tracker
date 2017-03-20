@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setUpUtilitiesButton() {
-        Button button = (Button) findViewById(R.id.utilitiesBtn);
+        ImageButton button = (ImageButton) findViewById(R.id.utilitiesBtn);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

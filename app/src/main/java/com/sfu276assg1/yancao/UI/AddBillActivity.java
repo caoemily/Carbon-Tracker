@@ -26,6 +26,11 @@ public class AddBillActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_bill);
 
+        if( getIntent().getExtras() != null)
+        {
+            extractDataFromIntent();
+        }
+
         setDate();
         setConsumption();
         setPeople();
@@ -197,7 +202,7 @@ public class AddBillActivity extends AppCompatActivity {
                 else if (people == 0) {
                     Toast.makeText(getApplicationContext(), "Please enter the number of people in the house", Toast.LENGTH_SHORT).show();
                 }
-                else if (electricity == 0 || gas == 0) {
+                else if (electricity == 0 && gas == 0) {
                     Toast.makeText(getApplicationContext(), "Please enter the consumptions", Toast.LENGTH_SHORT).show();
                 }
                 else {

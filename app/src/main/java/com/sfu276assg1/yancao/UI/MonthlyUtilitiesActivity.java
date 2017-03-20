@@ -106,7 +106,7 @@ public class MonthlyUtilitiesActivity extends AppCompatActivity {
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
         switch (item.getItemId()) {
             case R.id.delete:
-                CarbonModel.getInstance().removeCar(info.position);
+                CarbonModel.getInstance().removeBill(info.position);
                 adapter.notifyDataSetChanged();
                 populateListView();
                 return true;
