@@ -48,6 +48,8 @@ public class DBAdapter {
     public static final String ROUTE_LOWE = "lowEDis";
     public static final String ROUTE_HIGHE = "highEDis";
 
+    public static final String JOURNEY_DATE = "date";
+
 
     //public static final String[] ALL_KEYS = new String[] {KEY_ROWID, ROUTE_TYPE, ROUTE_NAME, ROUTE_DISTANCE, ROUTE_LOWE, ROUTE_HIGHE};
 
@@ -61,7 +63,7 @@ public class DBAdapter {
     //private static final String TABLE_UTILITY = "utility";
 
     // Track DB version if a new version of your app changes the format.
-    public static final int DATABASE_VERSION = 7;
+    public static final int DATABASE_VERSION = 9;
 
     private static final String CREATE_TABLE_CAR = "CREATE TABLE "
             + TABLE_CAR + "(" + KEY_ROWID + " INTEGER PRIMARY KEY," +
@@ -103,6 +105,7 @@ public class DBAdapter {
 
     private static final String CREATE_TABLE_JOURNEY = "CREATE TABLE "
             + TABLE_JOURNEY + "(" + KEY_ROWID + " INTEGER PRIMARY KEY," +
+            JOURNEY_DATE + " STRING," +
             CAR_NICKNAME + " STRING," +
             CAR_MAKE + " STRING," +
             CAR_MODEL + " STRING,"+
@@ -203,6 +206,7 @@ public class DBAdapter {
         ContentValues initialValues = new ContentValues();
         Car car = journey.getCar();
         Route route = journey.getRoute();
+        initialValues.put(JOURNEY_DATE,journey.getDate());
         initialValues.put(CAR_NICKNAME, car.getNickname());
         initialValues.put(CAR_MAKE, car.getMake());
         initialValues.put(CAR_MODEL, car.getModel());
@@ -474,6 +478,7 @@ public class DBAdapter {
         // return all cars in ListView
         if (c.moveToFirst()) {
             do {
+                String date = c.getString(c.getColumnIndex(JOURNEY_DATE));
                 Car car = new Car();
                 car.setNickname(c.getString(c.getColumnIndex(CAR_NICKNAME)));
                 car.setMake(c.getString(c.getColumnIndex(CAR_MAKE)));
@@ -492,7 +497,10 @@ public class DBAdapter {
                 route.setLowEDis(c.getDouble(c.getColumnIndex(ROUTE_LOWE)));
                 route.setHighEDis(c.getDouble(c.getColumnIndex(ROUTE_HIGHE)));
                 route.setDistance(c.getDouble(c.getColumnIndex(ROUTE_DISTANCE)));
-                journeyCollection.addJourney(new Journey(car,route));
+
+                Journey journey = new Journey(car,route);
+                journey.setDate(date);
+                journeyCollection.addJourney(journey);
 
             } while (c.moveToNext());
         }

@@ -205,7 +205,7 @@ public class AddCarActivity extends AppCompatActivity {
                         intent = new Intent(AddCarActivity.this, SelectRouteActivity.class);
                     }
                     else {
-                        String originalName = CarbonModel.getInstance().getCar(carChangePosition).getNickname();
+                        //String originalName = CarbonModel.getInstance().getCar(carChangePosition).getNickname();
                         CarbonModel.getInstance().changeCar(car, carChangePosition);
                         CarbonModel.getInstance().getDb().updateCarRow(tempCar,car);
                         CarbonModel.getInstance().getDb().updateCarInJourney(tempCar,car);

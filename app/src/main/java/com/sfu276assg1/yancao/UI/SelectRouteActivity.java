@@ -98,17 +98,15 @@ public class SelectRouteActivity extends AppCompatActivity {
                 switch(mode){
                     case 0:
                         route = CarbonModel.getInstance().getRoute(position);
-                        CarbonModel.getInstance().getLastJourney().setRoute(route);
                         break;
                     case 1:
                         route = CarbonModel.getInstance().getBusRoute(position);
-                        CarbonModel.getInstance().getJourneyCollection().addJourney(new Journey(route));
                         break;
                     case 2:
                         route = CarbonModel.getInstance().getWalkRoute(position);
-                        CarbonModel.getInstance().getJourneyCollection().addJourney(new Journey(route));
                         break;
                 }
+                CarbonModel.getInstance().getLastJourney().setRoute(route);
                 CarbonModel.getInstance().getDb().insertRowJourney(CarbonModel.getInstance().getLastJourney());
                 showCurrentJouney();
                 startActivity(new Intent(getApplicationContext(),MainActivity.class));
