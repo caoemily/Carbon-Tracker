@@ -25,7 +25,8 @@
         <activity android:name="com.sfu276assg1.yancao.UI.DisplayTable" />
         <activity android:name="com.sfu276assg1.yancao.UI.SelectTransModeActivity" />
         <activity android:name="com.sfu276assg1.yancao.UI.MonthlyUtilitiesActivity" />
-        <activity android:name="com.sfu276assg1.yancao.UI.AddBillActivity"></activity>
+        <activity android:name="com.sfu276assg1.yancao.UI.AddBillActivity" />
+        <activity android:name="com.sfu276assg1.yancao.UI.GiveTipsActivity" />
     </application>
 
 </manifest>

@@ -10,6 +10,7 @@ import android.widget.ImageButton;
 import com.sfu276assg1.yancao.carbontracker.Car;
 import com.sfu276assg1.yancao.carbontracker.CarbonModel;
 import com.sfu276assg1.yancao.carbontracker.DBAdapter;
+import com.sfu276assg1.yancao.carbontracker.GiveTipsActivity;
 import com.sfu276assg1.yancao.carbontracker.R;
 
 /**
@@ -28,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
         setUpShowTableButton();
         setUpShowChartButton();
         setUpUtilitiesButton();
+        setUpTipsButton();
     }
 
     private void setupDatabase() {
@@ -82,6 +84,18 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, MonthlyUtilitiesActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+    }
+
+    private void setUpTipsButton() {
+        Button button = (Button) findViewById(R.id.tips_btn);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, GiveTipsActivity.class);
                 startActivity(intent);
                 finish();
             }
