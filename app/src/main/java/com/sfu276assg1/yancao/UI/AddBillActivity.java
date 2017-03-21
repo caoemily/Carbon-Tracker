@@ -214,12 +214,8 @@ public class AddBillActivity extends AppCompatActivity {
                         intent = new Intent(AddBillActivity.this, MonthlyUtilitiesActivity.class);
                     }
                     else {
-                        CarbonModel.getInstance().getBill(position).setStartDate(startDate);
-                        CarbonModel.getInstance().getBill(position).setEndDate(endDate);
-                        CarbonModel.getInstance().getBill(position).setElectricity(electricity);
-                        CarbonModel.getInstance().getBill(position).setGas(gas);
-                        CarbonModel.getInstance().getBill(position).setPeople(people);
-                        CarbonModel.getInstance().getDb().updateBillRow((position+1),bill);
+                        CarbonModel.getInstance().changeBill(bill, position);
+                        CarbonModel.getInstance().getDb().updateBillRow((position),bill);
                         intent = new Intent(AddBillActivity.this, MonthlyUtilitiesActivity.class);
                     }
                     startActivity(intent);
@@ -232,7 +228,7 @@ public class AddBillActivity extends AppCompatActivity {
     private void extractDataFromIntent() {
         position = getIntent().getIntExtra("billIndex", 0);
         startDate = CarbonModel.getInstance().getBill(position).getStartDate();
-        endDate = CarbonModel.getInstance().getBill(position).getStartDate();
+        endDate = CarbonModel.getInstance().getBill(position).getEndDate();
         electricity = CarbonModel.getInstance().getBill(position).getElectricity();
         gas = CarbonModel.getInstance().getBill(position).getGas();
         people = CarbonModel.getInstance().getBill(position).getPeople();
