@@ -233,4 +233,5 @@ public class AddBillActivity extends AppCompatActivity {
         gas = CarbonModel.getInstance().getBill(position).getGas();
         people = CarbonModel.getInstance().getBill(position).getPeople();
     }
+
 }

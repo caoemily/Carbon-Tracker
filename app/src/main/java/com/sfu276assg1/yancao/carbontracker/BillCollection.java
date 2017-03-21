@@ -38,7 +38,7 @@ public class BillCollection {
         bills.remove(index);
     }
 
-    public double getCarbonEmission(String stringDate) {
+    public double getTotalCarbonEmission(String stringDate) {
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 
         for (Bill bill : bills) {
@@ -48,7 +48,39 @@ public class BillCollection {
                 Date d2 = format.parse(bill.getEndDate());
 
                 if (testDate.after(d1) || testDate.before(d2)) {
-                    return bill.getCarbonEmission();
+                    return bill.getTotalCarbonEmission();
+                }
+            } catch (ParseException e) {}
+        }
+        return 0;
+    }
+    public double getElectricityCarbonEmission(String stringDate) {
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+
+        for (Bill bill : bills) {
+            try {
+                Date testDate = format.parse(stringDate);
+                Date d1 = format.parse(bill.getStartDate());
+                Date d2 = format.parse(bill.getEndDate());
+
+                if (testDate.after(d1) || testDate.before(d2)) {
+                    return bill.getElectricityCarbonEmission();
+                }
+            } catch (ParseException e) {}
+        }
+        return 0;
+    }
+    public double getGasCarbonEmission(String stringDate) {
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+
+        for (Bill bill : bills) {
+            try {
+                Date testDate = format.parse(stringDate);
+                Date d1 = format.parse(bill.getStartDate());
+                Date d2 = format.parse(bill.getEndDate());
+
+                if (testDate.after(d1) || testDate.before(d2)) {
+                    return bill.getGasCarbonEmission();
                 }
             } catch (ParseException e) {}
         }

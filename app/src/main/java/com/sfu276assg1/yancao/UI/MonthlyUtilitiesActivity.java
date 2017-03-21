@@ -128,9 +128,7 @@ public class MonthlyUtilitiesActivity extends AppCompatActivity {
         list.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> parent, View viewClicked, int position, long id) {
-                String message = Double.toString(CarbonModel.getInstance().getBill(position).getElectricity()) + " " +
-                        Double.toString(CarbonModel.getInstance().getBill(position).getGas()) + " " +
-                        Double.toString(CarbonModel.getInstance().getBill(position).getCarbonEmission());
+                String message = Double.toString(CarbonModel.getInstance().getBillCollection().getElectricityCarbonEmission("20/1/1993"));
                 Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
             }
         });
