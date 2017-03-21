@@ -43,7 +43,11 @@ public class DisplayTable extends AppCompatActivity {
     private void populateListView() {
         ArrayList<JourneyInfoForListView> itemsForListView = new ArrayList<>();
         for (int i = 0; i < journeyCollection.countJourneys(); i++) {
-            itemsForListView.add(new JourneyInfoForListView(journeyCollection.getJourney(i).getCar().getMake(), journeyCollection.getJourney(i).getDate()));
+            if (!journeyCollection.getJourney(i).getCar().getNickname().equals(" ")) {
+                itemsForListView.add(new JourneyInfoForListView(journeyCollection.getJourney(i).getCar().getMake(), journeyCollection.getJourney(i).getDate()));
+            }else{
+                itemsForListView.add(new JourneyInfoForListView(journeyCollection.getJourney(i).getRoute().getType(), journeyCollection.getJourney(i).getDate()));
+            }
         }
         adapter = new CustomArrayAdapter(this,R.layout.journey_info, itemsForListView);
 
