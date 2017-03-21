@@ -219,7 +219,6 @@ public class AddBillActivity extends AppCompatActivity {
                         CarbonModel.getInstance().getBill(position).setElectricity(electricity);
                         CarbonModel.getInstance().getBill(position).setGas(gas);
                         CarbonModel.getInstance().getBill(position).setPeople(people);
-                        position = getIntent().getIntExtra("billIndex", 0);
                         CarbonModel.getInstance().getDb().updateBillRow((position+1),bill);
                         intent = new Intent(AddBillActivity.this, MonthlyUtilitiesActivity.class);
                     }
