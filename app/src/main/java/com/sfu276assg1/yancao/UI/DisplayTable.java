@@ -72,7 +72,7 @@ public class DisplayTable extends AppCompatActivity {
             populateListView();
             return true;
         }else if(item.getItemId() == R.id.edit) {
-            Intent intent = new Intent(getApplicationContext(), AddRouteActivity.class);
+            Intent intent = new Intent(getApplicationContext(), SelectRouteActivity.class);
             intent.putExtra("routeIndex", info.position);
             startActivity(intent);
             finish();

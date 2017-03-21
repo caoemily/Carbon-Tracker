@@ -1,6 +1,9 @@
 package com.sfu276assg1.yancao.carbontracker;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -33,5 +36,54 @@ public class BillCollection {
 
     public void remove(int index) {
         bills.remove(index);
+    }
+
+    public double getTotalCarbonEmission(String stringDate) {
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+
+        for (Bill bill : bills) {
+            try {
+                Date testDate = format.parse(stringDate);
+                Date d1 = format.parse(bill.getStartDate());
+                Date d2 = format.parse(bill.getEndDate());
+
+                if (testDate.after(d1) || testDate.before(d2)) {
+                    return bill.getTotalCarbonEmission();
+                }
+            } catch (ParseException e) {}
+        }
+        return 0;
+    }
+    public double getElectricityCarbonEmission(String stringDate) {
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+
+        for (Bill bill : bills) {
+            try {
+                Date testDate = format.parse(stringDate);
+                Date d1 = format.parse(bill.getStartDate());
+                Date d2 = format.parse(bill.getEndDate());
+
+                if (testDate.after(d1) || testDate.before(d2)) {
+                    return bill.getElectricityCarbonEmission();
+                }
+            } catch (ParseException e) {}
+        }
+        return 0;
+    }
+    public double getGasCarbonEmission(String stringDate) {
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+
+        for (Bill bill : bills) {
+            try {
+                Date testDate = format.parse(stringDate);
+                Date d1 = format.parse(bill.getStartDate());
+                Date d2 = format.parse(bill.getEndDate());
+
+                if (testDate.after(d1) || testDate.before(d2)) {
+                    return bill.getGasCarbonEmission();
+                }
+            } catch (ParseException e) {}
+        }
+        return 0;
     }
 }

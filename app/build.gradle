@@ -56,3 +56,6 @@ dependencies {
 dependencies {
     compile 'com.github.PhilJay:MPAndroidChart:v3.0.1'
 }
+dependencies {
+    compile 'joda-time:joda-time:2.9.7'
+}
