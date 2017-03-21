@@ -49,4 +49,5 @@
     <string name="add_bill">Add Bill</string>
     <string name="natural_gas_gj">Natural Gas (GJ)</string>
     <string name="TRANS_MODE">TransMode</string>
+    <string name="edit_transportation_mode">Edit Transportation Mode</string>
 </resources>
