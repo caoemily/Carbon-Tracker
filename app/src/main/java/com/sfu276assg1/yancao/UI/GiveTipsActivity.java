@@ -1,4 +1,4 @@
-package com.sfu276assg1.yancao.carbontracker;
+package com.sfu276assg1.yancao.UI;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -6,9 +6,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
-import com.sfu276assg1.yancao.UI.AddBillActivity;
-import com.sfu276assg1.yancao.UI.MainActivity;
-import com.sfu276assg1.yancao.UI.MonthlyUtilitiesActivity;
+import com.sfu276assg1.yancao.carbontracker.BillCollection;
+import com.sfu276assg1.yancao.carbontracker.CarbonModel;
+import com.sfu276assg1.yancao.carbontracker.JourneyCollection;
+import com.sfu276assg1.yancao.carbontracker.R;
+import com.sfu276assg1.yancao.carbontracker.RouteCollection;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -49,6 +51,8 @@ public class GiveTipsActivity extends AppCompatActivity {
         storeLastIndexElect();
         storeLastIndexGas();
 
+        checkForType();
+
 
     }
 
@@ -59,7 +63,7 @@ public class GiveTipsActivity extends AppCompatActivity {
         finish();
     }
 
-    public void checkForTypeCar()
+    public void checkForType()
     {
         int i, car_trips = 0;
         int total_car_carbon = 0;
@@ -127,7 +131,7 @@ public class GiveTipsActivity extends AppCompatActivity {
 
                 String total_elect_carbon_str = Double.toString(total_elect_carbon);
 
-                giveTipsTxt.setText("The amount of carbon emission by electricity you have produced today is: "+total_elect_carbon_str+"."+tooMuchCar[elect_array_index]);
+                giveTipsTxt.setText("The amount of carbon emission by electricity you have produced today is: "+total_elect_carbon_str+"."+tooMuchElectricity[elect_array_index]);
 
             }
 
@@ -139,7 +143,7 @@ public class GiveTipsActivity extends AppCompatActivity {
 
                 String total_gas_carbon_str = Double.toString(total_gas_carbon);
 
-                giveTipsTxt.setText("The amount of carbon emission by natural gas you have produced today is: "+total_gas_carbon_str+"."+tooMuchCar[gas_array_index]);
+                giveTipsTxt.setText("The amount of carbon emission by natural gas you have produced today is: "+total_gas_carbon_str+"."+tooMuchGas[gas_array_index]);
             }
         }
 
