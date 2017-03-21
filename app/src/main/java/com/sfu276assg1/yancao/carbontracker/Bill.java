@@ -1,5 +1,12 @@
 package com.sfu276assg1.yancao.carbontracker;
 
+import org.joda.time.Days;
+import org.joda.time.LocalDate;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * Store information about a single bill
  */
@@ -56,6 +63,20 @@ public class Bill {
     }
     public void setPeople(int people) {
         this.people = people;
+    }
+    public double getCarbonEmission(){
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        try {
+            Date d1 = format.parse(startDate);
+            Date d2 = format.parse(endDate);
+            int days = Days.daysBetween(new LocalDate(d1.getTime()), new LocalDate(d2.getTime())).getDays() + 1;
+
+            double electricity_emission = electricity/days/people*900;
+            double gas_emission = gas/days/people*56.1;
+
+            return electricity_emission+gas_emission;
+        } catch (ParseException e) {}
+        return 0;
     }
 }
 

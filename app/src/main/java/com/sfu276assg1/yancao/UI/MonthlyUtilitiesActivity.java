@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.sfu276assg1.yancao.carbontracker.Bill;
 import com.sfu276assg1.yancao.carbontracker.CarbonModel;
@@ -33,6 +34,7 @@ public class MonthlyUtilitiesActivity extends AppCompatActivity {
         setUpAddBillButton();
         populateListView();
         registerForContextMenu(list);
+        selectExistingCar();
     }
 
     @Override
@@ -107,7 +109,7 @@ public class MonthlyUtilitiesActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.delete:
                 CarbonModel.getInstance().removeBill(info.position);
-                CarbonModel.getInstance().getDb().deleteBillRow((info.position+1));
+                CarbonModel.getInstance().getDb().deleteBillRow((info.position));
                 adapter.notifyDataSetChanged();
                 populateListView();
                 return true;
@@ -120,4 +122,18 @@ public class MonthlyUtilitiesActivity extends AppCompatActivity {
                 return super.onContextItemSelected(item);
         }
     }
+
+    private void selectExistingCar(){
+        list = (ListView) findViewById(R.id.billsListView);
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+            @Override
+            public void onItemClick(AdapterView<?> parent, View viewClicked, int position, long id) {
+                String message = Double.toString(CarbonModel.getInstance().getBill(position).getElectricity()) + " " +
+                        Double.toString(CarbonModel.getInstance().getBill(position).getGas()) + " " +
+                        Double.toString(CarbonModel.getInstance().getBill(position).getCarbonEmission());
+                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 }
+
