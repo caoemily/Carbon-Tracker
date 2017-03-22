@@ -66,7 +66,7 @@ public class Bill {
     }
 
     public double getTotalCarbonEmission(){
-        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         try {
             Date d1 = format.parse(startDate);
             Date d2 = format.parse(endDate);
@@ -80,7 +80,7 @@ public class Bill {
         return 0;
     }
     public double getElectricityCarbonEmission(){
-        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         try {
             Date d1 = format.parse(startDate);
             Date d2 = format.parse(endDate);
@@ -93,7 +93,7 @@ public class Bill {
         return 0;
     }
     public double getGasCarbonEmission(){
-        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         try {
             Date d1 = format.parse(startDate);
             Date d2 = format.parse(endDate);

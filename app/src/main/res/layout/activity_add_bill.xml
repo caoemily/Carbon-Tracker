@@ -54,27 +54,27 @@
         android:id="@+id/editStartDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="dd/mm/yyyy"
-        android:inputType="date"
-        android:textSize="14sp"
         android:layout_alignBaseline="@+id/textView11"
         android:layout_alignBottom="@+id/textView11"
+        android:layout_toEndOf="@+id/textView3"
         android:layout_toRightOf="@+id/textView3"
-        android:layout_toEndOf="@+id/textView3" />
+        android:ems="10"
+        android:hint="yyyy-MM-dd"
+        android:inputType="date"
+        android:textSize="14sp" />
 
     <EditText
         android:id="@+id/editEndDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/editStartDate"
+        android:layout_alignStart="@+id/editStartDate"
+        android:layout_below="@+id/editStartDate"
         android:ems="10"
-        android:hint="dd/mm/yyyy"
+        android:hint="yyyy-MM-dd"
         android:inputType="date"
         android:textAlignment="textStart"
-        android:textSize="14sp"
-        android:layout_below="@+id/editStartDate"
-        android:layout_alignLeft="@+id/editStartDate"
-        android:layout_alignStart="@+id/editStartDate" />
+        android:textSize="14sp" />
 
     <TextView
         android:id="@+id/textView16"
