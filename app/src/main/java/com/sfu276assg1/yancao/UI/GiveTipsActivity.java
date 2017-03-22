@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 
 import com.sfu276assg1.yancao.carbontracker.BillCollection;
@@ -73,28 +74,36 @@ public class GiveTipsActivity extends AppCompatActivity {
         String reportDate = df.format(today);
 
         Calendar cal = Calendar.getInstance();
-        int day = cal.get(Calendar.DATE);
-        int month = cal.get(Calendar.MONTH);
-        int year = cal.get(Calendar.YEAR);
-        ArrayList itemsForTips = new ArrayList<>();
+        cal.add(Calendar.DATE, 1);
+        SimpleDateFormat formattedDate = new SimpleDateFormat("yyyy-MM-dd");
+
+        String formatted = formattedDate.format(cal.getTime());
+        //ArrayList itemsForTips = new ArrayList<>();
 
         Double total_util_carbon = CarbonModel.getInstance().getBillCollection().getTotalCarbonEmission(reportDate);
         Double total_elect_carbon = CarbonModel.getInstance().getBillCollection().getElectricityCarbonEmission(reportDate);
         Double total_gas_carbon = CarbonModel.getInstance().getBillCollection().getGasCarbonEmission(reportDate);
 
         //checking for cars
+        Log.d("journeys", "This is the number of journeys: "+journeyCollection.countJourneys());
         for(i = 0; i < journeyCollection.countJourneys();i++)
         {
-            if(journeyCollection.getJourney(i).getDate().equals(cal) && !journeyCollection.getJourney(i).getCar().getNickname().equals(""))
+            Log.d("journeys", "This is the journey date: "+journeyCollection.getJourney(i).getDate()+ "This is the current date: "+formatted);
+            if(journeyCollection.getJourney(i).getDate().equals(formatted) && !journeyCollection.getJourney(i).getCar().getNickname().equals(" "))
             {
                 String car_carbon = journeyCollection.getJourney(i).calculateCarbon();
-                itemsForTips.add(car_carbon);
+                Log.d("car_carbon", "This is the car carbon emission: "+journeyCollection.getJourney(i).calculateCarbon());
+                //itemsForTips.add(car_carbon);
                 car_trips++;
                 total_car_carbon = total_car_carbon + parseInt(car_carbon);
+                Log.d("car_trips", "This is the car_trips: "+car_trips+ "This is the carbon car emission inside the loop: "+total_car_carbon);
             }
 
 
         }
+
+        Log.d("car_trips", "This is the car_trips: "+car_trips+ "This is the carbon car emission: "+total_car_carbon);
+        Log.d("ultilities", "This is the total utility: "+ total_util_carbon+ "This is the electricity emission: "+total_elect_carbon+"This is the gas emission: "+total_gas_carbon);
 
 
         if(car_trips > 3)
@@ -151,22 +160,22 @@ public class GiveTipsActivity extends AppCompatActivity {
     private int getLastIndexFromSharedPrefCar()
     {
         SharedPreferences prefs = getSharedPreferences("car array", MODE_PRIVATE);
-        int extractedValue = prefs.getInt("car array index", 0); //first time 0
-        return extractedValue;
+        int extractedValueCar = prefs.getInt("car array index", 0); //first time 0
+        return extractedValueCar;
     }
 
     private int getLastIndexFromSharedPrefElect()
     {
         SharedPreferences prefs = getSharedPreferences("electricity array", MODE_PRIVATE);
-        int extractedValue = prefs.getInt("elect array index", 0); //first time 0
-        return extractedValue;
+        int extractedValueElect = prefs.getInt("elect array index", 0); //first time 0
+        return extractedValueElect;
     }
 
     private int getLastIndexFromSharedPrefGas()
     {
         SharedPreferences prefs = getSharedPreferences("gas array", MODE_PRIVATE);
-        int extractedValue = prefs.getInt("gas array index", 0); //first time 0
-        return extractedValue;
+        int extractedValueGas = prefs.getInt("gas array index", 0); //first time 0
+        return extractedValueGas;
     }
 
 
