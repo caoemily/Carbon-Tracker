@@ -105,16 +105,4 @@
         android:adjustViewBounds="true"
         app:srcCompat="@drawable/car1" />
 
-    <Button
-        android:text="TIPS"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/utilitiesBtn"
-        android:layout_alignLeft="@+id/utilitiesBtn"
-        android:layout_alignStart="@+id/utilitiesBtn"
-        android:layout_marginTop="25dp"
-        android:id="@+id/tips_btn"
-        android:layout_alignRight="@+id/addJourneyBtn"
-        android:layout_alignEnd="@+id/addJourneyBtn" />
-
 </RelativeLayout>
