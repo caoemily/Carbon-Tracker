@@ -145,6 +145,7 @@ public class DisplayBarChart extends AppCompatActivity {
     private void generateData() {
         Intent intent = getIntent();
         String dateInString = intent.getStringExtra("today");
+        //String dateInString = "2017-03-10";
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         Date today;
         Date today28;
@@ -162,8 +163,10 @@ public class DisplayBarChart extends AppCompatActivity {
                 }
             }
             for(int j = 0; j <= numberOfDaysToGoBack; j++) {
+                cal.setTime(today);
                 cal.add(Calendar.DAY_OF_MONTH, -j);
                 Date currentDay = cal.getTime();
+                Log.d("DEBUG DATE PLEASE", ""+ currentDay);
                 String currentDayInString = df.format(currentDay);
                 float currentDayCarbon = (float)CarbonModel.getInstance().getBillCollection().getTotalCarbonEmission(currentDayInString);
                 totalCarbonUtilities += currentDayCarbon;

@@ -11,4 +11,14 @@
         android:layout_height="400dp"
         android:id="@+id/lineChart"></com.github.mikephil.charting.charts.LineChart>
 
+    <TextView
+        android:id="@+id/lineChartDes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lineChart"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="23dp"
+        android:text="TextView"
+        android:textSize="18sp" />
+
 </RelativeLayout>

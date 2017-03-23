@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
+import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.XAxis;
@@ -47,6 +48,9 @@ public class DisplayLineChart extends AppCompatActivity {
 
         generateDataForLineChart();
         generateLineChart();
+        TextView textView = (TextView) findViewById(R.id.lineChartDes);
+        textView.setText("Every point on the line represent 1 month, starting from current month." + "\n" +
+                        "Please click on the point to view each month in detail");
     }
 
     private void generateLineChart() {
@@ -193,7 +197,6 @@ public class DisplayLineChart extends AppCompatActivity {
         for (DataForOneMonth data : dataForYear) {
             float carbonForCar = 0;
             float carbonForPublic = 0;
-            float carbonForUtilities = 0;
             for (int i = 0; i < journeys.size(); i++) {
                 DateFormat formatDate = new SimpleDateFormat("yyyy-MM-dd");
                 int journeyMonth = 0;
@@ -212,14 +215,35 @@ public class DisplayLineChart extends AppCompatActivity {
                         Log.d("Debug", "" + carbonForCar);
                     }else if (journeys.get(i).getRoute().getType().equals("public")) {
                         carbonForPublic += Float.parseFloat(journeys.get(i).calculateCarbon());
-                    } else {
-                        carbonForUtilities += (float) (CarbonModel.getInstance().getBillCollection().getTotalCarbonEmission(journeys.get(i).getDate()));
                     }
                 }
             }
             data.setTotalCarbonForCar(carbonForCar);
             data.setTotalCarbonForPublic(carbonForPublic);
-            data.setTotalCarbonUtilities(carbonForUtilities);
+        }
+
+        for (int i = 0; i < dataForYear.size(); i++) {
+            String firstDateString = dataForYear.get(i).getFirstDayOfMonth();
+            String lastDayOfMonthString = dataForYear.get(i).getLastDayOfMonth();
+            Date firstDate;
+            Date lastDay;
+            float totalCarbonUtilities = 0;
+            try{
+                firstDate = df.parse(firstDateString);
+                Calendar cal = new GregorianCalendar();
+                cal.setTime(firstDate);
+                lastDay = df.parse(lastDayOfMonthString);
+                Date currentDate = firstDate;
+                while(!(currentDate.before(firstDate) || currentDate.after(lastDay))) {
+                    String currentDayInString = df.format(currentDate);
+                    float currentDayCarbon = (float)CarbonModel.getInstance().getBillCollection().getTotalCarbonEmission(currentDayInString);
+                    totalCarbonUtilities += currentDayCarbon;
+                    cal.add(Calendar.DAY_OF_MONTH, +1);
+                    currentDate = cal.getTime();
+                    Log.d("DEBUG DATE PLEASE", "" + currentDate);
+                }
+                dataForYear.get(i).setTotalCarbonUtilities(totalCarbonUtilities);
+            }catch(ParseException e) {}
         }
         for (DataForOneMonth data : dataForYear) {
             Log.d("DEBUGG DATA FOR", "" + data.getMonth() + "" + data.getYear());

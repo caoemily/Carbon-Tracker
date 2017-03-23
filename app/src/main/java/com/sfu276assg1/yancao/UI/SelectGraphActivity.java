@@ -9,6 +9,7 @@ import android.support.annotation.RequiresApi;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -56,6 +57,7 @@ public class SelectGraphActivity extends AppCompatActivity {
                 String today = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
                 Intent intent = new Intent(SelectGraphActivity.this, DisplayBarChart.class);
                 intent.putExtra("today", today);
+                Log.d("DEBUG DAY FOR 28", today);
                 startActivity(intent);
             }
         });

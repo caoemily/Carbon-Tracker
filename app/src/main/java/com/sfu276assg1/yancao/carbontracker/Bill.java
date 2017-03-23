@@ -99,9 +99,9 @@ public class Bill {
             Date d2 = format.parse(endDate);
             int days = Days.daysBetween(new LocalDate(d1.getTime()), new LocalDate(d2.getTime())).getDays() + 1;
 
-            double electricity_emission = electricity/days/people*900;
+            double gas_emission = gas/days/people*56.1;
 
-            return electricity_emission;
+            return gas_emission;
         } catch (ParseException e) {}
         return 0;
     }

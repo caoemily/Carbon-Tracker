@@ -49,6 +49,19 @@ public class DataForOneMonth {
         return formatted;
     }
 
+    public String getFirstDayOfMonth() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String firstDateOfMonth = "" + year + "-" + String.format("%02d", month) + "-" + 01;
+        Calendar calendar = Calendar.getInstance();
+        try {
+            Date convertedDate = dateFormat.parse(firstDateOfMonth);
+            calendar.setTime(convertedDate);
+            calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMinimum(Calendar.DAY_OF_MONTH));
+        }catch(ParseException e) {}
+        String formatted = dateFormat.format(calendar.getTime());
+        return formatted;
+    }
+
     public float getTotalCarbonForCar() {
         return totalCarbonForCar;
     }
