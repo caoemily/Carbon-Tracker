@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 
-import com.sfu276assg1.yancao.carbontracker.Car;
 import com.sfu276assg1.yancao.carbontracker.CarbonModel;
 import com.sfu276assg1.yancao.carbontracker.DBAdapter;
 import com.sfu276assg1.yancao.carbontracker.R;
@@ -87,4 +86,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+
 }
