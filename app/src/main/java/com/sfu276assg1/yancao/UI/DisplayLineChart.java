@@ -81,19 +81,16 @@ public class DisplayLineChart extends AppCompatActivity {
         LineDataSet lineDataSet1 = new LineDataSet(yAxisCar,"Car");
         lineDataSet1.setLineWidth(5);
         lineDataSet1.setDrawValues(true);
-///        lineDataSet1.setDrawCircles(false);
         lineDataSet1.setColor(Color.BLUE);
 
         LineDataSet lineDataSet2 = new LineDataSet(yAxisPublicTransportation,"Public Transportation");
         lineDataSet2.setLineWidth(5);
         lineDataSet2.setDrawValues(true);
-//        lineDataSet2.setDrawCircles(false);
         lineDataSet2.setColor(Color.RED);
 
         LineDataSet lineDataSet3 = new LineDataSet(yAxisUtilities,"Utilities");
         lineDataSet3.setLineWidth(5);
         lineDataSet3.setDrawValues(true);
-//        lineDataSet2.setDrawCircles(false);
         lineDataSet3.setColor(Color.GREEN);
 
         lineDataSets.add(lineDataSet1);

@@ -38,6 +38,8 @@ public class DisplayBarChart extends AppCompatActivity {
     BarChart barChart;
     private JourneyCollection journeyCollection = CarbonModel.getInstance().getJourneyCollection();
     private ArrayList<Journey> journeys = new ArrayList<>();
+    private int numberOfDaysToGoBack = 28;
+    private float totalCarbonUtilities = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,6 +87,8 @@ public class DisplayBarChart extends AppCompatActivity {
             }
             emissions.add(sumOfCarbon);
         }
+        nameOfEntries.add("Utilities");
+        emissions.add(totalCarbonUtilities);
         for (Float emission : emissions) {
             Log.d("DEBUGGGG", "" + emission);
         }
@@ -148,7 +152,7 @@ public class DisplayBarChart extends AppCompatActivity {
             today = df.parse(dateInString);
             Calendar cal = new GregorianCalendar();
             cal.setTime(today);
-            cal.add(Calendar.DAY_OF_MONTH, -28);
+            cal.add(Calendar.DAY_OF_MONTH, -numberOfDaysToGoBack);
             today28 = cal.getTime();
             Log.d("DEBUG TODAY 30", "" + today28);
             for(int i = 0; i < journeyCollection.countJourneys(); i++) {
@@ -156,6 +160,13 @@ public class DisplayBarChart extends AppCompatActivity {
                 if(!(date.before(today28) || date.after(today))) {
                     journeys.add(journeyCollection.getJourney(i));
                 }
+            }
+            for(int j = 0; j <= numberOfDaysToGoBack; j++) {
+                cal.add(Calendar.DAY_OF_MONTH, -j);
+                Date currentDay = cal.getTime();
+                String currentDayInString = df.format(currentDay);
+                float currentDayCarbon = (float)CarbonModel.getInstance().getBillCollection().getTotalCarbonEmission(currentDayInString);
+                totalCarbonUtilities += currentDayCarbon;
             }
         }catch (ParseException e) {
 
