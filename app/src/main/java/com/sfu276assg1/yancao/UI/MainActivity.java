@@ -31,10 +31,6 @@ import static java.lang.Double.parseDouble;
 public class MainActivity extends AppCompatActivity {
 
     int car_array_index, elect_array_index, gas_array_index;
-
-
-
-
     String[] tooMuchCar = {"Try to take the bike!", "Try to take the public transit", "Try to walk!",
             "Avoid areas with congested traffic!", "Plan out your journey so you don't get lost and waste fuel!",
             "Keep your vehicles well maintained!","Don't accelerate unnecessarily!", "Buy a fuel efficient car!"};
@@ -89,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, DisplayTable.class);
+                Intent intent = new Intent(MainActivity.this, DisplayTableActivity.class);
                 startActivity(intent);
             }
         });
@@ -130,9 +126,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void checkForType()
-    {
-
+    public void checkForType() {
         JourneyCollection journeyCollection = CarbonModel.getInstance().getJourneyCollection();
         BillCollection billCollection = CarbonModel.getInstance().getBillCollection();
         RouteCollection routeCollection = CarbonModel.getInstance().getRouteCollection();
@@ -143,121 +137,74 @@ public class MainActivity extends AppCompatActivity {
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date today = Calendar.getInstance().getTime();
         String reportDate = df.format(today);
-
         Calendar cal = Calendar.getInstance();
         cal.add(Calendar.DATE, 0);
         SimpleDateFormat formattedDate = new SimpleDateFormat("yyyy-MM-dd");
-
         String formatted = formattedDate.format(cal.getTime());
-
-
         Double total_util_carbon = CarbonModel.getInstance().getBillCollection().getTotalCarbonEmission(reportDate);
         Double total_elect_carbon = CarbonModel.getInstance().getBillCollection().getElectricityCarbonEmission(reportDate);
         Double total_gas_carbon = CarbonModel.getInstance().getBillCollection().getGasCarbonEmission(reportDate);
 
-
-        for(i = 0; i < journeyCollection.countJourneys();i++)
-        {
+        for(i = 0; i < journeyCollection.countJourneys();i++) {
             //Log.d("journeys", "This is the journey date: "+journeyCollection.getJourney(i).getDate()+ "This is the current date: "+formatted);
-            if(journeyCollection.getJourney(i).getDate().equals(formatted) && !journeyCollection.getJourney(i).getCar().getNickname().equals(" "))
-            {
+            if(journeyCollection.getJourney(i).getDate().equals(formatted) && !journeyCollection.getJourney(i).getCar().getNickname().equals(" ")) {
                 double car_carbon = parseDouble(journeyCollection.getJourney(i).calculateCarbon());
                 car_trips++;
                 total_car_carbon = total_car_carbon + car_carbon;
             }
-
-
         }
-
-
-        if(total_car_carbon > total_util_carbon)
-        {
+        if(total_car_carbon > total_util_carbon) {
             car_array_index = getLastIndexFromSharedPrefCar();
-
             Math.round(total_car_carbon);
-
             String total_car_carbon_str = Double.toString(total_car_carbon);
-
-
-
             String car_trips_str = Integer.toString(car_trips);
             String car_msg = "You have gone on "+car_trips_str+" trips today. And the amount of carbon emitted by your car today is: "+total_car_carbon_str+". "+tooMuchCar[car_array_index%8];
-
-
             Toast.makeText(getApplicationContext(), car_msg, Toast.LENGTH_LONG).show();
             car_array_index++;
-
-
             storeLastIndexCar();
 
         }
-
-
         else // total_util_carbon > total_car_carbon
-        {
+            {
             if(total_elect_carbon > total_gas_carbon) // more electricity
             {
                 elect_array_index = getLastIndexFromSharedPrefElect();
-
                 Math.round(total_elect_carbon);
-
                 String total_elect_carbon_str = Double.toString(total_elect_carbon);
                 String elect_msg = "The amount of carbon emission by electricity you have produced today is: "+total_elect_carbon_str+". "+tooMuchElectricity[elect_array_index%9];
-
                 Toast.makeText(getApplicationContext(), elect_msg, Toast.LENGTH_LONG).show();
-
                 elect_array_index++;
-
-
                 storeLastIndexElect();
             }
-
-            else
-            {
+            else {
                 gas_array_index = getLastIndexFromSharedPrefGas();
-
                 Math.round(total_gas_carbon);
-
                 String total_gas_carbon_str = Double.toString(total_gas_carbon);
                 String gas_msg = "The amount of carbon emission by natural gas you have produced today is: "+total_gas_carbon_str+". "+tooMuchGas[gas_array_index%8];
-
                 Toast.makeText(getApplicationContext(), gas_msg, Toast.LENGTH_LONG).show();
-
                 gas_array_index++;
-
                 Log.d("gas array index", "This is the gas array index after: "+gas_array_index);
-
                 storeLastIndexGas();
             }
         }
-
-
     }
-    private int getLastIndexFromSharedPrefCar()
-    {
+    private int getLastIndexFromSharedPrefCar() {
         SharedPreferences prefs = getSharedPreferences("car array", MODE_PRIVATE);
         int extractedValueCar = prefs.getInt("car array index", 0); //first time 0
         return extractedValueCar;
     }
 
-    private int getLastIndexFromSharedPrefElect()
-    {
+    private int getLastIndexFromSharedPrefElect() {
         SharedPreferences prefs = getSharedPreferences("electricity array", MODE_PRIVATE);
         int extractedValueElect = prefs.getInt("elect array index", 0); //first time 0
         return extractedValueElect;
     }
-
-    private int getLastIndexFromSharedPrefGas()
-    {
+    private int getLastIndexFromSharedPrefGas() {
         SharedPreferences prefs = getSharedPreferences("gas array", MODE_PRIVATE);
         int extractedValueGas = prefs.getInt("gas array index", 0); //first time 0
         return extractedValueGas;
     }
-
-
-
-    private void storeLastIndexCar()
-    {
+    private void storeLastIndexCar() {
         int val = car_array_index;
         SharedPreferences prefs = getSharedPreferences("car array", MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
@@ -265,9 +212,7 @@ public class MainActivity extends AppCompatActivity {
         editor.putInt("car array index", val );
         editor.commit();
     }
-
-    private void storeLastIndexElect()
-    {
+    private void storeLastIndexElect() {
         int val = elect_array_index;
         SharedPreferences prefs = getSharedPreferences("elect array", MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
@@ -275,9 +220,7 @@ public class MainActivity extends AppCompatActivity {
         editor.putInt("elect array index", val );
         editor.commit();
     }
-
-    private void storeLastIndexGas()
-    {
+    private void storeLastIndexGas() {
         int val = gas_array_index;
         SharedPreferences prefs = getSharedPreferences("gas array", MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();

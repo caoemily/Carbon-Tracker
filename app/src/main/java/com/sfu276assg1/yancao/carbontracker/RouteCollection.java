@@ -47,11 +47,11 @@ public class RouteCollection {
         String[] descriptions = new String[countRoutes()];
         for (int i = 0; i < countRoutes(); i++) {
             Route route = getRoute(i);
-            if(route.getType().equals("drive")){
+            if(route.getType().equals("Drive")){
                 descriptions[i] = route.getName() + " - " + route.getDistance() + "km" + " - "
                         +"Highway:" +  route.getLowEDis() + "km" + " - " + "City:" + route.getHighEDis() + "km";
             }
-            else if (route.getType().equals("public")){
+            else if (route.getType().equals("Public Transit")){
                 descriptions[i] = route.getName() + " - " + route.getDistance() + "km" + " - "
                         +"Skytrain:" +  route.getLowEDis() + "km" + " - " + "Bus:" + route.getHighEDis() + "km";
             }

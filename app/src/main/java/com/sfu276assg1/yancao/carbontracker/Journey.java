@@ -23,8 +23,7 @@ public class Journey implements Serializable {
     public Journey (Route route){
         this.date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
         this.route = route;
-        Car car = new Car();
-        this.car = car;
+        this.car = new Car();
     }
 
     public Journey (String date) {
@@ -34,8 +33,7 @@ public class Journey implements Serializable {
         else {
             this.date = date;
         }
-        Car car = new Car();
-        this.car = car;
+        this.car = new Car();
     }
 
     public String getDate() {
@@ -72,7 +70,7 @@ public class Journey implements Serializable {
 
     public String calculateCarbon() {
         double carbonEmission = 0;
-        if(this.route.getType().equals("drive")){
+        if(this.route.getType().equals("Drive")){
             double highway = this.route.getLowEDis() * 0.621371;
             double city = this.route.getHighEDis() * 0.621371;
             double gasUsed = highway /this.car.getHighwayE()  + city / this.car.getHighwayE();
@@ -86,7 +84,7 @@ public class Journey implements Serializable {
                 carbonEmission = 0 * gasUsed;
             }
         }
-        else if(this.route.getType().equals("public")){
+        else if(this.route.getType().equals("Public Transit")){
             carbonEmission = (route.getLowEDis()*50 + route.getHighEDis()*89)/1000;
         }
         return String.format("%.2f", carbonEmission);
@@ -100,11 +98,11 @@ public class Journey implements Serializable {
             routeName = "no name";
         }
         String distance = Double.toString(this.route.getDistance());
-        if(this.route.getType().equals("drive")){
+        if(this.route.getType().equals("Drive")){
             des = "Current Journey Info: Emission: " + calculateCarbon() + " kg"+
                     "; Car: " + carName + "; Route: " + routeName + "; Distance: " + distance + " km.";
         }
-        else if (this.route.getType().equals("public")){
+        else if (this.route.getType().equals("Public Transit")){
             des = "Current Journey Info: Emission: " + calculateCarbon() + " kg"+
                     "; Public Transit - Route: " + routeName + "; Distance: " + distance + " km.";
         }
@@ -114,5 +112,4 @@ public class Journey implements Serializable {
         }
         return des;
     }
-
 }

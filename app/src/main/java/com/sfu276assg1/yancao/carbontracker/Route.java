@@ -20,14 +20,6 @@ public class Route {
 
     }
 
-    public Route(double distanceInKm, double lowEDis, double city) {
-        this.type = " ";
-        this.rName = " ";
-        this.distance = distanceInKm;
-        this.lowEDis = lowEDis;
-        this.highEDis = highEDis;
-    }
-
     public double getHighEDis() {
         return highEDis;
     }

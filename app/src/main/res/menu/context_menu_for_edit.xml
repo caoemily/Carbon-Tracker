@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-
     <item
-        android:id="@+id/edit"
-        android:title="@string/edit_journey" />
-    <item
-        android:id="@+id/editTransMode"
-        android:title="@string/edit_transportation_mode" />
+        android:id="@+id/editModeRoute"
+        android:title="@string/edit_mode_route" />
 
     <item android:title="@string/edit_date"
-        android:id="@+id/changeDate" />
+        android:id="@+id/editDate" />
 
     <item android:title="@string/delete"
         android:id="@+id/delete" />

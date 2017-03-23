@@ -15,7 +15,6 @@ import android.widget.Toast;
 
 import com.sfu276assg1.yancao.carbontracker.BillCollection;
 import com.sfu276assg1.yancao.carbontracker.CarbonModel;
-import com.sfu276assg1.yancao.carbontracker.Journey;
 import com.sfu276assg1.yancao.carbontracker.JourneyCollection;
 import com.sfu276assg1.yancao.carbontracker.R;
 import com.sfu276assg1.yancao.carbontracker.Route;
@@ -39,11 +38,10 @@ public class AddRouteActivity extends AppCompatActivity {
     Route tempRoute;
     Route currentRoute = new Route();
     int mode = 0;
-
-
+    int edit_journey;
+    int edit_journey_postition;
 
     int car_array_index, elect_array_index, gas_array_index;
-
 
     String[] tooMuchCar = {"Try to take the bike!", "Try to take the public transit", "Try to walk!",
             "Avoid areas with congested traffic!", "Plan out your journey so you don't get lost and waste fuel!",
@@ -61,22 +59,31 @@ public class AddRouteActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_route);
-        mode = getIntent().getIntExtra(getResources().getString(R.string.TRANS_MODE),0);
+
+        mode = getIntent().getIntExtra(getResources().getString(R.string.TRANS_MODE), 0);
+        routeChangePosition = getIntent().getIntExtra("routeIndex", -1);
+        if(routeChangePosition != -1) {
+            extractDataFromIntent();
+        }
+        edit_journey = getIntent().getIntExtra(getResources().getString(R.string.EDIT_JOURNEY), 0);
+        edit_journey_postition = getIntent().getIntExtra(getResources().getString(R.string.EDIT_JOURNEY_POSITION), 0);
         setIndividualDis();
         setTotalDistance();
         setRouteName();
-        setupOkButton();
         setRouteType();
 
         car_array_index = getLastIndexFromSharedPrefCar();
         elect_array_index = getLastIndexFromSharedPrefElect();
         gas_array_index = getLastIndexFromSharedPrefGas();
+        setupOkButton();
     }
 
     @Override
     public void onBackPressed() {
         Intent intent = new Intent(AddRouteActivity.this, SelectRouteActivity.class);
         intent.putExtra(getResources().getString(R.string.TRANS_MODE),mode);
+        intent.putExtra(getResources().getString(R.string.EDIT_JOURNEY), edit_journey);
+        intent.putExtra(getResources().getString(R.string.EDIT_JOURNEY_POSITION), edit_journey_postition);
         startActivity(intent);
         finish();
     }
@@ -211,43 +218,48 @@ public class AddRouteActivity extends AppCompatActivity {
                 currentRoute.setDistance(totalDis);
                 Intent intent;
                 routeChangePosition = getIntent().getIntExtra("routeIndex", -1);
-                if(routeChangePosition==-1)
+                if(routeChangePosition == -1)
                 {
                     if (routeName != "") {
                         currentRoute.setName(routeName);
-                    }
-                    switch(mode){
-                        case 0:
-                            CarbonModel.getInstance().addRoute(currentRoute);
-                            CarbonModel.getInstance().getDb().insertRouteRow(currentRoute);
+                        switch (mode) {
+                            case 0:
+                                CarbonModel.getInstance().addRoute(currentRoute);
+                                CarbonModel.getInstance().getDb().insertRouteRow(currentRoute);
 
-                            break;
-                        case 1:
-                            CarbonModel.getInstance().addBusRoute(currentRoute);
-                            CarbonModel.getInstance().getDb().insertBusRouteRow(currentRoute);
-                            break;
-                        case 2:
-                            CarbonModel.getInstance().addWalkRoute(currentRoute);
-                            CarbonModel.getInstance().getDb().insertWalkRouteRow(currentRoute);
-                            break;
+                                break;
+                            case 1:
+                                CarbonModel.getInstance().addBusRoute(currentRoute);
+                                CarbonModel.getInstance().getDb().insertBusRouteRow(currentRoute);
+                                break;
+                            case 2:
+                                CarbonModel.getInstance().addWalkRoute(currentRoute);
+                                CarbonModel.getInstance().getDb().insertWalkRouteRow(currentRoute);
+                                break;
+                        }
                     }
-
-                    CarbonModel.getInstance().getLastJourney().setRoute(currentRoute);
-                    CarbonModel.getInstance().getDb().insertRowJourney(CarbonModel.getInstance().getLastJourney());
-                    intent = new Intent(AddRouteActivity.this, MainActivity.class);
-                    startActivity(intent);
+                    if (edit_journey == 0) {
+                        CarbonModel.getInstance().getLastJourney().setRoute(currentRoute);
+                        CarbonModel.getInstance().getDb().insertRowJourney(CarbonModel.getInstance().getLastJourney());
+                        intent = new Intent(AddRouteActivity.this, MainActivity.class);
+                        startActivity(intent);
+                    }
+                    else {
+                        CarbonModel.getInstance().getJourneyCollection().getJourney(edit_journey_postition).setRoute(currentRoute);
+                        // need to update in database
+                        intent = new Intent(AddRouteActivity.this, DisplayTableActivity.class);
+                        startActivity(intent);
+                    }
                     finish();
                     checkForType();
                 }
                 else {
-                    extractDataFromIntent();
                     if(routeName.isEmpty()) {
                         Toast.makeText(getApplicationContext(),"Please enter a name for the route.",
                                 Toast.LENGTH_SHORT).show();
                     }
                     else{
                         currentRoute.setName(routeName);
-                        int index;
                         switch(mode){
                             case 0:
                                 CarbonModel.getInstance().getDb().updateRouteRow(tempRoute,currentRoute);
@@ -262,7 +274,7 @@ public class AddRouteActivity extends AppCompatActivity {
                                 CarbonModel.getInstance().changeWalkRoute(currentRoute, routeChangePosition);
                                 break;
                         }
-                        //CarbonModel.getInstance().changeRouteInJourney(tempRoute, currentRoute);
+                        CarbonModel.getInstance().changeRouteInJourney(tempRoute, currentRoute);
                         CarbonModel.getInstance().getDb().updateRouteInJourney(tempRoute,currentRoute);
 
                         intent = new Intent(AddRouteActivity.this, SelectRouteActivity.class);
@@ -278,39 +290,40 @@ public class AddRouteActivity extends AppCompatActivity {
         });
     }
 
-    private void showCurrentJouney(){
-        Journey curJourney = CarbonModel.getInstance().getLastJourney();
-        String msg = curJourney.getJourneyDes();
-        Toast.makeText(getApplicationContext(),msg,
-                Toast.LENGTH_LONG).show();
-        Toast.makeText(getApplicationContext(),msg,
-                Toast.LENGTH_LONG).show();
-    }
-
-
     private void setRouteType(){
         switch(mode){
             case 0:
-                currentRoute.setType("drive");
+                currentRoute.setType("Drive");
                 break;
             case 1:
-                currentRoute.setType("public");
+                currentRoute.setType("Public Transit");
                 break;
             case 2:
-                currentRoute.setType("walk");
+                currentRoute.setType("Bike/Walk");
                 break;
         }
     }
 
     private void extractDataFromIntent() {
         tempRoute = new Route();
-        routeChangePosition = getIntent().getIntExtra("routeIndex", -1);
         switch(mode){
-            case 0: tempRoute = CarbonModel.getInstance().getRoute(routeChangePosition);
+            case 0:
+                tempRoute = CarbonModel.getInstance().getRoute(routeChangePosition);
+                lowerEDis = CarbonModel.getInstance().getRoute(routeChangePosition).getLowEDis();
+                higherEDis = CarbonModel.getInstance().getRoute(routeChangePosition).getHighEDis();
+                routeName = CarbonModel.getInstance().getRoute(routeChangePosition).getName();
                 break;
-            case 1: tempRoute = CarbonModel.getInstance().getBusRoute(routeChangePosition);
+            case 1:
+                tempRoute = CarbonModel.getInstance().getBusRoute(routeChangePosition);
+                lowerEDis = CarbonModel.getInstance().getBusRoute(routeChangePosition).getLowEDis();
+                higherEDis = CarbonModel.getInstance().getBusRoute(routeChangePosition).getHighEDis();
+                routeName = CarbonModel.getInstance().getBusRoute(routeChangePosition).getName();
                 break;
-            case 2: tempRoute = CarbonModel.getInstance().getWalkRoute(routeChangePosition);
+            case 2:
+                tempRoute = CarbonModel.getInstance().getWalkRoute(routeChangePosition);
+                lowerEDis = CarbonModel.getInstance().getWalkRoute(routeChangePosition).getLowEDis();
+                higherEDis = CarbonModel.getInstance().getWalkRoute(routeChangePosition).getHighEDis();
+                routeName = CarbonModel.getInstance().getWalkRoute(routeChangePosition).getName();
                 break;
         }
     }
@@ -351,7 +364,6 @@ public class AddRouteActivity extends AppCompatActivity {
                 total_car_carbon = total_car_carbon + car_carbon;
             }
 
-
         }
 
         Log.d("Total Util", "This is the total utility: "+total_util_carbon);
@@ -361,64 +373,38 @@ public class AddRouteActivity extends AppCompatActivity {
         if(total_car_carbon > total_util_carbon)
         {
             car_array_index = getLastIndexFromSharedPrefCar();
-
             Math.round(total_car_carbon);
-
             String total_car_carbon_str = Double.toString(total_car_carbon);
-
-
-
             String car_trips_str = Integer.toString(car_trips);
             String car_msg = "You have gone on "+car_trips_str+" trips today. And the amount of carbon emitted by your car today is: "+total_car_carbon_str+". "+tooMuchCar[car_array_index%8];
-
-
             Toast.makeText(getApplicationContext(), car_msg, Toast.LENGTH_LONG).show();
             car_array_index++;
-
-
             storeLastIndexCar();
-
         }
-
 
         else // total_util_carbon > total_car_carbon
         {
             if(total_elect_carbon > total_gas_carbon) // more electricity
             {
                 elect_array_index = getLastIndexFromSharedPrefElect();
-
                 Math.round(total_elect_carbon);
-
-
                 String total_elect_carbon_str = Double.toString(total_elect_carbon);
                 String elect_msg = "The amount of carbon emission by electricity you have produced today is: "+total_elect_carbon_str+". "+tooMuchElectricity[elect_array_index%9];
-
                 Toast.makeText(getApplicationContext(), elect_msg, Toast.LENGTH_LONG).show();
-
                 elect_array_index++;
-
-
                 storeLastIndexElect();
             }
-
             else
             {
                 gas_array_index = getLastIndexFromSharedPrefGas();
-
                 Math.round(total_gas_carbon);
-
                 String total_gas_carbon_str = Double.toString(total_gas_carbon);
                 String gas_msg = "The amount of carbon emission by natural gas you have produced today is: "+total_gas_carbon_str+". "+tooMuchGas[gas_array_index%8];
-
                 Toast.makeText(getApplicationContext(), gas_msg, Toast.LENGTH_LONG).show();
-
                 gas_array_index++;
-
-
                 storeLastIndexGas();
             }
         }
-
 
     }
     private int getLastIndexFromSharedPrefCar()
@@ -442,14 +428,11 @@ public class AddRouteActivity extends AppCompatActivity {
         return extractedValueGas;
     }
 
-
-
     private void storeLastIndexCar()
     {
         int val = car_array_index;
         SharedPreferences prefs = getSharedPreferences("car array", MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
-
         editor.putInt("car array index", val );
         editor.commit();
     }
@@ -459,7 +442,6 @@ public class AddRouteActivity extends AppCompatActivity {
         int val = elect_array_index;
         SharedPreferences prefs = getSharedPreferences("elect array", MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
-
         editor.putInt("elect array index", val );
         editor.commit();
     }
@@ -469,12 +451,7 @@ public class AddRouteActivity extends AppCompatActivity {
         int val = gas_array_index;
         SharedPreferences prefs = getSharedPreferences("gas array", MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
-
         editor.putInt("gas array index", val );
         editor.commit();
     }
-
-
 }
-
-

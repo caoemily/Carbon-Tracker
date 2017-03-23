@@ -36,17 +36,20 @@ public class AddCarActivity extends AppCompatActivity {
     int highWayE, cityE;
     int carChangePosition;
     Car tempCar;
+    int edit_journey;
+    int edit_journey_postition;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_car);
 
-        if( getIntent().getExtras() != null)
-        {
+        edit_journey = getIntent().getIntExtra(getResources().getString(R.string.EDIT_JOURNEY), 0);
+        edit_journey_postition = getIntent().getIntExtra(getResources().getString(R.string.EDIT_JOURNEY_POSITION), 0);
+        carChangePosition = getIntent().getIntExtra("carIndex", -1);
+        if(carChangePosition != -1) {
             extractDataFromIntent();
         }
-
         setCarName();
         setupAcceptButton();
         setupMakeSpinner();
@@ -59,6 +62,7 @@ public class AddCarActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         Intent intent = new Intent(AddCarActivity.this, SelectCarActivity.class);
+        intent.putExtra(getResources().getString(R.string.EDIT_JOURNEY), edit_journey);
         startActivity(intent);
         finish();
     }
@@ -198,20 +202,27 @@ public class AddCarActivity extends AppCompatActivity {
                 else {
                     Car car = new Car(make, model, year, highWayE, cityE, fuelType, carName);
                     Intent intent;
-                    if(getIntent().getExtras() == null) {
+                    if(carChangePosition == -1) {
                         CarbonModel.getInstance().addCar(car);
                         CarbonModel.getInstance().getDb().insertCarRow(car);
-                        CarbonModel.getInstance().getLastJourney().setCar(car);
+                        if (edit_journey == 0) {
+                            CarbonModel.getInstance().getLastJourney().setCar(car);
+                            // update database?
+                        }
+                        else {
+                            CarbonModel.getInstance().getJourneyCollection().getJourney(edit_journey_postition).setCar(car);
+                            // Update Database
+                        }
                         intent = new Intent(AddCarActivity.this, SelectRouteActivity.class);
                     }
                     else {
-                        //String originalName = CarbonModel.getInstance().getCar(carChangePosition).getNickname();
                         CarbonModel.getInstance().changeCar(car, carChangePosition);
                         CarbonModel.getInstance().getDb().updateCarRow(tempCar,car);
                         CarbonModel.getInstance().getDb().updateCarInJourney(tempCar,car);
-                        //CarbonModel.getInstance().changeCarInJourney(tempCar, car);
                         intent = new Intent(AddCarActivity.this, SelectCarActivity.class);
                     }
+                    intent.putExtra(getResources().getString(R.string.EDIT_JOURNEY),edit_journey);
+                    intent.putExtra(getResources().getString(R.string.EDIT_JOURNEY_POSITION),edit_journey_postition);
                     startActivity(intent);
                     finish();
                 }
@@ -221,8 +232,8 @@ public class AddCarActivity extends AppCompatActivity {
 
     private void extractDataFromIntent() {
         tempCar = new Car();
-        carChangePosition = getIntent().getIntExtra("carIndex", 0);
         tempCar = CarbonModel.getInstance().getCar(carChangePosition);
+        carName = CarbonModel.getInstance().getCar(carChangePosition).getNickname();
     }
 }
 

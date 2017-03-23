@@ -22,7 +22,6 @@
         <activity android:name="com.sfu276assg1.yancao.UI.AddRouteActivity" />
         <activity android:name="com.sfu276assg1.yancao.UI.DisplayCarbonFootprintActivity" />
         <activity android:name="com.sfu276assg1.yancao.UI.DisplayTableActivity" />
-        <activity android:name="com.sfu276assg1.yancao.UI.DisplayTable" />
         <activity android:name="com.sfu276assg1.yancao.UI.SelectTransModeActivity" />
         <activity android:name="com.sfu276assg1.yancao.UI.MonthlyUtilitiesActivity" />
         <activity android:name="com.sfu276assg1.yancao.UI.AddBillActivity" />

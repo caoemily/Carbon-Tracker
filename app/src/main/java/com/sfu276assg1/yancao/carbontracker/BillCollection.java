@@ -61,7 +61,7 @@ public class BillCollection {
                 Date d1 = format.parse(bill.getStartDate());
                 Date d2 = format.parse(bill.getEndDate());
 
-                if (testDate.after(d1) || testDate.before(d2)) {
+                if (!(testDate.before(d1) || testDate.after(d2))) {
                     return bill.getElectricityCarbonEmission();
                 }
             } catch (ParseException e) {}
@@ -76,7 +76,7 @@ public class BillCollection {
                 Date d1 = format.parse(bill.getStartDate());
                 Date d2 = format.parse(bill.getEndDate());
 
-                if (testDate.after(d1) || testDate.before(d2)) {
+                if (!(testDate.before(d1) || testDate.after(d2))) {
                     return bill.getGasCarbonEmission();
                 }
             } catch (ParseException e) {}

@@ -34,12 +34,16 @@ public class SelectCarActivity extends AppCompatActivity {
     private ArrayList<Car> cars = new ArrayList<>();
     ArrayAdapter<String> adapter;
     ListView list;
+    int edit_journey;
+    int edit_journey_postition;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_car);
 
+        edit_journey = getIntent().getIntExtra(getResources().getString(R.string.EDIT_JOURNEY), 0);
+        edit_journey_postition = getIntent().getIntExtra(getResources().getString(R.string.EDIT_JOURNEY_POSITION), 0);
         list = (ListView) findViewById(R.id.listView_carList);
         registerForContextMenu(list);
         readDataFromFile();
@@ -50,9 +54,16 @@ public class SelectCarActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(SelectCarActivity.this, SelectTransModeActivity.class);
-        startActivity(intent);
-        finish();
+        if (edit_journey == 0) {
+            Intent intent = new Intent(SelectCarActivity.this, SelectTransModeActivity.class);
+            startActivity(intent);
+            finish();
+        }
+        else {
+            Intent intent = new Intent(SelectCarActivity.this, DisplayTableActivity.class);
+            startActivity(intent);
+            finish();
+        }
     }
 
     private void setLaunchNewCar() {
@@ -61,6 +72,8 @@ public class SelectCarActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), AddCarActivity.class);
+                intent.putExtra(getResources().getString(R.string.EDIT_JOURNEY), edit_journey);
+                intent.putExtra(getResources().getString(R.string.EDIT_JOURNEY_POSITION), edit_journey_postition);
                 startActivity(intent);
                 finish();
             }
@@ -143,6 +156,8 @@ public class SelectCarActivity extends AppCompatActivity {
             case R.id.edit:
                 Intent intent = new Intent(getApplicationContext(), AddCarActivity.class);
                 intent.putExtra("carIndex", info.position);
+                intent.putExtra(getResources().getString(R.string.EDIT_JOURNEY), edit_journey);
+                intent.putExtra(getResources().getString(R.string.EDIT_JOURNEY_POSITION), edit_journey_postition);
                 startActivity(intent);
                 finish();
             default:
@@ -159,8 +174,20 @@ public class SelectCarActivity extends AppCompatActivity {
                 String message = "You have chosen:  " + textView.getText().toString();
                 Toast.makeText(getApplicationContext(),message,Toast.LENGTH_LONG).show();
                 Car car = CarbonModel.getInstance().getCar(position);
-                CarbonModel.getInstance().getLastJourney().setCar(car);
-                startActivity(new Intent(getApplicationContext(),SelectRouteActivity.class));
+                Car tempCar = CarbonModel.getInstance().getJourneyCollection().getJourney(edit_journey_postition).getCar();
+                Intent intent;
+                if (edit_journey == 0) {
+                    CarbonModel.getInstance().getLastJourney().setCar(car);
+                    //Dont u add car into database?
+                }
+                else {
+                    CarbonModel.getInstance().getJourneyCollection().getJourney(edit_journey_postition).setCar(car);
+                    // update database
+                }
+                intent = new Intent(getApplicationContext(),SelectRouteActivity.class);
+                intent.putExtra(getResources().getString(R.string.EDIT_JOURNEY), edit_journey);
+                intent.putExtra(getResources().getString(R.string.EDIT_JOURNEY_POSITION), edit_journey_postition);
+                startActivity(intent);
                 finish();
             }
         });
