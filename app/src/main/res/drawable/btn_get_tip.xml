@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- This is defines is a button when clicked -->
+    <item android:drawable="@drawable/get_tip2"
+        android:state_pressed="true"/>
+
+    <!-- This is defines is a button when focused -->
+    <item android:drawable="@drawable/get_tip2"
+        android:state_pressed="true"/>
+
+    <!-- This is defines is a button when normal -->
+    <item android:drawable="@drawable/get_tip1" />
+
+</selector>
