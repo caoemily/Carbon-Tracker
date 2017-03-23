@@ -6,7 +6,8 @@ import java.util.Calendar;
 import java.util.Date;
 
 /**
- * Created by vu on 2017-03-22.
+ * Construct an object of Data for one full month which include total emission for car, for public
+ * transportation and utilities
  */
 
 public class DataForOneMonth {

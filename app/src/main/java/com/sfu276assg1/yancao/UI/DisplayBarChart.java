@@ -34,12 +34,17 @@ import java.util.GregorianCalendar;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Display bar chart of all travelled journeys in 28 days
+ */
+
 public class DisplayBarChart extends AppCompatActivity {
     BarChart barChart;
     private JourneyCollection journeyCollection = CarbonModel.getInstance().getJourneyCollection();
     private ArrayList<Journey> journeys = new ArrayList<>();
     private int numberOfDaysToGoBack = 28;
     private float totalCarbonUtilities = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,9 +70,7 @@ public class DisplayBarChart extends AppCompatActivity {
         hs.addAll(nameOfEntries);
         nameOfEntries.clear();
         nameOfEntries.addAll(hs);
-        for(String name : nameOfEntries) {
-            Log.d("DEBUGGGGGG", name);
-        }
+
         for(int i = 0; i < nameOfEntries.size(); i++) {
             float sumOfCarbon = 0;
             if (!nameOfEntries.get(i).equals("walk") && !nameOfEntries.get(i).equals("public")) {
@@ -89,9 +92,6 @@ public class DisplayBarChart extends AppCompatActivity {
         }
         nameOfEntries.add("Utilities");
         emissions.add(totalCarbonUtilities);
-        for (Float emission : emissions) {
-            Log.d("DEBUGGGG", "" + emission);
-        }
 
         ArrayList<BarEntry> barEntries = new ArrayList<>();
         for(int i = 0; i < emissions.size(); i++) {
@@ -108,7 +108,7 @@ public class DisplayBarChart extends AppCompatActivity {
         barChart.setTouchEnabled(true);
         barChart.animateXY(2000, 2000);
         Description description = new Description();
-        description.setText("CO2 in the past 28 days");
+        description.setText("CO2 in the past month");
         barChart.setDescription(description);
         barChart.invalidate();
 
@@ -122,11 +122,6 @@ public class DisplayBarChart extends AppCompatActivity {
             }
         }
 
-        for(String name : nameOfEntriesDisplay) {
-            Log.d("DEBUGGG", name);
-
-        }
-        Log.d("SIZEEEE", "" + nameOfEntriesDisplay.size());
         final XAxis xAxis = barChart.getXAxis();
         xAxis.setGranularity(1f);
         xAxis.setGranularityEnabled(true);
@@ -137,15 +132,11 @@ public class DisplayBarChart extends AppCompatActivity {
 
         YAxis rightAxis = barChart.getAxisRight();
         rightAxis.setEnabled(false);
-
-
-
     }
 
     private void generateData() {
         Intent intent = getIntent();
         String dateInString = intent.getStringExtra("today");
-        //String dateInString = "2017-03-10";
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         Date today;
         Date today28;
@@ -155,7 +146,6 @@ public class DisplayBarChart extends AppCompatActivity {
             cal.setTime(today);
             cal.add(Calendar.DAY_OF_MONTH, -numberOfDaysToGoBack);
             today28 = cal.getTime();
-            Log.d("DEBUG TODAY 30", "" + today28);
             for(int i = 0; i < journeyCollection.countJourneys(); i++) {
                 Date date = df.parse(journeyCollection.getJourney(i).getDate());
                 if(!(date.before(today28) || date.after(today))) {
@@ -166,7 +156,6 @@ public class DisplayBarChart extends AppCompatActivity {
                 cal.setTime(today);
                 cal.add(Calendar.DAY_OF_MONTH, -j);
                 Date currentDay = cal.getTime();
-                Log.d("DEBUG DATE PLEASE", ""+ currentDay);
                 String currentDayInString = df.format(currentDay);
                 float currentDayCarbon = (float)CarbonModel.getInstance().getBillCollection().getTotalCarbonEmission(currentDayInString);
                 totalCarbonUtilities += currentDayCarbon;
@@ -174,10 +163,5 @@ public class DisplayBarChart extends AppCompatActivity {
         }catch (ParseException e) {
 
         }
-
-        for(Journey journey : journeys) {
-            Log.d("DEBUGG DATE IN RANGE", "" + journey.getCar().getMake());
-        }
     }
-
 }

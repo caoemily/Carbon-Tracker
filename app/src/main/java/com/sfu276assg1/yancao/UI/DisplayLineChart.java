@@ -9,7 +9,9 @@ import android.view.MotionEvent;
 import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
@@ -35,12 +37,16 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
+/**
+ * Display line chart for Carbon emissions in 12 months.
+ */
 public class DisplayLineChart extends AppCompatActivity {
 
     private JourneyCollection journeyCollection = CarbonModel.getInstance().getJourneyCollection();
     private ArrayList<Journey> journeys = new ArrayList<>();
     private ArrayList<DataForOneMonth> dataForYear = new ArrayList<>();
     LineChart lineChart;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,25 +62,22 @@ public class DisplayLineChart extends AppCompatActivity {
     private void generateLineChart() {
         lineChart = (LineChart) findViewById(R.id.lineChart);
 
-        ArrayList<String> xAxis = new ArrayList<>();
+        ArrayList<String> monthToDisplay = new ArrayList<>();
         ArrayList<Entry> yAxisCar = new ArrayList<>();
         ArrayList<Entry> yAxisPublicTransportation = new ArrayList<>();
         ArrayList<Entry> yAxisUtilities = new ArrayList<>();
         for (int i = 0; i < dataForYear.size(); i++) {
             yAxisCar.add(new Entry(i, dataForYear.get(i).getTotalCarbonForCar()));
-            xAxis.add(i, String.valueOf(dataForYear.get(i).getMonth()));
+            monthToDisplay.add(i, String.valueOf(dataForYear.get(i).getMonth()));
         }
 
 
         for (int i = 0; i < dataForYear.size(); i++) {
             yAxisPublicTransportation.add(new Entry(i, dataForYear.get(i).getTotalCarbonForPublic()));
-            //    xAxis.add(i, String.valueOf(num));
         }
 
         for (int i = 0; i < dataForYear.size(); i++) {
             yAxisUtilities.add(new Entry(i, dataForYear.get(i).getTotalCarbonUtilities()));
-            //   xAxis.add(i, String.valueOf(num));
-            //   num = num + 25;
         }
 
         Collections.sort(yAxisCar, new EntryXComparator());
@@ -102,10 +105,16 @@ public class DisplayLineChart extends AppCompatActivity {
         lineDataSets.add(lineDataSet3);
 
         lineChart.setData(new LineData(lineDataSets));
-
-        lineChart.setVisibleXRangeMaximum(10f);
+        lineChart.animateXY(2000, 2000);
+        lineChart.setVisibleXRangeMaximum(10.5f);
+        Description description = new Description();
+        description.setText(" ");
+        lineChart.setDescription(description);
         final XAxis axis = lineChart.getXAxis();
         axis.setAxisMaximum((float) yAxisCar.size());
+
+        YAxis rightAxis = lineChart.getAxisRight();
+        rightAxis.setEnabled(false);
 
         lineChart.setOnChartGestureListener(new OnChartGestureListener() {
             @Override
@@ -131,7 +140,6 @@ public class DisplayLineChart extends AppCompatActivity {
             @Override
             public void onChartSingleTapped(MotionEvent me) {
                 final Entry entry = lineChart.getEntryByTouchPoint(me.getX(), me.getY());
-                Log.d("DEBUG ENTRY", "X position :" + entry.getX() + " Y position:" + entry.getY() + " Last Day: " + dataForYear.get((int)entry.getX()).getLastDayOfMonth());
                 Intent intent = new Intent(DisplayLineChart.this, DisplayBarChart.class);
                 String lastDayOfMonth = dataForYear.get((int)entry.getX()).getLastDayOfMonth();
                 intent.putExtra("today",lastDayOfMonth);
@@ -174,16 +182,13 @@ public class DisplayLineChart extends AppCompatActivity {
             cal.setTime(today);
             cal.add(Calendar.DAY_OF_MONTH, -365);
             today365 = cal.getTime();
-            Log.d("DEBUG TODAY 30", "" + today365);
             for(int i = 0; i < journeyCollection.countJourneys(); i++) {
                 Date date = df.parse(journeyCollection.getJourney(i).getDate());
                 if(!(date.before(today365) || date.after(today))) {
                     journeys.add(journeyCollection.getJourney(i));
                 }
             }
-        }catch (ParseException e) {
-
-        }
+        }catch (ParseException e) {}
 
         for(int i = 0; i < 12; i++) {
             dataForYear.add(new DataForOneMonth(month, year));
@@ -201,18 +206,15 @@ public class DisplayLineChart extends AppCompatActivity {
                 DateFormat formatDate = new SimpleDateFormat("yyyy-MM-dd");
                 int journeyMonth = 0;
                 int journeyYear = 0;
-                Log.d("I AM HERE 1", "HELLO");
                 try {
                     Date theDate = formatDate.parse(journeys.get(i).getDate());
                     DateTime dateTime = new DateTime(theDate);
                     journeyMonth = Integer.parseInt(dateTime.toString("MM"));
                     journeyYear = Integer.parseInt(dateTime.toString("yyyy"));
-                    Log.d("I AM HERE 2", "HELLO2222");
                 }catch (ParseException e) {}
                 if (data.getMonth() == journeyMonth && data.getYear() == journeyYear) {
                     if (journeys.get(i).getRoute().getType().equals("drive")) {
                         carbonForCar += Float.parseFloat(journeys.get(i).calculateCarbon());
-                        Log.d("Debug", "" + carbonForCar);
                     }else if (journeys.get(i).getRoute().getType().equals("public")) {
                         carbonForPublic += Float.parseFloat(journeys.get(i).calculateCarbon());
                     }
@@ -240,21 +242,9 @@ public class DisplayLineChart extends AppCompatActivity {
                     totalCarbonUtilities += currentDayCarbon;
                     cal.add(Calendar.DAY_OF_MONTH, +1);
                     currentDate = cal.getTime();
-                    Log.d("DEBUG DATE PLEASE", "" + currentDate);
                 }
                 dataForYear.get(i).setTotalCarbonUtilities(totalCarbonUtilities);
             }catch(ParseException e) {}
-        }
-        for (DataForOneMonth data : dataForYear) {
-            Log.d("DEBUGG DATA FOR", "" + data.getMonth() + "" + data.getYear());
-        }
-
-        for (DataForOneMonth data : dataForYear) {
-            Log.d("DEBUGG CARBON", "" + data.getMonth() + "" + data.getYear() + " " + "Car: " + data.getTotalCarbonForCar()
-                                        + " Public: " + data.getTotalCarbonForPublic() + " Utilities: " + data.getTotalCarbonUtilities());
-        }
-        for(Journey journey : journeys) {
-            Log.d("DEBUGG DATE IN RANGE", "" + journey.getCar().getMake() + " "+ journey.getDate());
         }
     }
 }

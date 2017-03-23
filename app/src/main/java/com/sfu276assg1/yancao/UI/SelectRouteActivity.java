@@ -242,8 +242,7 @@ public class SelectRouteActivity extends AppCompatActivity {
         Double total_elect_carbon = CarbonModel.getInstance().getBillCollection().getElectricityCarbonEmission(reportDate);
         Double total_gas_carbon = CarbonModel.getInstance().getBillCollection().getGasCarbonEmission(reportDate);
 
-        for(i = 0; i < journeyCollection.countJourneys();i++)
-        {
+        for(i = 0; i < journeyCollection.countJourneys();i++) {
             if(journeyCollection.getJourney(i).getDate().equals(formatted) && !journeyCollection.getJourney(i).getCar().getNickname().equals(" "))
             {
                 double car_carbon = parseDouble(journeyCollection.getJourney(i).calculateCarbon());
@@ -251,8 +250,7 @@ public class SelectRouteActivity extends AppCompatActivity {
                 total_car_carbon = total_car_carbon + car_carbon;
             }
         }
-        if(total_car_carbon > total_util_carbon)
-        {
+        if(total_car_carbon > total_util_carbon) {
             car_array_index = getLastIndexFromSharedPrefCar();
             Math.round(total_car_carbon);
             String total_car_carbon_str = Double.toString(total_car_carbon);
@@ -287,26 +285,26 @@ public class SelectRouteActivity extends AppCompatActivity {
             }
         }
     }
-    private int getLastIndexFromSharedPrefCar()
-    {
+
+    private int getLastIndexFromSharedPrefCar() {
         SharedPreferences prefs = getSharedPreferences("car array", MODE_PRIVATE);
         int extractedValueCar = prefs.getInt("car array index", 0); //first time 0
         return extractedValueCar;
     }
-    private int getLastIndexFromSharedPrefElect()
-    {
+
+    private int getLastIndexFromSharedPrefElect() {
         SharedPreferences prefs = getSharedPreferences("electricity array", MODE_PRIVATE);
         int extractedValueElect = prefs.getInt("elect array index", 0); //first time 0
         return extractedValueElect;
     }
-    private int getLastIndexFromSharedPrefGas()
-    {
+
+    private int getLastIndexFromSharedPrefGas() {
         SharedPreferences prefs = getSharedPreferences("gas array", MODE_PRIVATE);
         int extractedValueGas = prefs.getInt("gas array index", 0); //first time 0
         return extractedValueGas;
     }
-    private void storeLastIndexCar()
-    {
+
+    private void storeLastIndexCar() {
         int val = car_array_index;
         SharedPreferences prefs = getSharedPreferences("car array", MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
@@ -315,8 +313,7 @@ public class SelectRouteActivity extends AppCompatActivity {
         editor.commit();
     }
 
-    private void storeLastIndexElect()
-    {
+    private void storeLastIndexElect() {
         int val = elect_array_index;
         SharedPreferences prefs = getSharedPreferences("elect array", MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
@@ -324,15 +321,12 @@ public class SelectRouteActivity extends AppCompatActivity {
         editor.putInt("elect array index", val );
         editor.commit();
     }
-    private void storeLastIndexGas()
-    {
+
+    private void storeLastIndexGas() {
         int val = gas_array_index;
         SharedPreferences prefs = getSharedPreferences("gas array", MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
-
         editor.putInt("gas array index", val );
         editor.commit();
     }
-
-
 }

@@ -20,11 +20,16 @@ import com.sfu276assg1.yancao.carbontracker.R;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * Activity to let user select to display single day, 28 days or a year of chart.
+ */
+
 public class SelectGraphActivity extends AppCompatActivity {
     private int year_x;
     private int month_x;
     private int date_x;
     static final int DIALOG_ID = 0;
+
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +62,6 @@ public class SelectGraphActivity extends AppCompatActivity {
                 String today = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
                 Intent intent = new Intent(SelectGraphActivity.this, DisplayBarChart.class);
                 intent.putExtra("today", today);
-                Log.d("DEBUG DAY FOR 28", today);
                 startActivity(intent);
             }
         });

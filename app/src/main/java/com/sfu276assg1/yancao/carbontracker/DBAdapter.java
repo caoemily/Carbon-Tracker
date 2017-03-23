@@ -7,7 +7,9 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-
+/**
+ * Data base to keep all the entry from the singleton
+ */
 public class DBAdapter {
 
     // For logging:
@@ -16,7 +18,7 @@ public class DBAdapter {
     // DB Fields
     public static final String KEY_ROWID = "_id";
     // Track DB version if a new version of your app changes the format.
-    public static final int DATABASE_VERSION = 21;
+    public static final int DATABASE_VERSION = 22;
 
 
     public static final String JOURNEY_DATE = "date";
