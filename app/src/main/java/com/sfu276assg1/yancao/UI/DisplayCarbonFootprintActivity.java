@@ -38,6 +38,7 @@ public class DisplayCarbonFootprintActivity extends AppCompatActivity {
 
     private JourneyCollection journeyCollection = CarbonModel.getInstance().getJourneyCollection();
     private ArrayList<Journey> journeys = new ArrayList<>();
+    private String chosenDate;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -105,7 +106,7 @@ public class DisplayCarbonFootprintActivity extends AppCompatActivity {
 
     private void generateInfoForChart() {
         Intent intent = getIntent();
-        String chosenDate = intent.getStringExtra("single date selected");
+        chosenDate = intent.getStringExtra("single date selected");
         //Log.d("Debugggg", chosenDate);
         if(intent.getIntExtra("mode", 0) == 0) {
             for(int i = 0; i < journeyCollection.countJourneys(); i++) {
@@ -168,7 +169,9 @@ public class DisplayCarbonFootprintActivity extends AppCompatActivity {
             for (int i = 0; i < journeys.size(); i++) {
                 xEntries.add(journeyCollection.getJourney(i).getCar().getMake());
             }
-
+            float carbonForUtilities = (float) CarbonModel.getInstance().getBillCollection().getTotalCarbonEmission(chosenDate);
+            yEntries.add(new PieEntry(carbonForUtilities, "Utilities"));
+            xEntries.add("Utilities");
             PieDataSet dataSet = new PieDataSet(yEntries, "Car Type");
             dataSet.setSliceSpace(2);
             dataSet.setValueTextSize(12);

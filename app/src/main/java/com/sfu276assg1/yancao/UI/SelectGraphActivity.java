@@ -16,6 +16,9 @@ import android.widget.Toast;
 
 import com.sfu276assg1.yancao.carbontracker.R;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class SelectGraphActivity extends AppCompatActivity {
     private int year_x;
     private int month_x;
@@ -29,6 +32,20 @@ public class SelectGraphActivity extends AppCompatActivity {
         generateRealTimeCalendar();
         setSingleDayButton();
         set28DaysButton();
+        set365DayButton();
+    }
+
+    private void set365DayButton() {
+        Button button = (Button) findViewById(R.id.display365Days);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String today = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+                Intent intent = new Intent(SelectGraphActivity.this, DisplayLineChart.class);
+                intent.putExtra("today", today);
+                startActivity(intent);
+            }
+        });
     }
 
     private void set28DaysButton() {
@@ -36,7 +53,10 @@ public class SelectGraphActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(SelectGraphActivity.this, DisplayBarChart.class));
+                String today = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+                Intent intent = new Intent(SelectGraphActivity.this, DisplayBarChart.class);
+                intent.putExtra("today", today);
+                startActivity(intent);
             }
         });
     }

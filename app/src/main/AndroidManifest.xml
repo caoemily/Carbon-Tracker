@@ -27,7 +27,8 @@
         <activity android:name="com.sfu276assg1.yancao.UI.MonthlyUtilitiesActivity" />
         <activity android:name="com.sfu276assg1.yancao.UI.AddBillActivity" />
         <activity android:name="com.sfu276assg1.yancao.UI.DisplayBarChart" />
-        <activity android:name="com.sfu276assg1.yancao.UI.SelectGraphActivity"></activity>
+        <activity android:name="com.sfu276assg1.yancao.UI.SelectGraphActivity" />
+        <activity android:name="com.sfu276assg1.yancao.UI.DisplayLineChart"></activity>
     </application>
 
 </manifest>

@@ -1,15 +1,21 @@
 package com.sfu276assg1.yancao.UI;
 
+import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
 import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.components.AxisBase;
+import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.formatter.LargeValueFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
@@ -93,18 +99,16 @@ public class DisplayBarChart extends AppCompatActivity {
         BarData data = new BarData(barDataSet);
         data.setBarWidth(0.4f);
         data.setValueFormatter(new LargeValueFormatter());
-        barChart.setDescription(null);
-        barChart.setDragEnabled(true);
-        barChart.setScaleEnabled(false);
-        barChart.setDrawBarShadow(false);
-        barChart.setDrawGridBackground(false);
         barChart.setData(data);
         barChart.setFitBars(true);
         barChart.setTouchEnabled(true);
         barChart.animateXY(2000, 2000);
+        Description description = new Description();
+        description.setText("CO2 in the past 28 days");
+        barChart.setDescription(description);
         barChart.invalidate();
 
-        ArrayList<String> nameOfEntriesDisplay = new ArrayList<>();
+        final ArrayList<String> nameOfEntriesDisplay = new ArrayList<>();
         for(String name : nameOfEntries) {
             if(!name.equals("walk") && !name.equals("public")) {
                 String[] splitName = name.split(",");
@@ -116,22 +120,27 @@ public class DisplayBarChart extends AppCompatActivity {
 
         for(String name : nameOfEntriesDisplay) {
             Log.d("DEBUGGG", name);
+
         }
-        XAxis xAxis = barChart.getXAxis();
+        Log.d("SIZEEEE", "" + nameOfEntriesDisplay.size());
+        final XAxis xAxis = barChart.getXAxis();
         xAxis.setGranularity(1f);
         xAxis.setGranularityEnabled(true);
-        xAxis.setCenterAxisLabels(true);
         xAxis.setDrawGridLines(false);
-        xAxis.setAxisMaximum(nameOfEntries.size());
+        xAxis.setAxisMaximum((float) nameOfEntriesDisplay.size());
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         xAxis.setValueFormatter(new IndexAxisValueFormatter(nameOfEntriesDisplay));
+
+        YAxis rightAxis = barChart.getAxisRight();
+        rightAxis.setEnabled(false);
+
 
 
     }
 
     private void generateData() {
-
-        String dateInString = "2017-03-20";
+        Intent intent = getIntent();
+        String dateInString = intent.getStringExtra("today");
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         Date today;
         Date today28;
