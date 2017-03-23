@@ -47,14 +47,15 @@ public class AddRouteActivity extends AppCompatActivity {
 
     String[] tooMuchCar = {"Try to take the bike!", "Try to take the public transit", "Try to walk!",
             "Avoid areas with congested traffic!", "Plan out your journey so you don't get lost and waste fuel!",
-            "Keep your vehicles well maintained","Don't accelerate unnecessarily!"};
+            "Keep your vehicles well maintained!","Don't accelerate unnecessarily!", "Buy a fuel efficient car!"};
 
     String[] tooMuchElectricity = {"Turn off the lights when you can!", "Install Compact Fluorescent Bulbs to save energy!", "Wash your clothes with cold water!",
             "Set your refrigerator to the optimal temperature!", "Turn off your lights when you're not using it!", "Wash and dry full loads!", "Cut your heating needs!",
-            "Unplug unnecessary appliances!"};
+            "Unplug unnecessary appliances!", "Run your dishwasher only with a full load!"};
 
     String[] tooMuchGas = {"Insulate your house!", "Take quicker showers!", "Close off doors and vents in unused rooms to conserve heat within your home!",
-            "Upgrade your heating equipments!"};
+            "Upgrade your heating equipments!", "Don't let the water run!", "Install a programmable thermostat!", "Seal air leaks with caulk!", "Replace Any old Natural Gas Heaters!" };
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -368,7 +369,7 @@ public class AddRouteActivity extends AppCompatActivity {
 
 
             String car_trips_str = Integer.toString(car_trips);
-            String car_msg = "You have gone on "+car_trips_str+" trips today. And the amount of carbon emitted by your car today is: "+total_car_carbon_str+". "+tooMuchCar[car_array_index%7];
+            String car_msg = "You have gone on "+car_trips_str+" trips today. And the amount of carbon emitted by your car today is: "+total_car_carbon_str+". "+tooMuchCar[car_array_index%8];
 
 
             Toast.makeText(getApplicationContext(), car_msg, Toast.LENGTH_LONG).show();
@@ -390,7 +391,7 @@ public class AddRouteActivity extends AppCompatActivity {
 
 
                 String total_elect_carbon_str = Double.toString(total_elect_carbon);
-                String elect_msg = "The amount of carbon emission by electricity you have produced today is: "+total_elect_carbon_str+". "+tooMuchElectricity[elect_array_index%7];
+                String elect_msg = "The amount of carbon emission by electricity you have produced today is: "+total_elect_carbon_str+". "+tooMuchElectricity[elect_array_index%9];
 
                 Toast.makeText(getApplicationContext(), elect_msg, Toast.LENGTH_LONG).show();
 
@@ -407,7 +408,7 @@ public class AddRouteActivity extends AppCompatActivity {
                 Math.round(total_gas_carbon);
 
                 String total_gas_carbon_str = Double.toString(total_gas_carbon);
-                String gas_msg = "The amount of carbon emission by natural gas you have produced today is: "+total_gas_carbon_str+". "+tooMuchGas[gas_array_index%4];
+                String gas_msg = "The amount of carbon emission by natural gas you have produced today is: "+total_gas_carbon_str+". "+tooMuchGas[gas_array_index%8];
 
                 Toast.makeText(getApplicationContext(), gas_msg, Toast.LENGTH_LONG).show();
 
