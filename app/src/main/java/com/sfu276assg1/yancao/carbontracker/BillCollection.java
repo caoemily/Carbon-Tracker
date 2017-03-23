@@ -39,8 +39,7 @@ public class BillCollection {
     }
 
     public double getTotalCarbonEmission(String stringDate) {
-        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         for (Bill bill : bills) {
             try {
                 Date testDate = format.parse(stringDate);
@@ -55,8 +54,7 @@ public class BillCollection {
         return 0;
     }
     public double getElectricityCarbonEmission(String stringDate) {
-        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         for (Bill bill : bills) {
             try {
                 Date testDate = format.parse(stringDate);
@@ -71,8 +69,7 @@ public class BillCollection {
         return 0;
     }
     public double getGasCarbonEmission(String stringDate) {
-        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         for (Bill bill : bills) {
             try {
                 Date testDate = format.parse(stringDate);

@@ -50,4 +50,7 @@
     <string name="natural_gas_gj">Natural Gas (GJ)</string>
     <string name="TRANS_MODE">TransMode</string>
     <string name="edit_transportation_mode">Edit Transportation Mode</string>
+    <string name="single_day">Single Day</string>
+    <string name="_28_days">28 Days</string>
+    <string name="_365_days">365 Days</string>
 </resources>
