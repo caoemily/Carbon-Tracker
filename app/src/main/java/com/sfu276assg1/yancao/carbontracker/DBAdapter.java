@@ -16,7 +16,7 @@ public class DBAdapter {
     // DB Fields
     public static final String KEY_ROWID = "_id";
     // Track DB version if a new version of your app changes the format.
-    public static final int DATABASE_VERSION = 20;
+    public static final int DATABASE_VERSION = 21;
 
 
     public static final String JOURNEY_DATE = "date";
@@ -357,6 +357,34 @@ public class DBAdapter {
         ContentValues updateDate = new ContentValues();
         updateDate.put(JOURNEY_DATE,s);
         db.update(TABLE_JOURNEY,updateDate,where,null);
+    }
+
+    public void updateSingleCarInJourney(int index, Car update){
+        String where = KEY_ROWID + "='" + index +"'";
+        ContentValues updateCar = new ContentValues();
+        updateCar.put(CAR_NICKNAME, update.getNickname());
+        updateCar.put(CAR_MAKE, update.getMake());
+        updateCar.put(CAR_MODEL, update.getModel());
+        updateCar.put(CAR_YEAR, update.getYear());
+        updateCar.put(CAR_HIGHWAYE, update.getHighwayE());
+        updateCar.put(CAR_CITYE, update.getCityE());
+        updateCar.put(CAR_CYLINDER, update.getCylinders());
+        updateCar.put(CAR_DISPLACEMENT, update.getDisplacement());
+        updateCar.put(CAR_DRIVE, update.getDrive());
+        updateCar.put(CAR_FUELTYPE, update.getFuelType());
+        updateCar.put(CAR_DRIVE, update.getTransmission());
+        db.update(TABLE_JOURNEY,updateCar,where,null);
+    }
+
+    public void updateSingleRouteInJourney(int index, Route update){
+        String where = KEY_ROWID + "='" + index +"'";
+        ContentValues updateRoute = new ContentValues();
+        updateRoute.put(ROUTE_TYPE, update.getType());
+        updateRoute.put(ROUTE_NAME, update.getName());
+        updateRoute.put(ROUTE_DISTANCE,update.getDistance());
+        updateRoute.put(ROUTE_LOWE, update.getLowEDis());
+        updateRoute.put(ROUTE_HIGHE, update.getHighEDis());
+        db.update(TABLE_JOURNEY, updateRoute, where, null);
     }
 
     public void updateBillRow(int index, Bill update){

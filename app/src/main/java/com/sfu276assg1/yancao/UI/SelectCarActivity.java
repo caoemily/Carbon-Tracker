@@ -178,11 +178,10 @@ public class SelectCarActivity extends AppCompatActivity {
                 Intent intent;
                 if (edit_journey == 0) {
                     CarbonModel.getInstance().getLastJourney().setCar(car);
-                    //Dont u add car into database?
                 }
                 else {
                     CarbonModel.getInstance().getJourneyCollection().getJourney(edit_journey_postition).setCar(car);
-                    // update database
+                    CarbonModel.getInstance().getDb().updateSingleCarInJourney((edit_journey_postition+1),car);
                 }
                 intent = new Intent(getApplicationContext(),SelectRouteActivity.class);
                 intent.putExtra(getResources().getString(R.string.EDIT_JOURNEY), edit_journey);

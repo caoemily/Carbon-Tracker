@@ -154,7 +154,7 @@ public class SelectRouteActivity extends AppCompatActivity {
                 }
                 else {
                     CarbonModel.getInstance().getJourneyCollection().getJourney(edit_journey_postition).setRoute(route);
-                    // need to update in database
+                    CarbonModel.getInstance().getDb().updateSingleRouteInJourney((edit_journey_postition+1),route);
                     startActivity(new Intent(getApplicationContext(), DisplayTableActivity.class));
                 }
                 checkForType();

@@ -207,11 +207,10 @@ public class AddCarActivity extends AppCompatActivity {
                         CarbonModel.getInstance().getDb().insertCarRow(car);
                         if (edit_journey == 0) {
                             CarbonModel.getInstance().getLastJourney().setCar(car);
-                            // update database?
                         }
                         else {
                             CarbonModel.getInstance().getJourneyCollection().getJourney(edit_journey_postition).setCar(car);
-                            // Update Database
+                            CarbonModel.getInstance().getDb().updateSingleCarInJourney((edit_journey_postition+1),car);
                         }
                         intent = new Intent(AddCarActivity.this, SelectRouteActivity.class);
                     }

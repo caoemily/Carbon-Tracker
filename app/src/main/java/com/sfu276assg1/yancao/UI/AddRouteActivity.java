@@ -246,7 +246,7 @@ public class AddRouteActivity extends AppCompatActivity {
                     }
                     else {
                         CarbonModel.getInstance().getJourneyCollection().getJourney(edit_journey_postition).setRoute(currentRoute);
-                        // need to update in database
+                        CarbonModel.getInstance().getDb().updateSingleRouteInJourney((edit_journey_postition+1),currentRoute);
                         intent = new Intent(AddRouteActivity.this, DisplayTableActivity.class);
                         startActivity(intent);
                     }
