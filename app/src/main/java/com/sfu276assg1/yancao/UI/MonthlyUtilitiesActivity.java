@@ -109,7 +109,7 @@ public class MonthlyUtilitiesActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.delete:
                 CarbonModel.getInstance().removeBill(info.position);
-                CarbonModel.getInstance().getDb().deleteBillRow((info.position));
+                CarbonModel.getInstance().getDb().deleteBillRow((info.position + 1));
                 adapter.notifyDataSetChanged();
                 populateListView();
                 return true;
@@ -128,7 +128,7 @@ public class MonthlyUtilitiesActivity extends AppCompatActivity {
         list.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> parent, View viewClicked, int position, long id) {
-                String message = Double.toString(CarbonModel.getInstance().getBillCollection().getElectricityCarbonEmission("20/1/1993"));
+                String message = Double.toString(CarbonModel.getInstance().getBillCollection().getBill(position).getTotalCarbonEmission());
                 Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
             }
         });
