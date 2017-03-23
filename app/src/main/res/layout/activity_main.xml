@@ -105,4 +105,13 @@
         android:adjustViewBounds="true"
         app:srcCompat="@drawable/car1" />
 
+    <Button
+        android:id="@+id/nextTipsBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/utilitiesBtn"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="11dp"
+        android:text="Next Tip" />
+
 </RelativeLayout>

@@ -226,7 +226,7 @@ public class SelectRouteActivity extends AppCompatActivity {
         int i, car_trips = 0;
         double total_car_carbon = 0;
 
-        DateFormat df = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date today = Calendar.getInstance().getTime();
         String reportDate = df.format(today);
 

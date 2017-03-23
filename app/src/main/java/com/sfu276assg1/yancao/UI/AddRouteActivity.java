@@ -324,7 +324,7 @@ public class AddRouteActivity extends AppCompatActivity {
         int i, car_trips = 0;
         double total_car_carbon = 0;
 
-        DateFormat df = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date today = Calendar.getInstance().getTime();
         String reportDate = df.format(today);
 
@@ -352,6 +352,9 @@ public class AddRouteActivity extends AppCompatActivity {
 
 
         }
+
+        Log.d("Total Util", "This is the total utility: "+total_util_carbon);
+        Log.d("Total car", "This is the total car: "+total_car_carbon);
 
 
         if(total_car_carbon > total_util_carbon)
