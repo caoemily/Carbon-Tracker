@@ -15,7 +15,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.sfu276assg1.yancao.UI.MainActivity" />
         <activity android:name="com.sfu276assg1.yancao.UI.SelectCarActivity" />
         <activity android:name="com.sfu276assg1.yancao.UI.AddCarActivity" />
         <activity android:name="com.sfu276assg1.yancao.UI.SelectRouteActivity" />
@@ -27,7 +26,9 @@
         <activity android:name="com.sfu276assg1.yancao.UI.AddBillActivity" />
         <activity android:name="com.sfu276assg1.yancao.UI.DisplayBarChart" />
         <activity android:name="com.sfu276assg1.yancao.UI.SelectGraphActivity" />
-        <activity android:name="com.sfu276assg1.yancao.UI.DisplayLineChart"></activity>
+        <activity android:name="com.sfu276assg1.yancao.UI.DisplayLineChart" />
+        <activity android:name="com.sfu276assg1.yancao.UI.MainActivity" />
+        <activity android:name="com.sfu276assg1.yancao.UI.AppInfoActivity"></activity>
     </application>
 
 </manifest>

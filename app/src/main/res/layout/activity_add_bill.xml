@@ -80,11 +80,11 @@
         android:id="@+id/textView16"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Electricity (GWh):"
-        android:layout_marginBottom="81dp"
         android:layout_above="@+id/editPeople"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="81dp"
+        android:text="Electricity (kWh):" />
 
     <TextView
         android:id="@+id/textView15"

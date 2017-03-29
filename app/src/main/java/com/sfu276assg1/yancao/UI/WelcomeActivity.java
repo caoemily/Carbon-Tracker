@@ -39,7 +39,9 @@ public class WelcomeActivity extends AppCompatActivity {
 
         trans_car.setAnimationListener(new Animation.AnimationListener() {
             public void onAnimationEnd(Animation animation) {
-                startActivity(new Intent(WelcomeActivity.this, MainActivity.class));
+                Intent intent = new Intent(WelcomeActivity.this, MainActivity.class);
+                intent.putExtra("PreviousActivity", 0);
+                startActivity(intent);
                 finish();
             }
             public void onAnimationRepeat(Animation animation) {}
@@ -53,6 +55,7 @@ public class WelcomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(WelcomeActivity.this, MainActivity.class);
+                intent.putExtra("PreviousActivity", "Welcome");
                 startActivity(intent);
                 finish();
             }
