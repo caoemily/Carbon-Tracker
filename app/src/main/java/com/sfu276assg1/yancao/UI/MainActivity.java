@@ -147,21 +147,12 @@ public class MainActivity extends AppCompatActivity {
         if(previousActicity!=0){
             return;
         }
-        Dialog dialog = onCreateDialog(0);
+        Dialog dialog;
         String today = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
         JourneyCollection journeyCollection = CarbonModel.getInstance().getJourneyCollection();
         BillCollection billCollection = CarbonModel.getInstance().getBillCollection();
-        int journeyCount = 0, billCount =0;
-        for(int i=0; i<journeyCollection.countJourneys();i++){
-            if(today.equals(journeyCollection.getJourney(i).getDate())){
-                journeyCount++;
-            }
-        }
-        for(int i=0; i<billCollection.countBills();i++){
-            if(today.equals(billCollection.getBill(i).getRecordDate())){
-                billCount++;
-            }
-        }
+        int journeyCount = journeyCollection.countJourneyInOneDate(today);
+        int billCount = billCollection.countBillInOneDate(today);
 
         if(journeyCount==0&&billCount==0){
             dialog = onCreateDialog(0);

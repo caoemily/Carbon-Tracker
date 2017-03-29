@@ -49,6 +49,16 @@ public class JourneyCollection {
         }
     }
 
+    public int countJourneyInOneDate(String s){
+        int count =0;
+        for(int i=0; i<countJourneys();i++){
+            if(s.equals(getJourney(i).getDate())){
+                count++;
+            }
+        }
+        return count;
+    }
+
     public void changeRoute(Route tempRoute, Route route){
         for (int i = 0; i < countJourneys() - 1; i++) {
             if(getJourney(i).getRoute().equals(tempRoute)) {

@@ -38,6 +38,16 @@ public class BillCollection {
         bills.remove(index);
     }
 
+    public int countBillInOneDate(String s){
+        int count = 0;
+        for(int i=0; i<countBills();i++){
+            if(s.equals(getBill(i).getRecordDate())){
+                count++;
+            }
+        }
+        return count;
+    }
+
     public double getTotalCarbonEmission(String stringDate) {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         for (Bill bill : bills) {
