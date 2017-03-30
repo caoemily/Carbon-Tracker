@@ -63,6 +63,7 @@ public class BillCollection {
         }
         return 0;
     }
+
     public double getElectricityCarbonEmission(String stringDate) {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         for (Bill bill : bills) {

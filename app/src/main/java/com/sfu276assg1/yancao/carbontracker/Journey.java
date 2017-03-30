@@ -91,7 +91,7 @@ public class Journey implements Serializable {
     }
 
     public String calculateCarbonTreeYear(){
-        double treeYear = Double.parseDouble (calculateCarbon());
+        double treeYear = Double.parseDouble (calculateCarbon())/20;
         return String.format("%.2f", treeYear);
     }
 

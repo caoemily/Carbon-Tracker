@@ -1,5 +1,6 @@
 package com.sfu276assg1.yancao.UI;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -140,6 +141,8 @@ public class SelectRouteActivity extends AppCompatActivity {
                     CarbonModel.getInstance().getDb().updateSingleRouteInJourney((edit_journey_postition+1),route);
                     startActivity(new Intent(getApplicationContext(), DisplayTableActivity.class));
                 }
+
+                setupTips(getApplicationContext());
                 finish();
             }
         });
@@ -200,6 +203,70 @@ public class SelectRouteActivity extends AppCompatActivity {
             default:
                 return super.onContextItemSelected(item);
         }
+    }
+
+    static public void setupTips(Context context) {
+        JourneyCollection journeyCollection = CarbonModel.getInstance().getJourneyCollection();
+        BillCollection billCollection = CarbonModel.getInstance().getBillCollection();
+        int whichTip = CarbonModel.getInstance().showWhichTip(journeyCollection, billCollection);
+        int index = 0;
+        String tip = "";
+        switch (whichTip) {
+            case 0:
+                index = getLastIndexFromSharedPrefCar(context);
+                tip = CarbonModel.getInstance().generateCarTip(journeyCollection, index);
+                index++;
+                storeLastIndexCar(context,index);
+                break;
+            case 1:
+                index = getLastIndexFromSharedPrefElect(context);
+                tip = CarbonModel.getInstance().generateElecTip(billCollection, index);
+                index++;
+                storeLastIndexElect(context,index);
+                break;
+            case 2:
+                index = getLastIndexFromSharedPrefGas(context);
+                tip = CarbonModel.getInstance().generateGasTip(billCollection, index);
+                index++;
+                storeLastIndexGas(context,index);
+                break;
+        }
+        Toast.makeText(context, tip, Toast.LENGTH_LONG).show();
+        Toast.makeText(context, tip, Toast.LENGTH_LONG).show();
+    }
+
+    static public int getLastIndexFromSharedPrefCar(Context context) {
+        SharedPreferences prefs = context.getSharedPreferences("car array", MODE_PRIVATE);
+        int extractedValueCar = prefs.getInt("car array index", 0);
+        return extractedValueCar;
+    }
+    static public int getLastIndexFromSharedPrefElect(Context context) {
+        SharedPreferences prefs = context.getSharedPreferences("electricity array", MODE_PRIVATE);
+        int extractedValueElect = prefs.getInt("elect array index", 0);
+        return extractedValueElect;
+    }
+    static public int getLastIndexFromSharedPrefGas(Context context) {
+        SharedPreferences prefs = context.getSharedPreferences("gas array", MODE_PRIVATE);
+        int extractedValueGas = prefs.getInt("gas array index", 0);
+        return extractedValueGas;
+    }
+    static public void storeLastIndexCar(Context context, int index) {
+        SharedPreferences prefs = context.getSharedPreferences("car array", MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putInt("car array index", index);
+        editor.commit();
+    }
+    static public void storeLastIndexElect(Context context, int index) {
+        SharedPreferences prefs = context.getSharedPreferences("elect array", MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putInt("elect array index", index );
+        editor.commit();
+    }
+    static public void storeLastIndexGas(Context context, int index) {
+        SharedPreferences prefs = context.getSharedPreferences("gas array", MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putInt("gas array index", index );
+        editor.commit();
     }
 
 }

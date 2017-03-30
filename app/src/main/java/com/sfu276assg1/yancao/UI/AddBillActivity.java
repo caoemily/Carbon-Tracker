@@ -1,8 +1,12 @@
 package com.sfu276assg1.yancao.UI;
 
+import android.app.Dialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -221,6 +225,7 @@ public class AddBillActivity extends AppCompatActivity {
                         intent = new Intent(AddBillActivity.this, MonthlyUtilitiesActivity.class);
                     }
                     startActivity(intent);
+                    SelectRouteActivity.setupTips(getApplicationContext());
                     finish();
                 }
             }
@@ -236,4 +241,5 @@ public class AddBillActivity extends AppCompatActivity {
         people = CarbonModel.getInstance().getBill(position).getPeople();
         recordDate = CarbonModel.getInstance().getBill(position).getRecordDate();
     }
+
 }

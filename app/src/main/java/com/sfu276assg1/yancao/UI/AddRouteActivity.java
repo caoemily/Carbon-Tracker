@@ -243,6 +243,7 @@ public class AddRouteActivity extends AppCompatActivity {
                         startActivity(intent);
                     }
                     finish();
+                    SelectRouteActivity.setupTips(getApplicationContext());
                 }
                 else {
                     if(routeName.isEmpty()) {

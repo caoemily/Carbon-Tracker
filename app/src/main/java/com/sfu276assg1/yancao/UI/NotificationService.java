@@ -17,6 +17,10 @@ import com.sfu276assg1.yancao.carbontracker.R;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * Service to support notification while app is running or at background. Notification will pop up at 9:00.
+ */
+
 public class NotificationService extends Service {
 
     private final String SET_TIME = "9:00";

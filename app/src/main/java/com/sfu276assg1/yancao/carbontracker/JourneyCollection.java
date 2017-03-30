@@ -49,10 +49,10 @@ public class JourneyCollection {
         }
     }
 
-    public int countJourneyInOneDate(String s){
+    public int countJourneyInOneDate(String date){
         int count =0;
         for(int i=0; i<countJourneys();i++){
-            if(s.equals(getJourney(i).getDate())){
+            if(date.equals(getJourney(i).getDate())){
                 count++;
             }
         }
@@ -66,6 +66,18 @@ public class JourneyCollection {
             }
         }
     }
+
+    public double getJourneyCarbonInOneDay (String date){
+        double carbonEm = 0;
+        for(int i=0; i<countJourneys();i++){
+            if(date.equals(getJourney(i).getDate())){
+                carbonEm += Double.parseDouble(getJourney(i).calculateCarbon());
+            }
+        }
+        return carbonEm;
+    }
+
+
 
     private void validateIndexWithException(int index) {
         if (index < 0 || index >= countJourneys()) {
