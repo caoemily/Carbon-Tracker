@@ -69,6 +69,7 @@ public class DisplayLineChart extends AppCompatActivity {
         for (int i = 0; i < dataForYear.size(); i++) {
             yAxisCar.add(new Entry(i, dataForYear.get(i).getTotalCarbonForCar()));
             monthToDisplay.add(i, String.valueOf(dataForYear.get(i).getMonth()));
+            Log.d("DEBUGGGG", "" + dataForYear.get(i).getTotalCarbonForCar());
         }
 
 
@@ -106,7 +107,7 @@ public class DisplayLineChart extends AppCompatActivity {
 
         lineChart.setData(new LineData(lineDataSets));
         lineChart.animateXY(2000, 2000);
-        lineChart.setVisibleXRangeMaximum(10.5f);
+        lineChart.setVisibleXRangeMaximum(11f);
         Description description = new Description();
         description.setText(" ");
         lineChart.setDescription(description);
@@ -167,7 +168,7 @@ public class DisplayLineChart extends AppCompatActivity {
 
     private void generateDataForLineChart() {
         Intent intent = getIntent();
-        String dateInString = intent.getStringExtra("today");
+        String dateInString = intent.getStringExtra("today 365");
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         Date today;
         Date today365;
@@ -213,9 +214,9 @@ public class DisplayLineChart extends AppCompatActivity {
                     journeyYear = Integer.parseInt(dateTime.toString("yyyy"));
                 }catch (ParseException e) {}
                 if (data.getMonth() == journeyMonth && data.getYear() == journeyYear) {
-                    if (journeys.get(i).getRoute().getType().equals("drive")) {
+                    if (journeys.get(i).getRoute().getType().equals("Drive")) {
                         carbonForCar += Float.parseFloat(journeys.get(i).calculateCarbon());
-                    }else if (journeys.get(i).getRoute().getType().equals("public")) {
+                    }else if (journeys.get(i).getRoute().getType().equals("Public Transit")) {
                         carbonForPublic += Float.parseFloat(journeys.get(i).calculateCarbon());
                     }
                 }
