@@ -56,4 +56,23 @@
     <string name="_28_days">28 Days</string>
     <string name="_365_days">365 Days</string>
     <string name="info">Info</string>
+
+    <string name="NOTIFICATION_CONTENT_TITLE">Reduce CO2 emission together.</string>
+    <string name="NOTIFICATION_NOBILL_NOJOURNEY_PART1">You haven not entered any journey or bill today,</string>
+    <string name="NOTIFICATION_NOBILL_NOJOURNEY_PART2">do you want to enter one?</string>
+    <string name="NOTIFICATION_NOBILL_PART1">You have entered several journeys today,</string>
+    <string name="NOTIFICATION_NOBILL_PART2">do you want to enter a utility bill as well?</string>
+    <string name="NOTIFICATION_NOJOURNEY_PART1">You have entered utility bill today,</string>
+    <string name="NOTIFICATION_NOJOURNEY_PART2">do you want to enter a journey as well?</string>
+    <string name="NOTIFICATION_OTHER">Do you want to enter more journeys for today?</string>
+
+    <string name="SKYTRAIN">Skytrain</string>
+    <string name="BUS">Bus</string>
+    <string name="WALK">Walk</string>
+    <string name="BIKE">Bike</string>
+    <string name="TOTAL_DISTANCE_POSITIVE">Total distance must be positive.</string>
+    <string name="ENTER_ROUT_NAME">Please enter a name for the route.</string>
+
 </resources>
+
+

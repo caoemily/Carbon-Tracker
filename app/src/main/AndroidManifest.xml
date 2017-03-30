@@ -28,7 +28,12 @@
         <activity android:name="com.sfu276assg1.yancao.UI.SelectGraphActivity" />
         <activity android:name="com.sfu276assg1.yancao.UI.DisplayLineChart" />
         <activity android:name="com.sfu276assg1.yancao.UI.MainActivity" />
-        <activity android:name="com.sfu276assg1.yancao.UI.AppInfoActivity"></activity>
+        <activity android:name="com.sfu276assg1.yancao.UI.AppInfoActivity" />
+
+        <service
+            android:name="com.sfu276assg1.yancao.UI.NotificationService"
+            android:enabled="true"
+            android:exported="true" />
     </application>
 
 </manifest>

@@ -31,6 +31,10 @@ import java.util.ArrayList;
  */
 
 public class SelectCarActivity extends AppCompatActivity {
+
+    public final static int EDITJOURNEY_DEFAULT= 0;
+    public final static int EDITJOURNEY_POSITION_DEFAULT= 0;
+
     private ArrayList<Car> cars = new ArrayList<>();
     ArrayAdapter<String> adapter;
     ListView list;
@@ -42,14 +46,18 @@ public class SelectCarActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_car);
 
-        edit_journey = getIntent().getIntExtra(getResources().getString(R.string.EDIT_JOURNEY), 0);
-        edit_journey_postition = getIntent().getIntExtra(getResources().getString(R.string.EDIT_JOURNEY_POSITION), 0);
-        list = (ListView) findViewById(R.id.listView_carList);
+        setupInitials();
         registerForContextMenu(list);
         readDataFromFile();
         setLaunchNewCar();
         selectExistingCar();
         carList();
+    }
+
+    private void setupInitials() {
+        edit_journey = getIntent().getIntExtra(getResources().getString(R.string.EDIT_JOURNEY), EDITJOURNEY_DEFAULT);
+        edit_journey_postition = getIntent().getIntExtra(getResources().getString(R.string.EDIT_JOURNEY_POSITION), EDITJOURNEY_POSITION_DEFAULT);
+        list = (ListView) findViewById(R.id.listView_carList);
     }
 
     @Override
@@ -174,7 +182,6 @@ public class SelectCarActivity extends AppCompatActivity {
                 String message = "You have chosen:  " + textView.getText().toString();
                 Toast.makeText(getApplicationContext(),message,Toast.LENGTH_LONG).show();
                 Car car = CarbonModel.getInstance().getCar(position);
-                Car tempCar = CarbonModel.getInstance().getJourneyCollection().getJourney(edit_journey_postition).getCar();
                 Intent intent;
                 if (edit_journey == 0) {
                     CarbonModel.getInstance().getLastJourney().setCar(car);

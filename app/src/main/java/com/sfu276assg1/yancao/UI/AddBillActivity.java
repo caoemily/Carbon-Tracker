@@ -57,18 +57,6 @@ public class AddBillActivity extends AppCompatActivity {
         finish();
     }
 
-    private void setUpUtilitiesButton() {
-        Button button = (Button) findViewById(R.id.okBtn);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(AddBillActivity.this, MonthlyUtilitiesActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
-    }
-
     public void setDate() {
         EditText edit_startDate = (EditText) findViewById(R.id.editStartDate);
         edit_startDate.setText(startDate);

@@ -44,12 +44,7 @@ public class AddCarActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_car);
 
-        edit_journey = getIntent().getIntExtra(getResources().getString(R.string.EDIT_JOURNEY), 0);
-        edit_journey_postition = getIntent().getIntExtra(getResources().getString(R.string.EDIT_JOURNEY_POSITION), 0);
-        carChangePosition = getIntent().getIntExtra("carIndex", -1);
-        if(carChangePosition != -1) {
-            extractDataFromIntent();
-        }
+        setupInitials();
         setCarName();
         setupAcceptButton();
         setupMakeSpinner();
@@ -57,6 +52,15 @@ public class AddCarActivity extends AppCompatActivity {
         setupYearSpinner();
         generateListView();
         registerClickOnListViewItems();
+    }
+
+    private void setupInitials() {
+        edit_journey = getIntent().getIntExtra(getResources().getString(R.string.EDIT_JOURNEY), 0);
+        edit_journey_postition = getIntent().getIntExtra(getResources().getString(R.string.EDIT_JOURNEY_POSITION), 0);
+        carChangePosition = getIntent().getIntExtra("carIndex", -1);
+        if(carChangePosition != -1) {
+            extractDataFromIntent();
+        }
     }
 
     @Override
