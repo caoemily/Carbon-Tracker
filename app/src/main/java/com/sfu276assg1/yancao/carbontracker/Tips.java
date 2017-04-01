@@ -42,7 +42,8 @@ public class Tips {
                     "Avoid areas with congested traffic!", "Plan out your journey so you don't get lost and waste fuel!",
                     "Keep your vehicles well maintained!","Don't accelerate unnecessarily!", "Buy a fuel efficient car!"};
             int arraySize = tooMuchCar.length;
-            String journeyCarbon = Double.toString(journeyCollection.getJourneyCarbonInOneDay(date));
+            Double journeyCarNum = (double)Math.round (journeyCollection.getJourneyCarbonInOneDay(date)*10/10);
+            String journeyCarbon = Double.toString(journeyCarNum);
             String journeyNum = Integer.toString(CarbonModel.getInstance().getJourneyCollection().countJourneyInOneDate(date));
             String tip = "You have gone on "+ journeyNum +" trip(s) today. And the amount of carbon emitted by your car today is: "+journeyCarbon+" kg. "+tooMuchCar[index%arraySize];
             return tip;
@@ -53,7 +54,8 @@ public class Tips {
                     "Set your refrigerator to the optimal temperature!", "Turn off your lights when you're not using it!", "Wash and dry full loads!", "Cut your heating needs!",
                     "Unplug unnecessary appliances!", "Run your dishwasher only with a full load!"};
             int arraySize = tooMuchElectricity.length;
-            String electricityCarbon = Double.toString(billCollection.getElectricityCarbonEmission(date));
+            Double elecCarNum = (double)Math.round (billCollection.getElectricityCarbonEmission(date)*10/10);
+            String electricityCarbon = Double.toString(elecCarNum);
             String tip = "The amount of carbon emission by electricity you have produced today is: "+electricityCarbon+" kg. "+tooMuchElectricity[index%arraySize];
             return tip;
         }
@@ -62,7 +64,8 @@ public class Tips {
             String[] tooMuchGas = {"Insulate your house!", "Take quicker showers!", "Close off doors and vents in unused rooms to conserve heat within your home!",
                     "Upgrade your heating equipments!", "Don't let the water run!", "Install a programmable thermostat!", "Seal air leaks with caulk!", "Replace Any old Natural Gas Heaters!" };
             int arraySize = tooMuchGas.length;
-            String gasCarbon = Double.toString(billCollection.getGasCarbonEmission(date));
+            Double gasCarNum = (double)Math.round (billCollection.getGasCarbonEmission(date)*10/10);
+            String gasCarbon = Double.toString(gasCarNum);
             String tip = "The amount of carbon emission by natural gas you have produced today is: "+gasCarbon+" kg. "+tooMuchGas[index%arraySize];
             return tip;
         }

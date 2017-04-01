@@ -1,8 +1,11 @@
 package com.sfu276assg1.yancao.UI;
 
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -45,6 +48,7 @@ public class AddRouteActivity extends AppCompatActivity {
     int mode = 0;
     int edit_journey;
     int edit_journey_postition;
+    String currentTip = "";
 
 
     @Override
@@ -233,17 +237,13 @@ public class AddRouteActivity extends AppCompatActivity {
                     if (edit_journey == 0) {
                         CarbonModel.getInstance().getLastJourney().setRoute(currentRoute);
                         CarbonModel.getInstance().getDb().insertRowJourney(CarbonModel.getInstance().getLastJourney());
-                        intent = new Intent(AddRouteActivity.this, MainActivity.class);
-                        startActivity(intent);
                     }
                     else {
                         CarbonModel.getInstance().getJourneyCollection().getJourney(edit_journey_postition).setRoute(currentRoute);
                         CarbonModel.getInstance().getDb().updateSingleRouteInJourney((edit_journey_postition+1),currentRoute);
-                        intent = new Intent(AddRouteActivity.this, DisplayTableActivity.class);
-                        startActivity(intent);
                     }
-                    finish();
-                    SelectRouteActivity.setupTips(getApplicationContext());
+                    currentTip = SelectRouteActivity.setupTips(getApplicationContext());
+                    showDialog(currentTip);
                 }
                 else {
                     if(routeName.isEmpty()) {
@@ -318,6 +318,40 @@ public class AddRouteActivity extends AppCompatActivity {
                 routeName = CarbonModel.getInstance().getWalkRoute(routeChangePosition).getName();
                 break;
         }
+    }
+
+    private void showDialog(String theTip){
+        Dialog dialog = onCreateDialog(theTip);
+        dialog.show();
+    }
+
+    private Dialog onCreateDialog(String theTip) {
+        final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setTitle("Tips")
+                .setMessage(theTip)
+                .setCancelable(false)
+                .setPositiveButton("Next Tip",new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog,int id) {
+                        currentTip = SelectRouteActivity.setupTips(getApplicationContext());
+                        showDialog(currentTip);
+                    }
+                })
+                .setNegativeButton("Skip",new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog,int id) {
+                        AddRouteActivity.this.finish();
+                        if (edit_journey == 0){
+                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                            startActivity(intent);
+                        }
+                        else{
+                            Intent intent = new Intent(getApplicationContext(), DisplayTableActivity.class);
+                            startActivity(intent);
+                        }
+                    }
+                });
+        return alertDialogBuilder.create();
     }
 
 }

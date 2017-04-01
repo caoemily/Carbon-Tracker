@@ -40,6 +40,7 @@ public class SelectRouteActivity extends AppCompatActivity {
     int edit_journey;
     int edit_journey_postition;
     String type = "";
+    String currentTip = "";
 
 
     @Override
@@ -137,16 +138,18 @@ public class SelectRouteActivity extends AppCompatActivity {
                 if (edit_journey == 0) {
                     CarbonModel.getInstance().getLastJourney().setRoute(route);
                     CarbonModel.getInstance().getDb().insertRowJourney(CarbonModel.getInstance().getLastJourney());
-                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+
+                    //startActivity(new Intent(getApplicationContext(), MainActivity.class));
                 }
                 else {
                     CarbonModel.getInstance().getJourneyCollection().getJourney(edit_journey_postition).setRoute(route);
                     CarbonModel.getInstance().getDb().updateSingleRouteInJourney((edit_journey_postition+1),route);
-                    startActivity(new Intent(getApplicationContext(), DisplayTableActivity.class));
+                    //startActivity(new Intent(getApplicationContext(), DisplayTableActivity.class));
                 }
 
-                setupTips(getApplicationContext());
-                finish();
+                currentTip = setupTips(getApplicationContext());
+                showDialog(currentTip);
+                //finish();
             }
         });
     }
@@ -208,6 +211,40 @@ public class SelectRouteActivity extends AppCompatActivity {
         }
     }
 
+    private void showDialog(String theTip){
+        Dialog dialog = onCreateDialog(theTip);
+        dialog.show();
+    }
+
+    private Dialog onCreateDialog(String theTip) {
+        final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setTitle("Tips")
+                .setMessage(theTip)
+                .setCancelable(false)
+                .setPositiveButton("Next Tip",new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog,int id) {
+                        currentTip = setupTips(getApplicationContext());
+                        showDialog(currentTip);
+                    }
+                })
+                .setNegativeButton("Skip",new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog,int id) {
+                        SelectRouteActivity.this.finish();
+                        if (edit_journey == 0){
+                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                            startActivity(intent);
+                        }
+                        else{
+                            Intent intent = new Intent(getApplicationContext(), DisplayTableActivity.class);
+                            startActivity(intent);
+                        }
+                    }
+                });
+        return alertDialogBuilder.create();
+    }
+
     static public String setupTips(Context context) {
         JourneyCollection journeyCollection = CarbonModel.getInstance().getJourneyCollection();
         BillCollection billCollection = CarbonModel.getInstance().getBillCollection();
@@ -234,8 +271,6 @@ public class SelectRouteActivity extends AppCompatActivity {
                 storeLastIndexGas(context,index);
                 break;
         }
-        Toast.makeText(context, tip, Toast.LENGTH_LONG).show();
-        Toast.makeText(context, tip, Toast.LENGTH_LONG).show();
         return tip;
     }
 

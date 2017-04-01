@@ -70,7 +70,7 @@ public class NotificationService extends Service {
         else if(journeyCount>0 && (!isBill)){
             notification[0] = getResources().getString(R.string.NOTIFICATION_NOBILL_PART1);
             notification[1] = getResources().getString(R.string.NOTIFICATION_NOBILL_PART2);
-            intent = new Intent(getApplicationContext(),MonthlyUtilitiesActivity.class);
+            intent = new Intent(getApplicationContext(),AddBillActivity.class);
         }
         else {
             notification[0] = getResources().getString(R.string.NOTIFICATION_OTHER);

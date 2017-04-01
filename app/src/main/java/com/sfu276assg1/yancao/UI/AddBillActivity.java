@@ -33,6 +33,7 @@ import static java.lang.Double.parseDouble;
 public class AddBillActivity extends AppCompatActivity {
 
     String startDate = "", endDate = "", recordDate = "";
+    String currentTip = "";
     double gas, electricity;
     int people;
     int position;
@@ -211,22 +212,19 @@ public class AddBillActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Please enter the consumptions", Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    Intent intent;
+                    //Intent intent;
                     recordDate = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
                     Bill bill = new Bill(startDate, endDate, electricity, gas, people, recordDate);
                     if(getIntent().getExtras() == null) {
                         CarbonModel.getInstance().addBill(bill);
                         CarbonModel.getInstance().getDb().insertBillRow(bill);
-                        intent = new Intent(AddBillActivity.this, MonthlyUtilitiesActivity.class);
                     }
                     else {
                         CarbonModel.getInstance().changeBill(bill, position);
                         CarbonModel.getInstance().getDb().updateBillRow((position + 1),bill);
-                        intent = new Intent(AddBillActivity.this, MonthlyUtilitiesActivity.class);
                     }
-                    startActivity(intent);
-                    SelectRouteActivity.setupTips(getApplicationContext());
-                    finish();
+                    currentTip = SelectRouteActivity.setupTips(getApplicationContext());
+                    showDialog(currentTip);
                 }
             }
         });
@@ -240,6 +238,33 @@ public class AddBillActivity extends AppCompatActivity {
         gas = CarbonModel.getInstance().getBill(position).getGas();
         people = CarbonModel.getInstance().getBill(position).getPeople();
         recordDate = CarbonModel.getInstance().getBill(position).getRecordDate();
+    }
+
+    private void showDialog(String theTip){
+        Dialog dialog = onCreateDialog(theTip);
+        dialog.show();
+    }
+    private Dialog onCreateDialog(String theTip) {
+        final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setTitle("Tips")
+                .setMessage(theTip)
+                .setCancelable(false)
+                .setPositiveButton("Next Tip",new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog,int id) {
+                        currentTip = SelectRouteActivity.setupTips(getApplicationContext());
+                        showDialog(currentTip);
+                    }
+                })
+                .setNegativeButton("Skip",new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog,int id) {
+                        AddBillActivity.this.finish();
+                        Intent intent = new Intent(getApplicationContext(), MonthlyUtilitiesActivity.class);
+                        startActivity(intent);
+                    }
+                });
+        return alertDialogBuilder.create();
     }
 
 }
