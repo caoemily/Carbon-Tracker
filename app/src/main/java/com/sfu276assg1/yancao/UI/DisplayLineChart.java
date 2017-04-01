@@ -59,6 +59,13 @@ public class DisplayLineChart extends AppCompatActivity {
                         "Please click on the point to view each month in detail");
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(getApplicationContext(), SelectGraphActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
     private void generateLineChart() {
         lineChart = (LineChart) findViewById(R.id.lineChart);
 

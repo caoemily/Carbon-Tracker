@@ -1,10 +1,17 @@
 package com.sfu276assg1.yancao.carbontracker;
 
+import android.util.Log;
+
+import org.joda.time.Days;
+import org.joda.time.LocalDate;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Class to manage a collection of bills.
@@ -38,16 +45,6 @@ public class BillCollection {
         bills.remove(index);
     }
 
-    public int countBillInOneDate(String s){
-        int count = 0;
-        for(int i=0; i<countBills();i++){
-            if(s.equals(getBill(i).getRecordDate())){
-                count++;
-            }
-        }
-        return count;
-    }
-
     public double getTotalCarbonEmission(String stringDate) {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         for (Bill bill : bills) {
@@ -55,7 +52,6 @@ public class BillCollection {
                 Date testDate = format.parse(stringDate);
                 Date d1 = format.parse(bill.getStartDate());
                 Date d2 = format.parse(bill.getEndDate());
-
                 if (!(testDate.before(d1) || testDate.after(d2))) {
                     return bill.getTotalCarbonEmission();
                 }
@@ -79,6 +75,7 @@ public class BillCollection {
         }
         return 0;
     }
+
     public double getGasCarbonEmission(String stringDate) {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         for (Bill bill : bills) {
@@ -93,5 +90,26 @@ public class BillCollection {
             } catch (ParseException e) {}
         }
         return 0;
+    }
+
+    public boolean isBillInPrevious45days (){
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        for(int i= this.countBills()-1; i>=0; i--){
+            String recordDate = this.getBill(i).getRecordDate();
+            Date date = new Date();
+            Date today = new Date();
+            try {
+                date = format.parse(recordDate);
+            } catch (ParseException e) {}
+            if(getDateDiff(date, today, TimeUnit.DAYS)<=45){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public long getDateDiff(Date date1, Date date2, TimeUnit timeUnit) {
+        long diffInMillies = date2.getTime() - date1.getTime();
+        return timeUnit.convert(diffInMillies,TimeUnit.MILLISECONDS);
     }
 }

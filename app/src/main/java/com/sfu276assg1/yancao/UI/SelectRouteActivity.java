@@ -1,9 +1,13 @@
 package com.sfu276assg1.yancao.UI;
 
+import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.ContextMenu;
@@ -51,25 +55,6 @@ public class SelectRouteActivity extends AppCompatActivity {
         routeList();
 
     }
-
-    private void setupInitials(){
-        mode = getIntent().getIntExtra(getResources().getString(R.string.TRANS_MODE), AddRouteActivity.TRANSMODE_DEFAULT);
-        edit_journey = getIntent().getIntExtra(getResources().getString(R.string.EDIT_JOURNEY), SelectCarActivity.EDITJOURNEY_DEFAULT);
-        edit_journey_postition = getIntent().getIntExtra(getResources().getString(R.string.EDIT_JOURNEY_POSITION), SelectCarActivity.EDITJOURNEY_POSITION_DEFAULT);
-        list = (ListView) findViewById(R.id.listView_routeList);
-    }
-
-    private void setRouteType() {
-        switch(mode){
-            case 0: type += "Drive";
-                break;
-            case 1: type += "Public Transit";
-                break;
-            case 2: type += "Bile/Walk";
-                break;
-        }
-    }
-
     @Override
     public void onBackPressed() {
         if (edit_journey == 0) {
@@ -95,6 +80,24 @@ public class SelectRouteActivity extends AppCompatActivity {
             intent.putExtra(getResources().getString(R.string.EDIT_JOURNEY_POSITION), edit_journey_postition);
             startActivity(intent);
             finish();
+        }
+    }
+
+    private void setupInitials(){
+        mode = getIntent().getIntExtra(getResources().getString(R.string.TRANS_MODE), AddRouteActivity.TRANSMODE_DEFAULT);
+        edit_journey = getIntent().getIntExtra(getResources().getString(R.string.EDIT_JOURNEY), SelectCarActivity.EDITJOURNEY_DEFAULT);
+        edit_journey_postition = getIntent().getIntExtra(getResources().getString(R.string.EDIT_JOURNEY_POSITION), SelectCarActivity.EDITJOURNEY_POSITION_DEFAULT);
+        list = (ListView) findViewById(R.id.listView_routeList);
+    }
+
+    private void setRouteType() {
+        switch(mode){
+            case 0: type += "Drive";
+                break;
+            case 1: type += "Public Transit";
+                break;
+            case 2: type += "Bile/Walk";
+                break;
         }
     }
 
@@ -205,7 +208,7 @@ public class SelectRouteActivity extends AppCompatActivity {
         }
     }
 
-    static public void setupTips(Context context) {
+    static public String setupTips(Context context) {
         JourneyCollection journeyCollection = CarbonModel.getInstance().getJourneyCollection();
         BillCollection billCollection = CarbonModel.getInstance().getBillCollection();
         int whichTip = CarbonModel.getInstance().showWhichTip(journeyCollection, billCollection);
@@ -233,6 +236,7 @@ public class SelectRouteActivity extends AppCompatActivity {
         }
         Toast.makeText(context, tip, Toast.LENGTH_LONG).show();
         Toast.makeText(context, tip, Toast.LENGTH_LONG).show();
+        return tip;
     }
 
     static public int getLastIndexFromSharedPrefCar(Context context) {

@@ -41,6 +41,13 @@ public class SelectGraphActivity extends AppCompatActivity {
         set365DayButton();
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
     private void set365DayButton() {
         Button button = (Button) findViewById(R.id.display365Days);
         button.setOnClickListener(new View.OnClickListener() {

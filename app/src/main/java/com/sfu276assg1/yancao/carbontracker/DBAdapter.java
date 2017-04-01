@@ -18,7 +18,7 @@ public class DBAdapter {
     // DB Fields
     public static final String KEY_ROWID = "_id";
     // Track DB version if a new version of your app changes the format.
-    public static final int DATABASE_VERSION = 24;
+    public static final int DATABASE_VERSION = 26;
 
 
     public static final String JOURNEY_DATE = "date";

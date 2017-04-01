@@ -23,7 +23,7 @@ import java.util.Date;
 
 public class NotificationService extends Service {
 
-    private final String SET_TIME = "9:00";
+    private final String SET_TIME = "09:00:00 PM";
 
 
     @Override
@@ -48,7 +48,7 @@ public class NotificationService extends Service {
     }
 
     private void setUpNotification() {
-        String time = new SimpleDateFormat("hh:mm").format(new Date());
+        String time = new SimpleDateFormat("hh:mm:ss aa").format(new Date());
         if(!time.equals(SET_TIME)){
             return;
         }
@@ -56,31 +56,28 @@ public class NotificationService extends Service {
         JourneyCollection journeyCollection = CarbonModel.getInstance().getJourneyCollection();
         BillCollection billCollection = CarbonModel.getInstance().getBillCollection();
         int journeyCount = journeyCollection.countJourneyInOneDate(today);
-        int billCount = billCollection.countBillInOneDate(today);
+        boolean isBill = billCollection.isBillInPrevious45days();
         String[] notification = new String [2];
         String notificationContentTitle = getResources().getString(R.string.NOTIFICATION_CONTENT_TITLE);
         Intent intent;
 
-        if(journeyCount==0&&billCount==0){
+        if(journeyCount==0){
             notification[0] = getResources().getString(R.string.NOTIFICATION_NOBILL_NOJOURNEY_PART1);
-            notification[1] = getResources().getString(R.string.NOTIFICATION_NOBILL_NOJOURNEY_PART2);;
-            intent = new Intent(getApplicationContext(),MainActivity.class);
+            notification[1] = getResources().getString(R.string.NOTIFICATION_NOBILL_NOJOURNEY_PART2);
+            intent = new Intent(getApplicationContext(),SelectTransModeActivity.class);
+
         }
-        else if(journeyCount>=3 && billCount==0){
+        else if(journeyCount>0 && (!isBill)){
             notification[0] = getResources().getString(R.string.NOTIFICATION_NOBILL_PART1);
             notification[1] = getResources().getString(R.string.NOTIFICATION_NOBILL_PART2);
             intent = new Intent(getApplicationContext(),MonthlyUtilitiesActivity.class);
-        }
-        else if (billCount>0&&journeyCount==0){
-            notification[0] = getResources().getString(R.string.NOTIFICATION_NOJOURNEY_PART1);
-            notification[1] = getResources().getString(R.string.NOTIFICATION_NOJOURNEY_PART2);
-            intent = new Intent(getApplicationContext(),SelectTransModeActivity.class);
         }
         else {
             notification[0] = getResources().getString(R.string.NOTIFICATION_OTHER);
             notification[1] = " ";
             intent = new Intent(getApplicationContext(),SelectTransModeActivity.class);
         }
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(this)
@@ -93,12 +90,11 @@ public class NotificationService extends Service {
                             .addLine(notification[1]));
 
         int notificationId = 0;
-        TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
-        stackBuilder.addParentStack(MainActivity.class);
-        stackBuilder.addNextIntent(intent);
         PendingIntent resultPendingIntent =
                 PendingIntent.getActivity(this, notificationId, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         mBuilder.setContentIntent(resultPendingIntent);
+
+
         NotificationManager mNotifyMgr =
                 (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         mNotifyMgr.notify(notificationId, mBuilder.build());

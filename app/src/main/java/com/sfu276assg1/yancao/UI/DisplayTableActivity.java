@@ -60,6 +60,13 @@ public class DisplayTableActivity extends AppCompatActivity implements View.OnCl
         });
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
     private void populateTable() {
         TableLayout table = (TableLayout) findViewById(R.id.table);
         TableRow titleRow = new TableRow(this);

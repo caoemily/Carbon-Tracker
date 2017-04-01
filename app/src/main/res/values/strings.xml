@@ -58,12 +58,10 @@
     <string name="info">Info</string>
 
     <string name="NOTIFICATION_CONTENT_TITLE">Reduce CO2 emission together.</string>
-    <string name="NOTIFICATION_NOBILL_NOJOURNEY_PART1">You haven not entered any journey or bill today,</string>
+    <string name="NOTIFICATION_NOBILL_NOJOURNEY_PART1">You have not entered any journey today,</string>
     <string name="NOTIFICATION_NOBILL_NOJOURNEY_PART2">do you want to enter one?</string>
-    <string name="NOTIFICATION_NOBILL_PART1">You have entered several journeys today,</string>
-    <string name="NOTIFICATION_NOBILL_PART2">do you want to enter a utility bill as well?</string>
-    <string name="NOTIFICATION_NOJOURNEY_PART1">You have entered utility bill today,</string>
-    <string name="NOTIFICATION_NOJOURNEY_PART2">do you want to enter a journey as well?</string>
+    <string name="NOTIFICATION_NOBILL_PART1">You have not entered a utility bill in 1.5 months,</string>
+    <string name="NOTIFICATION_NOBILL_PART2">do you want to enter one today?</string>
     <string name="NOTIFICATION_OTHER">Do you want to enter more journeys for today?</string>
 
     <string name="SKYTRAIN">Skytrain</string>
