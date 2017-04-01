@@ -2,6 +2,7 @@ package com.sfu276assg1.yancao.UI;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,13 +13,20 @@ import android.view.View;
 import android.widget.Button;
 
 import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.charts.CombinedChart;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Description;
+import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.components.LegendEntry;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.data.CombinedData;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
@@ -36,10 +44,13 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Set;
 
 /**
@@ -48,6 +59,7 @@ import java.util.Set;
 
 public class DisplayBarChart extends AppCompatActivity {
     BarChart barChart;
+    //CombinedChart mChart;
     PieChart chart;
     private JourneyCollection journeyCollection = CarbonModel.getInstance().getJourneyCollection();
     private ArrayList<Journey> journeys = new ArrayList<>();
@@ -66,6 +78,7 @@ public class DisplayBarChart extends AppCompatActivity {
         generateData();
         generateBarChart();
         generatePieChart();
+        //generateCombineChart();
     }
 
     @Override
@@ -84,7 +97,6 @@ public class DisplayBarChart extends AppCompatActivity {
             case R.id.action_mode:
                 generatePieChart();
                 break;
-            case R.id.action_tree:
             default:
                 break;
         }
@@ -156,6 +168,8 @@ public class DisplayBarChart extends AppCompatActivity {
         chart.setData(data);
         chart.animateY(2000);
         chart.invalidate();
+        Legend legend = chart.getLegend();
+        legend.setWordWrapEnabled(true);
 
     }
 
@@ -180,6 +194,9 @@ public class DisplayBarChart extends AppCompatActivity {
         chart.setData(data);
         chart.animateY(2000);
         chart.invalidate();
+
+        Legend legend = chart.getLegend();
+        legend.setWordWrapEnabled(true);
     }
 
     private void generateBarChart() {
@@ -225,22 +242,32 @@ public class DisplayBarChart extends AppCompatActivity {
 
 
         ArrayList<BarEntry> barEntries = new ArrayList<>();
+//        for(int i = 0; i < emissions.size(); i++) {
+//            barEntries.add(new BarEntry(i, emissions.get(i)));
+//        }
+        float[] emissionInFloat = new float[emissions.size()];
         for(int i = 0; i < emissions.size(); i++) {
-            barEntries.add(new BarEntry(i, emissions.get(i)));
+            emissionInFloat[i] = emissions.get(i);
         }
+        barEntries.add(new BarEntry(0, emissionInFloat));
+        barEntries.add(new BarEntry(2, (float) 36.2 * 30));
+        barEntries.add(new BarEntry(4, (float) ((36.2 * 30) * 70)/100));
+
         BarDataSet barDataSet = new BarDataSet(barEntries, "");
         barDataSet.setColors(generateColorsForGraph());
 
+
         BarData data = new BarData(barDataSet);
-        data.setBarWidth(0.4f);
+        data.setBarWidth(0.8f);
         data.setValueFormatter(new LargeValueFormatter());
         barChart.setData(data);
         barChart.setFitBars(true);
         barChart.setTouchEnabled(true);
         barChart.animateXY(2000, 2000);
-        Description description = new Description();
-        description.setText("CO2 in the past month");
-        barChart.setDescription(description);
+//        Description description = new Description();
+//        description.setText("CO2 in the past month");
+//        barChart.setDescription(description);
+        barChart.setDescription(null);
         barChart.invalidate();
 
         for(String name : nameOfEntries) {
@@ -252,13 +279,38 @@ public class DisplayBarChart extends AppCompatActivity {
             }
         }
 
+        List<LegendEntry> legendEntries = new ArrayList<>();
+        for (int i = 0; i < nameOfEntriesDisplay.size(); i++) {
+            LegendEntry entry = new LegendEntry();
+            int color = generateColorsForGraph().get(i);
+            entry.formColor = color;
+            entry.label = nameOfEntriesDisplay.get(i);
+            legendEntries.add(entry);
+        }
+        Legend legend = barChart.getLegend();
+        legend.setCustom(legendEntries);
+        legend.setVerticalAlignment(Legend.LegendVerticalAlignment.BOTTOM);
+        legend.setHorizontalAlignment(Legend.LegendHorizontalAlignment.RIGHT);
+        legend.setOrientation(Legend.LegendOrientation.HORIZONTAL);
+        legend.setDrawInside(false);
+        legend.setFormSize(8f);
+        legend.setFormToTextSpace(4f);
+        legend.setXEntrySpace(6f);
+        legend.setWordWrapEnabled(true);
+
+        ArrayList<String> labels = new ArrayList<>();
+        labels.add("Total In Month");
+        labels.add(" ");
+        labels.add("Average CO2/Canadian");
+        labels.add(" ");
+        labels.add("Target CO2");
         final XAxis xAxis = barChart.getXAxis();
         xAxis.setGranularity(1f);
         xAxis.setGranularityEnabled(true);
         xAxis.setDrawGridLines(false);
-        xAxis.setAxisMaximum((float) nameOfEntriesDisplay.size());
+        xAxis.setAxisMaximum((float) 5);
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-        xAxis.setValueFormatter(new IndexAxisValueFormatter(nameOfEntriesDisplay));
+        xAxis.setValueFormatter(new IndexAxisValueFormatter(labels));
 
         YAxis rightAxis = barChart.getAxisRight();
         rightAxis.setEnabled(false);

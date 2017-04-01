@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Description;
+import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
@@ -98,7 +99,6 @@ public class DisplayLineChart extends AppCompatActivity {
             case R.id.action_mode:
                 generatePieChart();
                 break;
-            case R.id.action_tree:
             default:
                 break;
         }
@@ -178,6 +178,9 @@ public class DisplayLineChart extends AppCompatActivity {
         chart.animateY(2000);
         chart.invalidate();
 
+        Legend legend = chart.getLegend();
+        legend.setWordWrapEnabled(true);
+
     }
 
     private void generatePieChartInRoute() {
@@ -239,15 +242,23 @@ public class DisplayLineChart extends AppCompatActivity {
         chart.setData(data);
         chart.animateY(2000);
         chart.invalidate();
+
+        Legend legend = chart.getLegend();
+        legend.setWordWrapEnabled(true);
     }
 
     private void generateLineChart() {
         lineChart = (LineChart) findViewById(R.id.lineChart);
+        float averageCO2PerDay = (float)36.2;
+        float averageCO2PerMonth = averageCO2PerDay * 30;
+        float targetCO2 = (averageCO2PerMonth * 70) / 100;
 
         ArrayList<String> monthToDisplay = new ArrayList<>();
         ArrayList<Entry> yAxisCar = new ArrayList<>();
         ArrayList<Entry> yAxisPublicTransportation = new ArrayList<>();
         ArrayList<Entry> yAxisUtilities = new ArrayList<>();
+        ArrayList<Entry> yAxisAvgCanadian = new ArrayList<>();
+        ArrayList<Entry> yAxisTargetCO2 = new ArrayList<>();
         for (int i = 0; i < dataForYear.size(); i++) {
             yAxisCar.add(new Entry(i, dataForYear.get(i).getTotalCarbonForCar()));
             monthToDisplay.add(i, String.valueOf(dataForYear.get(i).getMonth()));
@@ -260,6 +271,15 @@ public class DisplayLineChart extends AppCompatActivity {
 
         for (int i = 0; i < dataForYear.size(); i++) {
             yAxisUtilities.add(new Entry(i, dataForYear.get(i).getTotalCarbonUtilities()));
+        }
+
+
+        for (int i = 0; i < dataForYear.size(); i++) {
+            yAxisAvgCanadian.add(new Entry(i, averageCO2PerMonth));
+        }
+
+        for (int i = 0; i < dataForYear.size(); i++) {
+            yAxisTargetCO2.add(new Entry(i, targetCO2));
         }
 
         Collections.sort(yAxisCar, new EntryXComparator());
@@ -282,9 +302,25 @@ public class DisplayLineChart extends AppCompatActivity {
         lineDataSet3.setDrawValues(true);
         lineDataSet3.setColor(Color.GREEN);
 
+        LineDataSet lineDataSet4 = new LineDataSet(yAxisAvgCanadian,"Emission/Canadian");
+        lineDataSet4.setLineWidth(5);
+        lineDataSet4.setDrawValues(true);
+        lineDataSet4.setColor(Color.CYAN);
+
+        LineDataSet lineDataSet5 = new LineDataSet(yAxisTargetCO2,"Target CO2");
+        lineDataSet5.setLineWidth(5);
+        lineDataSet5.setDrawValues(true);
+        lineDataSet5.setColor(Color.GRAY);
+
         lineDataSets.add(lineDataSet1);
         lineDataSets.add(lineDataSet2);
         lineDataSets.add(lineDataSet3);
+        lineDataSets.add(lineDataSet4);
+        lineDataSets.add(lineDataSet5);
+
+        Legend legend = lineChart.getLegend();
+        legend.setWordWrapEnabled(true);
+
 
         lineChart.setData(new LineData(lineDataSets));
         lineChart.animateXY(2000, 2000);

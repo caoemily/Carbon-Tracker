@@ -84,7 +84,6 @@ public class DisplayCarbonFootprintActivity extends AppCompatActivity {
             case R.id.action_mode:
                 generatePieChart();
                 break;
-            case R.id.action_tree:
             default:
                 break;
         }

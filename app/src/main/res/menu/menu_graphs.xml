@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
         android:id="@+id/action_mode"
-        android:title="Mode"/>
+        android:title="Mode"
+        app:showAsAction="ifRoom"/>
     <item
         android:id="@+id/action_route"
-        android:title="Route"/>
-    <item
-        android:id="@+id/action_tree"
-        android:title="Trees"/>
-    <item
-        android:id="@+id/action_kg"
-        android:title="Kg"/>
+        android:title="Route"
+        app:showAsAction="ifRoom"/>
+
 
 </menu>

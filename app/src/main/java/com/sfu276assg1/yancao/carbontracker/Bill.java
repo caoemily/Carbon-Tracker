@@ -72,7 +72,7 @@ public class Bill {
             Date d2 = format.parse(endDate);
             int days = Days.daysBetween(new LocalDate(d1.getTime()), new LocalDate(d2.getTime())).getDays() + 1;
 
-            double electricity_emission = electricity/days/people*900;
+            double electricity_emission = (electricity/1000000)/days/people*9000;
             double gas_emission = gas/days/people*56.1;
 
             return electricity_emission + gas_emission;
@@ -86,7 +86,7 @@ public class Bill {
             Date d2 = format.parse(endDate);
             int days = Days.daysBetween(new LocalDate(d1.getTime()), new LocalDate(d2.getTime())).getDays() + 1;
 
-            double electricity_emission = electricity/days/people*900;
+            double electricity_emission = (electricity/1000000)/days/people*9000;
 
             return electricity_emission;
         } catch (ParseException e) {}
