@@ -18,7 +18,7 @@ public class DBAdapter {
     // DB Fields
     public static final String KEY_ROWID = "_id";
     // Track DB version if a new version of your app changes the format.
-    public static final int DATABASE_VERSION = 23;
+    public static final int DATABASE_VERSION = 26;
 
 
     public static final String JOURNEY_DATE = "date";
@@ -45,6 +45,7 @@ public class DBAdapter {
     public static final String BILL_ELECTRICITY = "electricity";
     public static final String BILL_GAS = "gas";
     public static final String BILL_PEOPLENUM = "peopleNum";
+    public static final String BILL_RECORDDATE = "recordDate";
 
     public static final String DATABASE_NAME = "MyDb";
     private static final String TABLE_CAR = "car";
@@ -117,6 +118,7 @@ public class DBAdapter {
             + TABLE_BILL + "(" + KEY_ROWID + " INTEGER PRIMARY KEY," +
             BILL_STARTDATE + " STRING," +
             BILL_ENDDATE + " STRING," +
+            BILL_RECORDDATE + " STRING," +
             BILL_ELECTRICITY + " DOUBLE," +
             BILL_GAS + " DOUBLE," +
             BILL_PEOPLENUM + " INT" +")";
@@ -215,6 +217,7 @@ public class DBAdapter {
         ContentValues initialValues = new ContentValues();
         initialValues.put(BILL_STARTDATE, bill.getStartDate());
         initialValues.put(BILL_ENDDATE, bill.getEndDate());
+        initialValues.put(BILL_RECORDDATE, bill.getRecordDate());
         initialValues.put(BILL_ELECTRICITY, bill.getElectricity());
         initialValues.put(BILL_GAS, bill.getGas());
         initialValues.put(BILL_PEOPLENUM, bill.getPeople());
@@ -394,6 +397,7 @@ public class DBAdapter {
         ContentValues updateBill = new ContentValues();
         updateBill.put(BILL_STARTDATE, update.getStartDate());
         updateBill.put(BILL_ENDDATE, update.getEndDate());
+        updateBill.put(BILL_RECORDDATE, update.getRecordDate());
         updateBill.put(BILL_ELECTRICITY,update.getElectricity());
         updateBill.put(BILL_GAS, update.getGas());
         updateBill.put(BILL_PEOPLENUM, update.getPeople());
@@ -533,6 +537,7 @@ public class DBAdapter {
                 Bill bill = new Bill();
                 bill.setStartDate(c.getString(c.getColumnIndex(BILL_STARTDATE)));
                 bill.setEndDate(c.getString(c.getColumnIndex(BILL_ENDDATE)));
+                bill.setRecordDate(c.getString(c.getColumnIndex(BILL_RECORDDATE)));
                 bill.setElectricity(c.getDouble(c.getColumnIndex(BILL_ELECTRICITY)));
                 bill.setGas(c.getDouble(c.getColumnIndex(BILL_GAS)));
                 bill.setPeople(c.getInt(c.getColumnIndex(BILL_PEOPLENUM)));

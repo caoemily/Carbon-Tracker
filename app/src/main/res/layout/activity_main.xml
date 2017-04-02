@@ -7,115 +7,133 @@
     android:layout_height="match_parent"
     tools:context="com.sfu276assg1.yancao.UI.MainActivity">
 
+    <com.github.mikephil.charting.charts.PieChart
+        android:id="@+id/chart_mainpage"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="50dp" />
+
     <ImageView
         android:id="@+id/city"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
         android:scaleType="fitXY"
-        app:srcCompat="@drawable/city" />
+        app:srcCompat="@drawable/backgroundforvu"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <ImageButton
         android:id="@+id/addJourneyBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/showChartBtn"
-        android:layout_alignRight="@+id/showChartBtn"
-        android:layout_alignTop="@+id/showTableBtn"
-        android:layout_marginTop="110dp"
         android:adjustViewBounds="true"
         android:background="@android:color/transparent"
-        android:maxWidth="220dp"
+        android:maxWidth="50dp"
         android:scaleType="fitCenter"
-        android:src="@drawable/btn_add_journey_click" />
+        android:src="@drawable/btn_add_journey_click"
+        android:layout_alignTop="@+id/utilitiesBtn"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="17dp"
+        android:layout_marginStart="17dp" />
 
     <ImageButton
         android:id="@+id/utilitiesBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/addJourneyBtn"
-        android:layout_alignStart="@+id/addJourneyBtn"
-        android:layout_below="@+id/addJourneyBtn"
-        android:layout_marginTop="10dp"
         android:adjustViewBounds="true"
         android:background="@android:color/transparent"
-        android:maxWidth="221dp"
+        android:maxWidth="50dp"
         android:scaleType="fitCenter"
-        android:src="@drawable/btn_utilities_click" />
-
-    <ImageButton
-        android:id="@+id/nextTipsBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/utilitiesBtn"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:adjustViewBounds="true"
-        android:background="@android:color/transparent"
-        android:maxWidth="221dp"
-        android:scaleType="fitCenter"
-        android:src="@drawable/btn_get_tip" />
+        android:src="@drawable/btn_utilities_click"
+        android:layout_alignTop="@+id/showChartBtn"
+        android:layout_toLeftOf="@+id/showChartBtn"
+        android:layout_toStartOf="@+id/showChartBtn"
+        android:layout_marginRight="33dp"
+        android:layout_marginEnd="33dp" />
 
     <ImageButton
         android:id="@+id/showTableBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/addJourneyBtn"
-        android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/addJourneyBtn"
-        android:layout_marginTop="15dp"
         android:adjustViewBounds="true"
         android:background="@android:color/transparent"
-        android:maxHeight="100dp"
-        android:maxWidth="100dp"
+        android:maxHeight="50dp"
+        android:maxWidth="50dp"
         android:scaleType="fitCenter"
-        android:src="@drawable/btn_show_table_click" />
+        android:src="@drawable/btn_show_table_click"
+        android:layout_alignTop="@+id/showChartBtn"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="19dp"
+        android:layout_marginEnd="19dp" />
+
+    <ImageButton
+        android:id="@+id/btn_modeBike"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/showChartBtn"
+        android:layout_toLeftOf="@+id/btn_modeBus"
+        android:layout_toStartOf="@+id/btn_modeBus"
+        android:adjustViewBounds="true"
+        android:background="@android:color/transparent"
+        android:maxHeight="50dp"
+        android:maxWidth="50dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/cloud1"
+        android:visibility="invisible" />
+
+    <ImageButton
+        android:id="@+id/btn_modeBus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/utilitiesBtn"
+        android:layout_toLeftOf="@+id/utilitiesBtn"
+        android:layout_toStartOf="@+id/utilitiesBtn"
+        android:adjustViewBounds="true"
+        android:background="@android:color/transparent"
+        android:maxHeight="50dp"
+        android:maxWidth="50dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/car1"
+        android:visibility="invisible" />
+
+    <ImageButton
+        android:id="@+id/btn_modeCar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/showChartBtn"
+        android:layout_alignLeft="@+id/addJourneyBtn"
+        android:layout_alignStart="@+id/addJourneyBtn"
+        android:adjustViewBounds="true"
+        android:background="@android:color/transparent"
+        android:maxHeight="50dp"
+        android:maxWidth="50dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/car"
+        android:visibility="invisible" />
 
     <ImageButton
         android:id="@+id/showChartBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/car2"
-        android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/car2"
-        android:layout_marginLeft="-9dp"
-        android:layout_marginTop="15dp"
         android:adjustViewBounds="true"
         android:background="@android:color/transparent"
-        android:maxHeight="100dp"
-        android:maxWidth="100dp"
+        android:maxHeight="50dp"
+        android:maxWidth="50dp"
         android:scaleType="fitCenter"
-        android:src="@drawable/btn_show_chart_click" />
+        android:src="@drawable/btn_show_chart_click"
+        android:layout_marginRight="45dp"
+        android:layout_marginEnd="45dp"
+        android:layout_marginBottom="39dp"
+        android:layout_alignParentBottom="true"
+        android:layout_toLeftOf="@+id/showTableBtn"
+        android:layout_toStartOf="@+id/showTableBtn" />
 
-    <ImageView
-        android:id="@+id/car1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/addJourneyBtn"
-        android:layout_marginBottom="-10dp"
-        android:layout_marginLeft="-200dp"
-        android:layout_marginStart="-200dp"
-        android:layout_marginTop="260dp"
-        android:maxHeight="16dp"
-        android:maxWidth="16dp"
-        app:srcCompat="@drawable/car" />
-
-    <ImageView
-        android:id="@+id/car2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/addJourneyBtn"
-        android:layout_marginBottom="15dp"
-        android:layout_marginLeft="200dp"
-        android:layout_marginStart="200dp"
-        android:layout_marginTop="230dp"
-        android:adjustViewBounds="true"
-        app:srcCompat="@drawable/car1" />
 
 </RelativeLayout>

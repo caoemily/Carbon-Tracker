@@ -10,9 +10,14 @@ import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.sfu276assg1.yancao.carbontracker.R;
@@ -36,9 +41,30 @@ public class SelectGraphActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_graph);
         generateRealTimeCalendar();
+        createRadioButtons();
         setSingleDayButton();
         set28DaysButton();
         set365DayButton();
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+    private void createRadioButtons() {
+        RadioGroup group = (RadioGroup) findViewById(R.id.radio_selectUnit);
+        String[] unit = getResources().getStringArray(R.array.graphUnit);
+        RadioButton button1 = new RadioButton(this);
+        button1.setText(unit[0]);
+        group.addView(button1);
+        button1.setChecked(true);
+        RadioButton button2 = new RadioButton(this);
+        button2.setText(unit[1]);
+        group.addView(button2);
     }
 
     private void set365DayButton() {
@@ -46,9 +72,11 @@ public class SelectGraphActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                int unitChoice = getCheckedUnit();
                 String today = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
                 Intent intent = new Intent(SelectGraphActivity.this, DisplayLineChart.class);
                 intent.putExtra("today 365", today);
+                intent.putExtra("unitChoice", unitChoice);
                 startActivity(intent);
             }
         });
@@ -59,9 +87,11 @@ public class SelectGraphActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                int unitChoice = getCheckedUnit();
                 String today = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
                 Intent intent = new Intent(SelectGraphActivity.this, DisplayBarChart.class);
                 intent.putExtra("today", today);
+                intent.putExtra("unitChoice", unitChoice);
                 startActivity(intent);
             }
         });
@@ -80,7 +110,7 @@ public class SelectGraphActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showDialog(DIALOG_ID);
+            showDialog(DIALOG_ID);
             }
         });
     }
@@ -100,14 +130,30 @@ public class SelectGraphActivity extends AppCompatActivity {
             year_x = year;
             month_x = month;
             date_x = dayOfMonth;
+            int unitChoice = getCheckedUnit();
             String monthSelected = String.format("%02d", month + 1);
             String daySelected = String.format("%02d", dayOfMonth);
             String dateSelected = "" + year + "-" + monthSelected+ "-" + daySelected;
             Intent intent = new Intent(SelectGraphActivity.this, DisplayCarbonFootprintActivity.class);
             intent.putExtra("single date selected", dateSelected);
             intent.putExtra("mode", 0);
+            intent.putExtra("unitChoice", unitChoice);
             startActivity(intent);
         }
     };
+
+    private int getCheckedUnit(){
+        RadioGroup group = (RadioGroup) findViewById(R.id.radio_selectUnit);
+        int idOfSelected = group.getCheckedRadioButtonId();
+        RadioButton radioButton = (RadioButton) findViewById(idOfSelected);
+        String chosenUnit = radioButton.getText().toString();
+        String[] unit = getResources().getStringArray(R.array.graphUnit);
+        if(chosenUnit.equals(unit[0])){
+            return 0;
+        }
+        else{
+            return 1;
+        }
+    }
 }
 

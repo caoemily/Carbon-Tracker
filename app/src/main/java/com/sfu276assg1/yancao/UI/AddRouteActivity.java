@@ -1,8 +1,11 @@
 package com.sfu276assg1.yancao.UI;
 
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -32,6 +35,11 @@ import static java.lang.Double.parseDouble;
 
 public class AddRouteActivity extends AppCompatActivity {
 
+    public static final int INVALID_INDEX = -1;
+    public static final int TRANSMODE_DEFAULT = 0;
+    public static final String ROUTE_INDEX = "routeIndex";
+
+
     String routeName = "";
     double higherEDis, lowerEDis, totalDis;
     int routeChangePosition;
@@ -40,19 +48,7 @@ public class AddRouteActivity extends AppCompatActivity {
     int mode = 0;
     int edit_journey;
     int edit_journey_postition;
-
-    int car_array_index, elect_array_index, gas_array_index;
-
-    String[] tooMuchCar = {"Try to take the bike!", "Try to take the public transit", "Try to walk!",
-            "Avoid areas with congested traffic!", "Plan out your journey so you don't get lost and waste fuel!",
-            "Keep your vehicles well maintained!","Don't accelerate unnecessarily!", "Buy a fuel efficient car!"};
-
-    String[] tooMuchElectricity = {"Turn off the lights when you can!", "Install Compact Fluorescent Bulbs to save energy!", "Wash your clothes with cold water!",
-            "Set your refrigerator to the optimal temperature!", "Turn off your lights when you're not using it!", "Wash and dry full loads!", "Cut your heating needs!",
-            "Unplug unnecessary appliances!", "Run your dishwasher only with a full load!"};
-
-    String[] tooMuchGas = {"Insulate your house!", "Take quicker showers!", "Close off doors and vents in unused rooms to conserve heat within your home!",
-            "Upgrade your heating equipments!", "Don't let the water run!", "Install a programmable thermostat!", "Seal air leaks with caulk!", "Replace Any old Natural Gas Heaters!" };
+    String currentTip = "";
 
 
     @Override
@@ -60,32 +56,32 @@ public class AddRouteActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_route);
 
-        mode = getIntent().getIntExtra(getResources().getString(R.string.TRANS_MODE), 0);
-        routeChangePosition = getIntent().getIntExtra("routeIndex", -1);
-        if(routeChangePosition != -1) {
-            extractDataFromIntent();
-        }
-        edit_journey = getIntent().getIntExtra(getResources().getString(R.string.EDIT_JOURNEY), 0);
-        edit_journey_postition = getIntent().getIntExtra(getResources().getString(R.string.EDIT_JOURNEY_POSITION), 0);
+        setInitialSettings();
         setIndividualDis();
         setTotalDistance();
         setRouteName();
         setRouteType();
-
-        car_array_index = getLastIndexFromSharedPrefCar();
-        elect_array_index = getLastIndexFromSharedPrefElect();
-        gas_array_index = getLastIndexFromSharedPrefGas();
         setupOkButton();
     }
 
     @Override
     public void onBackPressed() {
         Intent intent = new Intent(AddRouteActivity.this, SelectRouteActivity.class);
-        intent.putExtra(getResources().getString(R.string.TRANS_MODE),mode);
+        intent.putExtra(getResources().getString(R.string.TRANS_MODE), mode);
         intent.putExtra(getResources().getString(R.string.EDIT_JOURNEY), edit_journey);
         intent.putExtra(getResources().getString(R.string.EDIT_JOURNEY_POSITION), edit_journey_postition);
         startActivity(intent);
         finish();
+    }
+
+    public void setInitialSettings(){
+        mode = getIntent().getIntExtra(getResources().getString(R.string.TRANS_MODE), TRANSMODE_DEFAULT);
+        routeChangePosition = getIntent().getIntExtra(ROUTE_INDEX, INVALID_INDEX);
+        if(routeChangePosition != INVALID_INDEX) {
+            extractDataFromIntent();
+        }
+        edit_journey = getIntent().getIntExtra(getResources().getString(R.string.EDIT_JOURNEY), SelectCarActivity.EDITJOURNEY_DEFAULT);
+        edit_journey_postition = getIntent().getIntExtra(getResources().getString(R.string.EDIT_JOURNEY_POSITION), SelectCarActivity.EDITJOURNEY_POSITION_DEFAULT);
     }
 
     public void setIndividualDis() {
@@ -93,12 +89,12 @@ public class AddRouteActivity extends AppCompatActivity {
         TextView textViewH = (TextView) findViewById(R.id.textView_higherEDis);
         switch(mode){
             case 1:
-                textViewL.setText(""+"Skytrain (km):");
-                textViewH.setText(""+"Bus (km):");
+                textViewL.setText(""+ getResources().getString(R.string.SKYTRAIN) + " (km)");
+                textViewH.setText(""+ getResources().getString(R.string.BUS) + " (km)");
                 break;
             case 2:
-                textViewL.setText(""+"Walk (km):");
-                textViewH.setText(""+"Bike (km):");
+                textViewL.setText(""+ getResources().getString(R.string.WALK) + " (km)");
+                textViewH.setText(""+getResources().getString(R.string.BIKE) + " (km)");
                 break;
         }
 
@@ -209,7 +205,7 @@ public class AddRouteActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
             if (totalDis <= 0) {
-                Toast.makeText(getApplicationContext(), "Total distance must be positive.",
+                Toast.makeText(getApplicationContext(), getResources().getString(R.string.TOTAL_DISTANCE_POSITIVE),
                         Toast.LENGTH_SHORT).show();
             }
             else {
@@ -217,7 +213,7 @@ public class AddRouteActivity extends AppCompatActivity {
                 currentRoute.setLowEDis(lowerEDis);
                 currentRoute.setDistance(totalDis);
                 Intent intent;
-                routeChangePosition = getIntent().getIntExtra("routeIndex", -1);
+                routeChangePosition = getIntent().getIntExtra(ROUTE_INDEX, INVALID_INDEX);
                 if(routeChangePosition == -1)
                 {
                     if (routeName != "") {
@@ -241,21 +237,17 @@ public class AddRouteActivity extends AppCompatActivity {
                     if (edit_journey == 0) {
                         CarbonModel.getInstance().getLastJourney().setRoute(currentRoute);
                         CarbonModel.getInstance().getDb().insertRowJourney(CarbonModel.getInstance().getLastJourney());
-                        intent = new Intent(AddRouteActivity.this, MainActivity.class);
-                        startActivity(intent);
                     }
                     else {
                         CarbonModel.getInstance().getJourneyCollection().getJourney(edit_journey_postition).setRoute(currentRoute);
                         CarbonModel.getInstance().getDb().updateSingleRouteInJourney((edit_journey_postition+1),currentRoute);
-                        intent = new Intent(AddRouteActivity.this, DisplayTableActivity.class);
-                        startActivity(intent);
                     }
-                    finish();
-                    checkForType();
+                    currentTip = SelectRouteActivity.setupTips(getApplicationContext());
+                    showDialog(currentTip);
                 }
                 else {
                     if(routeName.isEmpty()) {
-                        Toast.makeText(getApplicationContext(),"Please enter a name for the route.",
+                        Toast.makeText(getApplicationContext(),getResources().getString(R.string.ENTER_ROUT_NAME),
                                 Toast.LENGTH_SHORT).show();
                     }
                     else{
@@ -328,130 +320,38 @@ public class AddRouteActivity extends AppCompatActivity {
         }
     }
 
-    public void checkForType()
-    {
-
-        JourneyCollection journeyCollection = CarbonModel.getInstance().getJourneyCollection();
-        BillCollection billCollection = CarbonModel.getInstance().getBillCollection();
-        RouteCollection routeCollection = CarbonModel.getInstance().getRouteCollection();
-
-        int i, car_trips = 0;
-        double total_car_carbon = 0;
-
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date today = Calendar.getInstance().getTime();
-        String reportDate = df.format(today);
-
-        Calendar cal = Calendar.getInstance();
-        cal.add(Calendar.DATE, 0);
-        SimpleDateFormat formattedDate = new SimpleDateFormat("yyyy-MM-dd");
-
-        String formatted = formattedDate.format(cal.getTime());
-
-
-        Double total_util_carbon = CarbonModel.getInstance().getBillCollection().getTotalCarbonEmission(reportDate);
-        Double total_elect_carbon = CarbonModel.getInstance().getBillCollection().getElectricityCarbonEmission(reportDate);
-        Double total_gas_carbon = CarbonModel.getInstance().getBillCollection().getGasCarbonEmission(reportDate);
-
-
-        for(i = 0; i < journeyCollection.countJourneys();i++)
-        {
-            //Log.d("journeys", "This is the journey date: "+journeyCollection.getJourney(i).getDate()+ "This is the current date: "+formatted);
-            if(journeyCollection.getJourney(i).getDate().equals(formatted) && !journeyCollection.getJourney(i).getCar().getNickname().equals(" "))
-            {
-                double car_carbon = parseDouble(journeyCollection.getJourney(i).calculateCarbon());
-                car_trips++;
-                total_car_carbon = total_car_carbon + car_carbon;
-            }
-
-        }
-
-        Log.d("Total Util", "This is the total utility: "+total_util_carbon);
-        Log.d("Total car", "This is the total car: "+total_car_carbon);
-
-
-        if(total_car_carbon > total_util_carbon)
-        {
-            car_array_index = getLastIndexFromSharedPrefCar();
-            Math.round(total_car_carbon);
-            String total_car_carbon_str = Double.toString(total_car_carbon);
-            String car_trips_str = Integer.toString(car_trips);
-            String car_msg = "You have gone on "+car_trips_str+" trips today. And the amount of carbon emitted by your car today is: "+total_car_carbon_str+". "+tooMuchCar[car_array_index%8];
-            Toast.makeText(getApplicationContext(), car_msg, Toast.LENGTH_LONG).show();
-            car_array_index++;
-            storeLastIndexCar();
-        }
-
-        else // total_util_carbon > total_car_carbon
-        {
-            if(total_elect_carbon > total_gas_carbon) // more electricity
-            {
-                elect_array_index = getLastIndexFromSharedPrefElect();
-                Math.round(total_elect_carbon);
-                String total_elect_carbon_str = Double.toString(total_elect_carbon);
-                String elect_msg = "The amount of carbon emission by electricity you have produced today is: "+total_elect_carbon_str+". "+tooMuchElectricity[elect_array_index%9];
-                Toast.makeText(getApplicationContext(), elect_msg, Toast.LENGTH_LONG).show();
-                elect_array_index++;
-                storeLastIndexElect();
-            }
-            else
-            {
-                gas_array_index = getLastIndexFromSharedPrefGas();
-                Math.round(total_gas_carbon);
-                String total_gas_carbon_str = Double.toString(total_gas_carbon);
-                String gas_msg = "The amount of carbon emission by natural gas you have produced today is: "+total_gas_carbon_str+". "+tooMuchGas[gas_array_index%8];
-                Toast.makeText(getApplicationContext(), gas_msg, Toast.LENGTH_LONG).show();
-                gas_array_index++;
-                storeLastIndexGas();
-            }
-        }
-
-    }
-    private int getLastIndexFromSharedPrefCar()
-    {
-        SharedPreferences prefs = getSharedPreferences("car array", MODE_PRIVATE);
-        int extractedValueCar = prefs.getInt("car array index", 0); //first time 0
-        return extractedValueCar;
+    private void showDialog(String theTip){
+        Dialog dialog = onCreateDialog(theTip);
+        dialog.show();
     }
 
-    private int getLastIndexFromSharedPrefElect()
-    {
-        SharedPreferences prefs = getSharedPreferences("electricity array", MODE_PRIVATE);
-        int extractedValueElect = prefs.getInt("elect array index", 0); //first time 0
-        return extractedValueElect;
+    private Dialog onCreateDialog(String theTip) {
+        final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setTitle("Tips")
+                .setMessage(theTip)
+                .setCancelable(false)
+                .setPositiveButton("Next Tip",new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog,int id) {
+                        currentTip = SelectRouteActivity.setupTips(getApplicationContext());
+                        showDialog(currentTip);
+                    }
+                })
+                .setNegativeButton("Skip",new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog,int id) {
+                        AddRouteActivity.this.finish();
+                        if (edit_journey == 0){
+                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                            startActivity(intent);
+                        }
+                        else{
+                            Intent intent = new Intent(getApplicationContext(), DisplayTableActivity.class);
+                            startActivity(intent);
+                        }
+                    }
+                });
+        return alertDialogBuilder.create();
     }
 
-    private int getLastIndexFromSharedPrefGas()
-    {
-        SharedPreferences prefs = getSharedPreferences("gas array", MODE_PRIVATE);
-        int extractedValueGas = prefs.getInt("gas array index", 0); //first time 0
-        return extractedValueGas;
-    }
-
-    private void storeLastIndexCar()
-    {
-        int val = car_array_index;
-        SharedPreferences prefs = getSharedPreferences("car array", MODE_PRIVATE);
-        SharedPreferences.Editor editor = prefs.edit();
-        editor.putInt("car array index", val );
-        editor.commit();
-    }
-
-    private void storeLastIndexElect()
-    {
-        int val = elect_array_index;
-        SharedPreferences prefs = getSharedPreferences("elect array", MODE_PRIVATE);
-        SharedPreferences.Editor editor = prefs.edit();
-        editor.putInt("elect array index", val );
-        editor.commit();
-    }
-
-    private void storeLastIndexGas()
-    {
-        int val = gas_array_index;
-        SharedPreferences prefs = getSharedPreferences("gas array", MODE_PRIVATE);
-        SharedPreferences.Editor editor = prefs.edit();
-        editor.putInt("gas array index", val );
-        editor.commit();
-    }
 }

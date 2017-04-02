@@ -49,6 +49,16 @@ public class JourneyCollection {
         }
     }
 
+    public int countJourneyInOneDate(String date){
+        int count =0;
+        for(int i=0; i<countJourneys();i++){
+            if(date.equals(getJourney(i).getDate())){
+                count++;
+            }
+        }
+        return count;
+    }
+
     public void changeRoute(Route tempRoute, Route route){
         for (int i = 0; i < countJourneys() - 1; i++) {
             if(getJourney(i).getRoute().equals(tempRoute)) {
@@ -56,6 +66,18 @@ public class JourneyCollection {
             }
         }
     }
+
+    public double getJourneyCarbonInOneDay (String date){
+        double carbonEm = 0;
+        for(int i=0; i<countJourneys();i++){
+            if(date.equals(getJourney(i).getDate())){
+                carbonEm += Double.parseDouble(getJourney(i).calculateCarbon());
+            }
+        }
+        return carbonEm;
+    }
+
+
 
     private void validateIndexWithException(int index) {
         if (index < 0 || index >= countJourneys()) {

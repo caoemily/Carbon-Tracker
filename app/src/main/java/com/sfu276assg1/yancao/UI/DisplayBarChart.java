@@ -199,6 +199,13 @@ public class DisplayBarChart extends AppCompatActivity {
         legend.setWordWrapEnabled(true);
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(getApplicationContext(), SelectGraphActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
     private void generateBarChart() {
         barChart = (BarChart) findViewById(R.id.bargraph);
 

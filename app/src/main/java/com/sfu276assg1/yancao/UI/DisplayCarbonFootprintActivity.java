@@ -56,6 +56,13 @@ public class DisplayCarbonFootprintActivity extends AppCompatActivity {
         setUpShowTabletButton();
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(getApplicationContext(), SelectGraphActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
     private void generateInfoForChart() {
         Intent intent = getIntent();
         chosenDate = intent.getStringExtra("single date selected");

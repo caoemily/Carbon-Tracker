@@ -15,19 +15,38 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.sfu276assg1.yancao.UI.MainActivity" />
-        <activity android:name="com.sfu276assg1.yancao.UI.SelectCarActivity" />
-        <activity android:name="com.sfu276assg1.yancao.UI.AddCarActivity" />
-        <activity android:name="com.sfu276assg1.yancao.UI.SelectRouteActivity" />
-        <activity android:name="com.sfu276assg1.yancao.UI.AddRouteActivity" />
-        <activity android:name="com.sfu276assg1.yancao.UI.DisplayCarbonFootprintActivity" />
-        <activity android:name="com.sfu276assg1.yancao.UI.DisplayTableActivity" />
-        <activity android:name="com.sfu276assg1.yancao.UI.SelectTransModeActivity" />
-        <activity android:name="com.sfu276assg1.yancao.UI.MonthlyUtilitiesActivity" />
-        <activity android:name="com.sfu276assg1.yancao.UI.AddBillActivity" />
-        <activity android:name="com.sfu276assg1.yancao.UI.DisplayBarChart" />
-        <activity android:name="com.sfu276assg1.yancao.UI.SelectGraphActivity" />
-        <activity android:name="com.sfu276assg1.yancao.UI.DisplayLineChart"></activity>
+        <activity android:name="com.sfu276assg1.yancao.UI.SelectCarActivity"
+            android:noHistory="true"/>
+        <activity android:name="com.sfu276assg1.yancao.UI.AddCarActivity"
+            android:noHistory="true"/>
+        <activity android:name="com.sfu276assg1.yancao.UI.SelectRouteActivity"
+            android:noHistory="true"/>
+        <activity android:name="com.sfu276assg1.yancao.UI.AddRouteActivity"
+            android:noHistory="true"/>
+        <activity android:name="com.sfu276assg1.yancao.UI.DisplayCarbonFootprintActivity"
+            android:noHistory="true"/>
+        <activity android:name="com.sfu276assg1.yancao.UI.DisplayTableActivity"
+            android:noHistory="true"/>
+        <activity android:name="com.sfu276assg1.yancao.UI.SelectTransModeActivity"
+            android:noHistory="true"/>
+        <activity android:name="com.sfu276assg1.yancao.UI.MonthlyUtilitiesActivity"
+            android:noHistory="true"/>
+        <activity android:name="com.sfu276assg1.yancao.UI.AddBillActivity"
+            android:noHistory="true"/>
+        <activity android:name="com.sfu276assg1.yancao.UI.DisplayBarChart"
+            android:noHistory="true"/>
+        <activity android:name="com.sfu276assg1.yancao.UI.SelectGraphActivity"
+            android:noHistory="true"/>
+        <activity android:name="com.sfu276assg1.yancao.UI.DisplayLineChart"
+            android:noHistory="true"/>
+        <activity android:name="com.sfu276assg1.yancao.UI.MainActivity"
+            android:noHistory="true"/>
+        <activity android:name="com.sfu276assg1.yancao.UI.AppInfoActivity" />
+
+        <service
+            android:name="com.sfu276assg1.yancao.UI.NotificationService"
+            android:enabled="true"
+            android:exported="true" />
     </application>
 
 </manifest>

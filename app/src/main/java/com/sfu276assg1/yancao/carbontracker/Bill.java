@@ -14,20 +14,23 @@ import java.util.Date;
 public class Bill {
     private String startDate;
     private String endDate;
+    private String recordDate;
     private double electricity;
     private double gas;
     private int people;
 
-    public Bill(String startDate, String endDate, double electricity, double gas, int people) {
+    public Bill(String startDate, String endDate, double electricity, double gas, int people, String recordDate) {
         this.startDate = startDate;
         this.endDate = endDate;
         this.electricity = electricity;
         this.gas = gas;
         this.people = people;
+        this.recordDate = recordDate;
     }
     public Bill(){
         this.startDate = " ";
         this.endDate = " ";
+        this.recordDate = " ";
         this.electricity = 0;
         this.gas = 0;
         this.people = 0;
@@ -48,6 +51,7 @@ public class Bill {
     public int getPeople() {
         return people;
     }
+    public String getRecordDate(){return recordDate;}
 
     public void setStartDate(String startDate) {
         this.startDate = startDate;
@@ -64,6 +68,8 @@ public class Bill {
     public void setPeople(int people) {
         this.people = people;
     }
+    public void setRecordDate(String recordDate){this.recordDate = recordDate;}
+
 
     public double getTotalCarbonEmission(){
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
@@ -72,13 +78,18 @@ public class Bill {
             Date d2 = format.parse(endDate);
             int days = Days.daysBetween(new LocalDate(d1.getTime()), new LocalDate(d2.getTime())).getDays() + 1;
 
-            double electricity_emission = (electricity/1000000)/days/people*9000;
+            double electricity_emission = electricity/days/people*0.9;
             double gas_emission = gas/days/people*56.1;
 
             return electricity_emission + gas_emission;
         } catch (ParseException e) {}
         return 0;
     }
+
+    public double getTotalCarbonTreeYear(){
+        return getTotalCarbonEmission()/20;
+    }
+
     public double getElectricityCarbonEmission(){
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         try {
@@ -86,12 +97,17 @@ public class Bill {
             Date d2 = format.parse(endDate);
             int days = Days.daysBetween(new LocalDate(d1.getTime()), new LocalDate(d2.getTime())).getDays() + 1;
 
-            double electricity_emission = (electricity/1000000)/days/people*9000;
+            double electricity_emission = electricity/days/people*0.9;
 
             return electricity_emission;
         } catch (ParseException e) {}
         return 0;
     }
+
+    public double getElectricityCarbonTreeYear(){
+        return getElectricityCarbonEmission()/20;
+    }
+
     public double getGasCarbonEmission(){
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         try {
@@ -104,6 +120,9 @@ public class Bill {
             return gas_emission;
         } catch (ParseException e) {}
         return 0;
+    }
+    public double getGasCarbonTreeYear(){
+        return getGasCarbonEmission()/20;
     }
 }
 

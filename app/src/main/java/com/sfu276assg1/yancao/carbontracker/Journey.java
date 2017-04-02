@@ -90,6 +90,11 @@ public class Journey implements Serializable {
         return String.format("%.2f", carbonEmission);
     }
 
+    public String calculateCarbonTreeYear(){
+        double treeYear = Double.parseDouble (calculateCarbon())/20;
+        return String.format("%.2f", treeYear);
+    }
+
     public String getJourneyDes(){
         String des = "";
         String carName = this.car.getNickname();

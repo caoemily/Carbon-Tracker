@@ -5,5 +5,12 @@
         <item>"Public Transit"</item>
         <item>"Bike / Walk"</item>
     </string-array>
+
+    <string-array name = "graphUnit">
+        <item>"Tree Year (years needed for one tree to consume)"</item>
+        <item>"Kilogram (the actual weight of emitted CO2)"</item>
+    </string-array>
+
+
 </resources>
 

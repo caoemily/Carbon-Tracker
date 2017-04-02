@@ -247,6 +247,13 @@ public class DisplayLineChart extends AppCompatActivity {
         legend.setWordWrapEnabled(true);
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(getApplicationContext(), SelectGraphActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
     private void generateLineChart() {
         lineChart = (LineChart) findViewById(R.id.lineChart);
         float averageCO2PerDay = (float)36.2;

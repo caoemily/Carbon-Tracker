@@ -60,6 +60,13 @@ public class DisplayTableActivity extends AppCompatActivity implements View.OnCl
         });
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
     private void populateTable() {
         TableLayout table = (TableLayout) findViewById(R.id.table);
         TableRow titleRow = new TableRow(this);
@@ -218,7 +225,7 @@ public class DisplayTableActivity extends AppCompatActivity implements View.OnCl
     }
 
     public Dialog onCreateDialogSingleChoice() {
-        CharSequence[] array = {"Car", "Bike / Walk", "Public Transit"};
+        CharSequence[] array = {"Car", "Public Transit", "Bike / Walk"};
         AlertDialog.Builder builder = new AlertDialog.Builder(this)
                 .setTitle("Select Transportation Mode")
                 .setSingleChoiceItems(array, -1, new DialogInterface.OnClickListener() {
@@ -241,14 +248,14 @@ public class DisplayTableActivity extends AppCompatActivity implements View.OnCl
                             Intent intent = new Intent(DisplayTableActivity.this, SelectRouteActivity.class);
                             intent.putExtra(getResources().getString(R.string.EDIT_JOURNEY), 1);
                             intent.putExtra(getResources().getString(R.string.EDIT_JOURNEY_POSITION), position);
-                            intent.putExtra(getResources().getString(R.string.TRANS_MODE), 2);
+                            intent.putExtra(getResources().getString(R.string.TRANS_MODE), 1);
                             startActivity(intent);
                         }
                         else if (mode_id == 2) {
                             Intent intent = new Intent(DisplayTableActivity.this, SelectRouteActivity.class);
                             intent.putExtra(getResources().getString(R.string.EDIT_JOURNEY), 1);
                             intent.putExtra(getResources().getString(R.string.EDIT_JOURNEY_POSITION), position);
-                            intent.putExtra(getResources().getString(R.string.TRANS_MODE), 1);
+                            intent.putExtra(getResources().getString(R.string.TRANS_MODE), 2);
                             startActivity(intent);
                         }
                         finish();

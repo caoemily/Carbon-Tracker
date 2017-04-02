@@ -13,6 +13,7 @@ public class CarbonModel {
     private CarFamily carFromFile;
     private BillCollection billCollection;
     private DBAdapter db;
+    private Tips tips;
 
     public static CarbonModel getInstance() {
         return ourInstance;
@@ -26,6 +27,7 @@ public class CarbonModel {
         carCollection = new CarCollection();
         carFromFile = new CarFamily();
         billCollection = new BillCollection();
+        tips = new Tips();
     }
 
     public void setDb(DBAdapter db){this.db = db;}
@@ -128,4 +130,9 @@ public class CarbonModel {
     public void removeBill(int index) {
         billCollection.remove(index);
     }
+
+    public String generateCarTip(JourneyCollection journeyCollection, int index) {return tips.generateCarTip(journeyCollection,index);}
+    public String generateElecTip(BillCollection billCollection, int index) {return tips.generateElectricityTip(billCollection,index);}
+    public String generateGasTip(BillCollection billCollection, int index) {return tips.generateGasTip(billCollection,index);}
+    public int showWhichTip(JourneyCollection journeyCollection,BillCollection billCollection) {return tips.showWhichTip(journeyCollection, billCollection);}
 }

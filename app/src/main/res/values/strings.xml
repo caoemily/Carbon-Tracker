@@ -45,7 +45,7 @@
     <string name="select_transpotation_mode">Select Transpotation Mode</string>
     <string name="date">Date</string>
     <string name="people"># People</string>
-    <string name="electricity_gwh">Electricity (GWh)</string>
+    <string name="electricity_gwh">Electricity (kWh)</string>
     <string name="add_bill">Add Bill</string>
     <string name="natural_gas_gj">Natural Gas (GJ)</string>
     <string name="TRANS_MODE">TransMode</string>
@@ -55,4 +55,24 @@
     <string name="single_day">Single Day</string>
     <string name="_28_days">28 Days</string>
     <string name="_365_days">365 Days</string>
+    <string name="info">Info</string>
+    <string name="tree">Tree Year</string>
+    <string name="kg">Kg</string>
+
+    <string name="NOTIFICATION_CONTENT_TITLE">Reduce CO2 emission together.</string>
+    <string name="NOTIFICATION_NOBILL_NOJOURNEY_PART1">You have not entered any journey today,</string>
+    <string name="NOTIFICATION_NOBILL_NOJOURNEY_PART2">do you want to enter one?</string>
+    <string name="NOTIFICATION_NOBILL_PART1">You have not entered a utility bill in 1.5 months,</string>
+    <string name="NOTIFICATION_NOBILL_PART2">do you want to enter one today?</string>
+    <string name="NOTIFICATION_OTHER">Do you want to enter more journeys for today?</string>
+
+    <string name="SKYTRAIN">Skytrain</string>
+    <string name="BUS">Bus</string>
+    <string name="WALK">Walk</string>
+    <string name="BIKE">Bike</string>
+    <string name="TOTAL_DISTANCE_POSITIVE">Total distance must be positive.</string>
+    <string name="ENTER_ROUT_NAME">Please enter a name for the route.</string>
+
 </resources>
+
+
