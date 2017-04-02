@@ -56,6 +56,8 @@
     <string name="_28_days">28 Days</string>
     <string name="_365_days">365 Days</string>
     <string name="info">Info</string>
+    <string name="tree">Tree Year</string>
+    <string name="kg">Kg</string>
 
     <string name="NOTIFICATION_CONTENT_TITLE">Reduce CO2 emission together.</string>
     <string name="NOTIFICATION_NOBILL_NOJOURNEY_PART1">You have not entered any journey today,</string>
