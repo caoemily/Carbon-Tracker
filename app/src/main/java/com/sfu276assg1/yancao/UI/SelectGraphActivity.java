@@ -55,7 +55,7 @@ public class SelectGraphActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String today = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
                 Intent intent = new Intent(SelectGraphActivity.this, DisplayLineChart.class);
-                intent.putExtra("today", today);
+                intent.putExtra("today 365", today);
                 startActivity(intent);
             }
         });
