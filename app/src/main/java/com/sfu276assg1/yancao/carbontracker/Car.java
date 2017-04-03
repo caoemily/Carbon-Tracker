@@ -11,6 +11,7 @@ public class Car {
     private String drive;
     private String fuelType;
     private String transmission;
+    private int car_icon;
 
     //set member data based on parameter
     public Car()
@@ -21,6 +22,7 @@ public class Car {
         this.year = " ";
         this.highwayE = 0;
         this.cityE = 0;
+        this.car_icon = 0;
     }
 
     public Car(String make,String model, String year, int highwayE, int cityE, String transmission, double displacement, String fuelType){
@@ -35,7 +37,7 @@ public class Car {
         this.fuelType = fuelType;
     }
 
-    public Car(String make, String model, String year, int highwayE, int cityE, String fuelType, String nickname){
+    public Car(String make, String model, String year, int highwayE, int cityE, String fuelType, String nickname, int car_icon){
         this.make = make;
         this.model = model;
         this.year = year;
@@ -43,6 +45,12 @@ public class Car {
         this.cityE = cityE;
         this.fuelType = fuelType;
         this.nickname = nickname;
+        if (car_icon == 0) {
+            this.car_icon = R.drawable.no_icon;
+        }
+        else {
+            this.car_icon = car_icon;
+        }
     }
 
     public void setHighwayE(int highwayE) {
@@ -78,19 +86,20 @@ public class Car {
         return nickname;
     }
 
-    public String getMake() // returns the make
-    {
+    public String getMake() {
         return make;
     }
 
-    public String getModel() // returns the model
-    {
+    public String getModel() {
         return model;
     }
 
-    public String getYear() //returns the year
-    {
+    public String getYear() {
         return year;
+    }
+
+    public int getIcon() {
+        return car_icon;
     }
 
     public void setNickname(String nickname){

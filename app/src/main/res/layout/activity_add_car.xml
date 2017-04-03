@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_add_car"
     android:layout_width="match_parent"
@@ -11,9 +12,12 @@
     tools:context="com.sfu276assg1.yancao.UI.AddCarActivity">
 
     <TableRow
-        android:layout_width="match_parent"
+        android:id="@+id/tableRow4"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/tableRow4">
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true">
 
         <TextView
             android:id="@+id/give_Nickname"
@@ -31,29 +35,23 @@
             android:layout_marginLeft="10dp"
             android:layout_marginTop="19dp"
             android:ems="10"
-            android:hint="@string/please_enter_a_nickname_for_the_car"
+            android:hint="@string/please_enter_a_nickname"
             android:inputType="textPersonName"
+            android:maxLength="10"
             android:textSize="14sp" />
 
     </TableRow>
-
-    <Button
-        android:id="@+id/btnOkAddCar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/ok"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tableRow4"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="13dp"
         android:minHeight="90dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_below="@+id/car_icon"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
 
         <LinearLayout
             android:layout_width="56dp"
@@ -134,8 +132,16 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/textView7"
         android:layout_marginTop="5dp"
-        android:layout_above="@+id/btnOkAddCar"
         android:choiceMode="singleChoice" />
+
+    <ImageView
+        android:id="@+id/car_icon"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:adjustViewBounds="true"
+        android:clickable="true"
+        android:scaleType="fitCenter"
+        android:src="@drawable/button_add_icon" />
 
 
 </RelativeLayout>

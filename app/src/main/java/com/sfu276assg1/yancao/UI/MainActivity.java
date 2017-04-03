@@ -1,19 +1,17 @@
 package com.sfu276assg1.yancao.UI;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageButton;
 
-import com.sfu276assg1.yancao.carbontracker.BillCollection;
 import com.sfu276assg1.yancao.carbontracker.CarbonModel;
 import com.sfu276assg1.yancao.carbontracker.DBAdapter;
-import com.sfu276assg1.yancao.carbontracker.JourneyCollection;
 import com.sfu276assg1.yancao.carbontracker.R;
 
 /**
@@ -28,17 +26,18 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         setupDatabase();
-        setUpAddJourneytButton();
-        setUpShowTableButton();
-        setUpShowChartButton();
-        setUpUtilitiesButton();
-        setUpPieChart();
+        setUpBottomNavigation();
         setupNotification();
     }
 
-
-    private void setUpPieChart() {
-        //Vu's chart code here
+    @Override
+    public void onWindowFocusChanged(boolean hasFocas) {
+        super.onWindowFocusChanged(hasFocas);
+        View decorView = getWindow().getDecorView();
+        int uiOptions = View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
+        decorView.setSystemUiVisibility(uiOptions);
     }
 
     @Override
@@ -68,48 +67,30 @@ public class MainActivity extends AppCompatActivity {
         CarbonModel.getInstance().setBillCollection(CarbonModel.getInstance().getDb().getBillList());
     }
 
-    private void setUpAddJourneytButton() {
-        ImageButton button = (ImageButton) findViewById(R.id.addJourneyBtn);
-        button.setOnClickListener(new View.OnClickListener() {
+    private void setUpBottomNavigation() {
+        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, SelectTransModeActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
-    }
-
-    private void setUpShowTableButton() {
-        ImageButton button = (ImageButton) findViewById(R.id.showTableBtn);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, DisplayTableActivity.class);
-                startActivity(intent);
-            }
-        });
-    }
-
-    private void setUpShowChartButton() {
-        ImageButton button = (ImageButton) findViewById(R.id.showChartBtn);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, SelectGraphActivity.class);
-                startActivity(intent);
-            }
-        });
-    }
-
-    private void setUpUtilitiesButton() {
-        ImageButton button = (ImageButton) findViewById(R.id.utilitiesBtn);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, MonthlyUtilitiesActivity.class);
-                startActivity(intent);
-                finish();
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                Intent intent;
+                switch (item.getItemId()) {
+                    case R.id.journey:
+                        intent = new Intent(MainActivity.this, SelectTransModeActivity.class);
+                        startActivity(intent);
+                        finish();
+                        break;
+                    case R.id.utilities:
+                        intent = new Intent(MainActivity.this, MonthlyUtilitiesActivity.class);
+                        startActivity(intent);
+                        finish();
+                        break;
+                    case R.id.graph:
+                        intent = new Intent(MainActivity.this, SelectGraphActivity.class);
+                        startActivity(intent);
+                        finish();
+                        break;
+                }
+                return false;
             }
         });
     }
@@ -117,7 +98,4 @@ public class MainActivity extends AppCompatActivity {
     private void setupNotification() {
         startService(new Intent(getBaseContext(),NotificationService.class));
     }
-
 }
-
-

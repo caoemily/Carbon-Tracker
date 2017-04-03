@@ -19,15 +19,6 @@
         android:textSize="18sp"
         android:textStyle="bold" />
 
-    <Button
-        android:id="@+id/selectDateOk"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:text="@string/ok" />
-
     <LinearLayout
         android:id="@+id/linearLayout2"
         android:layout_width="wrap_content"
@@ -41,7 +32,8 @@
         <CalendarView
             android:id="@+id/calendar"
             android:layout_width="match_parent"
-            android:layout_height="303dp" />
+            android:layout_height="303dp"
+            android:layout_marginTop="10dp" />
 
     </LinearLayout>
 
@@ -49,10 +41,10 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="17dp"
+        android:text="@string/select_transpotation_mode"
         android:layout_below="@+id/linearLayout2"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="5dp"
-        android:text="@string/select_transpotation_mode" />
+        android:layout_centerHorizontal="true" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -64,7 +56,9 @@
         <RadioGroup
             android:id="@+id/transMode"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:layout_marginLeft="100dp"
+            android:layout_marginTop="10dp" />
     </LinearLayout>
 
 </RelativeLayout>

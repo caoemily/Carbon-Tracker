@@ -2,14 +2,12 @@ package com.sfu276assg1.yancao.UI;
 
 import android.content.Intent;
 import android.graphics.Color;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
-import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.charts.PieChart;
@@ -23,7 +21,6 @@ import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
-import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.listener.ChartTouchListener;
 import com.github.mikephil.charting.listener.OnChartGestureListener;
@@ -344,22 +341,18 @@ public class DisplayLineChart extends AppCompatActivity {
         lineChart.setOnChartGestureListener(new OnChartGestureListener() {
             @Override
             public void onChartGestureStart(MotionEvent me, ChartTouchListener.ChartGesture lastPerformedGesture) {
-
             }
 
             @Override
             public void onChartGestureEnd(MotionEvent me, ChartTouchListener.ChartGesture lastPerformedGesture) {
-
             }
 
             @Override
             public void onChartLongPressed(MotionEvent me) {
-
             }
 
             @Override
             public void onChartDoubleTapped(MotionEvent me) {
-
             }
 
             @Override
@@ -369,22 +362,18 @@ public class DisplayLineChart extends AppCompatActivity {
                 String lastDayOfMonth = dataForYear.get((int)entry.getX()).getLastDayOfMonth();
                 intent.putExtra("today",lastDayOfMonth);
                 startActivity(intent);
-
             }
 
             @Override
             public void onChartFling(MotionEvent me1, MotionEvent me2, float velocityX, float velocityY) {
-
             }
 
             @Override
             public void onChartScale(MotionEvent me, float scaleX, float scaleY) {
-
             }
 
             @Override
             public void onChartTranslate(MotionEvent me, float dX, float dY) {
-
             }
         });
 

@@ -4,51 +4,24 @@
     android:id="@+id/activity_select_trans_mode"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.sfu276assg1.yancao.UI.SelectCarActivity">
 
     <TextView
-        android:id="@+id/text_selectCar"
+        android:id="@+id/textView18"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:text="@string/please_select_a_car" />
-
-    <TextView
-        android:id="@+id/text_hintEditCar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="11dp"
-        android:text="@string/long_pressing_on_car_to_edit_or_delete"
-        android:layout_above="@+id/btn_addCar"
-        android:layout_centerHorizontal="true" />
+        android:padding="10dp"
+        android:text="Your Car:"
+        android:textStyle="bold" />
 
     <ListView
         android:id="@+id/listView_carList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/text_hintEditCar"
+        android:longClickable="true"
+        android:layout_below="@+id/textView18"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="11dp"
-        android:layout_marginTop="30dp"
-        android:longClickable="true" />
-
-    <Button
-        android:id="@+id/btn_addCar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginEnd="19dp"
-        android:layout_marginRight="19dp"
-        android:text="@string/add_car" />
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>
 
