@@ -59,7 +59,6 @@ import java.util.Set;
 
 public class DisplayBarChart extends AppCompatActivity {
     BarChart barChart;
-    //CombinedChart mChart;
     PieChart chart;
     private JourneyCollection journeyCollection = CarbonModel.getInstance().getJourneyCollection();
     private ArrayList<Journey> journeys = new ArrayList<>();
@@ -70,6 +69,7 @@ public class DisplayBarChart extends AppCompatActivity {
     private int numberOfDaysToGoBack = 28;
     private float totalCarbonElectrical = 0;
     private float totalCarbonNaturalGas = 0;
+    private int unitChose = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,7 +78,7 @@ public class DisplayBarChart extends AppCompatActivity {
         generateData();
         generateBarChart();
         generatePieChart();
-        //generateCombineChart();
+
     }
 
     @Override
@@ -120,7 +120,12 @@ public class DisplayBarChart extends AppCompatActivity {
             float sumOfCarbonPerRoute = 0;
             for(int j = 0; j < journeys.size(); j++) {
                 if(nameOfRoutes.get(i).equals(journeys.get(j).getRoute().getName())) {
-                    String emissionString = journeys.get(j).calculateCarbon();
+                    String emissionString = "";
+                    if(unitChose != 0) {
+                        emissionString = journeys.get(j).calculateCarbon();
+                    }else{
+                        emissionString = journeys.get(j).calculateCarbonTreeYear();
+                    }
                     sumOfCarbonPerRoute += Float.parseFloat(emissionString);
                 }
             }
@@ -227,14 +232,24 @@ public class DisplayBarChart extends AppCompatActivity {
             if (!nameOfEntries.get(i).equals("Bike/Walk") && !nameOfEntries.get(i).equals("Public Transit")) {
                 for (int j = 0; j < journeys.size(); j++) {
                     if (nameOfEntries.get(i).equals(journeys.get(j).getCar().toString())){
-                        String emissionString = journeys.get(j).calculateCarbon();
+                        String emissionString = "";
+                        if(unitChose != 0) {
+                            emissionString = journeys.get(j).calculateCarbon();
+                        }else{
+                            emissionString = journeys.get(j).calculateCarbonTreeYear();
+                        }
                         sumOfCarbon += Float.parseFloat(emissionString);
                     }
                 }
             }else{
                 for (int y = 0; y < journeys.size(); y++) {
                     if(nameOfEntries.get(i).equals(journeys.get(y).getRoute().getType())){
-                        String emissionString = journeys.get(y).calculateCarbon();
+                        String emissionString = "";
+                        if(unitChose != 0) {
+                            emissionString = journeys.get(y).calculateCarbon();
+                        }else{
+                            emissionString = journeys.get(y).calculateCarbonTreeYear();
+                        }
                         sumOfCarbon += Float.parseFloat(emissionString);
                     }
                 }
@@ -257,8 +272,13 @@ public class DisplayBarChart extends AppCompatActivity {
             emissionInFloat[i] = emissions.get(i);
         }
         barEntries.add(new BarEntry(0, emissionInFloat));
-        barEntries.add(new BarEntry(2, (float) 36.2 * 30));
-        barEntries.add(new BarEntry(4, (float) ((36.2 * 30) * 70)/100));
+        if (unitChose != 0) {
+            barEntries.add(new BarEntry(2, (float) 36.2 * 30));
+            barEntries.add(new BarEntry(4, (float) ((36.2 * 30) * 70) / 100));
+        }else{
+            barEntries.add(new BarEntry(2, (float) (36.2 * 30) / 20));
+            barEntries.add(new BarEntry(4, (float) (((36.2 * 30) * 70) / 100) / 20));
+        }
 
         BarDataSet barDataSet = new BarDataSet(barEntries, "");
         barDataSet.setColors(generateColorsForGraph());
@@ -325,6 +345,7 @@ public class DisplayBarChart extends AppCompatActivity {
 
     private void generateData() {
         Intent intent = getIntent();
+        unitChose = intent.getIntExtra("unitChoice", 0);
         String dateInString = intent.getStringExtra("today");
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         Date today;
@@ -346,6 +367,7 @@ public class DisplayBarChart extends AppCompatActivity {
                 cal.add(Calendar.DAY_OF_MONTH, -j);
                 Date currentDay = cal.getTime();
                 String currentDayInString = df.format(currentDay);
+                //NEED to add IF here for tree
                 float currentDayCarbonElectrical = (float)CarbonModel.getInstance().getBillCollection().getElectricityCarbonEmission(currentDayInString);
                 totalCarbonElectrical += currentDayCarbonElectrical;
                 float currentDayCarbonGas = (float)CarbonModel.getInstance().getBillCollection().getGasCarbonEmission(currentDayInString);
