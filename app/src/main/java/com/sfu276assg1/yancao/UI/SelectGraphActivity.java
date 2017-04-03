@@ -41,7 +41,6 @@ public class SelectGraphActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_graph);
         generateRealTimeCalendar();
-        createRadioButtons();
         setSingleDayButton();
         set28DaysButton();
         set365DayButton();
@@ -53,18 +52,6 @@ public class SelectGraphActivity extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(intent);
         finish();
-    }
-
-    private void createRadioButtons() {
-        RadioGroup group = (RadioGroup) findViewById(R.id.radio_selectUnit);
-        String[] unit = getResources().getStringArray(R.array.graphUnit);
-        RadioButton button1 = new RadioButton(this);
-        button1.setText(unit[0]);
-        group.addView(button1);
-        button1.setChecked(true);
-        RadioButton button2 = new RadioButton(this);
-        button2.setText(unit[1]);
-        group.addView(button2);
     }
 
     private void set365DayButton() {
@@ -143,17 +130,8 @@ public class SelectGraphActivity extends AppCompatActivity {
     };
 
     private int getCheckedUnit(){
-        RadioGroup group = (RadioGroup) findViewById(R.id.radio_selectUnit);
-        int idOfSelected = group.getCheckedRadioButtonId();
-        RadioButton radioButton = (RadioButton) findViewById(idOfSelected);
-        String chosenUnit = radioButton.getText().toString();
-        String[] unit = getResources().getStringArray(R.array.graphUnit);
-        if(chosenUnit.equals(unit[0])){
-            return 0;
-        }
-        else{
-            return 1;
-        }
+        int unitChoice = getIntent().getIntExtra("unitChoice", 0);
+        return unitChoice;
     }
 }
 

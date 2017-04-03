@@ -135,5 +135,19 @@
         android:layout_toLeftOf="@+id/showTableBtn"
         android:layout_toStartOf="@+id/showTableBtn" />
 
+    <ImageView
+        android:id="@+id/image_mainIntro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/chart_mainpage"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="67dp"
+        android:layout_marginLeft="60dp"
+        android:layout_toLeftOf="@+id/showTableBtn"
+        android:layout_toStartOf="@+id/showTableBtn"
+        android:visibility="invisible"
+        app:srcCompat="@drawable/mainpage_intro" />
+
 
 </RelativeLayout>
