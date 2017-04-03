@@ -46,6 +46,7 @@ public class DisplayCarbonFootprintActivity extends AppCompatActivity {
     private String chosenDate;
     private float carbonForUtilitiesElectrical;
     private float carbonForUtilitiesGas;
+    private int unitChose = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,6 +67,7 @@ public class DisplayCarbonFootprintActivity extends AppCompatActivity {
     private void generateInfoForChart() {
         Intent intent = getIntent();
         chosenDate = intent.getStringExtra("single date selected");
+        unitChose = intent.getIntExtra("unitChoice", 0);
         if(intent.getIntExtra("mode", 0) == 0) {
             for(int i = 0; i < journeyCollection.countJourneys(); i++) {
                 if(journeyCollection.getJourney(i).getDate().equals(chosenDate)) {
@@ -113,7 +115,12 @@ public class DisplayCarbonFootprintActivity extends AppCompatActivity {
             float sumOfCarbonPerRoute = 0;
             for(int j = 0; j < journeys.size(); j++) {
                 if(nameOfRoutes.get(i).equals(journeys.get(j).getRoute().getName())) {
-                    String emissionString = journeys.get(j).calculateCarbon();
+                    String emissionString = "";
+                    if(unitChose != 0) {
+                        emissionString = journeys.get(j).calculateCarbon();
+                    }else{
+                        emissionString = journeys.get(j).calculateCarbonTreeYear();
+                    }
                     sumOfCarbonPerRoute += Float.parseFloat(emissionString);
                 }
             }
@@ -164,15 +171,30 @@ public class DisplayCarbonFootprintActivity extends AppCompatActivity {
     private void generatePieChart() {
         List<PieEntry> yEntries = new ArrayList<>();
         List<String> xEntries = new ArrayList<>();
-        carbonForUtilitiesElectrical = (float) CarbonModel.getInstance().getBillCollection().getElectricityCarbonEmission(chosenDate);
-        carbonForUtilitiesGas = (float) CarbonModel.getInstance().getBillCollection().getGasCarbonEmission(chosenDate);
+        //NEED TO CHANGE TO TREE!!!!!!!
+        if(unitChose != 0) {
+            carbonForUtilitiesElectrical = (float) CarbonModel.getInstance().getBillCollection().getElectricityCarbonEmission(chosenDate);
+            carbonForUtilitiesGas = (float) CarbonModel.getInstance().getBillCollection().getGasCarbonEmission(chosenDate);
+        }else{
+            carbonForUtilitiesElectrical = (float) CarbonModel.getInstance().getBillCollection().getElectricityCarbonEmission(chosenDate);
+            carbonForUtilitiesGas = (float) CarbonModel.getInstance().getBillCollection().getGasCarbonEmission(chosenDate);
+        }
         if (!journeys.isEmpty()) {
             for (int i = 0; i < journeys.size(); i++) {
                 if (journeys.get(i).getRoute().getType().equals("Drive")) {
-                    yEntries.add(new PieEntry(Float.valueOf(journeys.get(i).calculateCarbon()), journeys.get(i).getCar().getMake()));
+                    if(unitChose != 0) {
+                        yEntries.add(new PieEntry(Float.valueOf(journeys.get(i).calculateCarbon()), journeys.get(i).getCar().getMake()));
+                    }else{
+                        yEntries.add(new PieEntry(Float.valueOf(journeys.get(i).calculateCarbonTreeYear()), journeys.get(i).getCar().getMake()));
+                    }
                     xEntries.add(journeyCollection.getJourney(i).getCar().getMake());
                 }else{
-                    yEntries.add(new PieEntry(Float.valueOf(journeys.get(i).calculateCarbon()), journeys.get(i).getRoute().getType()));
+                    if(unitChose != 0) {
+                        yEntries.add(new PieEntry(Float.valueOf(journeys.get(i).calculateCarbon()), journeys.get(i).getRoute().getType()));
+                    }else{
+                        yEntries.add(new PieEntry(Float.valueOf(journeys.get(i).calculateCarbonTreeYear()), journeys.get(i).getRoute().getType()));
+
+                    }
                     xEntries.add(journeyCollection.getJourney(i).getRoute().getType());
                 }
             }
