@@ -87,6 +87,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupUnitChoice() {
+        CarbonModel.getInstance().setUnitChoice(getUnitChoice());
         unitChoice = getUnitChoice();
     }
 
@@ -108,7 +109,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, DisplayTableActivity.class);
-                intent.putExtra(getResources().getString(R.string.UNIT_CHOICE), unitChoice);
                 startActivity(intent);
             }
         });
@@ -120,7 +120,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, SelectGraphActivity.class);
-                intent.putExtra(getResources().getString(R.string.UNIT_CHOICE), unitChoice);
                 startActivity(intent);
             }
         });
@@ -163,6 +162,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog,int id) {
                         saveUnitChoice(unitChoice);
+                        CarbonModel.getInstance().setUnitChoice(unitChoice);
                     }
                 })
                 .setNegativeButton(getResources().getString(R.string.CANCEL),new DialogInterface.OnClickListener() {

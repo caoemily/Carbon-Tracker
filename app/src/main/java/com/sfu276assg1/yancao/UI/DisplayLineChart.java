@@ -86,7 +86,6 @@ public class DisplayLineChart extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         Intent intent = new Intent(getApplicationContext(), SelectGraphActivity.class);
-        intent.putExtra(getResources().getString(R.string.UNIT_CHOICE), unitChose);
         startActivity(intent);
         finish();
     }
@@ -418,7 +417,7 @@ public class DisplayLineChart extends AppCompatActivity {
 
     private void generateDataForLineChart() {
         Intent intent = getIntent();
-        unitChose = intent.getIntExtra(getString(R.string.UNIT_CHOICE), 0);
+        unitChose = CarbonModel.getInstance().getUnitChoice();
         String dateInString = intent.getStringExtra("today 365");
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         Date today;

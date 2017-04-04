@@ -14,6 +14,7 @@ public class CarbonModel {
     private BillCollection billCollection;
     private DBAdapter db;
     private Tips tips;
+    private int unitChoice;
 
     public static CarbonModel getInstance() {
         return ourInstance;
@@ -28,7 +29,11 @@ public class CarbonModel {
         carFromFile = new CarFamily();
         billCollection = new BillCollection();
         tips = new Tips();
+        unitChoice = 0;
     }
+
+    public void setUnitChoice(int unit){this.unitChoice = unit;}
+    public int getUnitChoice(){return this.unitChoice;}
 
     public void setDb(DBAdapter db){this.db = db;}
     public DBAdapter getDb(){return this.db;}

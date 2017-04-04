@@ -77,7 +77,9 @@ public class JourneyCollection {
         return carbonEm;
     }
 
-
+    public double getJourneyCarbonInOneDayTreeYear (String date){
+        return getJourneyCarbonInOneDay(date)/20;
+    }
 
     private void validateIndexWithException(int index) {
         if (index < 0 || index >= countJourneys()) {

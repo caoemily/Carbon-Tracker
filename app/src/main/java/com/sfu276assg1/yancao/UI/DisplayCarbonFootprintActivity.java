@@ -17,6 +17,7 @@ import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.utils.ColorTemplate;
+import com.sfu276assg1.yancao.carbontracker.Car;
 import com.sfu276assg1.yancao.carbontracker.CarbonModel;
 import com.sfu276assg1.yancao.carbontracker.Journey;
 import com.sfu276assg1.yancao.carbontracker.JourneyCollection;
@@ -57,14 +58,13 @@ public class DisplayCarbonFootprintActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         Intent intent = new Intent(getApplicationContext(), SelectGraphActivity.class);
-        intent.putExtra(getResources().getString(R.string.UNIT_CHOICE), unitChose);
         startActivity(intent);
         finish();
     }
     private void generateInfoForChart() {
         Intent intent = getIntent();
         chosenDate = intent.getStringExtra("single date selected");
-        unitChose = intent.getIntExtra(getString(R.string.UNIT_CHOICE), 0);
+        unitChose = CarbonModel.getInstance().getUnitChoice();
         if(intent.getIntExtra("mode", 0) == 0) {
             for(int i = 0; i < journeyCollection.countJourneys(); i++) {
                 if(journeyCollection.getJourney(i).getDate().equals(chosenDate)) {
