@@ -76,6 +76,15 @@
     <string name="ENTER_ROUT_NAME">Please enter a name for the route.</string>
     <string name="CHOOSE_UNIT">Please choose CO2 unit:</string>
     <string name="UNIT_CHOICE">unitChoice</string>
+    <string name="other">Other</string>
+    <string name="electrical">Electrical</string>
+    <string name="natural_gas">Natural Gas</string>
+    <string name="total_in_month">Total In Month</string>
+    <string name="average_canadian">Average CO2/Canadian</string>
+    <string name="target_co2">Target CO2</string>
+    <string name="utilities">Utilities</string>
+    <string name="public_trans">Public Transportation</string>
+    <string name="car">Car</string>
 
 </resources>
 

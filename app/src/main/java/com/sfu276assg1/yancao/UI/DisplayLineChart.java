@@ -150,10 +150,10 @@ public class DisplayLineChart extends AppCompatActivity {
             }
             emissions.add(sumOfCarbon);
         }
-        nameOfEntries.add("Electrical");
+        nameOfEntries.add(getString(R.string.electrical));
         emissions.add(totalCarbonElectrical);
 
-        nameOfEntries.add("Natural Gas");
+        nameOfEntries.add(getString(R.string.natural_gas));
         emissions.add(totalCarbonNaturalGas);
 
         for(String name : nameOfEntries) {
@@ -220,13 +220,13 @@ public class DisplayLineChart extends AppCompatActivity {
             }
             emissionPerRoute.add(sumOfCarbonPerRoute);
             if (nameOfRoutes.get(i).equals(" ")){
-                nameOfRoutes.set(i, "Other");
+                nameOfRoutes.set(i, getString(R.string.other));
             }
         }
 
-        nameOfRoutes.add("Electrical");
+        nameOfRoutes.add(getString(R.string.electrical));
         emissionPerRoute.add(totalCarbonElectrical);
-        nameOfRoutes.add("Natural Gas");
+        nameOfRoutes.add(getString(R.string.natural_gas));
         emissionPerRoute.add(totalCarbonNaturalGas);
         chart = (PieChart) findViewById(R.id.pieChart_365);
 
@@ -263,12 +263,12 @@ public class DisplayLineChart extends AppCompatActivity {
         legend.setWordWrapEnabled(true);
     }
 
-//    @Override
-//    public void onBackPressed() {
-//        Intent intent = new Intent(getApplicationContext(), SelectGraphActivity.class);
-//        startActivity(intent);
-//        finish();
-//    }
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(getApplicationContext(), SelectGraphActivity.class);
+        startActivity(intent);
+        finish();
+    }
 
     private void generateLineChart() {
         lineChart = (LineChart) findViewById(R.id.lineChart);
@@ -317,27 +317,27 @@ public class DisplayLineChart extends AppCompatActivity {
         Collections.sort(yAxisUtilities, new EntryXComparator());
         ArrayList<ILineDataSet> lineDataSets = new ArrayList<>();
 
-        LineDataSet lineDataSet1 = new LineDataSet(yAxisCar,"Car");
+        LineDataSet lineDataSet1 = new LineDataSet(yAxisCar,getString(R.string.car));
         lineDataSet1.setLineWidth(5);
         lineDataSet1.setDrawValues(true);
         lineDataSet1.setColor(Color.BLUE);
 
-        LineDataSet lineDataSet2 = new LineDataSet(yAxisPublicTransportation,"Public Transportation");
+        LineDataSet lineDataSet2 = new LineDataSet(yAxisPublicTransportation,getString(R.string.public_trans));
         lineDataSet2.setLineWidth(5);
         lineDataSet2.setDrawValues(true);
         lineDataSet2.setColor(Color.RED);
 
-        LineDataSet lineDataSet3 = new LineDataSet(yAxisUtilities,"Utilities");
+        LineDataSet lineDataSet3 = new LineDataSet(yAxisUtilities,getString(R.string.utilities));
         lineDataSet3.setLineWidth(5);
         lineDataSet3.setDrawValues(true);
         lineDataSet3.setColor(Color.GREEN);
 
-        LineDataSet lineDataSet4 = new LineDataSet(yAxisAvgCanadian,"Emission/Canadian");
+        LineDataSet lineDataSet4 = new LineDataSet(yAxisAvgCanadian,getString(R.string.average_canadian));
         lineDataSet4.setLineWidth(5);
         lineDataSet4.setDrawValues(true);
         lineDataSet4.setColor(Color.CYAN);
 
-        LineDataSet lineDataSet5 = new LineDataSet(yAxisTargetCO2,"Target CO2");
+        LineDataSet lineDataSet5 = new LineDataSet(yAxisTargetCO2,getString(R.string.target_co2));
         lineDataSet5.setLineWidth(5);
         lineDataSet5.setDrawValues(true);
         lineDataSet5.setColor(Color.GRAY);
@@ -391,6 +391,7 @@ public class DisplayLineChart extends AppCompatActivity {
                 Intent intent = new Intent(DisplayLineChart.this, DisplayBarChart.class);
                 String lastDayOfMonth = dataForYear.get((int)entry.getX()).getLastDayOfMonth();
                 intent.putExtra("today",lastDayOfMonth);
+                intent.putExtra(getString(R.string.UNIT_CHOICE), unitChose);
                 startActivity(intent);
 
             }
@@ -415,7 +416,7 @@ public class DisplayLineChart extends AppCompatActivity {
 
     private void generateDataForLineChart() {
         Intent intent = getIntent();
-        unitChose = intent.getIntExtra("unitChoice", 0);
+        unitChose = intent.getIntExtra(getString(R.string.UNIT_CHOICE), 0);
         String dateInString = intent.getStringExtra("today 365");
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         Date today;
@@ -444,9 +445,16 @@ public class DisplayLineChart extends AppCompatActivity {
                 Date currentDay = cal.getTime();
                 String currentDayInString = df.format(currentDay);
                 //NEED THISSSS TREEE
-                float currentDayCarbonElectrical = (float)CarbonModel.getInstance().getBillCollection().getElectricityCarbonEmission(currentDayInString);
+                float currentDayCarbonElectrical = 0;
+                float currentDayCarbonGas = 0;
+                if(unitChose != 0) {
+                    currentDayCarbonElectrical = (float) CarbonModel.getInstance().getBillCollection().getElectricityCarbonEmission(currentDayInString);
+                    currentDayCarbonGas = (float) CarbonModel.getInstance().getBillCollection().getGasCarbonEmission(currentDayInString);
+                }else{
+                    currentDayCarbonElectrical = (float) CarbonModel.getInstance().getBillCollection().getElectricityCarbonEmissionTreeYear(currentDayInString);
+                    currentDayCarbonGas = (float) CarbonModel.getInstance().getBillCollection().getGasCarbonEmissionTreeYear(currentDayInString);
+                }
                 totalCarbonElectrical += currentDayCarbonElectrical;
-                float currentDayCarbonGas = (float)CarbonModel.getInstance().getBillCollection().getGasCarbonEmission(currentDayInString);
                 totalCarbonNaturalGas += currentDayCarbonGas;
             }
         }catch (ParseException e) {}
@@ -508,7 +516,12 @@ public class DisplayLineChart extends AppCompatActivity {
                 while(!(currentDate.before(firstDate) || currentDate.after(lastDay))) {
                     String currentDayInString = df.format(currentDate);
                     //NEED TO ADD FOR TREEEE
-                    float currentDayCarbon = (float)CarbonModel.getInstance().getBillCollection().getTotalCarbonEmission(currentDayInString);
+                    float currentDayCarbon = 0;
+                    if(unitChose != 0) {
+                        currentDayCarbon = (float) CarbonModel.getInstance().getBillCollection().getTotalCarbonEmission(currentDayInString);
+                    }else{
+                        currentDayCarbon = (float) CarbonModel.getInstance().getBillCollection().getTotalCarbonEmissionTreeYear(currentDayInString);
+                    }
                     totalCarbonUtilities += currentDayCarbon;
                     cal.add(Calendar.DAY_OF_MONTH, +1);
                     currentDate = cal.getTime();

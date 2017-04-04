@@ -131,13 +131,13 @@ public class DisplayBarChart extends AppCompatActivity {
             }
             emissionPerRoute.add(sumOfCarbonPerRoute);
             if (nameOfRoutes.get(i).equals(" ")){
-                nameOfRoutes.set(i, "Other");
+                nameOfRoutes.set(i, getString(R.string.other));
             }
         }
 
-        nameOfRoutes.add("Electrical");
+        nameOfRoutes.add(getString(R.string.electrical));
         emissionPerRoute.add(totalCarbonElectrical);
-        nameOfRoutes.add("Natural Gas");
+        nameOfRoutes.add(getString(R.string.natural_gas));
         emissionPerRoute.add(totalCarbonNaturalGas);
         chart = (PieChart) findViewById(R.id.pieChart_28);
 
@@ -256,10 +256,10 @@ public class DisplayBarChart extends AppCompatActivity {
             }
             emissions.add(sumOfCarbon);
         }
-        nameOfEntries.add("Electrical");
+        nameOfEntries.add(getString(R.string.electrical));
         emissions.add(totalCarbonElectrical);
 
-        nameOfEntries.add("Natural Gas");
+        nameOfEntries.add(getString(R.string.natural_gas));
         emissions.add(totalCarbonNaturalGas);
 
 
@@ -326,11 +326,11 @@ public class DisplayBarChart extends AppCompatActivity {
         legend.setWordWrapEnabled(true);
 
         ArrayList<String> labels = new ArrayList<>();
-        labels.add("Total In Month");
+        labels.add(getString(R.string.total_in_month));
         labels.add(" ");
-        labels.add("Average CO2/Canadian");
+        labels.add(getString(R.string.average_canadian));
         labels.add(" ");
-        labels.add("Target CO2");
+        labels.add(getString(R.string.target_co2));
         final XAxis xAxis = barChart.getXAxis();
         xAxis.setGranularity(1f);
         xAxis.setGranularityEnabled(true);
@@ -345,7 +345,7 @@ public class DisplayBarChart extends AppCompatActivity {
 
     private void generateData() {
         Intent intent = getIntent();
-        unitChose = intent.getIntExtra("unitChoice", 0);
+        unitChose = intent.getIntExtra(getString(R.string.UNIT_CHOICE), 0);
         String dateInString = intent.getStringExtra("today");
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         Date today;
@@ -367,10 +367,16 @@ public class DisplayBarChart extends AppCompatActivity {
                 cal.add(Calendar.DAY_OF_MONTH, -j);
                 Date currentDay = cal.getTime();
                 String currentDayInString = df.format(currentDay);
-                //NEED to add IF here for tree
-                float currentDayCarbonElectrical = (float)CarbonModel.getInstance().getBillCollection().getElectricityCarbonEmission(currentDayInString);
+                float currentDayCarbonElectrical = 0;
+                float currentDayCarbonGas = 0;
+                if(unitChose != 0) {
+                    currentDayCarbonElectrical = (float) CarbonModel.getInstance().getBillCollection().getElectricityCarbonEmission(currentDayInString);
+                    currentDayCarbonGas = (float) CarbonModel.getInstance().getBillCollection().getGasCarbonEmission(currentDayInString);
+                }else{
+                    currentDayCarbonElectrical = (float) CarbonModel.getInstance().getBillCollection().getElectricityCarbonEmissionTreeYear(currentDayInString);
+                    currentDayCarbonGas = (float) CarbonModel.getInstance().getBillCollection().getGasCarbonEmissionTreeYear(currentDayInString);
+                }
                 totalCarbonElectrical += currentDayCarbonElectrical;
-                float currentDayCarbonGas = (float)CarbonModel.getInstance().getBillCollection().getGasCarbonEmission(currentDayInString);
                 totalCarbonNaturalGas += currentDayCarbonGas;
             }
         }catch (ParseException e) {

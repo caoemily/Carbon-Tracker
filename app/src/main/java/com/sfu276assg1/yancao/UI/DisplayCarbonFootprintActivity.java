@@ -63,7 +63,7 @@ public class DisplayCarbonFootprintActivity extends AppCompatActivity {
     private void generateInfoForChart() {
         Intent intent = getIntent();
         chosenDate = intent.getStringExtra("single date selected");
-        unitChose = intent.getIntExtra("unitChoice", 0);
+        unitChose = intent.getIntExtra(getString(R.string.UNIT_CHOICE), 0);
         if(intent.getIntExtra("mode", 0) == 0) {
             for(int i = 0; i < journeyCollection.countJourneys(); i++) {
                 if(journeyCollection.getJourney(i).getDate().equals(chosenDate)) {
@@ -117,12 +117,12 @@ public class DisplayCarbonFootprintActivity extends AppCompatActivity {
             }
             emissionPerRoute.add(sumOfCarbonPerRoute);
             if (nameOfRoutes.get(i).equals(" ")){
-                nameOfRoutes.set(i, "Other");
+                nameOfRoutes.set(i, getString(R.string.other));
             }
         }
-        nameOfRoutes.add("Electrical");
+        nameOfRoutes.add(getString(R.string.electrical));
         emissionPerRoute.add(carbonForUtilitiesElectrical);
-        nameOfRoutes.add("Natural Gas");
+        nameOfRoutes.add(getString(R.string.natural_gas));
         emissionPerRoute.add(carbonForUtilitiesGas);
         List<PieEntry> yEntries = new ArrayList<>();
         for(int i = 0; i < emissionPerRoute.size(); i++) {
@@ -136,7 +136,7 @@ public class DisplayCarbonFootprintActivity extends AppCompatActivity {
         PieChart chart = (PieChart) findViewById(R.id.Chart);
         Description description = new Description();
         description.setText("Amount of Carbon per Car");
-        chart.setDescription(description);
+        chart.setDescription(null);
         chart.setRotationEnabled(true);
         chart.setHoleRadius(25f);
         chart.setTransparentCircleAlpha(0);
@@ -163,8 +163,8 @@ public class DisplayCarbonFootprintActivity extends AppCompatActivity {
             carbonForUtilitiesElectrical = (float) CarbonModel.getInstance().getBillCollection().getElectricityCarbonEmission(chosenDate);
             carbonForUtilitiesGas = (float) CarbonModel.getInstance().getBillCollection().getGasCarbonEmission(chosenDate);
         }else{
-            carbonForUtilitiesElectrical = (float) CarbonModel.getInstance().getBillCollection().getElectricityCarbonEmission(chosenDate);
-            carbonForUtilitiesGas = (float) CarbonModel.getInstance().getBillCollection().getGasCarbonEmission(chosenDate);
+            carbonForUtilitiesElectrical = (float) CarbonModel.getInstance().getBillCollection().getElectricityCarbonEmissionTreeYear(chosenDate);
+            carbonForUtilitiesGas = (float) CarbonModel.getInstance().getBillCollection().getGasCarbonEmissionTreeYear(chosenDate);
         }
         if (!journeys.isEmpty()) {
             for (int i = 0; i < journeys.size(); i++) {
@@ -185,15 +185,15 @@ public class DisplayCarbonFootprintActivity extends AppCompatActivity {
                     xEntries.add(journeyCollection.getJourney(i).getRoute().getType());
                 }
             }
-            yEntries.add(new PieEntry(carbonForUtilitiesElectrical, "Electrical"));
-            xEntries.add("Electrical");
-            yEntries.add(new PieEntry(carbonForUtilitiesGas, "Natural Gas"));
-            xEntries.add("Natural Gas");
+            yEntries.add(new PieEntry(carbonForUtilitiesElectrical, getString(R.string.electrical)));
+            xEntries.add(getString(R.string.electrical));
+            yEntries.add(new PieEntry(carbonForUtilitiesGas, getString(R.string.natural_gas)));
+            xEntries.add(getString(R.string.natural_gas));
         }else{
-            yEntries.add(new PieEntry(carbonForUtilitiesElectrical, "Electrical"));
-            xEntries.add("Electrical");
-            yEntries.add(new PieEntry(carbonForUtilitiesGas, "Natural Gas"));
-            xEntries.add("Natural Gas");
+            yEntries.add(new PieEntry(carbonForUtilitiesElectrical, getString(R.string.electrical)));
+            xEntries.add(getString(R.string.electrical));
+            yEntries.add(new PieEntry(carbonForUtilitiesGas, getString(R.string.natural_gas)));
+            xEntries.add(getString(R.string.natural_gas));
         }
         PieDataSet dataSet = new PieDataSet(yEntries, "");
         dataSet.setSliceSpace(5);
@@ -203,7 +203,7 @@ public class DisplayCarbonFootprintActivity extends AppCompatActivity {
         PieChart chart = (PieChart) findViewById(R.id.Chart);
         Description description = new Description();
         description.setText("Amount of Carbon per Car");
-        chart.setDescription(description);
+        chart.setDescription(null);
         chart.setRotationEnabled(true);
         chart.setHoleRadius(25f);
         chart.setTransparentCircleAlpha(0);
