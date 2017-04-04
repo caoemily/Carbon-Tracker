@@ -67,6 +67,7 @@ public class DisplayLineChart extends AppCompatActivity {
     private int numberOfDaysGoBack = 365;
     private float totalCarbonElectrical = 0;
     private float totalCarbonNaturalGas = 0;
+    private int unitChose = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -125,24 +126,34 @@ public class DisplayLineChart extends AppCompatActivity {
             if (!nameOfEntries.get(i).equals("Bike/Walk") && !nameOfEntries.get(i).equals("Public Transit")) {
                 for (int j = 0; j < journeys.size(); j++) {
                     if (nameOfEntries.get(i).equals(journeys.get(j).getCar().toString())){
-                        String emissionString = journeys.get(j).calculateCarbon();
+                        String emissionString = "";
+                        if(unitChose != 0) {
+                            emissionString = journeys.get(j).calculateCarbon();
+                        }else {
+                            emissionString = journeys.get(j).calculateCarbonTreeYear();
+                        }
                         sumOfCarbon += Float.parseFloat(emissionString);
                     }
                 }
             }else{
                 for (int y = 0; y < journeys.size(); y++) {
                     if(nameOfEntries.get(i).equals(journeys.get(y).getRoute().getType())){
-                        String emissionString = journeys.get(y).calculateCarbon();
+                        String emissionString = "";
+                        if(unitChose != 0) {
+                            emissionString = journeys.get(y).calculateCarbon();
+                        }else {
+                            emissionString = journeys.get(y).calculateCarbonTreeYear();
+                        }
                         sumOfCarbon += Float.parseFloat(emissionString);
                     }
                 }
             }
             emissions.add(sumOfCarbon);
         }
-        nameOfEntries.add("Electrical");
+        nameOfEntries.add(getString(R.string.electrical));
         emissions.add(totalCarbonElectrical);
 
-        nameOfEntries.add("Natural Gas");
+        nameOfEntries.add(getString(R.string.natural_gas));
         emissions.add(totalCarbonNaturalGas);
 
         for(String name : nameOfEntries) {
@@ -198,19 +209,24 @@ public class DisplayLineChart extends AppCompatActivity {
             float sumOfCarbonPerRoute = 0;
             for(int j = 0; j < journeys.size(); j++) {
                 if(nameOfRoutes.get(i).equals(journeys.get(j).getRoute().getName())) {
-                    String emissionString = journeys.get(j).calculateCarbon();
+                    String emissionString = "";
+                    if(unitChose != 0) {
+                        emissionString = journeys.get(j).calculateCarbon();
+                    }else{
+                        emissionString = journeys.get(j).calculateCarbonTreeYear();
+                    }
                     sumOfCarbonPerRoute += Float.parseFloat(emissionString);
                 }
             }
             emissionPerRoute.add(sumOfCarbonPerRoute);
             if (nameOfRoutes.get(i).equals(" ")){
-                nameOfRoutes.set(i, "Other");
+                nameOfRoutes.set(i, getString(R.string.other));
             }
         }
 
-        nameOfRoutes.add("Electrical");
+        nameOfRoutes.add(getString(R.string.electrical));
         emissionPerRoute.add(totalCarbonElectrical);
-        nameOfRoutes.add("Natural Gas");
+        nameOfRoutes.add(getString(R.string.natural_gas));
         emissionPerRoute.add(totalCarbonNaturalGas);
         chart = (PieChart) findViewById(R.id.pieChart_365);
 
@@ -256,9 +272,16 @@ public class DisplayLineChart extends AppCompatActivity {
 
     private void generateLineChart() {
         lineChart = (LineChart) findViewById(R.id.lineChart);
+        float averageCO2PerMonth = 0;
+        float targetCO2 = 0;
         float averageCO2PerDay = (float)36.2;
-        float averageCO2PerMonth = averageCO2PerDay * 30;
-        float targetCO2 = (averageCO2PerMonth * 70) / 100;
+        if(unitChose != 0) {
+            averageCO2PerMonth = averageCO2PerDay * 30;
+            targetCO2 = (averageCO2PerMonth * 70) / 100;
+        }else{
+            averageCO2PerMonth = (averageCO2PerDay * 30) / 20;
+            targetCO2 = (averageCO2PerMonth * 70) / 100;
+        }
 
         ArrayList<String> monthToDisplay = new ArrayList<>();
         ArrayList<Entry> yAxisCar = new ArrayList<>();
@@ -294,27 +317,27 @@ public class DisplayLineChart extends AppCompatActivity {
         Collections.sort(yAxisUtilities, new EntryXComparator());
         ArrayList<ILineDataSet> lineDataSets = new ArrayList<>();
 
-        LineDataSet lineDataSet1 = new LineDataSet(yAxisCar,"Car");
+        LineDataSet lineDataSet1 = new LineDataSet(yAxisCar,getString(R.string.car));
         lineDataSet1.setLineWidth(5);
         lineDataSet1.setDrawValues(true);
         lineDataSet1.setColor(Color.BLUE);
 
-        LineDataSet lineDataSet2 = new LineDataSet(yAxisPublicTransportation,"Public Transportation");
+        LineDataSet lineDataSet2 = new LineDataSet(yAxisPublicTransportation,getString(R.string.public_trans));
         lineDataSet2.setLineWidth(5);
         lineDataSet2.setDrawValues(true);
         lineDataSet2.setColor(Color.RED);
 
-        LineDataSet lineDataSet3 = new LineDataSet(yAxisUtilities,"Utilities");
+        LineDataSet lineDataSet3 = new LineDataSet(yAxisUtilities,getString(R.string.utilities));
         lineDataSet3.setLineWidth(5);
         lineDataSet3.setDrawValues(true);
         lineDataSet3.setColor(Color.GREEN);
 
-        LineDataSet lineDataSet4 = new LineDataSet(yAxisAvgCanadian,"Emission/Canadian");
+        LineDataSet lineDataSet4 = new LineDataSet(yAxisAvgCanadian,getString(R.string.average_canadian));
         lineDataSet4.setLineWidth(5);
         lineDataSet4.setDrawValues(true);
         lineDataSet4.setColor(Color.CYAN);
 
-        LineDataSet lineDataSet5 = new LineDataSet(yAxisTargetCO2,"Target CO2");
+        LineDataSet lineDataSet5 = new LineDataSet(yAxisTargetCO2,getString(R.string.target_co2));
         lineDataSet5.setLineWidth(5);
         lineDataSet5.setDrawValues(true);
         lineDataSet5.setColor(Color.GRAY);
@@ -368,6 +391,7 @@ public class DisplayLineChart extends AppCompatActivity {
                 Intent intent = new Intent(DisplayLineChart.this, DisplayBarChart.class);
                 String lastDayOfMonth = dataForYear.get((int)entry.getX()).getLastDayOfMonth();
                 intent.putExtra("today",lastDayOfMonth);
+                intent.putExtra(getString(R.string.UNIT_CHOICE), unitChose);
                 startActivity(intent);
 
             }
@@ -392,6 +416,7 @@ public class DisplayLineChart extends AppCompatActivity {
 
     private void generateDataForLineChart() {
         Intent intent = getIntent();
+        unitChose = intent.getIntExtra(getString(R.string.UNIT_CHOICE), 0);
         String dateInString = intent.getStringExtra("today 365");
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         Date today;
@@ -419,9 +444,17 @@ public class DisplayLineChart extends AppCompatActivity {
                 cal.add(Calendar.DAY_OF_MONTH, -j);
                 Date currentDay = cal.getTime();
                 String currentDayInString = df.format(currentDay);
-                float currentDayCarbonElectrical = (float)CarbonModel.getInstance().getBillCollection().getElectricityCarbonEmission(currentDayInString);
+                //NEED THISSSS TREEE
+                float currentDayCarbonElectrical = 0;
+                float currentDayCarbonGas = 0;
+                if(unitChose != 0) {
+                    currentDayCarbonElectrical = (float) CarbonModel.getInstance().getBillCollection().getElectricityCarbonEmission(currentDayInString);
+                    currentDayCarbonGas = (float) CarbonModel.getInstance().getBillCollection().getGasCarbonEmission(currentDayInString);
+                }else{
+                    currentDayCarbonElectrical = (float) CarbonModel.getInstance().getBillCollection().getElectricityCarbonEmissionTreeYear(currentDayInString);
+                    currentDayCarbonGas = (float) CarbonModel.getInstance().getBillCollection().getGasCarbonEmissionTreeYear(currentDayInString);
+                }
                 totalCarbonElectrical += currentDayCarbonElectrical;
-                float currentDayCarbonGas = (float)CarbonModel.getInstance().getBillCollection().getGasCarbonEmission(currentDayInString);
                 totalCarbonNaturalGas += currentDayCarbonGas;
             }
         }catch (ParseException e) {}
@@ -450,9 +483,17 @@ public class DisplayLineChart extends AppCompatActivity {
                 }catch (ParseException e) {}
                 if (data.getMonth() == journeyMonth && data.getYear() == journeyYear) {
                     if (journeys.get(i).getRoute().getType().equals("Drive")) {
-                        carbonForCar += Float.parseFloat(journeys.get(i).calculateCarbon());
+                        if(unitChose != 0) {
+                            carbonForCar += Float.parseFloat(journeys.get(i).calculateCarbon());
+                        }else{
+                            carbonForCar += Float.parseFloat(journeys.get(i).calculateCarbonTreeYear());
+                        }
                     }else if (journeys.get(i).getRoute().getType().equals("Public Transit")) {
-                        carbonForPublic += Float.parseFloat(journeys.get(i).calculateCarbon());
+                        if(unitChose !=0) {
+                            carbonForPublic += Float.parseFloat(journeys.get(i).calculateCarbon());
+                        }else{
+                            carbonForPublic += Float.parseFloat(journeys.get(i).calculateCarbonTreeYear());
+                        }
                     }
                 }
             }
@@ -474,7 +515,13 @@ public class DisplayLineChart extends AppCompatActivity {
                 Date currentDate = firstDate;
                 while(!(currentDate.before(firstDate) || currentDate.after(lastDay))) {
                     String currentDayInString = df.format(currentDate);
-                    float currentDayCarbon = (float)CarbonModel.getInstance().getBillCollection().getTotalCarbonEmission(currentDayInString);
+                    //NEED TO ADD FOR TREEEE
+                    float currentDayCarbon = 0;
+                    if(unitChose != 0) {
+                        currentDayCarbon = (float) CarbonModel.getInstance().getBillCollection().getTotalCarbonEmission(currentDayInString);
+                    }else{
+                        currentDayCarbon = (float) CarbonModel.getInstance().getBillCollection().getTotalCarbonEmissionTreeYear(currentDayInString);
+                    }
                     totalCarbonUtilities += currentDayCarbon;
                     cal.add(Calendar.DAY_OF_MONTH, +1);
                     currentDate = cal.getTime();
