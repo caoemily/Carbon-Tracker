@@ -27,7 +27,6 @@ public class SelectTransModeActivity extends AppCompatActivity {
         createRadioButtons();
         generateCalendar();
         setupOkButton();
-        createRadioButtons();
     }
 
     @Override
