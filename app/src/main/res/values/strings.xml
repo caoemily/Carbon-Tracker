@@ -25,7 +25,6 @@
     <string name="add_new_journey">Add New Journey</string>
     <string name="show_chart">Show Chart</string>
     <string name="show_table">Show Table</string>
-    <string name="total_distance">Total distance</string>
     <string name="route_name_2">Route Name:</string>
     <string name="nickname">Nickname: </string>
     <string name="model">Model: </string>
@@ -74,5 +73,14 @@
     <string name="TOTAL_DISTANCE_POSITIVE">Total distance must be positive.</string>
     <string name="ENTER_ROUT_NAME">Please enter a name for the route.</string>
     <string name="select_icon">Select Icon</string>
+    <string name="billing_cycle">Billing Cycle</string>
+    <string name="start_date">Start Date:</string>
+    <string name="end_date">End Date:</string>
+    <string name="bc_hydro_or_fortis_bc_bill">(BC Hydro or Fortis BC bill)</string>
+    <string name="yyyy_mm_dd">yyyy-MM-dd</string>
+    <string name="electricity_kwh">Electricity (kWh):</string>
+    <string name="gas_gj">Gas (GJ):</string>
+    <string name="how_many_people_in_the_house">How many people in the house?</string>
+    <string name="consumption">Consumption</string>
 
 </resources>

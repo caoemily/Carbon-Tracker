@@ -14,9 +14,4 @@
         android:id="@+id/graph"
         android:icon="@drawable/graph"
         android:title="Graphs"/>
-    <!--<item-->
-        <!--android:id="@+id/tip"-->
-        <!--android:enabled="true"-->
-        <!--android:icon="@drawable/tip"-->
-        <!--android:title="Tips"/>-->
 </menu>

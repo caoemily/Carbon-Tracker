@@ -1,14 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.sfu276assg1.yancao.UI.AddBillActivity">
-
+    android:layout_margin="15dp"
+    android:fitsSystemWindows="true">
 
     <TextView
         android:id="@+id/textView3"
@@ -17,28 +12,28 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:text="Billing Cycle"
+        android:text="@string/billing_cycle"
         android:textStyle="bold" />
 
     <TextView
         android:id="@+id/textView11"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="22dp"
-        android:text="Start Date:"
-        android:layout_below="@+id/textView14"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/textView14"
+        android:layout_marginTop="22dp"
+        android:text="@string/start_date" />
 
     <TextView
         android:id="@+id/textView12"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="End Date:"
         android:layout_alignBaseline="@+id/editEndDate"
         android:layout_alignBottom="@+id/editEndDate"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:text="@string/end_date" />
 
     <TextView
         android:id="@+id/textView14"
@@ -47,7 +42,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/textView3"
-        android:text="(BC Hydro or Fortis BC bill)"
+        android:text="@string/bc_hydro_or_fortis_bc_bill"
         android:textSize="12sp" />
 
     <EditText
@@ -59,7 +54,7 @@
         android:layout_toEndOf="@+id/textView3"
         android:layout_toRightOf="@+id/textView3"
         android:ems="10"
-        android:hint="yyyy-MM-dd"
+        android:hint="@string/yyyy_mm_dd"
         android:inputType="date"
         android:textSize="14sp" />
 
@@ -71,7 +66,7 @@
         android:layout_alignStart="@+id/editStartDate"
         android:layout_below="@+id/editStartDate"
         android:ems="10"
-        android:hint="yyyy-MM-dd"
+        android:hint="@string/yyyy_mm_dd"
         android:inputType="date"
         android:textAlignment="textStart"
         android:textSize="14sp" />
@@ -80,31 +75,32 @@
         android:id="@+id/textView16"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/editPeople"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="81dp"
-        android:text="Electricity (kWh):" />
+        android:text="@string/electricity_kwh"
+        android:layout_below="@+id/textView13"
+        android:layout_alignLeft="@+id/textView15"
+        android:layout_alignStart="@+id/textView15"
+        android:layout_marginTop="92dp" />
 
     <TextView
         android:id="@+id/textView15"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Gas (GJ):"
         android:layout_alignBaseline="@+id/editGas"
         android:layout_alignBottom="@+id/editGas"
+        android:layout_alignEnd="@+id/textView12"
         android:layout_alignRight="@+id/textView12"
-        android:layout_alignEnd="@+id/textView12" />
+        android:text="@string/gas_gj" />
 
     <TextView
         android:id="@+id/textView13"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="105dp"
-        android:text="How many people in the home?"
-        android:layout_above="@+id/okBtn"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/editEndDate"
+        android:layout_marginTop="55dp"
+        android:text="@string/how_many_people_in_the_house"
+        android:textStyle="bold" />
 
     <EditText
         android:id="@+id/editPeople"
@@ -119,25 +115,16 @@
         android:inputType="number"
         android:textSize="14sp" />
 
-    <Button
-        android:id="@+id/okBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:text="@string/ok" />
-
     <TextView
         android:id="@+id/textView17"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="9dp"
-        android:text="Consumption"
-        android:textStyle="bold"
         android:layout_above="@+id/editElectricity"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="9dp"
+        android:text="@string/consumption"
+        android:textStyle="bold" />
 
     <EditText
         android:id="@+id/editElectricity"
