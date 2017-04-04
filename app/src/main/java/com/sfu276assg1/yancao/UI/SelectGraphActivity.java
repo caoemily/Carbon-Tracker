@@ -41,7 +41,6 @@ public class SelectGraphActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_graph);
         generateRealTimeCalendar();
-        createRadioButtons();
         setSingleDayButton();
         set28DaysButton();
         set365DayButton();
@@ -55,18 +54,6 @@ public class SelectGraphActivity extends AppCompatActivity {
         finish();
     }
 
-    private void createRadioButtons() {
-        RadioGroup group = (RadioGroup) findViewById(R.id.radio_selectUnit);
-        String[] unit = getResources().getStringArray(R.array.graphUnit);
-        RadioButton button1 = new RadioButton(this);
-        button1.setText(unit[0]);
-        group.addView(button1);
-        button1.setChecked(true);
-        RadioButton button2 = new RadioButton(this);
-        button2.setText(unit[1]);
-        group.addView(button2);
-    }
-
     private void set365DayButton() {
         Button button = (Button) findViewById(R.id.display365Days);
         button.setOnClickListener(new View.OnClickListener() {
@@ -76,7 +63,7 @@ public class SelectGraphActivity extends AppCompatActivity {
                 String today = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
                 Intent intent = new Intent(SelectGraphActivity.this, DisplayLineChart.class);
                 intent.putExtra("today 365", today);
-                intent.putExtra("unitChoice", unitChoice);
+                intent.putExtra(getResources().getString(R.string.UNIT_CHOICE), unitChoice);
                 startActivity(intent);
             }
         });
@@ -91,7 +78,7 @@ public class SelectGraphActivity extends AppCompatActivity {
                 String today = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
                 Intent intent = new Intent(SelectGraphActivity.this, DisplayBarChart.class);
                 intent.putExtra("today", today);
-                intent.putExtra("unitChoice", unitChoice);
+                intent.putExtra(getResources().getString(R.string.UNIT_CHOICE), unitChoice);
                 startActivity(intent);
             }
         });
@@ -137,23 +124,14 @@ public class SelectGraphActivity extends AppCompatActivity {
             Intent intent = new Intent(SelectGraphActivity.this, DisplayCarbonFootprintActivity.class);
             intent.putExtra("single date selected", dateSelected);
             intent.putExtra("mode", 0);
-            intent.putExtra("unitChoice", unitChoice);
+            intent.putExtra(getResources().getString(R.string.UNIT_CHOICE), unitChoice);
             startActivity(intent);
         }
     };
 
     private int getCheckedUnit(){
-        RadioGroup group = (RadioGroup) findViewById(R.id.radio_selectUnit);
-        int idOfSelected = group.getCheckedRadioButtonId();
-        RadioButton radioButton = (RadioButton) findViewById(idOfSelected);
-        String chosenUnit = radioButton.getText().toString();
-        String[] unit = getResources().getStringArray(R.array.graphUnit);
-        if(chosenUnit.equals(unit[0])){
-            return 0;
-        }
-        else{
-            return 1;
-        }
+        int unitChoice = getIntent().getIntExtra(getResources().getString(R.string.UNIT_CHOICE), 0);
+        return unitChoice;
     }
 }
 
