@@ -78,7 +78,14 @@ public class DisplayBarChart extends AppCompatActivity {
         generateData();
         generateBarChart();
         generatePieChart();
+    }
 
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(getApplicationContext(), SelectGraphActivity.class);
+        intent.putExtra(getResources().getString(R.string.UNIT_CHOICE), unitChose);
+        startActivity(intent);
+        finish();
     }
 
     @Override
@@ -202,13 +209,6 @@ public class DisplayBarChart extends AppCompatActivity {
 
         Legend legend = chart.getLegend();
         legend.setWordWrapEnabled(true);
-    }
-
-    @Override
-    public void onBackPressed() {
-        Intent intent = new Intent(getApplicationContext(), SelectGraphActivity.class);
-        startActivity(intent);
-        finish();
     }
 
     private void generateBarChart() {

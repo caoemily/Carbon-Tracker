@@ -57,6 +57,7 @@ public class DisplayCarbonFootprintActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         Intent intent = new Intent(getApplicationContext(), SelectGraphActivity.class);
+        intent.putExtra(getResources().getString(R.string.UNIT_CHOICE), unitChose);
         startActivity(intent);
         finish();
     }

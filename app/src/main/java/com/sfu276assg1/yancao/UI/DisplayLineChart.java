@@ -83,6 +83,14 @@ public class DisplayLineChart extends AppCompatActivity {
         generatePieChart();
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(getApplicationContext(), SelectGraphActivity.class);
+        intent.putExtra(getResources().getString(R.string.UNIT_CHOICE), unitChose);
+        startActivity(intent);
+        finish();
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -263,12 +271,6 @@ public class DisplayLineChart extends AppCompatActivity {
         legend.setWordWrapEnabled(true);
     }
 
-    @Override
-    public void onBackPressed() {
-        Intent intent = new Intent(getApplicationContext(), SelectGraphActivity.class);
-        startActivity(intent);
-        finish();
-    }
 
     private void generateLineChart() {
         lineChart = (LineChart) findViewById(R.id.lineChart);
