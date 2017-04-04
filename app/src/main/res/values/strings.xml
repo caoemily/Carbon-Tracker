@@ -30,7 +30,8 @@
     <string name="nickname">Nickname: </string>
     <string name="model">Model: </string>
     <string name="make">Make: </string>
-    <string name="ok">OK</string>
+    <string name="OK">OK</string>
+    <string name="CANCEL">Cancel</string>
     <string name="please_enter_a_nickname_for_the_car">Please enter a nickname for the car</string>
     <string name="skip"><![CDATA[Skip >>]]></string>
     <string name="please_select_a_car">Please select a car:</string>
@@ -73,7 +74,8 @@
     <string name="BIKE">Bike</string>
     <string name="TOTAL_DISTANCE_POSITIVE">Total distance must be positive.</string>
     <string name="ENTER_ROUT_NAME">Please enter a name for the route.</string>
-    <string name="MAIN_INTRO">Do you know...</string>
+    <string name="CHOOSE_UNIT">Please choose CO2 unit:</string>
+    <string name="UNIT_CHOICE">unitChoice</string>
 
 </resources>
 

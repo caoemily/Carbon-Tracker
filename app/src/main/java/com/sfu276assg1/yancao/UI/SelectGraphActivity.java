@@ -63,7 +63,7 @@ public class SelectGraphActivity extends AppCompatActivity {
                 String today = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
                 Intent intent = new Intent(SelectGraphActivity.this, DisplayLineChart.class);
                 intent.putExtra("today 365", today);
-                intent.putExtra("unitChoice", unitChoice);
+                intent.putExtra(getResources().getString(R.string.UNIT_CHOICE), unitChoice);
                 startActivity(intent);
             }
         });
@@ -78,7 +78,7 @@ public class SelectGraphActivity extends AppCompatActivity {
                 String today = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
                 Intent intent = new Intent(SelectGraphActivity.this, DisplayBarChart.class);
                 intent.putExtra("today", today);
-                intent.putExtra("unitChoice", unitChoice);
+                intent.putExtra(getResources().getString(R.string.UNIT_CHOICE), unitChoice);
                 startActivity(intent);
             }
         });
@@ -124,13 +124,13 @@ public class SelectGraphActivity extends AppCompatActivity {
             Intent intent = new Intent(SelectGraphActivity.this, DisplayCarbonFootprintActivity.class);
             intent.putExtra("single date selected", dateSelected);
             intent.putExtra("mode", 0);
-            intent.putExtra("unitChoice", unitChoice);
+            intent.putExtra(getResources().getString(R.string.UNIT_CHOICE), unitChoice);
             startActivity(intent);
         }
     };
 
     private int getCheckedUnit(){
-        int unitChoice = getIntent().getIntExtra("unitChoice", 0);
+        int unitChoice = getIntent().getIntExtra(getResources().getString(R.string.UNIT_CHOICE), 0);
         return unitChoice;
     }
 }

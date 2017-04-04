@@ -1,6 +1,7 @@
 package com.sfu276assg1.yancao.UI;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -47,7 +48,6 @@ public class MainActivity extends AppCompatActivity {
         setUpShowTableButton();
         setUpShowChartButton();
         setUpUtilitiesButton();
-        setUpGraphArea();
         setupNotification();
     }
 
@@ -85,18 +85,6 @@ public class MainActivity extends AppCompatActivity {
         CarbonModel.getInstance().setBillCollection(CarbonModel.getInstance().getDb().getBillList());
     }
 
-    private void setUpGraphArea() {
-        String today = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
-        JourneyCollection journeyCollection = CarbonModel.getInstance().getJourneyCollection();
-        int journeyCount = journeyCollection.countJourneyInOneDate(today);
-        if(journeyCount==0){
-            setUpImage();
-        }
-        else{
-            setUpPieChart();
-        }
-    }
-
     private void setUpAddJourneytButton() {
         ImageButton button = (ImageButton) findViewById(R.id.addJourneyBtn);
         button.setOnClickListener(new View.OnClickListener() {
@@ -115,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, DisplayTableActivity.class);
-                intent.putExtra("unitChoice", unitChoice);
+                intent.putExtra(getResources().getString(R.string.UNIT_CHOICE), unitChoice);
                 startActivity(intent);
             }
         });
@@ -127,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, SelectGraphActivity.class);
-                intent.putExtra("unitChoice", unitChoice);
+                intent.putExtra(getResources().getString(R.string.UNIT_CHOICE), unitChoice);
                 startActivity(intent);
             }
         });
@@ -155,22 +143,24 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private Dialog onCreateDialog() {
+        int unitFromPrevious = getUnitChoice();
         CharSequence[] array = getResources().getStringArray(R.array.graphUnit);
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-        alertDialogBuilder.setTitle("Please choose CO2 unit.")
+        alertDialogBuilder.setTitle(getResources().getString(R.string.CHOOSE_UNIT))
                 .setIcon(R.drawable.tree)
-                .setSingleChoiceItems(array, 0, new DialogInterface.OnClickListener() {
+                .setSingleChoiceItems(array, unitFromPrevious, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         unitChoice = which;
                     }
                 })
-                .setPositiveButton("OK",new DialogInterface.OnClickListener() {
+                .setPositiveButton(getResources().getString(R.string.OK),new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog,int id) {
+                        saveUnitChoice(unitChoice);
                     }
                 })
-                .setNegativeButton("Cancel",new DialogInterface.OnClickListener() {
+                .setNegativeButton(getResources().getString(R.string.CANCEL),new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog,int id) {
                     }
@@ -178,16 +168,18 @@ public class MainActivity extends AppCompatActivity {
         return alertDialogBuilder.create();
     }
 
-    private void setUpImage() {
-        ImageView imageView = (ImageView)findViewById(R.id.image_mainIntro);
-        imageView.setVisibility(View.VISIBLE);
+    private void saveUnitChoice(int choice) {
+        SharedPreferences prefs = this.getSharedPreferences(getResources().getString(R.string.UNIT_CHOICE), MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putInt("currentChoice",choice);
+        editor.apply();
     }
 
-    private void setUpPieChart() {
-
+    private int getUnitChoice(){
+        SharedPreferences prefs = this.getSharedPreferences(getResources().getString(R.string.UNIT_CHOICE),MODE_PRIVATE);
+        int defaultUnit = 0;
+        return prefs.getInt("currentChoice",defaultUnit);
     }
-
-
 }
 
 
