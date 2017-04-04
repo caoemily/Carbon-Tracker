@@ -60,6 +60,10 @@ public class BillCollection {
         return 0;
     }
 
+    public double getTotalCarbonEmissionTreeYear(String stringDate) {
+        return getTotalCarbonEmission(stringDate)/20;
+    }
+
     public double getElectricityCarbonEmission(String stringDate) {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         for (Bill bill : bills) {
@@ -76,6 +80,10 @@ public class BillCollection {
         return 0;
     }
 
+    public double getElectricityCarbonEmissionTreeYear(String stringDate) {
+        return getElectricityCarbonEmission(stringDate)/20;
+    }
+
     public double getGasCarbonEmission(String stringDate) {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         for (Bill bill : bills) {
@@ -90,6 +98,10 @@ public class BillCollection {
             } catch (ParseException e) {}
         }
         return 0;
+    }
+
+    public double getGasCarbonEmissionTreeYear(String stringDate) {
+        return getGasCarbonEmission(stringDate)/20;
     }
 
     public boolean isBillInPrevious45days (){

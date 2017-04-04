@@ -40,7 +40,6 @@ import java.util.Set;
  */
 
 public class DisplayCarbonFootprintActivity extends AppCompatActivity {
-
     private JourneyCollection journeyCollection = CarbonModel.getInstance().getJourneyCollection();
     private ArrayList<Journey> journeys = new ArrayList<>();
     private String chosenDate;
@@ -50,19 +49,16 @@ public class DisplayCarbonFootprintActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_carbon_footprint);
-
         generateInfoForChart();
         generatePieChart();
         setUpShowTabletButton();
     }
-
     @Override
     public void onBackPressed() {
         Intent intent = new Intent(getApplicationContext(), SelectGraphActivity.class);
         startActivity(intent);
         finish();
     }
-
     private void generateInfoForChart() {
         Intent intent = getIntent();
         chosenDate = intent.getStringExtra("single date selected");
@@ -74,14 +70,12 @@ public class DisplayCarbonFootprintActivity extends AppCompatActivity {
             }
         }
     }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_graphs, menu);
         return true;
     }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -94,10 +88,8 @@ public class DisplayCarbonFootprintActivity extends AppCompatActivity {
             default:
                 break;
         }
-
         return true;
     }
-
     private void generatePieChartInRoute() {
         ArrayList<String> nameOfRoutes = new ArrayList<>();
         ArrayList<Float> emissionPerRoute = new ArrayList<>();
@@ -108,7 +100,6 @@ public class DisplayCarbonFootprintActivity extends AppCompatActivity {
         hs.addAll(nameOfRoutes);
         nameOfRoutes.clear();
         nameOfRoutes.addAll(hs);
-
         for (int i = 0; i < nameOfRoutes.size(); i++) {
             float sumOfCarbonPerRoute = 0;
             for(int j = 0; j < journeys.size(); j++) {
@@ -126,7 +117,6 @@ public class DisplayCarbonFootprintActivity extends AppCompatActivity {
         emissionPerRoute.add(carbonForUtilitiesElectrical);
         nameOfRoutes.add("Natural Gas");
         emissionPerRoute.add(carbonForUtilitiesGas);
-
         List<PieEntry> yEntries = new ArrayList<>();
         for(int i = 0; i < emissionPerRoute.size(); i++) {
             yEntries.add(new PieEntry(emissionPerRoute.get(i), nameOfRoutes.get(i)));
@@ -136,7 +126,6 @@ public class DisplayCarbonFootprintActivity extends AppCompatActivity {
         dataSet.setValueTextSize(12);
         dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
         PieData data = new PieData(dataSet);
-
         PieChart chart = (PieChart) findViewById(R.id.Chart);
         Description description = new Description();
         description.setText("Amount of Carbon per Car");
@@ -148,7 +137,6 @@ public class DisplayCarbonFootprintActivity extends AppCompatActivity {
         chart.animateY(2000);
         chart.invalidate();
     }
-
     private void setUpShowTabletButton() {
         Button button = (Button) findViewById(R.id.showTable);
         button.setOnClickListener(new View.OnClickListener() {
@@ -160,7 +148,6 @@ public class DisplayCarbonFootprintActivity extends AppCompatActivity {
             }
         });
     }
-
     private void generatePieChart() {
         List<PieEntry> yEntries = new ArrayList<>();
         List<String> xEntries = new ArrayList<>();
@@ -176,7 +163,6 @@ public class DisplayCarbonFootprintActivity extends AppCompatActivity {
                     xEntries.add(journeyCollection.getJourney(i).getRoute().getType());
                 }
             }
-
             yEntries.add(new PieEntry(carbonForUtilitiesElectrical, "Electrical"));
             xEntries.add("Electrical");
             yEntries.add(new PieEntry(carbonForUtilitiesGas, "Natural Gas"));
@@ -187,13 +173,11 @@ public class DisplayCarbonFootprintActivity extends AppCompatActivity {
             yEntries.add(new PieEntry(carbonForUtilitiesGas, "Natural Gas"));
             xEntries.add("Natural Gas");
         }
-
         PieDataSet dataSet = new PieDataSet(yEntries, "");
         dataSet.setSliceSpace(5);
         dataSet.setValueTextSize(12);
         dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
         PieData data = new PieData(dataSet);
-
         PieChart chart = (PieChart) findViewById(R.id.Chart);
         Description description = new Description();
         description.setText("Amount of Carbon per Car");
