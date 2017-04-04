@@ -83,7 +83,6 @@ public class DisplayBarChart extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         Intent intent = new Intent(getApplicationContext(), SelectGraphActivity.class);
-        intent.putExtra(getResources().getString(R.string.UNIT_CHOICE), unitChose);
         startActivity(intent);
         finish();
     }
@@ -345,7 +344,7 @@ public class DisplayBarChart extends AppCompatActivity {
 
     private void generateData() {
         Intent intent = getIntent();
-        unitChose = intent.getIntExtra(getString(R.string.UNIT_CHOICE), 0);
+        unitChose = CarbonModel.getInstance().getUnitChoice();
         String dateInString = intent.getStringExtra("today");
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         Date today;

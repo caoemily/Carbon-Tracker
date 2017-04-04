@@ -83,7 +83,6 @@ public class DisplayLineChart extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         Intent intent = new Intent(getApplicationContext(), SelectGraphActivity.class);
-        intent.putExtra(getResources().getString(R.string.UNIT_CHOICE), unitChose);
         startActivity(intent);
         finish();
     }
@@ -366,18 +365,22 @@ public class DisplayLineChart extends AppCompatActivity {
         lineChart.setOnChartGestureListener(new OnChartGestureListener() {
             @Override
             public void onChartGestureStart(MotionEvent me, ChartTouchListener.ChartGesture lastPerformedGesture) {
+
             }
 
             @Override
             public void onChartGestureEnd(MotionEvent me, ChartTouchListener.ChartGesture lastPerformedGesture) {
+
             }
 
             @Override
             public void onChartLongPressed(MotionEvent me) {
+
             }
 
             @Override
             public void onChartDoubleTapped(MotionEvent me) {
+
             }
 
             @Override
@@ -388,18 +391,22 @@ public class DisplayLineChart extends AppCompatActivity {
                 intent.putExtra("today",lastDayOfMonth);
                 intent.putExtra(getString(R.string.UNIT_CHOICE), unitChose);
                 startActivity(intent);
+
             }
 
             @Override
             public void onChartFling(MotionEvent me1, MotionEvent me2, float velocityX, float velocityY) {
+
             }
 
             @Override
             public void onChartScale(MotionEvent me, float scaleX, float scaleY) {
+
             }
 
             @Override
             public void onChartTranslate(MotionEvent me, float dX, float dY) {
+
             }
         });
 
@@ -407,7 +414,7 @@ public class DisplayLineChart extends AppCompatActivity {
 
     private void generateDataForLineChart() {
         Intent intent = getIntent();
-        unitChose = intent.getIntExtra(getString(R.string.UNIT_CHOICE), 0);
+        unitChose = CarbonModel.getInstance().getUnitChoice();
         String dateInString = intent.getStringExtra("today 365");
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         Date today;

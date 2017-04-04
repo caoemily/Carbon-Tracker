@@ -110,6 +110,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupUnitChoice() {
+        CarbonModel.getInstance().setUnitChoice(getUnitChoice());
         unitChoice = getUnitChoice();
     }
 
@@ -138,6 +139,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog,int id) {
                         saveUnitChoice(unitChoice);
+                        CarbonModel.getInstance().setUnitChoice(unitChoice);
                     }
                 })
                 .setNegativeButton(getResources().getString(R.string.CANCEL),new DialogInterface.OnClickListener() {
