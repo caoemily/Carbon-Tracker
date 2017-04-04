@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         setupDatabase();
+        setupUnitChoice();
         setUpAddJourneytButton();
         setUpShowTableButton();
         setUpShowChartButton();
@@ -83,6 +84,10 @@ public class MainActivity extends AppCompatActivity {
         CarbonModel.getInstance().setBusRouteCollection(CarbonModel.getInstance().getDb().getBusRouteList());
         CarbonModel.getInstance().setWalkRouteCollection(CarbonModel.getInstance().getDb().getWalkRouteList());
         CarbonModel.getInstance().setBillCollection(CarbonModel.getInstance().getDb().getBillList());
+    }
+
+    private void setupUnitChoice() {
+        unitChoice = getUnitChoice();
     }
 
     private void setUpAddJourneytButton() {

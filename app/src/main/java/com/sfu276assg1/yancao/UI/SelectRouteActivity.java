@@ -139,17 +139,13 @@ public class SelectRouteActivity extends AppCompatActivity {
                     CarbonModel.getInstance().getLastJourney().setRoute(route);
                     CarbonModel.getInstance().getDb().insertRowJourney(CarbonModel.getInstance().getLastJourney());
 
-                    //startActivity(new Intent(getApplicationContext(), MainActivity.class));
                 }
                 else {
                     CarbonModel.getInstance().getJourneyCollection().getJourney(edit_journey_postition).setRoute(route);
                     CarbonModel.getInstance().getDb().updateSingleRouteInJourney((edit_journey_postition+1),route);
-                    //startActivity(new Intent(getApplicationContext(), DisplayTableActivity.class));
                 }
-
                 currentTip = setupTips(getApplicationContext());
                 showDialog(currentTip);
-                //finish();
             }
         });
     }
