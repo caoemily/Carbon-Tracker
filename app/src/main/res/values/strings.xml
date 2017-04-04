@@ -25,11 +25,13 @@
     <string name="add_new_journey">Add New Journey</string>
     <string name="show_chart">Show Chart</string>
     <string name="show_table">Show Table</string>
+    <string name="total_distance">Total distance</string>
     <string name="route_name_2">Route Name:</string>
     <string name="nickname">Nickname: </string>
     <string name="model">Model: </string>
     <string name="make">Make: </string>
-    <string name="ok">OK</string>
+    <string name="OK">OK</string>
+    <string name="CANCEL">Cancel</string>
     <string name="please_enter_a_nickname">Please enter a nickname</string>
     <string name="skip"><![CDATA[Skip >>]]></string>
     <string name="please_select_a_car">Please select a car:</string>
@@ -44,7 +46,6 @@
     <string name="select_transpotation_mode">Select Transpotation Mode</string>
     <string name="date">Date</string>
     <string name="people"># People</string>
-    <string name="electricity_gwh">Electricity (kWh)</string>
     <string name="add_bill">Add Bill</string>
     <string name="natural_gas_gj">Natural Gas (GJ)</string>
     <string name="TRANS_MODE">TransMode</string>
@@ -88,9 +89,11 @@
     <string name="end_date">End Date:</string>
     <string name="bc_hydro_or_fortis_bc_bill">(BC Hydro or Fortis BC bill)</string>
     <string name="yyyy_mm_dd">yyyy-MM-dd</string>
-    <string name="electricity_kwh">Electricity (kWh):</string>
     <string name="gas_gj">Gas (GJ):</string>
     <string name="how_many_people_in_the_house">How many people in the house?</string>
     <string name="consumption">Consumption</string>
-
+    <string name="electricity_kwh">Electricity (kWh):</string>
+    <string name="electricity">Electricity (kWh)</string>
 </resources>
+
+
