@@ -23,7 +23,6 @@ import com.sfu276assg1.yancao.carbontracker.JourneyCollection;
 import com.sfu276assg1.yancao.carbontracker.R;
 import com.sfu276assg1.yancao.carbontracker.Route;
 
-
 /**
  *show saved routes, let customer choose route, edit route, add route or delete route
  */
@@ -167,17 +166,13 @@ public class SelectRouteActivity extends AppCompatActivity {
                     CarbonModel.getInstance().getLastJourney().setRoute(route);
                     CarbonModel.getInstance().getDb().insertRowJourney(CarbonModel.getInstance().getLastJourney());
 
-                    //startActivity(new Intent(getApplicationContext(), MainActivity.class));
                 }
                 else {
                     CarbonModel.getInstance().getJourneyCollection().getJourney(edit_journey_postition).setRoute(route);
                     CarbonModel.getInstance().getDb().updateSingleRouteInJourney((edit_journey_postition + 1),route);
-                    //startActivity(new Intent(getApplicationContext(), DisplayTableActivity.class));
                 }
-
                 currentTip = setupTips(getApplicationContext());
                 showDialog(currentTip);
-                //finish();
             }
         });
     }

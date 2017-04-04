@@ -6,9 +6,14 @@
         <item>"Bike / Walk"</item>
     </string-array>
 
-    <string-array name = "graphUnit">
-        <item>"Tree Year (years needed for one tree to consume)"</item>
+    <string-array name = "graphUnit_Other">
+        <item>"Tree Year (years one tree needs to sequester the emitted CO2)"</item>
         <item>"Kilogram (the actual weight of emitted CO2)"</item>
+    </string-array>
+
+    <string-array name = "graphUnit">
+        <item>"Tree Year"</item>
+        <item>"Kilogram"</item>
     </string-array>
 
 </resources>
