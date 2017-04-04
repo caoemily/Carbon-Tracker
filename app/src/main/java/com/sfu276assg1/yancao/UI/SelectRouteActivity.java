@@ -1,6 +1,5 @@
 package com.sfu276assg1.yancao.UI;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -9,24 +8,20 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.ContextMenu;
+import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.sfu276assg1.yancao.carbontracker.BillCollection;
 import com.sfu276assg1.yancao.carbontracker.CarbonModel;
 import com.sfu276assg1.yancao.carbontracker.JourneyCollection;
 import com.sfu276assg1.yancao.carbontracker.R;
 import com.sfu276assg1.yancao.carbontracker.Route;
-import com.sfu276assg1.yancao.carbontracker.RouteCollection;
-
 
 /**
  *show saved routes, let customer choose route, edit route, add route or delete route
@@ -48,40 +43,72 @@ public class SelectRouteActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_route);
 
+        getSupportActionBar().setTitle("");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         setupInitials();
         registerForContextMenu(list);
-        setLaunchNewRoute();
         setRouteType();
         selectExistingRoute();
         routeList();
-
     }
+
     @Override
-    public void onBackPressed() {
-        if (edit_journey == 0) {
-            if (mode == 0) {
-                CarbonModel.getInstance().removeLastJourney();
-                Intent intent = new Intent(SelectRouteActivity.this, SelectCarActivity.class);
-                startActivity(intent);
-                finish();
-            } else {
-                Intent intent = new Intent(SelectRouteActivity.this, SelectTransModeActivity.class);
-                startActivity(intent);
-                finish();
-            }
+    public void onWindowFocusChanged(boolean hasFocas) {
+        super.onWindowFocusChanged(hasFocas);
+        View decorView = getWindow().getDecorView();
+        int uiOptions = View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
+        decorView.setSystemUiVisibility(uiOptions);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.action_bar_plus, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                if (edit_journey == 0) {
+                    if (mode == 0) {
+                        Intent intent = new Intent(SelectRouteActivity.this, SelectCarActivity.class);
+                        startActivity(intent);
+                        finish();
+                    } else {
+                        Intent intent = new Intent(SelectRouteActivity.this, SelectTransModeActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                }
+                else if (edit_journey == 1) {
+                    Intent intent = new Intent(SelectRouteActivity.this, DisplayTableActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+                else {
+                    Intent intent = new Intent(SelectRouteActivity.this, SelectCarActivity.class);
+                    intent.putExtra(getResources().getString(R.string.EDIT_JOURNEY), edit_journey);
+                    intent.putExtra(getResources().getString(R.string.EDIT_JOURNEY_POSITION), edit_journey_postition);
+                    startActivity(intent);
+                    finish();
+                }
+                return true;
+            case R.id.add_id:
+                    Intent intent = new Intent(getApplicationContext(), AddRouteActivity.class);
+                    intent.putExtra(getResources().getString(R.string.TRANS_MODE), mode);
+                    intent.putExtra(getResources().getString(R.string.EDIT_JOURNEY), edit_journey);
+                    intent.putExtra(getResources().getString(R.string.EDIT_JOURNEY_POSITION), edit_journey_postition);
+                    startActivity(intent);
+                    finish();
+                return true;
         }
-        else if (edit_journey == 1) {
-            Intent intent = new Intent(SelectRouteActivity.this, DisplayTableActivity.class);
-            startActivity(intent);
-            finish();
-        }
-        else {
-            Intent intent = new Intent(SelectRouteActivity.this, SelectCarActivity.class);
-            intent.putExtra(getResources().getString(R.string.EDIT_JOURNEY), edit_journey);
-            intent.putExtra(getResources().getString(R.string.EDIT_JOURNEY_POSITION), edit_journey_postition);
-            startActivity(intent);
-            finish();
-        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void setupInitials(){
@@ -146,21 +173,6 @@ public class SelectRouteActivity extends AppCompatActivity {
                 }
                 currentTip = setupTips(getApplicationContext());
                 showDialog(currentTip);
-            }
-        });
-    }
-
-    private void setLaunchNewRoute() {
-        Button newRouteBtn = (Button) findViewById(R.id.btn_addRoute);
-        newRouteBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), AddRouteActivity.class);
-                intent.putExtra(getResources().getString(R.string.TRANS_MODE), mode);
-                intent.putExtra(getResources().getString(R.string.EDIT_JOURNEY), edit_journey);
-                intent.putExtra(getResources().getString(R.string.EDIT_JOURNEY_POSITION), edit_journey_postition);
-                startActivity(intent);
-                finish();
             }
         });
     }
@@ -303,5 +315,4 @@ public class SelectRouteActivity extends AppCompatActivity {
         editor.putInt("gas array index", index );
         editor.commit();
     }
-
 }

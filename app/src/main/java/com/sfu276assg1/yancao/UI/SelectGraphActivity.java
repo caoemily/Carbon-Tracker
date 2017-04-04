@@ -93,7 +93,7 @@ public class SelectGraphActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            showDialog(DIALOG_ID);
+                showDialog(DIALOG_ID);
             }
         });
     }

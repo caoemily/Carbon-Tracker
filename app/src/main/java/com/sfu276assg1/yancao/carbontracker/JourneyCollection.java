@@ -78,7 +78,7 @@ public class JourneyCollection {
     }
 
     public double getJourneyCarbonInOneDayTreeYear (String date){
-        return getJourneyCarbonInOneDay(date)/20;
+        return (0.0+getJourneyCarbonInOneDay(date))/20.0;
     }
 
     private void validateIndexWithException(int index) {

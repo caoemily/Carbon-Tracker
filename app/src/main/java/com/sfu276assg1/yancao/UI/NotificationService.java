@@ -1,13 +1,11 @@
 package com.sfu276assg1.yancao.UI;
 
-import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
 import android.support.v4.app.NotificationCompat;
-import android.support.v4.app.TaskStackBuilder;
 
 import com.sfu276assg1.yancao.carbontracker.BillCollection;
 import com.sfu276assg1.yancao.carbontracker.CarbonModel;
@@ -24,7 +22,6 @@ import java.util.Date;
 public class NotificationService extends Service {
 
     private final String SET_TIME = "09:00:00 PM";
-
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId){

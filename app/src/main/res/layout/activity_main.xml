@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_main"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.sfu276assg1.yancao.UI.MainActivity">
+    android:layout_height="match_parent">
 
     <ImageView
         android:id="@+id/city"
@@ -15,115 +12,19 @@
         app:srcCompat="@drawable/backgroundforvu"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <ImageButton
-        android:id="@+id/addJourneyBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:adjustViewBounds="true"
-        android:background="@android:color/transparent"
-        android:maxWidth="50dp"
-        android:scaleType="fitCenter"
-        android:src="@drawable/btn_add_journey_click"
-        android:layout_alignTop="@+id/utilitiesBtn"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginLeft="17dp"
-        android:layout_marginStart="17dp" />
+        android:layout_alignParentBottom="true" />
 
-    <ImageButton
-        android:id="@+id/utilitiesBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:adjustViewBounds="true"
-        android:background="@android:color/transparent"
-        android:maxWidth="50dp"
-        android:scaleType="fitCenter"
-        android:src="@drawable/btn_utilities_click"
-        android:layout_alignTop="@+id/showChartBtn"
-        android:layout_toLeftOf="@+id/showChartBtn"
-        android:layout_toStartOf="@+id/showChartBtn"
-        android:layout_marginRight="33dp"
-        android:layout_marginEnd="33dp" />
-
-    <ImageButton
-        android:id="@+id/showTableBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:adjustViewBounds="true"
-        android:background="@android:color/transparent"
-        android:maxHeight="50dp"
-        android:maxWidth="50dp"
-        android:scaleType="fitCenter"
-        android:src="@drawable/btn_show_table_click"
-        android:layout_alignTop="@+id/showChartBtn"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginRight="19dp"
-        android:layout_marginEnd="19dp" />
-
-    <ImageButton
-        android:id="@+id/btn_modeBike"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/showChartBtn"
-        android:layout_toLeftOf="@+id/btn_modeBus"
-        android:layout_toStartOf="@+id/btn_modeBus"
-        android:adjustViewBounds="true"
-        android:background="@android:color/transparent"
-        android:maxHeight="50dp"
-        android:maxWidth="50dp"
-        android:scaleType="fitCenter"
-        android:src="@drawable/cloud1"
-        android:visibility="invisible" />
-
-    <ImageButton
-        android:id="@+id/btn_modeBus"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/utilitiesBtn"
-        android:layout_toLeftOf="@+id/utilitiesBtn"
-        android:layout_toStartOf="@+id/utilitiesBtn"
-        android:adjustViewBounds="true"
-        android:background="@android:color/transparent"
-        android:maxHeight="50dp"
-        android:maxWidth="50dp"
-        android:scaleType="fitCenter"
-        android:src="@drawable/car1"
-        android:visibility="invisible" />
-
-    <ImageButton
-        android:id="@+id/btn_modeCar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/showChartBtn"
-        android:layout_alignLeft="@+id/addJourneyBtn"
-        android:layout_alignStart="@+id/addJourneyBtn"
-        android:adjustViewBounds="true"
-        android:background="@android:color/transparent"
-        android:maxHeight="50dp"
-        android:maxWidth="50dp"
-        android:scaleType="fitCenter"
-        android:src="@drawable/car"
-        android:visibility="invisible" />
-
-    <ImageButton
-        android:id="@+id/showChartBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:adjustViewBounds="true"
-        android:background="@android:color/transparent"
-        android:maxHeight="50dp"
-        android:maxWidth="50dp"
-        android:scaleType="fitCenter"
-        android:src="@drawable/btn_show_chart_click"
-        android:layout_marginRight="45dp"
-        android:layout_marginEnd="45dp"
-        android:layout_marginBottom="39dp"
+    <android.support.design.widget.BottomNavigationView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
         android:layout_alignParentBottom="true"
-        android:layout_toLeftOf="@+id/showTableBtn"
-        android:layout_toStartOf="@+id/showTableBtn" />
-
+        app:itemBackground="@color/colorPrimary"
+        app:itemIconTint="@android:color/white"
+        app:itemTextColor="@android:color/white"
+        app:menu="@menu/bottom_navigation" />
 
 </RelativeLayout>
