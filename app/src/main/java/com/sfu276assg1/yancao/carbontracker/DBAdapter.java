@@ -18,10 +18,11 @@ public class DBAdapter {
     // DB Fields
     public static final String KEY_ROWID = "_id";
     // Track DB version if a new version of your app changes the format.
-    public static final int DATABASE_VERSION = 27;
+    public static final int DATABASE_VERSION = 29;
 
 
     public static final String JOURNEY_DATE = "date";
+    public static final String CAR_ICON = "carIcon";
     public static final String CAR_NICKNAME = "cName";
     public static final String CAR_MAKE = "make";
     public static final String CAR_MODEL = "model";
@@ -59,6 +60,7 @@ public class DBAdapter {
     private static final String CREATE_TABLE_CAR = "CREATE TABLE "
             + TABLE_CAR + "(" + KEY_ROWID + " INTEGER PRIMARY KEY," +
             CAR_NICKNAME + " STRING," +
+            CAR_ICON + " INT," +
             CAR_MAKE + " STRING," +
             CAR_MODEL + " STRING,"+
             CAR_YEAR + " STRING," +
@@ -98,6 +100,7 @@ public class DBAdapter {
             + TABLE_JOURNEY + "(" + KEY_ROWID + " INTEGER PRIMARY KEY," +
             JOURNEY_DATE + " STRING," +
             CAR_NICKNAME + " STRING," +
+            CAR_ICON + " INT," +
             CAR_MAKE + " STRING," +
             CAR_MODEL + " STRING,"+
             CAR_YEAR + " STRING," +
@@ -146,6 +149,7 @@ public class DBAdapter {
     public long insertCarRow(Car car) {
         ContentValues initialValues = new ContentValues();
         initialValues.put(CAR_NICKNAME, car.getNickname());
+        initialValues.put(CAR_ICON, car.getIcon());
         initialValues.put(CAR_MAKE, car.getMake());
         initialValues.put(CAR_MODEL, car.getModel());
         initialValues.put(CAR_YEAR, car.getYear());
@@ -195,6 +199,7 @@ public class DBAdapter {
         Route route = journey.getRoute();
         initialValues.put(JOURNEY_DATE,journey.getDate());
         initialValues.put(CAR_NICKNAME, car.getNickname());
+        initialValues.put(CAR_ICON, car.getIcon());
         initialValues.put(CAR_MAKE, car.getMake());
         initialValues.put(CAR_MODEL, car.getModel());
         initialValues.put(CAR_YEAR, car.getYear());
@@ -264,6 +269,7 @@ public class DBAdapter {
         ContentValues updateCar = new ContentValues();
         updateCar.put(CAR_NICKNAME, update.getNickname());
         updateCar.put(CAR_MAKE, update.getMake());
+        updateCar.put(CAR_ICON, update.getIcon());
         updateCar.put(CAR_MODEL, update.getModel());
         updateCar.put(CAR_YEAR, update.getYear());
         updateCar.put(CAR_HIGHWAYE, update.getHighwayE());
@@ -368,6 +374,7 @@ public class DBAdapter {
         String where = KEY_ROWID + "='" + index +"'";
         ContentValues updateCar = new ContentValues();
         updateCar.put(CAR_NICKNAME, update.getNickname());
+        updateCar.put(CAR_ICON, update.getIcon());
         updateCar.put(CAR_MAKE, update.getMake());
         updateCar.put(CAR_MODEL, update.getModel());
         updateCar.put(CAR_YEAR, update.getYear());
@@ -413,6 +420,7 @@ public class DBAdapter {
             do {
                 Car car = new Car();
                 car.setNickname(c.getString(c.getColumnIndex(CAR_NICKNAME)));
+                car.setIcon(c.getInt(c.getColumnIndex(CAR_ICON)));
                 car.setMake(c.getString(c.getColumnIndex(CAR_MAKE)));
                 car.setModel(c.getString(c.getColumnIndex(CAR_MODEL)));
                 car.setYear(c.getString(c.getColumnIndex(CAR_YEAR)));
@@ -501,6 +509,7 @@ public class DBAdapter {
                 String date = c.getString(c.getColumnIndex(JOURNEY_DATE));
                 Car car = new Car();
                 car.setNickname(c.getString(c.getColumnIndex(CAR_NICKNAME)));
+                car.setIcon(c.getInt(c.getColumnIndex(CAR_ICON)));
                 car.setMake(c.getString(c.getColumnIndex(CAR_MAKE)));
                 car.setModel(c.getString(c.getColumnIndex(CAR_MODEL)));
                 car.setYear(c.getString(c.getColumnIndex(CAR_YEAR)));

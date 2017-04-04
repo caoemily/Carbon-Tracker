@@ -101,6 +101,7 @@ public class Car {
     public int getIcon() {
         return car_icon;
     }
+    public void setIcon(int icon) {this.car_icon = icon;}
 
     public void setNickname(String nickname){
         this.nickname = nickname;
