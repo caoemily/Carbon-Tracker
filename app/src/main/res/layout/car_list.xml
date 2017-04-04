@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.daimajia.swipe.SwipeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/swipe_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Bottom View Start-->
+    <LinearLayout
+        android:id="@+id/bottom_wrapper"
+        android:layout_width="100dp"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="-12dp"
+            android:layout_weight="1"
+            android:background="@android:color/white">
+
+            <ImageView
+                android:id="@+id/edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:src="@mipmap/edit" />
+
+            <TextView
+                android:id="@+id/edit_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_below="@+id/edit"
+                android:layout_centerHorizontal="true"
+                android:maxLines="1"
+                android:text="@string/edit"
+                android:textColor="@android:color/black"
+                android:textSize="10sp" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="-12dp"
+            android:layout_weight="1"
+            android:background="@android:color/white">
+
+            <ImageView
+                android:id="@+id/delete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:src="@mipmap/delete" />
+
+            <TextView
+                android:id="@+id/delete_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_below="@+id/delete"
+                android:layout_centerHorizontal="true"
+                android:maxLines="1"
+                android:text="@string/delete"
+                android:textColor="@android:color/black"
+                android:textSize="10sp" />
+        </RelativeLayout>
+
+
+    </LinearLayout>
+    <!-- Bottom View End-->
+
+    <!-- Surface View Start -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:padding="5dp"
+        android:weightSum="1">
+
+        <ImageView
+            android:id="@+id/carIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:adjustViewBounds="true"
+            android:background="@android:color/transparent"
+            android:maxHeight="80dp"
+            android:maxWidth="80dp"
+            android:scaleType="fitCenter" />
+
+        <LinearLayout
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/carName"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingTop="20dp"
+                android:text="name"
+                android:textAlignment="center"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/carMake"
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:text="make"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/carModel"
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:text="model"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/carYear"
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:text="year"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+    <!-- Surface View End -->
+</com.daimajia.swipe.SwipeLayout>

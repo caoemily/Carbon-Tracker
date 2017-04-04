@@ -3,32 +3,22 @@ package com.sfu276assg1.yancao.UI;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.sfu276assg1.yancao.carbontracker.BillCollection;
 import com.sfu276assg1.yancao.carbontracker.CarbonModel;
-import com.sfu276assg1.yancao.carbontracker.JourneyCollection;
 import com.sfu276assg1.yancao.carbontracker.R;
 import com.sfu276assg1.yancao.carbontracker.Route;
-import com.sfu276assg1.yancao.carbontracker.RouteCollection;
-
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-
-import static java.lang.Double.parseDouble;
 
 //Customer can add or edit route in this activity. After editing/adding, goes to mainActivity.
 //Customer can choose to save the route, or not save the route, the carbon emission will be calculated in both cases.
@@ -56,25 +46,63 @@ public class AddRouteActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_route);
 
+        getSupportActionBar().setTitle("");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
         setInitialSettings();
         setIndividualDis();
         setTotalDistance();
         setRouteName();
         setRouteType();
-        setupOkButton();
+        UiChangeListener();
+    }
+
+    public void UiChangeListener()
+    {
+        final View decorView = getWindow().getDecorView();
+        decorView.setOnSystemUiVisibilityChangeListener (new View.OnSystemUiVisibilityChangeListener() {
+            @Override
+            public void onSystemUiVisibilityChange(int visibility) {
+                if ((visibility & View.SYSTEM_UI_FLAG_FULLSCREEN) == 0) {
+                    decorView.setSystemUiVisibility(
+                            View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                                    | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                                    | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                                    | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+                }
+            }
+        });
     }
 
     @Override
-    public void onBackPressed() {
-        Intent intent = new Intent(AddRouteActivity.this, SelectRouteActivity.class);
-        intent.putExtra(getResources().getString(R.string.TRANS_MODE), mode);
-        intent.putExtra(getResources().getString(R.string.EDIT_JOURNEY), edit_journey);
-        intent.putExtra(getResources().getString(R.string.EDIT_JOURNEY_POSITION), edit_journey_postition);
-        startActivity(intent);
-        finish();
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.action_bar_ok, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                Intent intent = new Intent(AddRouteActivity.this, SelectRouteActivity.class);
+                intent.putExtra(getResources().getString(R.string.TRANS_MODE), mode);
+                intent.putExtra(getResources().getString(R.string.EDIT_JOURNEY), edit_journey);
+                intent.putExtra(getResources().getString(R.string.EDIT_JOURNEY_POSITION), edit_journey_postition);
+                startActivity(intent);
+                finish();
+                return true;
+            case R.id.ok_id:
+                setupAcceptButton();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     public void setInitialSettings(){
+        TextView distance = (TextView) findViewById(R.id.text_enterDis);
+        distance.setText(" " + totalDis);
         mode = getIntent().getIntExtra(getResources().getString(R.string.TRANS_MODE), TRANSMODE_DEFAULT);
         routeChangePosition = getIntent().getIntExtra(ROUTE_INDEX, INVALID_INDEX);
         if(routeChangePosition != INVALID_INDEX) {
@@ -89,12 +117,12 @@ public class AddRouteActivity extends AppCompatActivity {
         TextView textViewH = (TextView) findViewById(R.id.textView_higherEDis);
         switch(mode){
             case 1:
-                textViewL.setText(""+ getResources().getString(R.string.SKYTRAIN) + " (km)");
-                textViewH.setText(""+ getResources().getString(R.string.BUS) + " (km)");
+                textViewL.setText(""+ getResources().getString(R.string.SKYTRAIN) + " (km):");
+                textViewH.setText(""+ getResources().getString(R.string.BUS) + " (km):");
                 break;
             case 2:
-                textViewL.setText(""+ getResources().getString(R.string.WALK) + " (km)");
-                textViewH.setText(""+getResources().getString(R.string.BIKE) + " (km)");
+                textViewL.setText(""+ getResources().getString(R.string.WALK) + " (km):");
+                textViewH.setText(""+getResources().getString(R.string.BIKE) + " (km):");
                 break;
         }
 
@@ -199,87 +227,80 @@ public class AddRouteActivity extends AppCompatActivity {
         });
     }
 
-    private void setupOkButton() {
-        Button okBtn = (Button) findViewById(R.id.ok_btn);
-        okBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-            if (totalDis <= 0) {
-                Toast.makeText(getApplicationContext(), getResources().getString(R.string.TOTAL_DISTANCE_POSITIVE),
-                        Toast.LENGTH_SHORT).show();
-            }
-            else {
-                currentRoute.setHighEDis(higherEDis);
-                currentRoute.setLowEDis(lowerEDis);
-                currentRoute.setDistance(totalDis);
-                Intent intent;
-                routeChangePosition = getIntent().getIntExtra(ROUTE_INDEX, INVALID_INDEX);
-                if(routeChangePosition == -1)
-                {
-                    if (routeName != "") {
-                        currentRoute.setName(routeName);
-                        switch (mode) {
-                            case 0:
-                                CarbonModel.getInstance().addRoute(currentRoute);
-                                CarbonModel.getInstance().getDb().insertRouteRow(currentRoute);
+    private void setupAcceptButton() {
+        if (totalDis <= 0) {
+            Toast.makeText(getApplicationContext(), getResources().getString(R.string.TOTAL_DISTANCE_POSITIVE),
+                    Toast.LENGTH_SHORT).show();
+        }
+        else {
+            currentRoute.setHighEDis(higherEDis);
+            currentRoute.setLowEDis(lowerEDis);
+            currentRoute.setDistance(totalDis);
+            Intent intent;
+            routeChangePosition = getIntent().getIntExtra(ROUTE_INDEX, INVALID_INDEX);
+            if(routeChangePosition == -1)
+            {
+                if (routeName != "") {
+                    currentRoute.setName(routeName);
+                    switch (mode) {
+                        case 0:
+                            CarbonModel.getInstance().addRoute(currentRoute);
+                            CarbonModel.getInstance().getDb().insertRouteRow(currentRoute);
 
-                                break;
-                            case 1:
-                                CarbonModel.getInstance().addBusRoute(currentRoute);
-                                CarbonModel.getInstance().getDb().insertBusRouteRow(currentRoute);
-                                break;
-                            case 2:
-                                CarbonModel.getInstance().addWalkRoute(currentRoute);
-                                CarbonModel.getInstance().getDb().insertWalkRouteRow(currentRoute);
-                                break;
-                        }
+                            break;
+                        case 1:
+                            CarbonModel.getInstance().addBusRoute(currentRoute);
+                            CarbonModel.getInstance().getDb().insertBusRouteRow(currentRoute);
+                            break;
+                        case 2:
+                            CarbonModel.getInstance().addWalkRoute(currentRoute);
+                            CarbonModel.getInstance().getDb().insertWalkRouteRow(currentRoute);
+                            break;
                     }
-                    if (edit_journey == 0) {
-                        CarbonModel.getInstance().getLastJourney().setRoute(currentRoute);
-                        CarbonModel.getInstance().getDb().insertRowJourney(CarbonModel.getInstance().getLastJourney());
-                    }
-                    else {
-                        CarbonModel.getInstance().getJourneyCollection().getJourney(edit_journey_postition).setRoute(currentRoute);
-                        CarbonModel.getInstance().getDb().updateSingleRouteInJourney((edit_journey_postition+1),currentRoute);
-                    }
-                    currentTip = SelectRouteActivity.setupTips(getApplicationContext());
-                    showDialog(currentTip);
+                }
+                if (edit_journey == 0) {
+                    CarbonModel.getInstance().getLastJourney().setRoute(currentRoute);
+                    CarbonModel.getInstance().getDb().insertRowJourney(CarbonModel.getInstance().getLastJourney());
                 }
                 else {
-                    if(routeName.isEmpty()) {
-                        Toast.makeText(getApplicationContext(),getResources().getString(R.string.ENTER_ROUT_NAME),
-                                Toast.LENGTH_SHORT).show();
+                    CarbonModel.getInstance().getJourneyCollection().getJourney(edit_journey_postition).setRoute(currentRoute);
+                    CarbonModel.getInstance().getDb().updateSingleRouteInJourney((edit_journey_postition+1),currentRoute);
+                }
+                currentTip = SelectRouteActivity.setupTips(getApplicationContext());
+                showDialog(currentTip);
+            }
+            else {
+                if(routeName.isEmpty()) {
+                    Toast.makeText(getApplicationContext(),getResources().getString(R.string.ENTER_ROUT_NAME),
+                            Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    currentRoute.setName(routeName);
+                    switch(mode){
+                        case 0:
+                            CarbonModel.getInstance().getDb().updateRouteRow(tempRoute,currentRoute);
+                            CarbonModel.getInstance().changeRoute(currentRoute, routeChangePosition);
+                            break;
+                        case 1:
+                            CarbonModel.getInstance().getDb().updateBusRouteRow(tempRoute,currentRoute);
+                            CarbonModel.getInstance().changeBusRoute(currentRoute, routeChangePosition);
+                            break;
+                        case 2:
+                            CarbonModel.getInstance().getDb().updateWalkRouteRow(tempRoute,currentRoute);
+                            CarbonModel.getInstance().changeWalkRoute(currentRoute, routeChangePosition);
+                            break;
                     }
-                    else{
-                        currentRoute.setName(routeName);
-                        switch(mode){
-                            case 0:
-                                CarbonModel.getInstance().getDb().updateRouteRow(tempRoute,currentRoute);
-                                CarbonModel.getInstance().changeRoute(currentRoute, routeChangePosition);
-                                break;
-                            case 1:
-                                CarbonModel.getInstance().getDb().updateBusRouteRow(tempRoute,currentRoute);
-                                CarbonModel.getInstance().changeBusRoute(currentRoute, routeChangePosition);
-                                break;
-                            case 2:
-                                CarbonModel.getInstance().getDb().updateWalkRouteRow(tempRoute,currentRoute);
-                                CarbonModel.getInstance().changeWalkRoute(currentRoute, routeChangePosition);
-                                break;
-                        }
-                        CarbonModel.getInstance().changeRouteInJourney(tempRoute, currentRoute);
-                        CarbonModel.getInstance().getDb().updateRouteInJourney(tempRoute,currentRoute);
+                    CarbonModel.getInstance().changeRouteInJourney(tempRoute, currentRoute);
+                    CarbonModel.getInstance().getDb().updateRouteInJourney(tempRoute,currentRoute);
 
-                        intent = new Intent(AddRouteActivity.this, SelectRouteActivity.class);
-                        intent.putExtra(getResources().getString(R.string.TRANS_MODE),mode);
+                    intent = new Intent(AddRouteActivity.this, SelectRouteActivity.class);
+                    intent.putExtra(getResources().getString(R.string.TRANS_MODE),mode);
 
-                        startActivity(intent);
-                        finish();
-                    }
+                    startActivity(intent);
+                    finish();
                 }
             }
-
-            }
-        });
+        }
     }
 
     private void setRouteType(){

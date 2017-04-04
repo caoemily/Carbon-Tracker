@@ -25,14 +25,12 @@
     <string name="add_new_journey">Add New Journey</string>
     <string name="show_chart">Show Chart</string>
     <string name="show_table">Show Table</string>
-    <string name="total_distance">Total distance</string>
     <string name="route_name_2">Route Name:</string>
     <string name="nickname">Nickname: </string>
     <string name="model">Model: </string>
     <string name="make">Make: </string>
-    <string name="OK">OK</string>
-    <string name="CANCEL">Cancel</string>
-    <string name="please_enter_a_nickname_for_the_car">Please enter a nickname for the car</string>
+    <string name="ok">OK</string>
+    <string name="please_enter_a_nickname">Please enter a nickname</string>
     <string name="skip"><![CDATA[Skip >>]]></string>
     <string name="please_select_a_car">Please select a car:</string>
     <string name="long_pressing_on_car_to_edit_or_delete">Long-pressing on car to edit or delete</string>
@@ -56,18 +54,17 @@
     <string name="single_day">Single Day</string>
     <string name="_28_days">28 Days</string>
     <string name="_365_days">365 Days</string>
+    <string name="add">Add</string>
     <string name="info">Info</string>
     <string name="unit">Unit setting</string>
     <string name="tree">Tree Year</string>
     <string name="kg">Kg</string>
-
     <string name="NOTIFICATION_CONTENT_TITLE">Reduce CO2 emission together.</string>
     <string name="NOTIFICATION_NOBILL_NOJOURNEY_PART1">You have not entered any journey today,</string>
     <string name="NOTIFICATION_NOBILL_NOJOURNEY_PART2">do you want to enter one?</string>
     <string name="NOTIFICATION_NOBILL_PART1">You have not entered a utility bill in 1.5 months,</string>
     <string name="NOTIFICATION_NOBILL_PART2">do you want to enter one today?</string>
     <string name="NOTIFICATION_OTHER">Do you want to enter more journeys for today?</string>
-
     <string name="SKYTRAIN">Skytrain</string>
     <string name="BUS">Bus</string>
     <string name="WALK">Walk</string>
@@ -85,7 +82,15 @@
     <string name="utilities">Utilities</string>
     <string name="public_trans">Public Transportation</string>
     <string name="car">Car</string>
+    <string name="select_icon">Select Icon</string>
+    <string name="billing_cycle">Billing Cycle</string>
+    <string name="start_date">Start Date:</string>
+    <string name="end_date">End Date:</string>
+    <string name="bc_hydro_or_fortis_bc_bill">(BC Hydro or Fortis BC bill)</string>
+    <string name="yyyy_mm_dd">yyyy-MM-dd</string>
+    <string name="electricity_kwh">Electricity (kWh):</string>
+    <string name="gas_gj">Gas (GJ):</string>
+    <string name="how_many_people_in_the_house">How many people in the house?</string>
+    <string name="consumption">Consumption</string>
 
 </resources>
-
-
