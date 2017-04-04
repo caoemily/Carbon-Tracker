@@ -94,6 +94,7 @@
     <string name="consumption">Consumption</string>
     <string name="electricity_kwh">Electricity (kWh):</string>
     <string name="electricity">Electricity (kWh)</string>
+    <string name="monthly_utilities_bills">Monthly Utilities Bills</string>
 </resources>
 
 

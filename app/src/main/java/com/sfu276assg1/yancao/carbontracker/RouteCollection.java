@@ -60,7 +60,6 @@ public class RouteCollection {
                         +"Walk:" +  route.getLowEDis() + "km" + " - " + "Bike:" + route.getHighEDis() + "km";
             }
         }
-
         return descriptions;
     }
 

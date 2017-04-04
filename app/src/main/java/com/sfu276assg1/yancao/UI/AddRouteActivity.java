@@ -374,5 +374,4 @@ public class AddRouteActivity extends AppCompatActivity {
                 });
         return alertDialogBuilder.create();
     }
-
 }

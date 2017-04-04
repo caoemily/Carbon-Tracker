@@ -234,7 +234,6 @@ public class AddBillActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Please enter the consumptions", Toast.LENGTH_SHORT).show();
         }
         else {
-            //Intent intent;
             recordDate = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
             Bill bill = new Bill(startDate, endDate, electricity, gas, people, recordDate);
             if(getIntent().getExtras() == null) {
@@ -264,6 +263,7 @@ public class AddBillActivity extends AppCompatActivity {
         Dialog dialog = onCreateDialog(theTip);
         dialog.show();
     }
+
     private Dialog onCreateDialog(String theTip) {
         final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
         alertDialogBuilder.setTitle("Tips")

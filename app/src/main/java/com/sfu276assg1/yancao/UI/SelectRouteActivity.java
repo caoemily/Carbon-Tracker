@@ -169,7 +169,7 @@ public class SelectRouteActivity extends AppCompatActivity {
                 }
                 else {
                     CarbonModel.getInstance().getJourneyCollection().getJourney(edit_journey_postition).setRoute(route);
-                    CarbonModel.getInstance().getDb().updateSingleRouteInJourney((edit_journey_postition + 1),route);
+                    CarbonModel.getInstance().getDb().updateSingleRouteInJourney((edit_journey_postition+1),route);
                 }
                 currentTip = setupTips(getApplicationContext());
                 showDialog(currentTip);
@@ -315,5 +315,4 @@ public class SelectRouteActivity extends AppCompatActivity {
         editor.putInt("gas array index", index );
         editor.commit();
     }
-
 }

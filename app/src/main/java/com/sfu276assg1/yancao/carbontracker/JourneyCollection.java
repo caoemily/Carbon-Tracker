@@ -77,8 +77,6 @@ public class JourneyCollection {
         return carbonEm;
     }
 
-
-
     private void validateIndexWithException(int index) {
         if (index < 0 || index >= countJourneys()) {
             throw new IllegalArgumentException();

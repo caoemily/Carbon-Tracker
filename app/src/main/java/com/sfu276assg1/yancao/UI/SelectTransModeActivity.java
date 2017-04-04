@@ -31,7 +31,6 @@ public class SelectTransModeActivity extends AppCompatActivity {
 
         createRadioButtons();
         generateCalendar();
-        setupOkButton();
     }
 
     @Override
@@ -61,7 +60,7 @@ public class SelectTransModeActivity extends AppCompatActivity {
                 finish();
                 return true;
             case R.id.ok_id:
-                setupOkButton();
+                setupAcceptButton();
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -78,7 +77,7 @@ public class SelectTransModeActivity extends AppCompatActivity {
         }
     }
 
-    private void setupOkButton() {
+    private void setupAcceptButton() {
         Journey journey = new Journey(journeyDate);
         CarbonModel.getInstance().addJourney(journey);
 
