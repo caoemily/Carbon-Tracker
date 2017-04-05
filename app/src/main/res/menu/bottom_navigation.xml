@@ -4,14 +4,14 @@
         android:id="@+id/journey"
         android:enabled="true"
         android:icon="@drawable/journey"
-        android:title="Journey"/>
+        android:title="@string/journey"/>
     <item
         android:id="@+id/utilities"
         android:enabled="true"
         android:icon="@drawable/utilities"
-        android:title="Utilities"/>
+        android:title="@string/utilities"/>
     <item
         android:id="@+id/graph"
         android:icon="@drawable/graph"
-        android:title="Graphs"/>
+        android:title="@string/graphs"/>
 </menu>

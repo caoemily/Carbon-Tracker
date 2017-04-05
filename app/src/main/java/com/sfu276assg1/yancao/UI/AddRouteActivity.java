@@ -367,7 +367,7 @@ public class AddRouteActivity extends AppCompatActivity {
                             startActivity(intent);
                         }
                         else{
-                            Intent intent = new Intent(getApplicationContext(), DisplayTableActivity.class);
+                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                             startActivity(intent);
                         }
                     }

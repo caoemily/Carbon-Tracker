@@ -41,6 +41,10 @@ public class JourneyCollection {
         journeys.remove(index);
     }
 
+    public List<Journey> getCollection() {
+        return this.journeys;
+    }
+
     public void changeCar(Car tempCar, Car car){
         for (Journey journey : journeys){
             if(journey.getCar().equals(tempCar)) {

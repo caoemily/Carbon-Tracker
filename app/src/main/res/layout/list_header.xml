@@ -1,0 +1,11 @@
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/list_header_title"
+    style="?android:attr/listSeparatorTextViewStyle"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:drawableLeft="@drawable/ic_clock"
+    android:drawablePadding="10dp"
+    android:paddingBottom="2dip"
+    android:paddingLeft="5dip"
+    android:paddingTop="2dip"
+    android:translationX="-7dp" />

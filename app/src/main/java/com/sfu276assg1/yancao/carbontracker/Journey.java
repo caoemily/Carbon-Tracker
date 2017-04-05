@@ -1,6 +1,6 @@
 package com.sfu276assg1.yancao.carbontracker;
 
-import java.io.Serializable;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -8,7 +8,7 @@ import java.util.Date;
  * Store information about a single journey
  */
 
-public class Journey implements Serializable {
+public class Journey implements Comparable<Journey> {
 
     private String date;
     private Car car;
@@ -116,5 +116,21 @@ public class Journey implements Serializable {
             des = "Current Journey Info: Emission: 0kg; Bike/Walk - Route: " + routeName + "; Distance: " + distance + " km.";
         }
         return des;
+    }
+
+    public Date getDateTime() {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            Date daTe = format.parse(this.date);
+            return daTe;
+        } catch (ParseException e) {}
+        return null;
+    }
+
+    @Override
+    public int compareTo(Journey journey) {
+        if (getDateTime() == null || journey.getDateTime() == null)
+            return 0;
+        return getDateTime().compareTo(journey.getDateTime());
     }
 }

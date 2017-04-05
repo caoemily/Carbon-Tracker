@@ -13,12 +13,12 @@ import com.sfu276assg1.yancao.UI.SelectCarActivity;
 
 import java.util.List;
 
-public class ListViewAdapter extends ArrayAdapter<Car> {
+public class CarListViewAdapter extends ArrayAdapter<Car> {
 
     private SelectCarActivity activity;
     private List<Car> cars;
 
-    public ListViewAdapter(SelectCarActivity context, int resource, List<Car> cars) {
+    public CarListViewAdapter(SelectCarActivity context, int resource, List<Car> cars) {
         super(context, resource, cars);
         this.activity = context;
         this.cars = cars;

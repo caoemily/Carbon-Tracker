@@ -12,8 +12,8 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.sfu276assg1.yancao.carbontracker.Car;
+import com.sfu276assg1.yancao.carbontracker.CarListViewAdapter;
 import com.sfu276assg1.yancao.carbontracker.CarbonModel;
-import com.sfu276assg1.yancao.carbontracker.ListViewAdapter;
 import com.sfu276assg1.yancao.carbontracker.R;
 
 import java.io.BufferedReader;
@@ -39,7 +39,7 @@ public class SelectCarActivity extends AppCompatActivity {
     int edit_journey_postition;
 
     private ListView list;
-    private ListViewAdapter adapter;
+    private CarListViewAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,7 +83,7 @@ public class SelectCarActivity extends AppCompatActivity {
                     finish();
                 }
                 else {
-                    Intent intent = new Intent(SelectCarActivity.this, DisplayTableActivity.class);
+                    Intent intent = new Intent(SelectCarActivity.this, MainActivity.class);
                     startActivity(intent);
                     finish();
                 }
@@ -157,7 +157,7 @@ public class SelectCarActivity extends AppCompatActivity {
     }
 
     private void setCarList() {
-        adapter = new ListViewAdapter(this,R.layout.car_list, carList);
+        adapter = new CarListViewAdapter(this,R.layout.car_list, carList);
         list.setAdapter(adapter);
     }
 

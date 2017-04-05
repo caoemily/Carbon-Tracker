@@ -87,7 +87,7 @@ public class SelectRouteActivity extends AppCompatActivity {
                     }
                 }
                 else if (edit_journey == 1) {
-                    Intent intent = new Intent(SelectRouteActivity.this, DisplayTableActivity.class);
+                    Intent intent = new Intent(SelectRouteActivity.this, MainActivity.class);
                     startActivity(intent);
                     finish();
                 }
@@ -245,7 +245,7 @@ public class SelectRouteActivity extends AppCompatActivity {
                             startActivity(intent);
                         }
                         else{
-                            Intent intent = new Intent(getApplicationContext(), DisplayTableActivity.class);
+                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                             startActivity(intent);
                         }
                     }
@@ -257,7 +257,7 @@ public class SelectRouteActivity extends AppCompatActivity {
         JourneyCollection journeyCollection = CarbonModel.getInstance().getJourneyCollection();
         BillCollection billCollection = CarbonModel.getInstance().getBillCollection();
         int whichTip = CarbonModel.getInstance().showWhichTip(journeyCollection, billCollection);
-        int index = 0;
+        int index;
         String tip = "";
         switch (whichTip) {
             case 0:

@@ -3,13 +3,9 @@ package com.sfu276assg1.yancao.UI;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Description;
@@ -17,21 +13,12 @@ import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.utils.ColorTemplate;
-import com.sfu276assg1.yancao.carbontracker.Car;
 import com.sfu276assg1.yancao.carbontracker.CarbonModel;
 import com.sfu276assg1.yancao.carbontracker.Journey;
 import com.sfu276assg1.yancao.carbontracker.JourneyCollection;
 import com.sfu276assg1.yancao.carbontracker.R;
 
-import org.joda.time.DateTime;
-
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -53,7 +40,6 @@ public class DisplayCarbonFootprintActivity extends AppCompatActivity {
         setContentView(R.layout.activity_display_carbon_footprint);
         generateInfoForChart();
         generatePieChart();
-        setUpShowTabletButton();
     }
     @Override
     public void onBackPressed() {
@@ -145,17 +131,7 @@ public class DisplayCarbonFootprintActivity extends AppCompatActivity {
         chart.animateY(2000);
         chart.invalidate();
     }
-    private void setUpShowTabletButton() {
-        Button button = (Button) findViewById(R.id.showTable);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(DisplayCarbonFootprintActivity.this, DisplayTableActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
-    }
+
     private void generatePieChart() {
         List<PieEntry> yEntries = new ArrayList<>();
         List<String> xEntries = new ArrayList<>();
