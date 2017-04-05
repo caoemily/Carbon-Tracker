@@ -138,8 +138,16 @@ public class CarbonModel {
         billCollection.remove(index);
     }
 
-    public String generateCarTip(Context context, JourneyCollection journeyCollection, int index) {return tips.generateCarTip(context,journeyCollection,index);}
-    public String generateElecTip(BillCollection billCollection, int index) {return tips.generateElectricityTip(billCollection,index);}
-    public String generateGasTip(BillCollection billCollection, int index) {return tips.generateGasTip(billCollection,index);}
-    public int showWhichTip(JourneyCollection journeyCollection,BillCollection billCollection) {return tips.showWhichTip(journeyCollection, billCollection);}
+    public String generateCarTip(Context context, JourneyCollection journeyCollection, int index) {
+        return tips.generateCarTip(context,journeyCollection,index);
+    }
+    public String generateElecTip(Context context, BillCollection billCollection, int index) {
+        return tips.generateElectricityTip(context, billCollection,index);
+    }
+    public String generateGasTip(Context context, BillCollection billCollection, int index) {
+        return tips.generateGasTip(context, billCollection,index);
+    }
+    public int showWhichTip(JourneyCollection journeyCollection,BillCollection billCollection) {
+        return tips.showWhichTip(journeyCollection, billCollection);
+    }
 }

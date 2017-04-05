@@ -348,17 +348,17 @@ public class AddRouteActivity extends AppCompatActivity {
 
     private Dialog onCreateDialog(String theTip) {
         final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-        alertDialogBuilder.setTitle("Tips")
+        alertDialogBuilder.setTitle(getResources().getString(R.string.TIP))
                 .setMessage(theTip)
                 .setCancelable(false)
-                .setPositiveButton("Next Tip",new DialogInterface.OnClickListener() {
+                .setPositiveButton(getResources().getString(R.string.NEXT_TIP),new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog,int id) {
                         currentTip = SelectRouteActivity.setupTips(getApplicationContext());
                         showDialog(currentTip);
                     }
                 })
-                .setNegativeButton("Skip",new DialogInterface.OnClickListener() {
+                .setNegativeButton(getResources().getString(R.string.SKIP),new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog,int id) {
                         AddRouteActivity.this.finish();
