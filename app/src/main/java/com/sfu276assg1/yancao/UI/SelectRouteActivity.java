@@ -133,11 +133,11 @@ public class SelectRouteActivity extends AppCompatActivity {
         String[] temp = {""};
         switch(mode){
             case 0:
-                temp = CarbonModel.getInstance().getRouteCollection().getRouteDescriptions();
+                temp = CarbonModel.getInstance().getRouteCollection().getRouteDescriptions(getApplicationContext());
                 break;
-            case 1: temp = CarbonModel.getInstance().getBusRouteCollection().getRouteDescriptions();
+            case 1: temp = CarbonModel.getInstance().getBusRouteCollection().getRouteDescriptions(getApplicationContext());
                 break;
-            case 2: temp = CarbonModel.getInstance().getWalkRouteCollection().getRouteDescriptions();
+            case 2: temp = CarbonModel.getInstance().getWalkRouteCollection().getRouteDescriptions(getApplicationContext());
                 break;
         }
         adapter = new ArrayAdapter<> (this,R.layout.route_list, temp);
@@ -226,17 +226,17 @@ public class SelectRouteActivity extends AppCompatActivity {
 
     private Dialog onCreateDialog(String theTip) {
         final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-        alertDialogBuilder.setTitle("Tips")
+        alertDialogBuilder.setTitle(getResources().getString(R.string.TIP))
                 .setMessage(theTip)
                 .setCancelable(false)
-                .setPositiveButton("Next Tip",new DialogInterface.OnClickListener() {
+                .setPositiveButton(getResources().getString(R.string.NEXT_TIP),new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog,int id) {
                         currentTip = setupTips(getApplicationContext());
                         showDialog(currentTip);
                     }
                 })
-                .setNegativeButton("Skip",new DialogInterface.OnClickListener() {
+                .setNegativeButton(getResources().getString(R.string.SKIP),new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog,int id) {
                         SelectRouteActivity.this.finish();
@@ -262,19 +262,19 @@ public class SelectRouteActivity extends AppCompatActivity {
         switch (whichTip) {
             case 0:
                 index = getLastIndexFromSharedPrefCar(context);
-                tip = CarbonModel.getInstance().generateCarTip(journeyCollection, index);
+                tip = CarbonModel.getInstance().generateCarTip(context,journeyCollection, index);
                 index++;
                 storeLastIndexCar(context,index);
                 break;
             case 1:
                 index = getLastIndexFromSharedPrefElect(context);
-                tip = CarbonModel.getInstance().generateElecTip(billCollection, index);
+                tip = CarbonModel.getInstance().generateElecTip(context,billCollection, index);
                 index++;
                 storeLastIndexElect(context,index);
                 break;
             case 2:
                 index = getLastIndexFromSharedPrefGas(context);
-                tip = CarbonModel.getInstance().generateGasTip(billCollection, index);
+                tip = CarbonModel.getInstance().generateGasTip(context,billCollection, index);
                 index++;
                 storeLastIndexGas(context,index);
                 break;

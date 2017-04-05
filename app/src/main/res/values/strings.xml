@@ -66,6 +66,8 @@
     <string name="NOTIFICATION_NOBILL_PART1">You have not entered a utility bill in 1.5 months,</string>
     <string name="NOTIFICATION_NOBILL_PART2">do you want to enter one today?</string>
     <string name="NOTIFICATION_OTHER">Do you want to enter more journeys for today?</string>
+    <string name="HIGHWEY">Highway</string>
+    <string name="CITY">City</string>
     <string name="SKYTRAIN">Skytrain</string>
     <string name="BUS">Bus</string>
     <string name="WALK">Walk</string>
@@ -95,6 +97,37 @@
     <string name="electricity_kwh">Electricity (kWh):</string>
     <string name="electricity">Electricity (kWh)</string>
     <string name="monthly_utilities_bills">Monthly Utilities Bills</string>
+    <string name="SKIP">Skip</string>
+    <string name="TIP">Tip:</string>
+    <string name="NEXT_TIP">Try to take the bike!</string>
+    <string name="CAR_TIP_1">Try to take the bike!</string>
+    <string name="CAR_TIP_2">Try to walk!</string>
+    <string name="CAR_TIP_3">Avoid areas with congested traffic!</string>
+    <string name="CAR_TIP_4">Plan out your journey so you do not get lost and waste fuel!</string>
+    <string name="CAR_TIP_5">Keep your vehicles well maintained!</string>
+    <string name="CAR_TIP_6">Try not to accelerate unnecessarily!</string>
+    <string name="CAR_TIP_7">Buy a fuel efficient car!</string>
+    <string name="CAR_TIP_PART1">You have gone on</string>
+    <string name="CAR_TIP_PART2">trip(s) today. And the amount of carbon emitted by your car today is:</string>
+    <string name="ELE_TIP_1">Turn off your lights when you are not using it!</string>
+    <string name="ELE_TIP_2">Install Compact Fluorescent Bulbs to save energy!</string>
+    <string name="ELE_TIP_3">Wash your clothes with cold water!</string>
+    <string name="ELE_TIP_4">Set your refrigerator to the optimal temperature!</string>
+    <string name="ELE_TIP_5">Wash and dry full loads!</string>
+    <string name="ELE_TIP_6">Unplug unnecessary appliances!</string>
+    <string name="ELE_TIP_7">Run your dishwasher only with a full load!</string>
+    <string name="ELE_TIP_PART1">According to your last bill, the amount of carbon emission by electricity daily is:</string>
+    <string name="GAS_TIP_1">Insulate your house well to keep cold air out!</string>
+    <string name="GAS_TIP_2">Consider to replace Any old Natural Gas Heaters!</string>
+    <string name="GAS_TIP_3">Close off doors and vents in unused rooms to conserve heat within your home!</string>
+    <string name="GAS_TIP_4">Upgrade your heating equipments to more energy-efficient ones!</string>
+    <string name="GAS_TIP_5">Consider to install a programmable thermostat!</string>
+    <string name="GAS_TIP_6">Cut your heating needs!</string>
+    <string name="GAS_TIP_7">Seal air leaks with caulk!</string>
+    <string name="GAS_TIP_8">Consider to replace Any old Natural Gas Heaters!</string>
+    <string name="GAS_TIP_9">Take quicker showers to save some energy!</string>
+    <string name="GAS_TIP_PART1">According to your last bill, the amount of carbon emission by natural gas daily is:</string>
+
 </resources>
 
 

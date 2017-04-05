@@ -1,5 +1,7 @@
 package com.sfu276assg1.yancao.carbontracker;
 
+import android.content.Context;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,21 +45,27 @@ public class RouteCollection {
     }
 
     // Useful for integrating with an ArrayAdapter
-    public String[] getRouteDescriptions() {
+    public String[] getRouteDescriptions(Context context) {
         String[] descriptions = new String[countRoutes()];
         for (int i = 0; i < countRoutes(); i++) {
             Route route = getRoute(i);
             if(route.getType().equals("Drive")){
-                descriptions[i] = route.getName() + " - " + route.getDistance() + "km" + " - "
-                        +"Highway:" +  route.getLowEDis() + "km" + " - " + "City:" + route.getHighEDis() + "km";
+                descriptions[i] = route.getName() + " - " + route.getDistance() + "km" + " - " +
+                        context.getResources().getString(R.string.HIGHWEY)+":" +  route.getLowEDis() +
+                        "km" + " - " +context.getResources().getString(R.string.CITY) +":" +
+                        route.getHighEDis() + "km";
             }
             else if (route.getType().equals("Public Transit")){
-                descriptions[i] = route.getName() + " - " + route.getDistance() + "km" + " - "
-                        +"Skytrain:" +  route.getLowEDis() + "km" + " - " + "Bus:" + route.getHighEDis() + "km";
+                descriptions[i] = route.getName() + " - " + route.getDistance() + "km" + " - " +
+                        context.getResources().getString(R.string.SKYTRAIN)+":" + route.getLowEDis() +
+                        "km" + " - " + context.getResources().getString(R.string.SKYTRAIN) +":" +
+                        route.getHighEDis() + "km";
             }
             else {
-                descriptions[i] = route.getName() + " - " + route.getDistance() + "km" + " - "
-                        +"Walk:" +  route.getLowEDis() + "km" + " - " + "Bike:" + route.getHighEDis() + "km";
+                descriptions[i] = route.getName() + " - " + route.getDistance() + "km" + " - " +
+                        context.getResources().getString(R.string.BIKE)+":" +  route.getLowEDis() +
+                        "km" + " - " + context.getResources().getString(R.string.WALK)+":" +
+                        route.getHighEDis() + "km";
             }
         }
         return descriptions;

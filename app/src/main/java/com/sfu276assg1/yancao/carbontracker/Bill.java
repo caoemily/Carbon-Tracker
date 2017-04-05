@@ -87,7 +87,7 @@ public class Bill {
     }
 
     public double getTotalCarbonTreeYear(){
-        return getTotalCarbonEmission()/20;
+        return (0.0+getTotalCarbonEmission())/20.0;
     }
 
     public double getElectricityCarbonEmission(){
@@ -105,7 +105,7 @@ public class Bill {
     }
 
     public double getElectricityCarbonTreeYear(){
-        return getElectricityCarbonEmission()/20;
+        return (0.0+getElectricityCarbonEmission())/20.0;
     }
 
     public double getGasCarbonEmission(){
@@ -122,7 +122,7 @@ public class Bill {
         return 0;
     }
     public double getGasCarbonTreeYear(){
-        return getGasCarbonEmission()/20;
+        return (0.0+getGasCarbonEmission())/20.0;
     }
 }
 
