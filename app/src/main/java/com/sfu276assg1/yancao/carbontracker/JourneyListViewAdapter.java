@@ -55,7 +55,15 @@ public class JourneyListViewAdapter extends ArrayAdapter<Journey> {
             holder.name.setText(journeys.get(position).getRoute().getType());
             holder.icon.setImageResource(R.drawable.bike_ic);
         }
-        holder.carbon.setText(Html.fromHtml("<b>" + journeys.get(position).calculateCarbon() + "</b>" + " kg/CO" + "<sub>" + "<small>" + "2" + "</small>" +"</sub>"));
+
+        if (CarbonModel.getInstance().getUnitChoice() == 0) {
+            holder.carbon_icon.setImageResource(R.drawable.ic_tree);
+            holder.carbon.setText(Html.fromHtml("<b>" + journeys.get(position).calculateCarbonTreeYear() + "</b>" + " year"));
+        }
+        else {
+            holder.carbon_icon.setImageResource(R.drawable.ic_cloud);
+            holder.carbon.setText(Html.fromHtml("<b>" + journeys.get(position).calculateCarbon() + "</b>" + " kg/CO" + "<sub>" + "<small>" + "2" + "</small>" +"</sub>"));
+        }
         holder.distance.setText(Html.fromHtml("<b>" + journeys.get(position).getRoute().getDistance() + "</b>" + " km"));
 
 
@@ -102,6 +110,7 @@ public class JourneyListViewAdapter extends ArrayAdapter<Journey> {
         private TextView carbon;
         private TextView distance;
         private ImageView icon;
+        private ImageView carbon_icon;
         private View btnEditJourney;
         private View btnEditDate;
         private View btnDeleteJourney;
@@ -116,6 +125,7 @@ public class JourneyListViewAdapter extends ArrayAdapter<Journey> {
             carbon = (TextView) v.findViewById(R.id.journeyCarbon);
             distance = (TextView) v.findViewById(R.id.journeyDistance);
             icon = (ImageView) v.findViewById(R.id.journeyIcon);
+            carbon_icon = (ImageView) v.findViewById(R.id.journeyCarbonIcon);
 
             swipeLayout.setShowMode(SwipeLayout.ShowMode.LayDown);
 

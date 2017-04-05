@@ -52,7 +52,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         setupDatabase();
-        Collections.sort(CarbonModel.getInstance().getDb().getJourneyList().getCollection());
         setUpBottomNavigation();
         setupUnitChoice();
         setupNotification();
@@ -167,6 +166,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog,int id) {
                         saveUnitChoice(unitChoice);
                         CarbonModel.getInstance().setUnitChoice(unitChoice);
+                        updateAdapter();
                     }
                 })
                 .setNegativeButton(getResources().getString(R.string.CANCEL),new DialogInterface.OnClickListener() {
@@ -191,7 +191,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void setUpJourney() {
-        journeyList = CarbonModel.getInstance().getDb().getJourneyList().getCollection();
+        Collections.sort(CarbonModel.getInstance().getDb().getJourneyList().getCollection());
+        Collections.sort(CarbonModel.getInstance().getJourneyCollection().getCollection());
+        journeyList = CarbonModel.getInstance().getJourneyCollection().getCollection();
         Collections.sort(journeyList);
     }
 
