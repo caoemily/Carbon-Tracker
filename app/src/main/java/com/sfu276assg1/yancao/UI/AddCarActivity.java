@@ -70,6 +70,14 @@ public class AddCarActivity extends AppCompatActivity {
         UiChangeListener();
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(AddCarActivity.this, SelectCarActivity.class);
+        intent.putExtra(getResources().getString(R.string.EDIT_JOURNEY), edit_journey);
+        startActivity(intent);
+        finish();
+    }
+
     public void UiChangeListener()
     {
         final View decorView = getWindow().getDecorView();

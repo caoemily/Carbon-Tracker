@@ -49,6 +49,13 @@ public class AddBillActivity extends AppCompatActivity {
         UiChangeListener();
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(AddBillActivity.this, MonthlyUtilitiesActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
     public void UiChangeListener()
     {
         final View decorView = getWindow().getDecorView();

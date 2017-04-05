@@ -54,6 +54,34 @@ public class SelectRouteActivity extends AppCompatActivity {
     }
 
     @Override
+    public void onBackPressed() {
+        if (edit_journey == 0) {
+            if (mode == 0) {
+                CarbonModel.getInstance().removeLastJourney();
+                Intent intent = new Intent(SelectRouteActivity.this, SelectCarActivity.class);
+                startActivity(intent);
+                finish();
+            } else {
+                Intent intent = new Intent(SelectRouteActivity.this, SelectTransModeActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        }
+        else if (edit_journey == 1) {
+            Intent intent = new Intent(SelectRouteActivity.this, MainActivity.class);
+            startActivity(intent);
+            finish();
+        }
+        else {
+            Intent intent = new Intent(SelectRouteActivity.this, SelectCarActivity.class);
+            intent.putExtra(getResources().getString(R.string.EDIT_JOURNEY), edit_journey);
+            intent.putExtra(getResources().getString(R.string.EDIT_JOURNEY_POSITION), edit_journey_postition);
+            startActivity(intent);
+            finish();
+        }
+    }
+
+    @Override
     public void onWindowFocusChanged(boolean hasFocas) {
         super.onWindowFocusChanged(hasFocas);
         View decorView = getWindow().getDecorView();

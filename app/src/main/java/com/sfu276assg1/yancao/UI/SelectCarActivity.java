@@ -56,6 +56,20 @@ public class SelectCarActivity extends AppCompatActivity {
     }
 
     @Override
+    public void onBackPressed() {
+        if (edit_journey == 0) {
+            Intent intent = new Intent(SelectCarActivity.this, SelectTransModeActivity.class);
+            startActivity(intent);
+            finish();
+        }
+        else {
+            Intent intent = new Intent(SelectCarActivity.this, MainActivity.class);
+            startActivity(intent);
+            finish();
+        }
+    }
+
+    @Override
     public void onWindowFocusChanged(boolean hasFocas) {
         super.onWindowFocusChanged(hasFocas);
         View decorView = getWindow().getDecorView();

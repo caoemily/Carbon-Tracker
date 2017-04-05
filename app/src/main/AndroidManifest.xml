@@ -4,14 +4,13 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/co2_cloud"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name="com.sfu276assg1.yancao.UI.WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -38,7 +37,8 @@
         <activity android:name="com.sfu276assg1.yancao.UI.DisplayLineChart"
             android:noHistory="true"/>
         <activity android:name="com.sfu276assg1.yancao.UI.MainActivity"
-            android:noHistory="true"/>
+            android:noHistory="true"
+            android:logo="@drawable/co2_cloud"/>
         <activity android:name="com.sfu276assg1.yancao.UI.AppInfoActivity" />
 
         <service

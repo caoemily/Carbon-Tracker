@@ -58,6 +58,16 @@ public class AddRouteActivity extends AppCompatActivity {
         UiChangeListener();
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(AddRouteActivity.this, SelectRouteActivity.class);
+        intent.putExtra(getResources().getString(R.string.TRANS_MODE),mode);
+        intent.putExtra(getResources().getString(R.string.EDIT_JOURNEY), edit_journey);
+        intent.putExtra(getResources().getString(R.string.EDIT_JOURNEY_POSITION), edit_journey_postition);
+        startActivity(intent);
+        finish();
+    }
+
     public void UiChangeListener()
     {
         final View decorView = getWindow().getDecorView();
