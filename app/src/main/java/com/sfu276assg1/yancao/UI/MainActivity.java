@@ -1,5 +1,6 @@
 package com.sfu276assg1.yancao.UI;
 
+import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -7,16 +8,29 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.DatePicker;
+import android.widget.ListView;
+import android.widget.TextView;
 
 import com.sfu276assg1.yancao.carbontracker.CarbonModel;
 import com.sfu276assg1.yancao.carbontracker.DBAdapter;
+import com.sfu276assg1.yancao.carbontracker.Journey;
+import com.sfu276assg1.yancao.carbontracker.JourneyListViewAdapter;
 import com.sfu276assg1.yancao.carbontracker.R;
+import com.sfu276assg1.yancao.carbontracker.SeparatedListAdapter;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Choose to add journey OR show carbon footprint in table or chart
@@ -24,6 +38,13 @@ import com.sfu276assg1.yancao.carbontracker.R;
 
 public class MainActivity extends AppCompatActivity {
     private int unitChoice = 0;
+    private int total;
+    private static int position;
+    private List<Journey> journeyList;
+    private SeparatedListAdapter adapter;
+    private ListView journalListView;
+    private JourneyListViewAdapter journeyAdapter;
+    private int mode_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,9 +52,15 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         setupDatabase();
+        Collections.sort(CarbonModel.getInstance().getDb().getJourneyList().getCollection());
         setUpBottomNavigation();
         setupUnitChoice();
         setupNotification();
+        setUpJourney();
+        setUpTotalTrip();
+        if (total > 0) {
+            setJourneyList();
+        }
     }
 
     @Override
@@ -161,5 +188,146 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences prefs = this.getSharedPreferences(getResources().getString(R.string.UNIT_CHOICE),MODE_PRIVATE);
         int defaultUnit = 0;
         return prefs.getInt("currentChoice",defaultUnit);
+    }
+
+    public void setUpJourney() {
+        journeyList = CarbonModel.getInstance().getDb().getJourneyList().getCollection();
+        Collections.sort(journeyList);
+    }
+
+    public void setUpTotalTrip() {
+        total = CarbonModel.getInstance().getJourneyCollection().countJourneys();
+        TextView total_trip = (TextView) findViewById(R.id.trip_total);
+        if (total <= 1) {
+            total_trip.setText(Integer.toString(total) + " " + getString(R.string.trip));
+        }
+        else{
+            total_trip.setText(Integer.toString(total) + " " + getString(R.string.trips));
+        }
+    }
+
+    public void setJourneyList() {
+        ArrayList<String> days = new ArrayList<>();
+        if (total > 0) {
+            days.add(journeyList.get(0).getDate());
+        }
+        int index = 0;
+        for (int i = 1; i < total; i++) {
+            String currentDay = journeyList.get(i).getDate();
+            if (!currentDay.equals(days.get(index))) {
+                days.add(currentDay);
+                index++;
+            }
+        }
+
+        // Create the ListView Adapter
+        adapter = new SeparatedListAdapter(this);
+
+        // Add Sections
+        for (int i = 0; i < days.size(); i++) {
+            List<Journey> journeys = new ArrayList<>();
+            for (int j = 0; j < total; j++) {
+                if (days.get(i).equals(journeyList.get(j).getDate())) {
+                    journeys.add(journeyList.get(j));
+                }
+            }
+            journeyAdapter = new JourneyListViewAdapter(this, R.layout.list_item, journeys);
+            adapter.addSection(days.get(i), journeyAdapter);
+        }
+
+        // Get a reference to the ListView holder
+        journalListView = (ListView) this.findViewById(R.id.journey_list);
+
+        // Set the adapter on the ListView holder
+        journalListView.setAdapter(adapter);
+    }
+
+    public void updateAdapter() {
+        adapter.notifyDataSetChanged();
+        setUpJourney();
+        setUpTotalTrip();
+        setJourneyList();
+    }
+
+    public void editDate(int position) {
+        this.position = position;
+        DialogFragment newFragment = new MainActivity.DatePickerFragment();
+        newFragment.show(getSupportFragmentManager(), "datePicker");
+    }
+
+    public void editJourney(int position) {
+        this.position = position;
+        Dialog dialog = onCreateDialogSingleChoice();
+        dialog.show();
+    }
+
+    public static class DatePickerFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener {
+
+        @NonNull
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            final Calendar c = Calendar.getInstance();
+            int year = c.get(Calendar.YEAR);
+            int month = c.get(Calendar.MONTH);
+            int day = c.get(Calendar.DAY_OF_MONTH);
+            return new DatePickerDialog(getActivity(), this, year, month, day);
+        }
+
+        public void onDateSet(DatePicker view, int year, int month, int day) {
+            Log.d("DEBUGGG DATE", "" + day + " " + month + " " + year);
+            String monthEdited = String.format("%02d", month + 1);
+            String dayEdited = String.format("%02d", day);
+            String dateEdited = "" + year + "-" + monthEdited + "-" + dayEdited;
+            CarbonModel.getInstance().getJourneyCollection().getJourney(position).setDate(dateEdited);
+            CarbonModel.getInstance().getDb().updateDateInJourney((position+1),dateEdited);
+            getActivity().finish();
+            startActivity(new Intent(getActivity(), MainActivity.class));
+        }
+    }
+
+    public Dialog onCreateDialogSingleChoice() {
+        CharSequence[] array = {"Car", "Public Transit", "Bike / Walk"};
+        AlertDialog.Builder builder = new AlertDialog.Builder(this)
+                .setTitle("Select Transportation Mode")
+                .setSingleChoiceItems(array, -1, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        mode_id = which;
+                    }
+                })
+                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if (mode_id == 0){
+                            Intent intent = new Intent(MainActivity.this, SelectCarActivity.class);
+                            intent.putExtra(getResources().getString(R.string.EDIT_JOURNEY_POSITION), position);
+                            intent.putExtra(getResources().getString(R.string.EDIT_JOURNEY), 2);
+                            intent.putExtra(getResources().getString(R.string.TRANS_MODE), 0);
+                            startActivity(intent);
+                        }
+                        else if (mode_id == 1) {
+                            Intent intent = new Intent(MainActivity.this, SelectRouteActivity.class);
+                            intent.putExtra(getResources().getString(R.string.EDIT_JOURNEY), 1);
+                            intent.putExtra(getResources().getString(R.string.EDIT_JOURNEY_POSITION), position);
+                            intent.putExtra(getResources().getString(R.string.TRANS_MODE), 1);
+                            startActivity(intent);
+                        }
+                        else if (mode_id == 2) {
+                            Intent intent = new Intent(MainActivity.this, SelectRouteActivity.class);
+                            intent.putExtra(getResources().getString(R.string.EDIT_JOURNEY), 1);
+                            intent.putExtra(getResources().getString(R.string.EDIT_JOURNEY_POSITION), position);
+                            intent.putExtra(getResources().getString(R.string.TRANS_MODE), 2);
+                            startActivity(intent);
+                        }
+                        finish();
+                    }
+                })
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                });
+
+        return builder.create();
     }
 }

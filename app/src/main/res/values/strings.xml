@@ -127,7 +127,10 @@
     <string name="GAS_TIP_8">Consider to replace Any old Natural Gas Heaters!</string>
     <string name="GAS_TIP_9">Take quicker showers to save some energy!</string>
     <string name="GAS_TIP_PART1">According to your last bill, the amount of carbon emission by natural gas daily is:</string>
-
+    <string name="trips">Trips</string>
+    <string name="trip">Trip</string>
+    <string name="graphs">Graphs</string>
+    <string name="journey">Journey</string>
 </resources>
 
 

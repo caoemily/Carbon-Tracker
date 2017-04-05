@@ -37,7 +37,7 @@ public class Tips {
             return CARTIPS;
         }
         else{
-            if(total_elect_carbon>total_gas_carbon){
+            if(total_elect_carbon > total_gas_carbon){
                 return ELECTRICITYTIPS;
             }
             else{

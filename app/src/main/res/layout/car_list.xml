@@ -7,14 +7,14 @@
     <!-- Bottom View Start-->
     <LinearLayout
         android:id="@+id/bottom_wrapper"
-        android:layout_width="100dp"
+        android:layout_width="120dp"
         android:layout_height="match_parent"
         android:orientation="horizontal">
 
         <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginTop="-12dp"
+            android:layout_marginTop="-15dp"
             android:layout_weight="1"
             android:background="@android:color/white">
 
@@ -32,6 +32,7 @@
                 android:layout_alignParentBottom="true"
                 android:layout_below="@+id/edit"
                 android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp"
                 android:maxLines="1"
                 android:text="@string/edit"
                 android:textColor="@android:color/black"
@@ -42,7 +43,7 @@
         <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginTop="-12dp"
+            android:layout_marginTop="-15dp"
             android:layout_weight="1"
             android:background="@android:color/white">
 
@@ -60,13 +61,12 @@
                 android:layout_alignParentBottom="true"
                 android:layout_below="@+id/delete"
                 android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp"
                 android:maxLines="1"
                 android:text="@string/delete"
                 android:textColor="@android:color/black"
                 android:textSize="10sp" />
         </RelativeLayout>
-
-
     </LinearLayout>
     <!-- Bottom View End-->
 
