@@ -1,5 +1,7 @@
 package com.sfu276assg1.yancao.carbontracker;
 
+import android.content.Context;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -19,11 +21,17 @@ public class Tips {
     }
 
     public int showWhichTip(JourneyCollection journeyCollection, BillCollection billCollection){
-
         double total_car_carbon = journeyCollection.getJourneyCarbonInOneDay(date);
-        double total_util_carbon = billCollection.getTotalCarbonEmission(date);
-        double total_elect_carbon = billCollection.getElectricityCarbonEmission(date);
-        double total_gas_carbon = billCollection.getGasCarbonEmission(date);
+        double total_util_carbon = 0.0;
+        double total_elect_carbon = 0.0;
+        double total_gas_carbon = 0.0;
+
+        Bill bill = billCollection.getLastBill();
+        if(bill!=null) {
+            total_util_carbon=bill.getTotalCarbonEmission();
+            total_elect_carbon=bill.getElectricityCarbonEmission();
+            total_gas_carbon=bill.getGasCarbonEmission();
+        }
 
         if(total_car_carbon > total_util_carbon){
             return CARTIPS;
@@ -38,10 +46,14 @@ public class Tips {
         }
     }
 
-    public String generateCarTip(JourneyCollection journeyCollection, int index) {
-        String[] tooMuchCar = {"Try to take the bike!", "Try to take the public transit", "Try to walk!",
-                "Avoid areas with congested traffic!", "Plan out your journey so you don't get lost and waste fuel!",
-                "Keep your vehicles well maintained!","Don't accelerate unnecessarily!", "Buy a fuel efficient car!"};
+    public String generateCarTip(Context context, JourneyCollection journeyCollection, int index) {
+        String[] tooMuchCar = {context.getResources().getString(R.string.CAR_TIP_1),
+                context.getResources().getString(R.string.CAR_TIP_2),
+                context.getResources().getString(R.string.CAR_TIP_3),
+                context.getResources().getString(R.string.CAR_TIP_4),
+                context.getResources().getString(R.string.CAR_TIP_5),
+                context.getResources().getString(R.string.CAR_TIP_6),
+                context.getResources().getString(R.string.CAR_TIP_7),};
         int arraySize = tooMuchCar.length;
         Double journeyCarNum = 0.0;
         String journeyCarbon = "";
@@ -50,12 +62,16 @@ public class Tips {
         if(CarbonModel.getInstance().getUnitChoice()==1){
             journeyCarNum = journeyCollection.getJourneyCarbonInOneDay(date)*10/10;
             journeyCarbon = Double.toString(journeyCarNum);
-            tip = "You have gone on "+ journeyNum +" trip(s) today. And the amount of carbon emitted by your car today is: "+journeyCarbon+" kg. "+tooMuchCar[index%arraySize];
+            tip = context.getResources().getString(R.string.CAR_TIP_PART1)+ " "+journeyNum +" "+
+                    context.getResources().getString(R.string.CAR_TIP_PART2)+ " "
+                    +journeyCarbon+" kg. "+tooMuchCar[index%arraySize];
         }
-        else{
-            journeyCarNum = journeyCollection.getJourneyCarbonInOneDayTreeYear(date)*10/10;
+        else {
+            journeyCarNum = journeyCollection.getJourneyCarbonInOneDayTreeYear(date) * 10/10;
             journeyCarbon = Double.toString(journeyCarNum);
-            tip = "You have gone on "+ journeyNum +" trip(s) today. And the amount of carbon emitted by your car today is: "+journeyCarbon+" tree year. "+tooMuchCar[index%arraySize];
+            tip = context.getResources().getString(R.string.CAR_TIP_PART1) + " " + journeyNum + " " +
+                    context.getResources().getString(R.string.CAR_TIP_PART2) + " "
+                    + journeyCarbon + " tree year. " + tooMuchCar[index % arraySize];
         }
         return tip;
     }
@@ -69,14 +85,14 @@ public class Tips {
         String electricityCarbon = "";
         String tip = "";
         if(CarbonModel.getInstance().getUnitChoice()==1){
-            elecCarNum = (double)Math.round (billCollection.getElectricityCarbonEmission(date)*10/10);
+            elecCarNum = billCollection.getLastBill().getElectricityCarbonEmission();
             electricityCarbon = Double.toString(elecCarNum);
-            tip = "The amount of carbon emission by electricity you have produced today is: "+electricityCarbon+" kg. "+tooMuchElectricity[index%arraySize];
+            tip = "According to your last bill, the amount of carbon emission by electricity daily is: "+electricityCarbon+" kg. "+tooMuchElectricity[index%arraySize];
         }
         else{
-            elecCarNum = (double)Math.round (billCollection.getElectricityCarbonEmissionTreeYear(date)*10/10);
+            elecCarNum = billCollection.getLastBill().getElectricityCarbonTreeYear();
             electricityCarbon = Double.toString(elecCarNum);
-            tip = "The amount of carbon emission by electricity you have produced today is: "+electricityCarbon+" tree year. "+tooMuchElectricity[index%arraySize];
+            tip = "According to your last bill, the amount of carbon emission by electricity daily is: "+electricityCarbon+" tree year. "+tooMuchElectricity[index%arraySize];
         }
         return tip;
     }
@@ -89,18 +105,17 @@ public class Tips {
         String gasCarbon = "";
         String tip = "";
         if(CarbonModel.getInstance().getUnitChoice()==1){
-            gasCarNum = (double)Math.round (billCollection.getGasCarbonEmission(date)*10/10);
+            gasCarNum = billCollection.getLastBill().getGasCarbonEmission();
             gasCarbon = Double.toString(gasCarNum);
-            tip = "The amount of carbon emission by natural gas you have produced today is: "+gasCarbon+" kg. "+tooMuchGas[index%arraySize];
+            tip = "According to your last bill, the amount of carbon emission by natural gas daily is: "+gasCarbon+" kg. "+tooMuchGas[index%arraySize];
         }
         else{
-            gasCarNum = (double)Math.round (billCollection.getGasCarbonEmissionTreeYear(date)*10/10);
+            gasCarNum = billCollection.getLastBill().getGasCarbonTreeYear();
             gasCarbon = Double.toString(gasCarNum);
-            tip = "The amount of carbon emission by natural gas you have produced today is: "+gasCarbon+" tree year. "+tooMuchGas[index%arraySize];
+            tip = "According to your last bill, the amount of carbon emission by natural gas daily is: "+gasCarbon+" tree year. "+tooMuchGas[index%arraySize];
         }
         return tip;
     }
-
 }
 
 

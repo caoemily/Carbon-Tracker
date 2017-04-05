@@ -124,4 +124,11 @@ public class BillCollection {
         long diffInMillies = date2.getTime() - date1.getTime();
         return timeUnit.convert(diffInMillies,TimeUnit.MILLISECONDS);
     }
+
+    public Bill getLastBill(){
+        if(this.countBills()==0){
+            return null;
+        }
+        return this.getBill(this.countBills()-1);
+    }
 }

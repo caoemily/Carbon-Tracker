@@ -1,5 +1,7 @@
 package com.sfu276assg1.yancao.carbontracker;
 
+import android.content.Context;
+
 import java.util.ArrayList;
 
 public class CarbonModel {
@@ -136,7 +138,7 @@ public class CarbonModel {
         billCollection.remove(index);
     }
 
-    public String generateCarTip(JourneyCollection journeyCollection, int index) {return tips.generateCarTip(journeyCollection,index);}
+    public String generateCarTip(Context context, JourneyCollection journeyCollection, int index) {return tips.generateCarTip(context,journeyCollection,index);}
     public String generateElecTip(BillCollection billCollection, int index) {return tips.generateElectricityTip(billCollection,index);}
     public String generateGasTip(BillCollection billCollection, int index) {return tips.generateGasTip(billCollection,index);}
     public int showWhichTip(JourneyCollection journeyCollection,BillCollection billCollection) {return tips.showWhichTip(journeyCollection, billCollection);}

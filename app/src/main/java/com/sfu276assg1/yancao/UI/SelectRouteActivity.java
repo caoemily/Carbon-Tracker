@@ -262,7 +262,7 @@ public class SelectRouteActivity extends AppCompatActivity {
         switch (whichTip) {
             case 0:
                 index = getLastIndexFromSharedPrefCar(context);
-                tip = CarbonModel.getInstance().generateCarTip(journeyCollection, index);
+                tip = CarbonModel.getInstance().generateCarTip(context,journeyCollection, index);
                 index++;
                 storeLastIndexCar(context,index);
                 break;

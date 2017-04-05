@@ -95,6 +95,25 @@
     <string name="electricity_kwh">Electricity (kWh):</string>
     <string name="electricity">Electricity (kWh)</string>
     <string name="monthly_utilities_bills">Monthly Utilities Bills</string>
+
+    "Turn off the lights when you can!", "Install Compact Fluorescent Bulbs to save energy!",
+    "Wash your clothes with cold water!",
+    "Set your refrigerator to the optimal temperature!", "Turn off your lights when you're not using it!", "Wash and dry full loads!", "Cut your heating needs!",
+    "Unplug unnecessary appliances!", "Run your dishwasher only with a full load!"
+
+    <string name="CAR_TIP_1">Try to take the bike!</string>
+    <string name="CAR_TIP_2">Try to walk!</string>
+    <string name="CAR_TIP_3">Avoid areas with congested traffic!</string>
+    <string name="CAR_TIP_4">Plan out your journey so you do not get lost and waste fuel!</string>
+    <string name="CAR_TIP_5">Keep your vehicles well maintained!</string>
+    <string name="CAR_TIP_6">Try not to accelerate unnecessarily!</string>
+    <string name="CAR_TIP_7">Buy a fuel efficient car!</string>
+    <string name="CAR_TIP_PART1">You have gone on</string>
+    <string name="CAR_TIP_PART2">trip(s) today. And the amount of carbon emitted by your car today is:</string>
+
+
+
+
 </resources>
 
 
