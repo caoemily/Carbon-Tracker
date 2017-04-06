@@ -269,10 +269,11 @@ public class MainActivity extends AppCompatActivity {
             String monthEdited = String.format("%02d", month + 1);
             String dayEdited = String.format("%02d", day);
             String dateEdited = "" + year + "-" + monthEdited + "-" + dayEdited;
-            //check here, Steven
+            //please check here, Steven
             // also need to update delete in JourneyListViewAdapter,which should be based on id as well.
             int id = journeyList.get(position).getId();
             //CarbonModel.getInstance().getJourneyCollection().getJourney(position).setDate(dateEdited);
+            //int id = CarbonModel.getInstance().getJourneyCollection().getJourney(position).getId();
             CarbonModel.getInstance().getDb().updateDateInJourney(id,dateEdited);
             getActivity().finish();
             startActivity(new Intent(getActivity(), MainActivity.class));

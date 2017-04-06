@@ -97,8 +97,9 @@ public class JourneyListViewAdapter extends ArrayAdapter<Journey> {
         return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                int id = CarbonModel.getInstance().getJourneyCollection().getJourney(position).getId();
                 CarbonModel.getInstance().removeJourney(position);
-                CarbonModel.getInstance().getDb().deleteJourneyRow((position+1));
+                CarbonModel.getInstance().getDb().deleteJourneyRow(id);
                 holder.swipeLayout.close();
                 activity.updateAdapter();
             }
