@@ -29,9 +29,11 @@ import com.sfu276assg1.yancao.carbontracker.JourneyListViewAdapter;
 import com.sfu276assg1.yancao.carbontracker.R;
 import com.sfu276assg1.yancao.carbontracker.SeparatedListAdapter;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -131,7 +133,10 @@ public class MainActivity extends AppCompatActivity {
                         finish();
                         break;
                     case R.id.graph:
-                        intent = new Intent(MainActivity.this, SelectGraphActivity.class);
+                        String today = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+                        intent = new Intent(MainActivity.this, DisplayCarbonFootprintActivity.class);
+                        intent.putExtra("single date selected", today);
+                        intent.putExtra("mode", 0);
                         startActivity(intent);
                         finish();
                         break;

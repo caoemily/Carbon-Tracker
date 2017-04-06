@@ -2,18 +2,32 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="10dp"
-    android:fitsSystemWindows="true">
+    android:layout_margin="10dp">
 
     <com.github.mikephil.charting.charts.LineChart
         android:id="@+id/lineChart"
         android:layout_width="match_parent"
-        android:layout_height="250dp"></com.github.mikephil.charting.charts.LineChart>
+        android:layout_height="250dp"
+        android:translationY="80dp"></com.github.mikephil.charting.charts.LineChart>
 
     <com.github.mikephil.charting.charts.PieChart
         android:id="@+id/pieChart_365"
         android:layout_width="match_parent"
         android:layout_height="250dp"
-        android:layout_below="@+id/lineChart"></com.github.mikephil.charting.charts.PieChart>
+        android:layout_below="@+id/lineChart"
+        android:translationY="80dp"></com.github.mikephil.charting.charts.PieChart>
+
+    <android.support.design.widget.BottomNavigationView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/bottom_navigation_chart"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_alignParentBottom="true"
+        android:background="#a0cd5a"
+        android:itemBackground="#a0cd5a"
+        app:itemIconTint="@android:color/white"
+        app:itemTextColor="@android:color/white"
+        app:menu="@menu/navigation_chart" />
+
 
 </RelativeLayout>

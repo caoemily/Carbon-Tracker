@@ -131,6 +131,10 @@
     <string name="trip">Trip</string>
     <string name="graphs">Graphs</string>
     <string name="journey">Journey</string>
+    <string name="mode">Mode</string>
+    <string name="route">Route</string>
+    <string name="single_day_chart">Single Day</string>
+    <string name="action_graph">GRAPH</string>
 </resources>
 
 
