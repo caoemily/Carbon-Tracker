@@ -99,7 +99,7 @@
     <string name="monthly_utilities_bills">Monthly Utilities Bills</string>
     <string name="SKIP">Skip</string>
     <string name="TIP">Tip:</string>
-    <string name="NEXT_TIP">Try to take the bike!</string>
+    <string name="NEXT_TIP">Next Tip</string>
     <string name="CAR_TIP_1">Try to take the bike!</string>
     <string name="CAR_TIP_2">Try to walk!</string>
     <string name="CAR_TIP_3">Avoid areas with congested traffic!</string>
@@ -131,6 +131,8 @@
     <string name="trip">Trip</string>
     <string name="graphs">Graphs</string>
     <string name="journey">Journey</string>
+    <string name="JOURNEY_ID">journeyId</string>
+    <string name="KeepOnTIp">Good Job, Keep On!</string>
 </resources>
 
 

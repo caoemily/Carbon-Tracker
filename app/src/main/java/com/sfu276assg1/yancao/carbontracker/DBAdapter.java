@@ -18,7 +18,7 @@ public class DBAdapter {
     // DB Fields
     public static final String KEY_ROWID = "_id";
     // Track DB version if a new version of your app changes the format.
-    public static final int DATABASE_VERSION = 35;
+    public static final int DATABASE_VERSION = 41;
 
 
     public static final String JOURNEY_DATE = "date";
@@ -507,6 +507,7 @@ public class DBAdapter {
         if (c.moveToFirst()) {
             do {
                 String date = c.getString(c.getColumnIndex(JOURNEY_DATE));
+                int id = c.getInt(c.getColumnIndex(KEY_ROWID));
                 Car car = new Car();
                 car.setNickname(c.getString(c.getColumnIndex(CAR_NICKNAME)));
                 car.setIcon(c.getInt(c.getColumnIndex(CAR_ICON)));
@@ -529,6 +530,7 @@ public class DBAdapter {
 
                 Journey journey = new Journey(car,route);
                 journey.setDate(date);
+                journey.setId(id);
                 journeyCollection.addJourney(journey);
 
             } while (c.moveToNext());

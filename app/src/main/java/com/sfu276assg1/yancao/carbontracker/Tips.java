@@ -13,6 +13,7 @@ public class Tips {
     private final static int CARTIPS = 0;
     private final static int ELECTRICITYTIPS = 1;
     private final static int GASTIPS = 2;
+    private final static int NOTIPS = 3;
 
     private String date;
 
@@ -27,6 +28,9 @@ public class Tips {
         double total_gas_carbon = 0.0;
 
         Bill bill = billCollection.getLastBill();
+        if(bill==null&&total_car_carbon==0){
+            return NOTIPS;
+        }
         if(bill!=null) {
             total_util_carbon=bill.getTotalCarbonEmission();
             total_elect_carbon=bill.getElectricityCarbonEmission();

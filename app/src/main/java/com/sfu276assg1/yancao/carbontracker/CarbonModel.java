@@ -17,6 +17,7 @@ public class CarbonModel {
     private DBAdapter db;
     private Tips tips;
     private int unitChoice;
+    private int journeyId;
 
     public static CarbonModel getInstance() {
         return ourInstance;
@@ -32,6 +33,15 @@ public class CarbonModel {
         billCollection = new BillCollection();
         tips = new Tips();
         unitChoice = 0;
+        journeyId=0;
+    }
+
+    public int getJourneyId() {
+        return journeyId;
+    }
+
+    public void setJourneyId(int journeyId) {
+        this.journeyId = journeyId;
     }
 
     public void setUnitChoice(int unit){this.unitChoice = unit;}

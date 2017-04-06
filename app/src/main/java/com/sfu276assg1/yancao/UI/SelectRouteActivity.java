@@ -306,6 +306,9 @@ public class SelectRouteActivity extends AppCompatActivity {
                 index++;
                 storeLastIndexGas(context,index);
                 break;
+            case 3:
+                tip = context.getString(R.string.KeepOnTIp);
+                break;
         }
         return tip;
     }

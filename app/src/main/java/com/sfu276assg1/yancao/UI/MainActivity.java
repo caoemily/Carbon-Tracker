@@ -2,6 +2,7 @@ package com.sfu276assg1.yancao.UI;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -42,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
     private int unitChoice = 0;
     private int total;
     private static int position;
-    private List<Journey> journeyList;
+    private static List<Journey> journeyList;
     private SeparatedListAdapter adapter;
     private ListView journalListView;
     private JourneyListViewAdapter journeyAdapter;
@@ -57,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
         actionBar.setDisplayShowHomeEnabled(true);
         actionBar.setIcon(R.drawable.co2_cloud1);
 
-        //setupDatabase();
+        setupDatabase();
         setUpBottomNavigation();
         setupUnitChoice();
         setUpJourney();
@@ -178,22 +179,9 @@ public class MainActivity extends AppCompatActivity {
         return alertDialogBuilder.create();
     }
 
-    private void saveUnitChoice(int choice) {
-        SharedPreferences prefs = this.getSharedPreferences(getResources().getString(R.string.UNIT_CHOICE), MODE_PRIVATE);
-        SharedPreferences.Editor editor = prefs.edit();
-        editor.putInt("currentChoice",choice);
-        editor.apply();
-    }
-
-    private int getUnitChoice(){
-        SharedPreferences prefs = this.getSharedPreferences(getResources().getString(R.string.UNIT_CHOICE),MODE_PRIVATE);
-        int defaultUnit = 0;
-        return prefs.getInt("currentChoice",defaultUnit);
-    }
-
     public void setUpJourney() {
-        //Collections.sort(CarbonModel.getInstance().getDb().getJourneyList().getCollection());
-        Collections.sort(CarbonModel.getInstance().getJourneyCollection().getCollection());
+//       Collections.sort(CarbonModel.getInstance().getDb().getJourneyList().getCollection());
+//        Collections.sort(CarbonModel.getInstance().getJourneyCollection().getCollection());
         journeyList = CarbonModel.getInstance().getJourneyCollection().getCollection();
         Collections.sort(journeyList);
     }
@@ -281,8 +269,11 @@ public class MainActivity extends AppCompatActivity {
             String monthEdited = String.format("%02d", month + 1);
             String dayEdited = String.format("%02d", day);
             String dateEdited = "" + year + "-" + monthEdited + "-" + dayEdited;
-            CarbonModel.getInstance().getJourneyCollection().getJourney(position).setDate(dateEdited);
-            //CarbonModel.getInstance().getDb().updateDateInJourney((position+1),dateEdited);
+            //check here, Steven
+            // also need to update delete in JourneyListViewAdapter,which should be based on id as well.
+            int id = journeyList.get(position).getId();
+            //CarbonModel.getInstance().getJourneyCollection().getJourney(position).setDate(dateEdited);
+            CarbonModel.getInstance().getDb().updateDateInJourney(id,dateEdited);
             getActivity().finish();
             startActivity(new Intent(getActivity(), MainActivity.class));
         }
@@ -332,5 +323,18 @@ public class MainActivity extends AppCompatActivity {
                 });
 
         return builder.create();
+    }
+
+    private void saveUnitChoice(int choice) {
+        SharedPreferences prefs = this.getSharedPreferences(getResources().getString(R.string.UNIT_CHOICE), MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putInt("currentChoice",choice);
+        editor.apply();
+    }
+
+    private int getUnitChoice(){
+        SharedPreferences prefs = this.getSharedPreferences(getResources().getString(R.string.UNIT_CHOICE),MODE_PRIVATE);
+        int defaultUnit = 0;
+        return prefs.getInt("currentChoice",defaultUnit);
     }
 }
