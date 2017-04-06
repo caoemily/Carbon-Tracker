@@ -129,7 +129,7 @@ public class DisplayLineChart extends AppCompatActivity {
         Intent intent;
         switch (item.getItemId()) {
             case android.R.id.home:
-                intent = new Intent(getApplicationContext(), SelectGraphActivity.class);
+                intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
                 finish();
                 return true;
@@ -281,6 +281,7 @@ public class DisplayLineChart extends AppCompatActivity {
 
         Description description = new Description();
         chart.setDescription(null);
+        chart.setEntryLabelColor(Color.DKGRAY);
         chart.setRotationEnabled(true);
         chart.setHoleRadius(25f);
         chart.setTransparentCircleAlpha(0);
@@ -350,6 +351,7 @@ public class DisplayLineChart extends AppCompatActivity {
         PieData data = new PieData(dataSet);
 
         Description description = new Description();
+        chart.setEntryLabelColor(Color.DKGRAY);
         chart.setDescription(null);
         chart.setRotationEnabled(true);
         chart.setHoleRadius(25f);

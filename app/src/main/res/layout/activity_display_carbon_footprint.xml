@@ -7,7 +7,8 @@
     <com.github.mikephil.charting.charts.PieChart
         android:id="@+id/Chart"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="400dp"
+        android:translationY="120dp" />
 
     <android.support.design.widget.BottomNavigationView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"

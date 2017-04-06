@@ -89,7 +89,7 @@ public class DisplayBarChart extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(getApplicationContext(), SelectGraphActivity.class);
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(intent);
         finish();
     }
@@ -117,7 +117,7 @@ public class DisplayBarChart extends AppCompatActivity {
         Intent intent;
         switch (item.getItemId()) {
             case android.R.id.home:
-                intent = new Intent(getApplicationContext(), SelectGraphActivity.class);
+                intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
                 finish();
                 return true;
@@ -255,6 +255,7 @@ public class DisplayBarChart extends AppCompatActivity {
         Description description = new Description();
 //        chart.setDrawSliceText(false);
 //        chart.setUsePercentValues(true);
+        chart.setEntryLabelColor(Color.DKGRAY);
         chart.setDescription(null);
         chart.setRotationEnabled(true);
         chart.setHoleRadius(25f);
@@ -281,6 +282,7 @@ public class DisplayBarChart extends AppCompatActivity {
         PieData data = new PieData(dataSet);
 
         Description description = new Description();
+        chart.setEntryLabelColor(Color.DKGRAY);
         chart.setDescription(null);
         chart.setRotationEnabled(true);
         chart.setHoleRadius(25f);

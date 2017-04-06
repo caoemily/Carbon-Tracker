@@ -3,6 +3,7 @@ package com.sfu276assg1.yancao.UI;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -68,7 +69,7 @@ public class DisplayCarbonFootprintActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(getApplicationContext(), SelectGraphActivity.class);
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(intent);
         finish();
     }
@@ -96,7 +97,7 @@ public class DisplayCarbonFootprintActivity extends AppCompatActivity {
         Intent intent;
         switch (item.getItemId()) {
             case android.R.id.home:
-                intent = new Intent(getApplicationContext(), SelectGraphActivity.class);
+                intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
                 finish();
                 return true;
@@ -230,6 +231,7 @@ public class DisplayCarbonFootprintActivity extends AppCompatActivity {
         PieChart chart = (PieChart) findViewById(R.id.Chart);
         Description description = new Description();
         description.setText("Amount of Carbon per Car");
+        chart.setEntryLabelColor(Color.DKGRAY);
         chart.setDescription(null);
         chart.setRotationEnabled(true);
         chart.setHoleRadius(25f);
@@ -289,6 +291,7 @@ public class DisplayCarbonFootprintActivity extends AppCompatActivity {
         PieChart chart = (PieChart) findViewById(R.id.Chart);
         Description description = new Description();
         description.setText("Amount of Carbon per Car");
+        chart.setEntryLabelColor(Color.DKGRAY);
         chart.setDescription(null);
         chart.setRotationEnabled(true);
         chart.setHoleRadius(25f);
