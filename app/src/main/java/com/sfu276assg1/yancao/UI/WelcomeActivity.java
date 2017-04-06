@@ -24,6 +24,7 @@ public class WelcomeActivity extends AppCompatActivity {
 
         setUpAnimation();
         setupSkipButton();
+        setupNotification();
     }
 
     private void setUpAnimation() {
@@ -73,6 +74,10 @@ public class WelcomeActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    private void setupNotification() {
+        startService(new Intent(getBaseContext(),NotificationService.class));
     }
 
 }

@@ -57,10 +57,9 @@ public class MainActivity extends AppCompatActivity {
         actionBar.setDisplayShowHomeEnabled(true);
         actionBar.setIcon(R.drawable.co2_cloud1);
 
-        setupDatabase();
+        //setupDatabase();
         setUpBottomNavigation();
         setupUnitChoice();
-        setupNotification();
         setUpJourney();
         setUpTotalTrip();
         if (total > 0) {
@@ -146,10 +145,6 @@ public class MainActivity extends AppCompatActivity {
         unitChoice = getUnitChoice();
     }
 
-    private void setupNotification() {
-        startService(new Intent(getBaseContext(),NotificationService.class));
-    }
-
     private void showDialog(){
         Dialog dialog = onCreateDialog();
         dialog.show();
@@ -197,7 +192,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void setUpJourney() {
-        Collections.sort(CarbonModel.getInstance().getDb().getJourneyList().getCollection());
+        //Collections.sort(CarbonModel.getInstance().getDb().getJourneyList().getCollection());
         Collections.sort(CarbonModel.getInstance().getJourneyCollection().getCollection());
         journeyList = CarbonModel.getInstance().getJourneyCollection().getCollection();
         Collections.sort(journeyList);
@@ -287,7 +282,7 @@ public class MainActivity extends AppCompatActivity {
             String dayEdited = String.format("%02d", day);
             String dateEdited = "" + year + "-" + monthEdited + "-" + dayEdited;
             CarbonModel.getInstance().getJourneyCollection().getJourney(position).setDate(dateEdited);
-            CarbonModel.getInstance().getDb().updateDateInJourney((position+1),dateEdited);
+            //CarbonModel.getInstance().getDb().updateDateInJourney((position+1),dateEdited);
             getActivity().finish();
             startActivity(new Intent(getActivity(), MainActivity.class));
         }

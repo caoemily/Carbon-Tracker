@@ -61,14 +61,14 @@ public class Tips {
         String tip = "";
         if(CarbonModel.getInstance().getUnitChoice()==1){
             journeyCarNum = journeyCollection.getJourneyCarbonInOneDay(date)*10/10;
-            journeyCarbon = Double.toString(journeyCarNum);
+            journeyCarbon = String.format("%.2f",journeyCarNum);
             tip = context.getResources().getString(R.string.CAR_TIP_PART1)+ " "+journeyNum +" "+
                     context.getResources().getString(R.string.CAR_TIP_PART2)+ " "
                     +journeyCarbon+context.getResources().getString(R.string.kg)+". "+tooMuchCar[index%arraySize];
         }
         else {
             journeyCarNum = journeyCollection.getJourneyCarbonInOneDayTreeYear(date) * 10/10;
-            journeyCarbon = Double.toString(journeyCarNum);
+            journeyCarbon = String.format("%.2f",journeyCarNum);
             tip = context.getResources().getString(R.string.CAR_TIP_PART1) + " " + journeyNum + " " +
                     context.getResources().getString(R.string.CAR_TIP_PART2) + " "
                     + journeyCarbon + " "+
@@ -92,14 +92,14 @@ public class Tips {
         String tip = "";
         if(CarbonModel.getInstance().getUnitChoice()==1){
             elecCarNum = billCollection.getLastBill().getElectricityCarbonEmission();
-            electricityCarbon = Double.toString(elecCarNum);
+            electricityCarbon = String.format("%.2f",elecCarNum);
             tip = context.getResources().getString(R.string.ELE_TIP_PART1)+" " +
                     electricityCarbon+" "+ context.getResources().getString(R.string.kg)+". "
                     +tooMuchElectricity[index%arraySize];
         }
         else{
             elecCarNum = billCollection.getLastBill().getElectricityCarbonTreeYear();
-            electricityCarbon = Double.toString(elecCarNum);
+            electricityCarbon = String.format("%.2f",elecCarNum);
             tip = context.getResources().getString(R.string.ELE_TIP_PART1)+" " +
                     electricityCarbon+" "+ context.getResources().getString(R.string.tree)+". "
                     +tooMuchElectricity[index%arraySize];
@@ -124,14 +124,14 @@ public class Tips {
         String tip = "";
         if(CarbonModel.getInstance().getUnitChoice()==1){
             gasCarNum = billCollection.getLastBill().getGasCarbonEmission();
-            gasCarbon = Double.toString(gasCarNum);
+            gasCarbon = String.format("%.2f",gasCarNum);
             tip = context.getResources().getString(R.string.ELE_TIP_PART1)+" " +
-                   gasCarbon+" "+ context.getResources().getString(R.string.kg)+". "
+                    gasCarbon+" "+ context.getResources().getString(R.string.kg)+". "
                     +tooMuchGas[index%arraySize];
         }
         else{
             gasCarNum = billCollection.getLastBill().getGasCarbonTreeYear();
-            gasCarbon = Double.toString(gasCarNum);
+            gasCarbon = String.format("%.2f",gasCarNum);
             tip = context.getResources().getString(R.string.GAS_TIP_PART1)+" " +
                     gasCarbon+" "+ context.getResources().getString(R.string.tree)+". "
                     +tooMuchGas[index%arraySize];
@@ -139,5 +139,4 @@ public class Tips {
         return tip;
     }
 }
-
 
