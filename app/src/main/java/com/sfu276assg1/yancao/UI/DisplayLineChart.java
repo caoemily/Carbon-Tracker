@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
+import android.view.View;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.charts.PieChart;
@@ -71,6 +72,9 @@ public class DisplayLineChart extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_line_chart);
 
+        getSupportActionBar().setTitle("");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         generateDataForLineChart();
         generateLineChart();
 //        TextView textView = (TextView) findViewById(R.id.lineChartDes);
@@ -87,6 +91,15 @@ public class DisplayLineChart extends AppCompatActivity {
         finish();
     }
 
+    @Override
+    public void onWindowFocusChanged(boolean hasFocas) {
+        super.onWindowFocusChanged(hasFocas);
+        View decorView = getWindow().getDecorView();
+        int uiOptions = View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
+        decorView.setSystemUiVisibility(uiOptions);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -97,18 +110,21 @@ public class DisplayLineChart extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        Intent intent;
         switch (item.getItemId()) {
+            case android.R.id.home:
+                intent = new Intent(getApplicationContext(), SelectGraphActivity.class);
+                startActivity(intent);
+                finish();
+                return true;
             case R.id.action_route:
                 generatePieChartInRoute();
-                break;
+                return true;
             case R.id.action_mode:
                 generatePieChart();
-                break;
-            default:
-                break;
+                return true;
         }
-
-        return true;
+        return super.onOptionsItemSelected(item);
     }
 
     private void generateDataForPieChart() {

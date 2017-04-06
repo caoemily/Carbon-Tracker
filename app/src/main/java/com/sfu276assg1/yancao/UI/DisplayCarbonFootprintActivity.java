@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Description;
@@ -38,15 +39,57 @@ public class DisplayCarbonFootprintActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_carbon_footprint);
+
+        getSupportActionBar().setTitle("");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         generateInfoForChart();
         generatePieChart();
     }
+
     @Override
     public void onBackPressed() {
         Intent intent = new Intent(getApplicationContext(), SelectGraphActivity.class);
         startActivity(intent);
         finish();
     }
+
+    @Override
+    public void onWindowFocusChanged(boolean hasFocas) {
+        super.onWindowFocusChanged(hasFocas);
+        View decorView = getWindow().getDecorView();
+        int uiOptions = View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
+        decorView.setSystemUiVisibility(uiOptions);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_graphs, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        Intent intent;
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                intent = new Intent(getApplicationContext(), SelectGraphActivity.class);
+                startActivity(intent);
+                finish();
+                return true;
+            case R.id.action_route:
+                generatePieChartInRoute();
+                return true;
+            case R.id.action_mode:
+                generatePieChart();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     private void generateInfoForChart() {
         Intent intent = getIntent();
         chosenDate = intent.getStringExtra("single date selected");
@@ -59,26 +102,7 @@ public class DisplayCarbonFootprintActivity extends AppCompatActivity {
             }
         }
     }
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_graphs, menu);
-        return true;
-    }
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_route:
-                generatePieChartInRoute();
-                break;
-            case R.id.action_mode:
-                generatePieChart();
-                break;
-            default:
-                break;
-        }
-        return true;
-    }
+
     private void generatePieChartInRoute() {
         ArrayList<String> nameOfRoutes = new ArrayList<>();
         ArrayList<Float> emissionPerRoute = new ArrayList<>();

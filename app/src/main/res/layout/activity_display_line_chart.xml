@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.sfu276assg1.yancao.UI.DisplayLineChart">
+    android:layout_margin="10dp"
+    android:fitsSystemWindows="true">
 
     <com.github.mikephil.charting.charts.LineChart
+        android:id="@+id/lineChart"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:id="@+id/lineChart"></com.github.mikephil.charting.charts.LineChart>
+        android:layout_height="250dp"></com.github.mikephil.charting.charts.LineChart>
 
     <com.github.mikephil.charting.charts.PieChart
-        android:layout_below="@+id/lineChart"
+        android:id="@+id/pieChart_365"
         android:layout_width="match_parent"
         android:layout_height="250dp"
-        android:id="@+id/pieChart_365"></com.github.mikephil.charting.charts.PieChart>
+        android:layout_below="@+id/lineChart"></com.github.mikephil.charting.charts.PieChart>
 
 </RelativeLayout>
