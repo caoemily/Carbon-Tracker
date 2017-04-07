@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/journey_bg">
+    android:background="@drawable/journey_bg1">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -32,7 +32,10 @@
                 android:id="@+id/calendar"
                 android:layout_width="match_parent"
                 android:layout_height="303dp"
-                android:layout_marginTop="10dp" />
+                android:layout_marginTop="10dp"
+                android:color="@android:color/white"
+                android:weekNumberColor="@android:color/white"
+                android:weekSeparatorLineColor="@android:color/white" />
 
         </LinearLayout>
 

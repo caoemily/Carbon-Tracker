@@ -113,7 +113,7 @@
             android:layout_height="1dp"
             android:layout_alignParentTop="true"
             android:layout_marginTop="28dp"
-            android:background="@android:color/white" />
+            android:background="@android:color/black" />
 
         <View
             android:id="@+id/view3"
@@ -121,7 +121,7 @@
             android:layout_height="1dp"
             android:layout_alignParentTop="true"
             android:layout_marginTop="63dp"
-            android:background="@android:color/white" />
+            android:background="@android:color/black" />
 
         <View
             android:id="@+id/view4"
@@ -129,7 +129,7 @@
             android:layout_height="36dp"
             android:layout_alignParentTop="true"
             android:layout_marginTop="28dp"
-            android:background="@android:color/white" />
+            android:background="@android:color/black" />
 
         <View
             android:id="@+id/view5"
@@ -138,7 +138,7 @@
             android:layout_alignParentTop="true"
             android:layout_marginLeft="329dp"
             android:layout_marginTop="28dp"
-            android:background="@android:color/white" />
+            android:background="@android:color/black" />
 
     </RelativeLayout>
 </RelativeLayout>
