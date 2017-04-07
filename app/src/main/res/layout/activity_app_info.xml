@@ -178,4 +178,22 @@
         android:layout_alignStart="@+id/web6"
         android:layout_below="@+id/web6"
         android:text="TextView" />
+
+    <TextView
+        android:id="@+id/citation8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/citation7"
+        android:layout_alignRight="@+id/citation7"
+        android:layout_below="@+id/citation7"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/web8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/web7"
+        android:layout_alignStart="@+id/web7"
+        android:layout_below="@+id/citation7"
+        android:text="TextView" />
 </RelativeLayout>

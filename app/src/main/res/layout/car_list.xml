@@ -98,7 +98,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:paddingTop="20dp"
-                android:text="name"
+                android:text="@string/name_xml"
                 android:textAlignment="center"
                 android:textStyle="bold" />
 
@@ -113,21 +113,21 @@
                 android:id="@+id/carMake"
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
-                android:text="make"
+                android:text="@string/make_xml"
                 android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/carModel"
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
-                android:text="model"
+                android:text="@string/model_xml"
                 android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/carYear"
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
-                android:text="year"
+                android:text="@string/year_xml"
                 android:textSize="12sp" />
         </LinearLayout>
 

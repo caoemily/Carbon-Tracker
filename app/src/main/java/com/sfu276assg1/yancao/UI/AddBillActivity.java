@@ -228,17 +228,17 @@ public class AddBillActivity extends AppCompatActivity {
 
     private void setupAcceptButton() {
         if (startDate.length() == 0 || startDate == null){
-            Toast.makeText(getApplicationContext(), "Please enter the start date of the bill", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), R.string.bill_startdate, Toast.LENGTH_SHORT).show();
 
         }
         else if (endDate.length() == 0 || endDate == null) {
-            Toast.makeText(getApplicationContext(), "Please enter the end date of the bill", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), R.string.bill_enddate, Toast.LENGTH_SHORT).show();
         }
         else if (people == 0) {
-            Toast.makeText(getApplicationContext(), "Please enter the number of people in the house", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), R.string.bill_people, Toast.LENGTH_SHORT).show();
         }
         else if (electricity == 0 && gas == 0) {
-            Toast.makeText(getApplicationContext(), "Please enter the consumptions", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), R.string.bill_consumption, Toast.LENGTH_SHORT).show();
         }
         else {
             recordDate = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
