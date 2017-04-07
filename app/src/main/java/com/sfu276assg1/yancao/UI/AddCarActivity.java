@@ -207,7 +207,7 @@ public class AddCarActivity extends AppCompatActivity {
 
     private void setupYearSpinner() {
         carYear = carFamily.getYear(make, model);
-        java.util.Collections.sort(carYear);
+        java.util.Collections.reverse(carYear);
         Spinner yearSpin = (Spinner) findViewById(R.id.car_year);
         ArrayAdapter<String> yearAdapter = new ArrayAdapter<>(getApplicationContext(),
                 R.layout.spinner_item, carYear);
