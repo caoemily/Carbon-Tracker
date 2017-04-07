@@ -2,13 +2,24 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/activity_display_carbon_footprint"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    android:padding="10dp">
+    android:layout_height="match_parent">
 
     <com.github.mikephil.charting.charts.PieChart
         android:id="@+id/Chart"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="400dp"
+        android:translationY="120dp" />
+
+    <android.support.design.widget.BottomNavigationView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/bottom_navigation_chart"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_alignParentBottom="true"
+        android:background="#a0cd5a"
+        android:itemBackground="#a0cd5a"
+        app:itemIconTint="@android:color/white"
+        app:itemTextColor="@android:color/white"
+        app:menu="@menu/navigation_chart" />
 
 </RelativeLayout>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/show_day_chart"
+        android:enabled="true"
+        android:icon="@drawable/day_chart"
+        android:title="@string/single_day_chart"/>
+    <item
+        android:id="@+id/show_month_chart"
+        android:enabled="true"
+        android:icon="@drawable/hello_chart"
+        android:title="@string/_28_days"/>
+    <item
+        android:id="@+id/show_year_chart"
+        android:icon="@drawable/year_chart"
+        android:title="@string/_365_days"/>
+</menu>

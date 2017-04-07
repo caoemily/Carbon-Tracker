@@ -1,13 +1,20 @@
 package com.sfu276assg1.yancao.UI;
 
+import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.DatePicker;
 
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.PieChart;
@@ -46,6 +53,11 @@ import java.util.Set;
  */
 
 public class DisplayBarChart extends AppCompatActivity {
+    private int year_x;
+    private int month_x;
+    private int date_x;
+    static final int DIALOG_ID = 0;
+
     BarChart barChart;
     PieChart chart;
     private JourneyCollection journeyCollection = CarbonModel.getInstance().getJourneyCollection();
@@ -59,14 +71,17 @@ public class DisplayBarChart extends AppCompatActivity {
     private float totalCarbonNaturalGas = 0;
     private int unitChose = 0;
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_bar_chart);
 
-        getSupportActionBar().setTitle("");
+        getSupportActionBar().setTitle(R.string.action_graph);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        generateRealTimeCalendar();
+        setUpBottomNavigation();
         generateData();
         generateBarChart();
         generatePieChart();
@@ -74,7 +89,7 @@ public class DisplayBarChart extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(getApplicationContext(), SelectGraphActivity.class);
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(intent);
         finish();
     }
@@ -85,7 +100,8 @@ public class DisplayBarChart extends AppCompatActivity {
         View decorView = getWindow().getDecorView();
         int uiOptions = View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                 | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
+                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION;
         decorView.setSystemUiVisibility(uiOptions);
     }
 
@@ -101,7 +117,7 @@ public class DisplayBarChart extends AppCompatActivity {
         Intent intent;
         switch (item.getItemId()) {
             case android.R.id.home:
-                intent = new Intent(getApplicationContext(), SelectGraphActivity.class);
+                intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
                 finish();
                 return true;
@@ -114,6 +130,69 @@ public class DisplayBarChart extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+    private void setUpBottomNavigation() {
+        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation_chart);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                Intent intent;
+                switch (item.getItemId()) {
+                    case R.id.show_day_chart:
+                        showDialog(DIALOG_ID);
+                        break;
+                    case R.id.show_month_chart:
+                        String today = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+                        intent = new Intent(DisplayBarChart.this, DisplayBarChart.class);
+                        intent.putExtra("today", today);
+                        startActivity(intent);
+                        finish();
+                        break;
+                    case R.id.show_year_chart:
+                        String todayNow = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+                        intent = new Intent(DisplayBarChart.this, DisplayLineChart.class);
+                        intent.putExtra("today 365", todayNow);
+                        startActivity(intent);
+                        finish();
+                        break;
+                }
+                return false;
+            }
+        });
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    private void generateRealTimeCalendar() {
+        final android.icu.util.Calendar cal = android.icu.util.Calendar.getInstance();
+        year_x = cal.get(android.icu.util.Calendar.YEAR);
+        month_x = cal.get(android.icu.util.Calendar.MONTH);
+        date_x = cal.get(android.icu.util.Calendar.DATE);
+    }
+
+    @Override
+    protected Dialog onCreateDialog(int id) {
+        if(id == DIALOG_ID) {
+            return new DatePickerDialog(this, datePickerListener, year_x, month_x, date_x);
+        }else{
+            return null;
+        }
+    }
+
+    private DatePickerDialog.OnDateSetListener datePickerListener = new DatePickerDialog.OnDateSetListener() {
+        @Override
+        public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+            year_x = year;
+            month_x = month;
+            date_x = dayOfMonth;
+            String monthSelected = String.format("%02d", month + 1);
+            String daySelected = String.format("%02d", dayOfMonth);
+            String dateSelected = "" + year + "-" + monthSelected+ "-" + daySelected;
+            Intent intent = new Intent(DisplayBarChart.this, DisplayCarbonFootprintActivity.class);
+            intent.putExtra("single date selected", dateSelected);
+            intent.putExtra("mode", 0);
+            startActivity(intent);
+        }
+    };
 
     private void generatePieChartInRoute() {
         ArrayList<String> nameOfRoutes = new ArrayList<>();
@@ -176,6 +255,7 @@ public class DisplayBarChart extends AppCompatActivity {
         Description description = new Description();
 //        chart.setDrawSliceText(false);
 //        chart.setUsePercentValues(true);
+        chart.setEntryLabelColor(Color.DKGRAY);
         chart.setDescription(null);
         chart.setRotationEnabled(true);
         chart.setHoleRadius(25f);
@@ -202,6 +282,7 @@ public class DisplayBarChart extends AppCompatActivity {
         PieData data = new PieData(dataSet);
 
         Description description = new Description();
+        chart.setEntryLabelColor(Color.DKGRAY);
         chart.setDescription(null);
         chart.setRotationEnabled(true);
         chart.setHoleRadius(25f);

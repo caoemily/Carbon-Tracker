@@ -1,20 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_margin="10dp"
-    android:fitsSystemWindows="true">
+    android:layout_height="match_parent">
 
     <com.github.mikephil.charting.charts.BarChart
         android:id="@+id/bargraph"
         android:layout_width="match_parent"
-        android:layout_height="250dp"></com.github.mikephil.charting.charts.BarChart>
+        android:layout_height="250dp"
+        android:translationY="80dp"></com.github.mikephil.charting.charts.BarChart>
 
     <com.github.mikephil.charting.charts.PieChart
         android:id="@+id/pieChart_28"
         android:layout_width="match_parent"
         android:layout_height="250dp"
         android:layout_below="@+id/bargraph"
-        android:paddingTop="20dp"></com.github.mikephil.charting.charts.PieChart>
+        android:paddingTop="20dp"
+        android:translationY="80dp"></com.github.mikephil.charting.charts.PieChart>
+
+    <android.support.design.widget.BottomNavigationView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/bottom_navigation_chart"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_alignParentBottom="true"
+        android:background="#a0cd5a"
+        android:itemBackground="#a0cd5a"
+        app:itemIconTint="@android:color/white"
+        app:itemTextColor="@android:color/white"
+        app:menu="@menu/navigation_chart" />
 
 </RelativeLayout>
