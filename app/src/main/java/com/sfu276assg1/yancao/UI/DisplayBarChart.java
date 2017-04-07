@@ -250,11 +250,8 @@ public class DisplayBarChart extends AppCompatActivity {
         //need to fix the colors!
         dataSet.setColors(generateColorsForGraph());
         PieData data = new PieData(dataSet);
-//        data.setValueFormatter(new PercentFormatter());
 
         Description description = new Description();
-//        chart.setDrawSliceText(false);
-//        chart.setUsePercentValues(true);
         chart.setEntryLabelColor(Color.DKGRAY);
         chart.setDescription(null);
         chart.setRotationEnabled(true);
@@ -347,9 +344,6 @@ public class DisplayBarChart extends AppCompatActivity {
 
 
         ArrayList<BarEntry> barEntries = new ArrayList<>();
-//        for(int i = 0; i < emissions.size(); i++) {
-//            barEntries.add(new BarEntry(i, emissions.get(i)));
-//        }
         float[] emissionInFloat = new float[emissions.size()];
         for(int i = 0; i < emissions.size(); i++) {
             emissionInFloat[i] = emissions.get(i);
@@ -374,9 +368,6 @@ public class DisplayBarChart extends AppCompatActivity {
         barChart.setFitBars(true);
         barChart.setTouchEnabled(true);
         barChart.animateXY(2000, 2000);
-//        Description description = new Description();
-//        description.setText("CO2 in the past month");
-//        barChart.setDescription(description);
         barChart.setDescription(null);
         barChart.invalidate();
 
