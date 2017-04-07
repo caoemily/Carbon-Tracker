@@ -3,15 +3,15 @@
     <item
         android:id="@+id/show_day_chart"
         android:enabled="true"
-        android:icon="@drawable/day_chart"
+        android:icon="@drawable/car"
         android:title="@string/single_day_chart"/>
     <item
         android:id="@+id/show_month_chart"
         android:enabled="true"
-        android:icon="@drawable/hello_chart"
+        android:icon="@drawable/car"
         android:title="@string/_28_days"/>
     <item
         android:id="@+id/show_year_chart"
-        android:icon="@drawable/year_chart"
+        android:icon="@drawable/car"
         android:title="@string/_365_days"/>
 </menu>
