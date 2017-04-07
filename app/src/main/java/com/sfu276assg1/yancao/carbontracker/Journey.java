@@ -103,25 +103,7 @@ public class Journey implements Comparable<Journey> {
     }
 
     public String calculateCarbon() {
-        double carbonEmission = 0;
-        if(this.route.getType().equals("Drive")){
-            double highway = this.route.getLowEDis() * 0.621371;
-            double city = this.route.getHighEDis() * 0.621371;
-            double gasUsed = highway /this.car.getHighwayE()  + city / this.car.getHighwayE();
-            if (this.car.getFuelType().equals("Gasoline") || this.car.getFuelType().equals("Regular") || this.car.getFuelType().equals("Premium")) {
-                carbonEmission = 8.89 * gasUsed;
-            }
-            else if (this.car.getFuelType().equals("Diesel")) {
-                carbonEmission = 10.16 * gasUsed;
-            }
-            else if (this.car.getFuelType().equals("Electric")){
-                carbonEmission = 0 * gasUsed;
-            }
-        }
-        else if(this.route.getType().equals("Public Transit")){
-            carbonEmission = (route.getLowEDis()*50 + route.getHighEDis()*89)/1000;
-        }
-        return String.format("%.2f", carbonEmission);
+        return String.format("%.2f", calculateCarbonDouble());
     }
 
     public String calculateCarbonTreeYear(){
