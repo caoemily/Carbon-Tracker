@@ -3,7 +3,7 @@
     android:id="@+id/activity_select_route"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/utilities_bg">
+    android:background="@drawable/journey_bg1">
 
     <RelativeLayout
         android:layout_width="match_parent"

@@ -101,7 +101,7 @@ public class DisplayLineChart extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(getApplicationContext(), SelectGraphActivity.class);
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(intent);
         finish();
     }
@@ -461,24 +461,16 @@ public class DisplayLineChart extends AppCompatActivity {
 
         lineChart.setOnChartGestureListener(new OnChartGestureListener() {
             @Override
-            public void onChartGestureStart(MotionEvent me, ChartTouchListener.ChartGesture lastPerformedGesture) {
-
-            }
+            public void onChartGestureStart(MotionEvent me, ChartTouchListener.ChartGesture lastPerformedGesture) {}
 
             @Override
-            public void onChartGestureEnd(MotionEvent me, ChartTouchListener.ChartGesture lastPerformedGesture) {
-
-            }
+            public void onChartGestureEnd(MotionEvent me, ChartTouchListener.ChartGesture lastPerformedGesture) {}
 
             @Override
-            public void onChartLongPressed(MotionEvent me) {
-
-            }
+            public void onChartLongPressed(MotionEvent me) {}
 
             @Override
-            public void onChartDoubleTapped(MotionEvent me) {
-
-            }
+            public void onChartDoubleTapped(MotionEvent me) {}
 
             @Override
             public void onChartSingleTapped(MotionEvent me) {
@@ -488,23 +480,16 @@ public class DisplayLineChart extends AppCompatActivity {
                 intent.putExtra("today",lastDayOfMonth);
                 intent.putExtra(getString(R.string.UNIT_CHOICE), unitChose);
                 startActivity(intent);
-
             }
 
             @Override
-            public void onChartFling(MotionEvent me1, MotionEvent me2, float velocityX, float velocityY) {
-
-            }
+            public void onChartFling(MotionEvent me1, MotionEvent me2, float velocityX, float velocityY) {}
 
             @Override
-            public void onChartScale(MotionEvent me, float scaleX, float scaleY) {
-
-            }
+            public void onChartScale(MotionEvent me, float scaleX, float scaleY) {}
 
             @Override
-            public void onChartTranslate(MotionEvent me, float dX, float dY) {
-
-            }
+            public void onChartTranslate(MotionEvent me, float dX, float dY) {}
         });
 
     }
@@ -540,8 +525,8 @@ public class DisplayLineChart extends AppCompatActivity {
                 Date currentDay = cal.getTime();
                 String currentDayInString = df.format(currentDay);
                 //NEED THISSSS TREEE
-                float currentDayCarbonElectrical = 0;
-                float currentDayCarbonGas = 0;
+                float currentDayCarbonElectrical;
+                float currentDayCarbonGas;
                 if(unitChose != 0) {
                     currentDayCarbonElectrical = (float) CarbonModel.getInstance().getBillCollection().getElectricityCarbonEmission(currentDayInString);
                     currentDayCarbonGas = (float) CarbonModel.getInstance().getBillCollection().getGasCarbonEmission(currentDayInString);
@@ -628,7 +613,6 @@ public class DisplayLineChart extends AppCompatActivity {
 
     private ArrayList<Integer> generateColorsForGraph() {
         ArrayList<Integer> colors = new ArrayList<>();
-
         for (int c : ColorTemplate.VORDIPLOM_COLORS)
             colors.add(c);
 
