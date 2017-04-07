@@ -212,7 +212,6 @@ public class MainActivity extends AppCompatActivity {
                 index++;
             }
         }
-
         Collections.sort(days, new Comparator<String>() {
             @Override
             public int compare(String o1, String o2) {

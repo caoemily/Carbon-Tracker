@@ -31,7 +31,8 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="start date"
-                    android:textAlignment="center" />
+                    android:textAlignment="center"
+                    android:textColor="@android:color/white" />
             </LinearLayout>
 
             <LinearLayout
@@ -45,7 +46,8 @@
                     android:layout_height="match_parent"
                     android:layout_marginTop="-3dp"
                     android:text="end date"
-                    android:textAlignment="center" />
+                    android:textAlignment="center"
+                    android:textColor="@android:color/white" />
 
             </LinearLayout>
 
@@ -62,7 +64,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="9dp"
                 android:text="@string/people"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:textColor="@android:color/white" />
         </LinearLayout>
 
         <LinearLayout
@@ -76,7 +79,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="9dp"
                 android:text="electricity"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:textColor="@android:color/white" />
 
         </LinearLayout>
 
@@ -92,7 +96,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="9dp"
                 android:text="gas"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:textColor="@android:color/white" />
 
         </LinearLayout>
     </LinearLayout>
@@ -103,14 +108,14 @@
         android:layout_height="1dp"
         android:layout_alignParentTop="true"
         android:layout_marginTop="35dp"
-        android:background="@android:color/black" />
+        android:background="@android:color/white" />
 
     <View
         android:id="@+id/view4"
         android:layout_width="1dp"
         android:layout_height="36dp"
         android:layout_alignParentTop="true"
-        android:background="@android:color/black" />
+        android:background="@android:color/white" />
 
     <View
         android:id="@+id/view5"
@@ -118,5 +123,5 @@
         android:layout_height="36dp"
         android:layout_alignParentTop="true"
         android:layout_marginLeft="329dp"
-        android:background="@android:color/black" />
+        android:background="@android:color/white" />
 </RelativeLayout>

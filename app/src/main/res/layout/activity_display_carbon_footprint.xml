@@ -3,7 +3,7 @@
     android:id="@+id/activity_display_carbon_footprint"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/leaves_background1">
+    android:background="@drawable/main_bg1">
 
     <com.github.mikephil.charting.charts.PieChart
         android:id="@+id/Chart"
