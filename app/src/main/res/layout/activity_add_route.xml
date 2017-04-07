@@ -3,46 +3,22 @@
     android:id="@+id/activity_add_route"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="15dp"
-    android:fitsSystemWindows="true">
-
-    <TableLayout
-        android:id="@+id/tableLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true">
-
-        <TableRow
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/textView_lowerEDis"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:text="@string/highway_km"
-                android:textSize="14sp"
-                android:textStyle="bold" />
-
-        </TableRow>
-
-        <TableRow
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-        </TableRow>
-
-    </TableLayout>
+    android:background="@drawable/utilities_bg">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+        android:layout_margin="15dp"
+        android:paddingTop="80dp">
+
+        <TextView
+            android:id="@+id/textView_lowerEDis"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/highway_km"
+            android:textSize="14sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/text_enterDis"
@@ -95,12 +71,12 @@
             android:id="@+id/textView_routeDistance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/editView_enterLowEDis"
+            android:layout_centerHorizontal="true"
             android:layout_marginTop="75dp"
             android:text="@string/distance_km"
             android:textSize="14sp"
-            android:textStyle="bold"
-            android:layout_below="@+id/editView_enterLowEDis"
-            android:layout_centerHorizontal="true" />
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/editView_enterHighEDis"
@@ -120,15 +96,15 @@
             android:id="@+id/editView_enterLowEDis"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/editText_enterRouteName"
             android:layout_alignLeft="@+id/textView_routeDistance"
             android:layout_alignParentTop="true"
+            android:layout_alignRight="@+id/editText_enterRouteName"
             android:layout_alignStart="@+id/textView_routeDistance"
             android:layout_marginTop="11dp"
             android:inputType="number"
             android:textAlignment="center"
-            android:textSize="16sp"
-            android:layout_alignRight="@+id/editText_enterRouteName"
-            android:layout_alignEnd="@+id/editText_enterRouteName" />
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/textView_higherEDis"
@@ -141,7 +117,5 @@
             android:text="@string/city_km"
             android:textSize="14sp"
             android:textStyle="bold" />
-
     </RelativeLayout>
-
 </RelativeLayout>

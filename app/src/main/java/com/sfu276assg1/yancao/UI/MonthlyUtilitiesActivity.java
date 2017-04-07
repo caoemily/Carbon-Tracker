@@ -29,7 +29,7 @@ public class MonthlyUtilitiesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_monthly_utilities);
 
-        getSupportActionBar().setTitle("");
+        getSupportActionBar().setTitle(R.string.utilities);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         list = (ListView) findViewById(R.id.billsListView);

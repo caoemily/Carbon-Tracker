@@ -37,13 +37,12 @@ public class SelectRouteActivity extends AppCompatActivity {
     String type = "";
     String currentTip = "";
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_route);
 
-        getSupportActionBar().setTitle("");
+        getSupportActionBar().setTitle(R.string.select_route);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         setupInitials();
