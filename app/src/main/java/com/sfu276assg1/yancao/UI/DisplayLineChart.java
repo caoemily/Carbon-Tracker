@@ -225,25 +225,25 @@ public class DisplayLineChart extends AppCompatActivity {
             if (!nameOfEntries.get(i).equals("Bike/Walk") && !nameOfEntries.get(i).equals("Public Transit")) {
                 for (int j = 0; j < journeys.size(); j++) {
                     if (nameOfEntries.get(i).equals(journeys.get(j).getCar().toString())){
-                        String emissionString = "";
+                        double emission = 0;
                         if(unitChose != 0) {
-                            emissionString = journeys.get(j).calculateCarbon();
+                            emission = journeys.get(j).calculateCarbonDouble();
                         }else {
-                            emissionString = journeys.get(j).calculateCarbonTreeYear();
+                            emission = journeys.get(j).calculateCarbonTreeYearDouble();
                         }
-                        sumOfCarbon += Float.parseFloat(emissionString);
+                        sumOfCarbon += (float) (emission);
                     }
                 }
             }else{
                 for (int y = 0; y < journeys.size(); y++) {
                     if(nameOfEntries.get(i).equals(journeys.get(y).getRoute().getType())){
-                        String emissionString = "";
+                        double emission = 0;
                         if(unitChose != 0) {
-                            emissionString = journeys.get(y).calculateCarbon();
+                            emission = journeys.get(y).calculateCarbonDouble();
                         }else {
-                            emissionString = journeys.get(y).calculateCarbonTreeYear();
+                            emission = journeys.get(y).calculateCarbonTreeYearDouble();
                         }
-                        sumOfCarbon += Float.parseFloat(emissionString);
+                        sumOfCarbon += (float) (emission);
                     }
                 }
             }
@@ -309,13 +309,13 @@ public class DisplayLineChart extends AppCompatActivity {
             float sumOfCarbonPerRoute = 0;
             for(int j = 0; j < journeys.size(); j++) {
                 if(nameOfRoutes.get(i).equals(journeys.get(j).getRoute().getName())) {
-                    String emissionString = "";
+                    double emission = 0;
                     if(unitChose != 0) {
-                        emissionString = journeys.get(j).calculateCarbon();
+                        emission = journeys.get(j).calculateCarbonDouble();
                     }else{
-                        emissionString = journeys.get(j).calculateCarbonTreeYear();
+                        emission = journeys.get(j).calculateCarbonTreeYearDouble();
                     }
-                    sumOfCarbonPerRoute += Float.parseFloat(emissionString);
+                    sumOfCarbonPerRoute += (float) (emission);
                 }
             }
             emissionPerRoute.add(sumOfCarbonPerRoute);
@@ -564,15 +564,15 @@ public class DisplayLineChart extends AppCompatActivity {
                 if (data.getMonth() == journeyMonth && data.getYear() == journeyYear) {
                     if (journeys.get(i).getRoute().getType().equals("Drive")) {
                         if(unitChose != 0) {
-                            carbonForCar += Float.parseFloat(journeys.get(i).calculateCarbon());
+                            carbonForCar += (float)(journeys.get(i).calculateCarbonDouble());
                         }else{
-                            carbonForCar += Float.parseFloat(journeys.get(i).calculateCarbonTreeYear());
+                            carbonForCar += (float)(journeys.get(i).calculateCarbonTreeYearDouble());
                         }
                     }else if (journeys.get(i).getRoute().getType().equals("Public Transit")) {
                         if(unitChose !=0) {
-                            carbonForPublic += Float.parseFloat(journeys.get(i).calculateCarbon());
+                            carbonForPublic += (float)(journeys.get(i).calculateCarbonDouble());
                         }else{
-                            carbonForPublic += Float.parseFloat(journeys.get(i).calculateCarbonTreeYear());
+                            carbonForPublic += (float)(journeys.get(i).calculateCarbonTreeYearDouble());
                         }
                     }
                 }
