@@ -154,8 +154,8 @@ public class MonthlyUtilitiesActivity extends AppCompatActivity {
         list.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> parent, View viewClicked, int position, long id) {
-                String message = Double.toString(CarbonModel.getInstance().getBillCollection().getBill(position).getTotalCarbonEmission());
-                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                String message =  String.format("%.2f", CarbonModel.getInstance().getBillCollection().getBill(position).getTotalCarbonEmission());
+                Toast.makeText(getApplicationContext(), "Total Carbon Emission of the Bill: " + message, Toast.LENGTH_SHORT).show();
             }
         });
     }
