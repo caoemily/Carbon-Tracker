@@ -266,10 +266,17 @@ public class DisplayCarbonFootprintActivity extends AppCompatActivity {
                     xEntries.add(journeyCollection.getJourney(i).getCar().getMake());
                 }else{
                     if(unitChose != 0) {
-                        yEntries.add(new PieEntry((float)(journeys.get(i).calculateCarbonDouble()), journeys.get(i).getRoute().getType()));
+                        if(!journeys.get(i).getRoute().getType().equals("Public Transit")) {
+                            yEntries.add(new PieEntry((float) (journeys.get(i).calculateCarbonDouble()), journeys.get(i).getRoute().getType()));
+                        }else{
+                            yEntries.add(new PieEntry((float) (journeys.get(i).calculateCarbonDouble()), getString(R.string.public_transit_trans)));
+                        }
                     }else{
-                        yEntries.add(new PieEntry((float)(journeys.get(i).calculateCarbonTreeYearDouble()), journeys.get(i).getRoute().getType()));
-
+                        if(!journeys.get(i).getRoute().getType().equals("Public Transit")) {
+                            yEntries.add(new PieEntry((float) (journeys.get(i).calculateCarbonTreeYearDouble()), journeys.get(i).getRoute().getType()));
+                        }else {
+                            yEntries.add(new PieEntry((float) (journeys.get(i).calculateCarbonTreeYearDouble()), getString(R.string.public_transit_trans)));
+                        }
                     }
                     xEntries.add(journeyCollection.getJourney(i).getRoute().getType());
                 }

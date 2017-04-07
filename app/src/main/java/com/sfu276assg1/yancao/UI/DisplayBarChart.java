@@ -385,7 +385,11 @@ public class DisplayBarChart extends AppCompatActivity {
                 String[] splitName = name.split(",");
                 nameOfEntriesDisplay.add(splitName[0]);
             }else {
-                nameOfEntriesDisplay.add(name);
+                if(name.equals("Public Transit")) {
+                    nameOfEntriesDisplay.add(getString(R.string.public_transit_trans));
+                } else {
+                    nameOfEntriesDisplay.add(name);
+                }
             }
         }
 
