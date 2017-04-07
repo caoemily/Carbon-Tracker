@@ -102,6 +102,10 @@ public class Journey implements Comparable<Journey> {
         return carbonEmission;
     }
 
+    public double calculateCarbonTreeYearDouble(){
+        return calculateCarbonDouble()/20.0;
+    }
+
     public String calculateCarbon() {
         return String.format("%.2f", calculateCarbonDouble());
     }
