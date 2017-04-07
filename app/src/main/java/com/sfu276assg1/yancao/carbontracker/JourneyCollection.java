@@ -85,7 +85,7 @@ public class JourneyCollection {
         double carbonEm = 0;
         for(int i = 0; i<countJourneys();i++){
             if(date.equals(getJourney(i).getDate())){
-                carbonEm += Double.parseDouble(getJourney(i).calculateCarbon());
+                carbonEm += getJourney(i).calculateCarbonDouble();
             }
         }
         return carbonEm;
