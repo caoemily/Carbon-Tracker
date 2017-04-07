@@ -249,15 +249,11 @@ public class DisplayCarbonFootprintActivity extends AppCompatActivity {
         List<String> xEntries = new ArrayList<>();
         //NEED TO CHANGE TO TREE!!!!!!!
         if(unitChose != 0) {
-            float numEle = (float) CarbonModel.getInstance().getBillCollection().getElectricityCarbonEmission(chosenDate);
-            float numGas = (float) CarbonModel.getInstance().getBillCollection().getGasCarbonEmission(chosenDate);
-            carbonForUtilitiesElectrical = numEle;
-            carbonForUtilitiesGas = numGas;
+            carbonForUtilitiesElectrical = (float) CarbonModel.getInstance().getBillCollection().getElectricityCarbonEmission(chosenDate);
+            carbonForUtilitiesGas = (float) CarbonModel.getInstance().getBillCollection().getGasCarbonEmission(chosenDate);
         }else{
-            float numEle = (float) CarbonModel.getInstance().getBillCollection().getElectricityCarbonEmissionTreeYear(chosenDate);
-            float numGas = (float) CarbonModel.getInstance().getBillCollection().getGasCarbonEmissionTreeYear(chosenDate);
-            carbonForUtilitiesElectrical = numEle;
-            carbonForUtilitiesGas = numGas;
+            carbonForUtilitiesElectrical = (float) CarbonModel.getInstance().getBillCollection().getElectricityCarbonEmissionTreeYear(chosenDate);
+            carbonForUtilitiesGas = (float) CarbonModel.getInstance().getBillCollection().getGasCarbonEmissionTreeYear(chosenDate);
         }
         if (!journeys.isEmpty()) {
             for (int i = 0; i < journeys.size(); i++) {
@@ -278,23 +274,15 @@ public class DisplayCarbonFootprintActivity extends AppCompatActivity {
                     xEntries.add(journeyCollection.getJourney(i).getRoute().getType());
                 }
             }
-            if(carbonForUtilitiesElectrical!=0.0){
-                yEntries.add(new PieEntry(carbonForUtilitiesElectrical, getString(R.string.electrical)));
-                xEntries.add(getString(R.string.electrical));
-            }
-            if(carbonForUtilitiesGas!=0.0){
-                yEntries.add(new PieEntry(carbonForUtilitiesGas, getString(R.string.natural_gas)));
-                xEntries.add(getString(R.string.natural_gas));
-            }
+            yEntries.add(new PieEntry(carbonForUtilitiesElectrical, getString(R.string.electrical)));
+            xEntries.add(getString(R.string.electrical));
+            yEntries.add(new PieEntry(carbonForUtilitiesGas, getString(R.string.natural_gas)));
+            xEntries.add(getString(R.string.natural_gas));
         }else{
-            if(carbonForUtilitiesElectrical!=0.0){
-                yEntries.add(new PieEntry(carbonForUtilitiesElectrical, getString(R.string.electrical)));
-                xEntries.add(getString(R.string.electrical));
-            }
-            if(carbonForUtilitiesGas!=0.0){
-                yEntries.add(new PieEntry(carbonForUtilitiesGas, getString(R.string.natural_gas)));
-                xEntries.add(getString(R.string.natural_gas));
-            }
+            yEntries.add(new PieEntry(carbonForUtilitiesElectrical, getString(R.string.electrical)));
+            xEntries.add(getString(R.string.electrical));
+            yEntries.add(new PieEntry(carbonForUtilitiesGas, getString(R.string.natural_gas)));
+            xEntries.add(getString(R.string.natural_gas));
         }
         PieDataSet dataSet = new PieDataSet(yEntries, "");
         dataSet.setSliceSpace(5);

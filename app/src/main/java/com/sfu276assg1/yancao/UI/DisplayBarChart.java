@@ -223,16 +223,10 @@ public class DisplayBarChart extends AppCompatActivity {
                 nameOfRoutes.set(i, getString(R.string.other));
             }
         }
-
-        if(totalCarbonElectrical!=0){
-            nameOfRoutes.add(getString(R.string.electrical));
-            emissionPerRoute.add(totalCarbonElectrical);
-        }
-
-        if(totalCarbonNaturalGas!=0){
-            nameOfRoutes.add(getString(R.string.natural_gas));
-            emissionPerRoute.add(totalCarbonNaturalGas);
-        }
+        nameOfRoutes.add(getString(R.string.electrical));
+        emissionPerRoute.add(totalCarbonElectrical);
+        nameOfRoutes.add(getString(R.string.natural_gas));
+        emissionPerRoute.add(totalCarbonNaturalGas);
 
         chart = (PieChart) findViewById(R.id.pieChart_28);
 
@@ -346,16 +340,10 @@ public class DisplayBarChart extends AppCompatActivity {
             }
             emissions.add(sumOfCarbon);
         }
-
-        if(totalCarbonElectrical!=0.0){
-            nameOfEntries.add(getString(R.string.electrical));
-            emissions.add(totalCarbonElectrical);
-        }
-
-        if(totalCarbonNaturalGas!=0.0){
-            nameOfEntries.add(getString(R.string.natural_gas));
-            emissions.add(totalCarbonNaturalGas);
-        }
+        nameOfEntries.add(getString(R.string.electrical));
+        emissions.add(totalCarbonElectrical);
+        nameOfEntries.add(getString(R.string.natural_gas));
+        emissions.add(totalCarbonNaturalGas);
 
 
         ArrayList<BarEntry> barEntries = new ArrayList<>();
