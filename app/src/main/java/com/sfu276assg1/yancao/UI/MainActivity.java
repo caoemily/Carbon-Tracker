@@ -279,6 +279,7 @@ public class MainActivity extends AppCompatActivity {
             String dayEdited = String.format("%02d", day);
             String dateEdited = "" + year + "-" + monthEdited + "-" + dayEdited;
             //CarbonModel.getInstance().getJourneyCollection().getJourney(id).setDate(dateEdited);
+            //comment out, test - id may give out of array range error in getJourney
             CarbonModel.getInstance().getDb().updateDateInJourney(id, dateEdited);
             getActivity().finish();
             startActivity(new Intent(getActivity(), MainActivity.class));
