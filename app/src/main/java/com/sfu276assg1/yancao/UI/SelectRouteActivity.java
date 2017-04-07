@@ -33,7 +33,7 @@ public class SelectRouteActivity extends AppCompatActivity {
     ListView list;
     int mode;
     int edit_journey;
-    int edit_journey_postition;
+    int edit_journey_id;
     String type = "";
     String currentTip = "";
 
@@ -75,7 +75,7 @@ public class SelectRouteActivity extends AppCompatActivity {
         else {
             Intent intent = new Intent(SelectRouteActivity.this, SelectCarActivity.class);
             intent.putExtra(getResources().getString(R.string.EDIT_JOURNEY), edit_journey);
-            intent.putExtra(getResources().getString(R.string.EDIT_JOURNEY_POSITION), edit_journey_postition);
+            intent.putExtra(getResources().getString(R.string.EDIT_JOURNEY_ID), edit_journey_id);
             startActivity(intent);
             finish();
         }
@@ -122,7 +122,7 @@ public class SelectRouteActivity extends AppCompatActivity {
                 else {
                     Intent intent = new Intent(SelectRouteActivity.this, SelectCarActivity.class);
                     intent.putExtra(getResources().getString(R.string.EDIT_JOURNEY), edit_journey);
-                    intent.putExtra(getResources().getString(R.string.EDIT_JOURNEY_POSITION), edit_journey_postition);
+                    intent.putExtra(getResources().getString(R.string.EDIT_JOURNEY_ID), edit_journey_id);
                     startActivity(intent);
                     finish();
                 }
@@ -131,7 +131,7 @@ public class SelectRouteActivity extends AppCompatActivity {
                     Intent intent = new Intent(getApplicationContext(), AddRouteActivity.class);
                     intent.putExtra(getResources().getString(R.string.TRANS_MODE), mode);
                     intent.putExtra(getResources().getString(R.string.EDIT_JOURNEY), edit_journey);
-                    intent.putExtra(getResources().getString(R.string.EDIT_JOURNEY_POSITION), edit_journey_postition);
+                    intent.putExtra(getResources().getString(R.string.EDIT_JOURNEY_ID), edit_journey_id);
                     startActivity(intent);
                     finish();
                 return true;
@@ -142,7 +142,7 @@ public class SelectRouteActivity extends AppCompatActivity {
     private void setupInitials(){
         mode = getIntent().getIntExtra(getResources().getString(R.string.TRANS_MODE), AddRouteActivity.TRANSMODE_DEFAULT);
         edit_journey = getIntent().getIntExtra(getResources().getString(R.string.EDIT_JOURNEY), SelectCarActivity.EDITJOURNEY_DEFAULT);
-        edit_journey_postition = getIntent().getIntExtra(getResources().getString(R.string.EDIT_JOURNEY_POSITION), SelectCarActivity.EDITJOURNEY_POSITION_DEFAULT);
+        edit_journey_id = getIntent().getIntExtra(getResources().getString(R.string.EDIT_JOURNEY_ID), SelectCarActivity.EDITJOURNEY_POSITION_DEFAULT);
         list = (ListView) findViewById(R.id.listView_routeList);
     }
 
@@ -196,8 +196,8 @@ public class SelectRouteActivity extends AppCompatActivity {
 
                 }
                 else {
-                    CarbonModel.getInstance().getJourneyCollection().getJourney(edit_journey_postition).setRoute(route);
-                    CarbonModel.getInstance().getDb().updateSingleRouteInJourney((edit_journey_postition+1),route);
+                    CarbonModel.getInstance().getJourneyCollection().getJourney_id(edit_journey_id).setRoute(route);
+                    CarbonModel.getInstance().getDb().updateSingleRouteInJourney((edit_journey_id),route);
                 }
                 currentTip = setupTips(getApplicationContext());
                 showDialog(currentTip);
@@ -237,7 +237,7 @@ public class SelectRouteActivity extends AppCompatActivity {
             case R.id.edit:
                 Intent intent = new Intent(getApplicationContext(), AddRouteActivity.class);
                 intent.putExtra(getResources().getString(R.string.EDIT_JOURNEY), edit_journey);
-                intent.putExtra(getResources().getString(R.string.EDIT_JOURNEY_POSITION), edit_journey_postition);
+                intent.putExtra(getResources().getString(R.string.EDIT_JOURNEY_ID), edit_journey_id);
                 intent.putExtra(AddRouteActivity.ROUTE_INDEX, info.position);
                 intent.putExtra(getResources().getString(R.string.TRANS_MODE), mode);
                 startActivity(intent);
@@ -305,6 +305,9 @@ public class SelectRouteActivity extends AppCompatActivity {
                 tip = CarbonModel.getInstance().generateGasTip(context,billCollection, index);
                 index++;
                 storeLastIndexGas(context,index);
+                break;
+            case 3:
+                tip = context.getString(R.string.KeepOnTIp);
                 break;
         }
         return tip;

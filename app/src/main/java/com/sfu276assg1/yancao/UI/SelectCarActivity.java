@@ -36,7 +36,7 @@ public class SelectCarActivity extends AppCompatActivity {
     private List<Car> carList = new ArrayList<>();
     private ArrayList<Car> cars = new ArrayList<>();
     int edit_journey;
-    int edit_journey_postition;
+    int edit_journey_id;
 
     private ListView list;
     private CarListViewAdapter adapter;
@@ -105,7 +105,7 @@ public class SelectCarActivity extends AppCompatActivity {
             case R.id.add_id:
                 Intent intent = new Intent(getApplicationContext(), AddCarActivity.class);
                 intent.putExtra(getResources().getString(R.string.EDIT_JOURNEY), edit_journey);
-                intent.putExtra(getResources().getString(R.string.EDIT_JOURNEY_POSITION), edit_journey_postition);
+                intent.putExtra(getResources().getString(R.string.EDIT_JOURNEY_ID), edit_journey_id);
                 startActivity(intent);
                 finish();
                 return true;
@@ -116,7 +116,7 @@ public class SelectCarActivity extends AppCompatActivity {
     private void setupInitials() {
         carList = CarbonModel.getInstance().getCarCollection().getCollection();
         edit_journey = getIntent().getIntExtra(getResources().getString(R.string.EDIT_JOURNEY), EDITJOURNEY_DEFAULT);
-        edit_journey_postition = getIntent().getIntExtra(getResources().getString(R.string.EDIT_JOURNEY_POSITION), EDITJOURNEY_POSITION_DEFAULT);
+        edit_journey_id = getIntent().getIntExtra(getResources().getString(R.string.EDIT_JOURNEY_ID), EDITJOURNEY_POSITION_DEFAULT);
         list = (ListView) findViewById(R.id.listView_carList);
     }
 
@@ -184,7 +184,7 @@ public class SelectCarActivity extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), AddCarActivity.class);
         intent.putExtra("carIndex", position);
         intent.putExtra(getResources().getString(R.string.EDIT_JOURNEY), edit_journey);
-        intent.putExtra(getResources().getString(R.string.EDIT_JOURNEY_POSITION), edit_journey_postition);
+        intent.putExtra(getResources().getString(R.string.EDIT_JOURNEY_ID), edit_journey_id);
         startActivity(intent);
         finish();
     }
@@ -199,12 +199,12 @@ public class SelectCarActivity extends AppCompatActivity {
                     CarbonModel.getInstance().getLastJourney().setCar(car);
                 }
                 else {
-                    CarbonModel.getInstance().getJourneyCollection().getJourney(edit_journey_postition).setCar(car);
-                    CarbonModel.getInstance().getDb().updateSingleCarInJourney((edit_journey_postition + 1),car);
+                    CarbonModel.getInstance().getJourneyCollection().getJourney_id(edit_journey_id).setCar(car);
+                    CarbonModel.getInstance().getDb().updateSingleCarInJourney((edit_journey_id),car);
                 }
                 intent = new Intent(getApplicationContext(),SelectRouteActivity.class);
                 intent.putExtra(getResources().getString(R.string.EDIT_JOURNEY), edit_journey);
-                intent.putExtra(getResources().getString(R.string.EDIT_JOURNEY_POSITION), edit_journey_postition);
+                intent.putExtra(getResources().getString(R.string.EDIT_JOURNEY_ID), edit_journey_id);
                 startActivity(intent);
                 finish();
             }

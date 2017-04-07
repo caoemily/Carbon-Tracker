@@ -73,7 +73,6 @@ public class SelectTransModeActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-
     private void createRadioButtons() {
         RadioGroup group = (RadioGroup) findViewById(R.id.transMode);
         String[] transporations = getResources().getStringArray(R.array.transportations);
@@ -86,6 +85,7 @@ public class SelectTransModeActivity extends AppCompatActivity {
 
     private void setupAcceptButton() {
         Journey journey = new Journey(journeyDate);
+
         CarbonModel.getInstance().addJourney(journey);
 
         RadioGroup group = (RadioGroup) findViewById(R.id.transMode);
@@ -93,7 +93,6 @@ public class SelectTransModeActivity extends AppCompatActivity {
 
         if (idOfSelected < 0) {
             Toast.makeText(getApplicationContext(),"Please Select Transportation Mode",Toast.LENGTH_SHORT).show();
-
         }
         else {
             RadioButton radioButton = (RadioButton) findViewById(idOfSelected);

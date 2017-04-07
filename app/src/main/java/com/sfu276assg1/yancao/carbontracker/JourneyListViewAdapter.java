@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.daimajia.swipe.SwipeLayout;
 import com.sfu276assg1.yancao.UI.MainActivity;
@@ -56,9 +57,16 @@ public class JourneyListViewAdapter extends ArrayAdapter<Journey> {
             holder.icon.setImageResource(R.drawable.bike_ic);
         }
 
+        if (journeys.get(position).getRoute().getName().equals("")) {
+            holder.routeName.setText("");
+        }
+        else {
+            holder.routeName.setText(journeys.get(position).getRoute().getName());
+        }
+
         if (CarbonModel.getInstance().getUnitChoice() == 0) {
             holder.carbon_icon.setImageResource(R.drawable.ic_tree);
-            holder.carbon.setText(Html.fromHtml("<b>" + journeys.get(position).calculateCarbonTreeYear() + "</b>" + " year"));
+            holder.carbon.setText(Html.fromHtml("<b>" + journeys.get(position).calculateCarbonTreeYear() + "</b>" + " tree days"));
         }
         else {
             holder.carbon_icon.setImageResource(R.drawable.ic_cloud);
@@ -79,7 +87,8 @@ public class JourneyListViewAdapter extends ArrayAdapter<Journey> {
         return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                activity.editJourney(position);
+                int id = journeys.get(position).getId();
+                activity.editJourney(id);
             }
         };
     }
@@ -88,7 +97,8 @@ public class JourneyListViewAdapter extends ArrayAdapter<Journey> {
         return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                activity.editDate(position);
+                int id = journeys.get(position).getId();
+                activity.editDate(id);
             }
         };
     }
@@ -97,8 +107,10 @@ public class JourneyListViewAdapter extends ArrayAdapter<Journey> {
         return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CarbonModel.getInstance().removeJourney(position);
-                CarbonModel.getInstance().getDb().deleteJourneyRow((position+1));
+                int id = journeys.get(position).getId();
+                CarbonModel.getInstance().removeJourney(id);
+                CarbonModel.getInstance().getDb().deleteJourneyRow(id);
+                Toast.makeText(activity, Integer.toString(id),Toast.LENGTH_SHORT).show();
                 holder.swipeLayout.close();
                 activity.updateAdapter();
             }
@@ -109,6 +121,7 @@ public class JourneyListViewAdapter extends ArrayAdapter<Journey> {
         private TextView name;
         private TextView carbon;
         private TextView distance;
+        private TextView routeName;
         private ImageView icon;
         private ImageView carbon_icon;
         private View btnEditJourney;
@@ -122,6 +135,7 @@ public class JourneyListViewAdapter extends ArrayAdapter<Journey> {
             btnEditDate = v.findViewById(R.id.edit_date);
             btnDeleteJourney = v.findViewById(R.id.delete_journey);
             name = (TextView) v.findViewById(R.id.journeyName);
+            routeName = (TextView) v.findViewById(R.id.journeyRouteName);
             carbon = (TextView) v.findViewById(R.id.journeyCarbon);
             distance = (TextView) v.findViewById(R.id.journeyDistance);
             icon = (ImageView) v.findViewById(R.id.journeyIcon);

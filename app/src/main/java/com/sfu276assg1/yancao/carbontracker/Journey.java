@@ -10,20 +10,31 @@ import java.util.Date;
 
 public class Journey implements Comparable<Journey> {
 
+    private int id;
     private String date;
     private Car car;
     private Route route;
 
     public Journey (Car car, Route route) {
+        this.id = 0;
         this.date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
         this.car = car;
         this.route = route;
     }
 
     public Journey (Route route){
+        this.id = 0;
         this.date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
         this.route = route;
         this.car = new Car();
+    }
+
+    public int getId() {
+        return this.id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public Journey (String date) {
@@ -33,6 +44,7 @@ public class Journey implements Comparable<Journey> {
         else {
             this.date = date;
         }
+        this.id = 0;
         this.car = new Car();
     }
 

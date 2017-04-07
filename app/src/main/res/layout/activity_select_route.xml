@@ -22,8 +22,9 @@
         android:layout_height="match_parent"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginLeft="20dp"
         android:layout_below="@+id/text_selectRoute"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:longClickable="true" />
 
 </RelativeLayout>
