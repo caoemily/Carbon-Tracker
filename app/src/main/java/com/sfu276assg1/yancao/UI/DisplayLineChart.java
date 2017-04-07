@@ -92,9 +92,6 @@ public class DisplayLineChart extends AppCompatActivity {
 
         generateDataForLineChart();
         generateLineChart();
-//        TextView textView = (TextView) findViewById(R.id.lineChartDes);
-//        textView.setText("Every point on the line represent 1 month, starting from current month." + "\n" +
-//                        "Please click on the point to view each month in detail");
         generateDataForPieChart();
         generatePieChart();
     }
