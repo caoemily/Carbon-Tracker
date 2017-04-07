@@ -32,8 +32,6 @@
             android:noHistory="true"/>
         <activity android:name="com.sfu276assg1.yancao.UI.DisplayBarChart"
             android:noHistory="true"/>
-        <activity android:name="com.sfu276assg1.yancao.UI.SelectGraphActivity"
-            android:noHistory="true"/>
         <activity android:name="com.sfu276assg1.yancao.UI.DisplayLineChart"
             android:noHistory="true"/>
         <activity android:name="com.sfu276assg1.yancao.UI.MainActivity"

@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/utilities_bg">
+    android:background="@drawable/main_bg">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -44,7 +44,9 @@
                     android:layout_height="match_parent"
                     android:layout_marginTop="8dp"
                     android:text="@string/date"
-                    android:textAlignment="center" />
+                    android:textAlignment="center"
+                    android:textColor="@android:color/white"
+                    android:textStyle="bold" />
             </LinearLayout>
 
             <LinearLayout
@@ -58,7 +60,9 @@
                     android:layout_height="match_parent"
                     android:layout_marginTop="8dp"
                     android:text="@string/people"
-                    android:textAlignment="center" />
+                    android:textAlignment="center"
+                    android:textColor="@android:color/white"
+                    android:textStyle="bold" />
             </LinearLayout>
 
             <LinearLayout
@@ -72,7 +76,9 @@
                     android:layout_height="match_parent"
                     android:layout_marginTop="-2dp"
                     android:text="@string/electricity"
-                    android:textAlignment="center" />
+                    android:textAlignment="center"
+                    android:textColor="@android:color/white"
+                    android:textStyle="bold" />
 
             </LinearLayout>
 
@@ -87,7 +93,9 @@
                     android:layout_height="match_parent"
                     android:layout_marginTop="-2dp"
                     android:text="@string/natural_gas_gj"
-                    android:textAlignment="center" />
+                    android:textAlignment="center"
+                    android:textColor="@android:color/white"
+                    android:textStyle="bold" />
 
             </LinearLayout>
         </LinearLayout>

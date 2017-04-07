@@ -201,13 +201,13 @@ public class DisplayCarbonFootprintActivity extends AppCompatActivity {
             float sumOfCarbonPerRoute = 0;
             for(int j = 0; j < journeys.size(); j++) {
                 if(nameOfRoutes.get(i).equals(journeys.get(j).getRoute().getName())) {
-                    String emissionString = "";
+                    double emission = 0;
                     if(unitChose != 0) {
-                        emissionString = journeys.get(j).calculateCarbon();
+                        emission = journeys.get(j).calculateCarbonDouble();
                     }else{
-                        emissionString = journeys.get(j).calculateCarbonTreeYear();
+                        emission = journeys.get(j).calculateCarbonTreeYearDouble();
                     }
-                    sumOfCarbonPerRoute += Float.parseFloat(emissionString);
+                    sumOfCarbonPerRoute += (float)emission;
                 }
             }
             emissionPerRoute.add(sumOfCarbonPerRoute);
@@ -259,16 +259,16 @@ public class DisplayCarbonFootprintActivity extends AppCompatActivity {
             for (int i = 0; i < journeys.size(); i++) {
                 if (journeys.get(i).getRoute().getType().equals("Drive")) {
                     if(unitChose != 0) {
-                        yEntries.add(new PieEntry(Float.valueOf(journeys.get(i).calculateCarbon()), journeys.get(i).getCar().getMake()));
+                        yEntries.add(new PieEntry((float) (journeys.get(i).calculateCarbonDouble()), journeys.get(i).getCar().getMake()));
                     }else{
-                        yEntries.add(new PieEntry(Float.valueOf(journeys.get(i).calculateCarbonTreeYear()), journeys.get(i).getCar().getMake()));
+                        yEntries.add(new PieEntry((float)(journeys.get(i).calculateCarbonTreeYearDouble()), journeys.get(i).getCar().getMake()));
                     }
                     xEntries.add(journeyCollection.getJourney(i).getCar().getMake());
                 }else{
                     if(unitChose != 0) {
-                        yEntries.add(new PieEntry(Float.valueOf(journeys.get(i).calculateCarbon()), journeys.get(i).getRoute().getType()));
+                        yEntries.add(new PieEntry((float)(journeys.get(i).calculateCarbonDouble()), journeys.get(i).getRoute().getType()));
                     }else{
-                        yEntries.add(new PieEntry(Float.valueOf(journeys.get(i).calculateCarbonTreeYear()), journeys.get(i).getRoute().getType()));
+                        yEntries.add(new PieEntry((float)(journeys.get(i).calculateCarbonTreeYearDouble()), journeys.get(i).getRoute().getType()));
 
                     }
                     xEntries.add(journeyCollection.getJourney(i).getRoute().getType());

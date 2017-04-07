@@ -316,25 +316,25 @@ public class DisplayBarChart extends AppCompatActivity {
             if (!nameOfEntries.get(i).equals("Bike/Walk") && !nameOfEntries.get(i).equals("Public Transit")) {
                 for (int j = 0; j < journeys.size(); j++) {
                     if (nameOfEntries.get(i).equals(journeys.get(j).getCar().toString())){
-                        String emissionString = "";
+                        double emission = 0;
                         if(unitChose != 0) {
-                            emissionString = journeys.get(j).calculateCarbon();
+                            emission = journeys.get(j).calculateCarbonDouble();
                         }else{
-                            emissionString = journeys.get(j).calculateCarbonTreeYear();
+                            emission = journeys.get(j).calculateCarbonTreeYearDouble();
                         }
-                        sumOfCarbon += Float.parseFloat(emissionString);
+                        sumOfCarbon += (float)(emission);
                     }
                 }
             }else{
                 for (int y = 0; y < journeys.size(); y++) {
                     if(nameOfEntries.get(i).equals(journeys.get(y).getRoute().getType())){
-                        String emissionString = "";
+                        double emission = 0;
                         if(unitChose != 0) {
-                            emissionString = journeys.get(y).calculateCarbon();
+                            emission = journeys.get(y).calculateCarbonDouble();
                         }else{
-                            emissionString = journeys.get(y).calculateCarbonTreeYear();
+                            emission = journeys.get(y).calculateCarbonTreeYearDouble();
                         }
-                        sumOfCarbon += Float.parseFloat(emissionString);
+                        sumOfCarbon += (float)(emission);
                     }
                 }
             }
