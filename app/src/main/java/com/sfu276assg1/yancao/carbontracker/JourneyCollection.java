@@ -15,12 +15,6 @@ public class JourneyCollection {
         journeys.add(journey);
     }
 
-    public void changeJourney(Journey journey, int indexOfJourneyEditing) {
-        validateIndexWithException(indexOfJourneyEditing);
-        journeys.remove(indexOfJourneyEditing);
-        journeys.add(indexOfJourneyEditing, journey);
-    }
-
     public void removeLastJourney() {
         journeys.remove(journeys.size() - 1);
     }
@@ -33,12 +27,28 @@ public class JourneyCollection {
         return journeys.get(index);
     }
 
+    public Journey getJourney_id(int id) {
+        for (Journey journey : journeys){
+            if(journey.getId() == id) {
+                return journey;
+            }
+        }
+        return null;
+    }
+
     public Journey getLastJourney(){
         return getJourney(journeys.size() - 1);
     }
 
-    public void remove(int index) {
-        journeys.remove(index);
+    public void removeJourney(int id) {
+        int i = 0;
+        for (Journey journey : journeys){
+            if(journey.getId() == id) {
+                journeys.remove(i);
+                break;
+            }
+            i++;
+        }
     }
 
     public List<Journey> getCollection() {
@@ -54,8 +64,8 @@ public class JourneyCollection {
     }
 
     public int countJourneyInOneDate(String date){
-        int count =0;
-        for(int i=0; i<countJourneys();i++){
+        int count = 0;
+        for(int i = 0; i<countJourneys();i++){
             if(date.equals(getJourney(i).getDate())){
                 count++;
             }
@@ -73,7 +83,7 @@ public class JourneyCollection {
 
     public double getJourneyCarbonInOneDay (String date){
         double carbonEm = 0;
-        for(int i=0; i<countJourneys();i++){
+        for(int i = 0; i<countJourneys();i++){
             if(date.equals(getJourney(i).getDate())){
                 carbonEm += Double.parseDouble(getJourney(i).calculateCarbon());
             }
@@ -90,13 +100,5 @@ public class JourneyCollection {
             throw new IllegalArgumentException();
         }
 
-    }
-
-    public ArrayList<String> journeyCollectionDescription() {
-        ArrayList<String> journeyDescription = new ArrayList<>();
-        for (Journey journey : journeys) {
-            journeyDescription.add(journey.getJourneyDes());
-        }
-        return journeyDescription;
     }
 }

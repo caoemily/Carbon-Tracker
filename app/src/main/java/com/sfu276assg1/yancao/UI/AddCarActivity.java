@@ -46,7 +46,7 @@ public class AddCarActivity extends AppCompatActivity {
     int carChangePosition;
     Car tempCar;
     int edit_journey;
-    int edit_journey_postition;
+    int edit_journey_id;
     int icon;
     private Context mContext;
 
@@ -120,7 +120,7 @@ public class AddCarActivity extends AppCompatActivity {
 
     private void setupInitials() {
         edit_journey = getIntent().getIntExtra(getResources().getString(R.string.EDIT_JOURNEY), 0);
-        edit_journey_postition = getIntent().getIntExtra(getResources().getString(R.string.EDIT_JOURNEY_POSITION), 0);
+        edit_journey_id = getIntent().getIntExtra(getResources().getString(R.string.EDIT_JOURNEY_ID), 0);
         carChangePosition = getIntent().getIntExtra("carIndex", -1);
         if(carChangePosition != -1) {
             extractDataFromIntent();
@@ -165,7 +165,7 @@ public class AddCarActivity extends AppCompatActivity {
 
     private void setupMakeSpinner() {
         Spinner makeSpin = (Spinner) findViewById(R.id.car_make);
-        ArrayAdapter<String> makeAdapter = new ArrayAdapter<String>(getApplicationContext(),
+        ArrayAdapter<String> makeAdapter = new ArrayAdapter<>(getApplicationContext(),
                 R.layout.spinner_item, carMake);
         makeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         makeSpin.setAdapter(makeAdapter);
@@ -187,7 +187,7 @@ public class AddCarActivity extends AppCompatActivity {
         carModel = carFamily.getModel(make);
         java.util.Collections.sort(carModel);
         Spinner modelSpin = (Spinner) findViewById(R.id.car_model);
-        ArrayAdapter<String> modelAdapter = new ArrayAdapter<String>(getApplicationContext(),
+        ArrayAdapter<String> modelAdapter = new ArrayAdapter<>(getApplicationContext(),
                 R.layout.spinner_item, carModel);
         modelAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         modelSpin.setAdapter(modelAdapter);
@@ -209,7 +209,7 @@ public class AddCarActivity extends AppCompatActivity {
         carYear = carFamily.getYear(make, model);
         java.util.Collections.sort(carYear);
         Spinner yearSpin = (Spinner) findViewById(R.id.car_year);
-        ArrayAdapter<String> yearAdapter = new ArrayAdapter<String>(getApplicationContext(),
+        ArrayAdapter<String> yearAdapter = new ArrayAdapter<>(getApplicationContext(),
                 R.layout.spinner_item, carYear);
         yearAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         yearSpin.setAdapter(yearAdapter);
@@ -277,8 +277,8 @@ public class AddCarActivity extends AppCompatActivity {
                     CarbonModel.getInstance().getLastJourney().setCar(car);
                 }
                 else {
-                    CarbonModel.getInstance().getJourneyCollection().getJourney(edit_journey_postition).setCar(car);
-                    CarbonModel.getInstance().getDb().updateSingleCarInJourney((edit_journey_postition+1),car);
+                    CarbonModel.getInstance().getJourneyCollection().getJourney_id(edit_journey_id).setCar(car);
+                    CarbonModel.getInstance().getDb().updateSingleCarInJourney((edit_journey_id),car);
                 }
                 intent = new Intent(AddCarActivity.this, SelectRouteActivity.class);
             }
@@ -289,7 +289,7 @@ public class AddCarActivity extends AppCompatActivity {
                 intent = new Intent(AddCarActivity.this, SelectCarActivity.class);
             }
             intent.putExtra(getResources().getString(R.string.EDIT_JOURNEY),edit_journey);
-            intent.putExtra(getResources().getString(R.string.EDIT_JOURNEY_POSITION),edit_journey_postition);
+            intent.putExtra(getResources().getString(R.string.EDIT_JOURNEY_ID),edit_journey_id);
             startActivity(intent);
             finish();
         }

@@ -17,6 +17,7 @@ public class CarbonModel {
     private DBAdapter db;
     private Tips tips;
     private int unitChoice;
+    private int journeyId;
 
     public static CarbonModel getInstance() {
         return ourInstance;
@@ -32,6 +33,15 @@ public class CarbonModel {
         billCollection = new BillCollection();
         tips = new Tips();
         unitChoice = 0;
+        journeyId = 0;
+    }
+
+    public int getJourneyId() {
+        return journeyId;
+    }
+
+    public void setJourneyId(int journeyId) {
+        this.journeyId = journeyId;
     }
 
     public void setUnitChoice(int unit){this.unitChoice = unit;}
@@ -58,13 +68,10 @@ public class CarbonModel {
     public void removeLastJourney() {
         journeyCollection.removeLastJourney();
     }
-    public void changeCarInJourney(Car tempCar, Car car) {
-        journeyCollection.changeCar(tempCar, car);
-    }
     public void changeRouteInJourney(Route tempRoute, Route route) {
         journeyCollection.changeRoute(tempRoute, route);
     }
-    public void removeJourney(int index) {journeyCollection.remove(index);}
+    public void removeJourney(int id) {journeyCollection.removeJourney(id);}
 
 
     public CarCollection getCarCollection(){

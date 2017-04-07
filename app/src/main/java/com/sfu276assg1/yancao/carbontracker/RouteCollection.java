@@ -51,20 +51,20 @@ public class RouteCollection {
             Route route = getRoute(i);
             if(route.getType().equals("Drive")){
                 descriptions[i] = route.getName() + " - " + route.getDistance() + "km" + " - " +
-                        context.getResources().getString(R.string.HIGHWEY)+":" +  route.getLowEDis() +
-                        "km" + " - " +context.getResources().getString(R.string.CITY) +":" +
+                        context.getResources().getString(R.string.HIGHWEY)+": " +  route.getLowEDis() +
+                        "km" + " - " +context.getResources().getString(R.string.CITY) +": " +
                         route.getHighEDis() + "km";
             }
             else if (route.getType().equals("Public Transit")){
                 descriptions[i] = route.getName() + " - " + route.getDistance() + "km" + " - " +
-                        context.getResources().getString(R.string.SKYTRAIN)+":" + route.getLowEDis() +
-                        "km" + " - " + context.getResources().getString(R.string.SKYTRAIN) +":" +
+                        context.getResources().getString(R.string.SKYTRAIN)+": " + route.getLowEDis() +
+                        "km" + " - " + context.getResources().getString(R.string.SKYTRAIN) +": " +
                         route.getHighEDis() + "km";
             }
             else {
                 descriptions[i] = route.getName() + " - " + route.getDistance() + "km" + " - " +
-                        context.getResources().getString(R.string.BIKE)+":" +  route.getLowEDis() +
-                        "km" + " - " + context.getResources().getString(R.string.WALK)+":" +
+                        context.getResources().getString(R.string.BIKE)+": " +  route.getLowEDis() +
+                        "km" + " - " + context.getResources().getString(R.string.WALK)+": " +
                         route.getHighEDis() + "km";
             }
         }

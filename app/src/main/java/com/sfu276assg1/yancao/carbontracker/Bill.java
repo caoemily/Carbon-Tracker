@@ -78,16 +78,12 @@ public class Bill {
             Date d2 = format.parse(endDate);
             int days = Days.daysBetween(new LocalDate(d1.getTime()), new LocalDate(d2.getTime())).getDays() + 1;
 
-            double electricity_emission = electricity/days/people*0.9;
+            double electricity_emission = (electricity/1000000)/days/people*9000;
             double gas_emission = gas/days/people*56.1;
 
             return electricity_emission + gas_emission;
         } catch (ParseException e) {}
         return 0;
-    }
-
-    public double getTotalCarbonTreeYear(){
-        return (0.0+getTotalCarbonEmission())/20.0;
     }
 
     public double getElectricityCarbonEmission(){
@@ -97,7 +93,7 @@ public class Bill {
             Date d2 = format.parse(endDate);
             int days = Days.daysBetween(new LocalDate(d1.getTime()), new LocalDate(d2.getTime())).getDays() + 1;
 
-            double electricity_emission = electricity/days/people*0.9;
+            double electricity_emission = (electricity/1000000)/days/people*9000;
 
             return electricity_emission;
         } catch (ParseException e) {}
