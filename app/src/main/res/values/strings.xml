@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Carbon Tracker</string>
+    <string name="app_name">greenEco</string>
     <string name="pie_chart">Pie Chart</string>
     <string name="go_to_main">Go to Main</string>
     <string name="distance_km">Distance (km): </string>
