@@ -74,17 +74,17 @@ public class NotificationService extends Service {
             notification[1] = " ";
             intent = new Intent(getApplicationContext(),SelectTransModeActivity.class);
         }
+        String showNotif = notification[0]+" "+notification[1];
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(this)
-                        .setSmallIcon(R.drawable.car)
+                        .setSmallIcon(R.drawable.co2_cloud)
                         .setWhen(System.currentTimeMillis())
                         .setContentTitle(notificationContentTitle)
                         .setAutoCancel(true)
-                        .setStyle(new NotificationCompat.InboxStyle()
-                            .addLine(notification[0])
-                            .addLine(notification[1]));
+                        .setStyle(new NotificationCompat.BigTextStyle().bigText(showNotif))
+                        .setContentText(showNotif);
 
         int notificationId = 0;
         PendingIntent resultPendingIntent =
