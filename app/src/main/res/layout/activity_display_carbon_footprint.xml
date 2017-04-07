@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/activity_display_carbon_footprint"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/leaves_background1">
 
     <com.github.mikephil.charting.charts.PieChart
         android:id="@+id/Chart"

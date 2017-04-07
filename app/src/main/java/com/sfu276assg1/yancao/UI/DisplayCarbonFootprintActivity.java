@@ -238,6 +238,7 @@ public class DisplayCarbonFootprintActivity extends AppCompatActivity {
         chart.setTransparentCircleAlpha(0);
         chart.setData(data);
         Legend legend = chart.getLegend();
+        legend.setWordWrapEnabled(true);
         legend.setEnabled(true);
         chart.animateY(2000);
         chart.invalidate();
@@ -297,6 +298,8 @@ public class DisplayCarbonFootprintActivity extends AppCompatActivity {
         chart.setHoleRadius(25f);
         chart.setTransparentCircleAlpha(0);
         chart.setData(data);
+        Legend legend = chart.getLegend();
+        legend.setWordWrapEnabled(true);
         chart.animateY(2000);
         chart.invalidate();
     }
