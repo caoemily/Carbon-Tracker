@@ -2,182 +2,175 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    android:padding="10dp">
+    android:background="@drawable/utilities_bg">
 
-    <TextView
-        android:id="@+id/about_developers"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="28dp"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="24dp"
-        android:text="TextView"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="80dp"
+        android:padding="15dp">
 
-    <TextView
-        android:id="@+id/clickable_link_txt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/about_developers"
-        android:layout_alignStart="@+id/about_developers"
-        android:layout_below="@+id/about_developers"
-        android:text="TextView"
-        android:layout_alignRight="@+id/about_developers"
-        android:layout_alignEnd="@+id/about_developers" />
+        <TextView
+            android:id="@+id/about_developers"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:text="TextView" />
 
-    <TextView
-        android:id="@+id/about_app"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/clickable_link_txt"
-        android:layout_alignStart="@+id/clickable_link_txt"
-        android:text="TextView"
-        android:layout_below="@+id/clickable_link_txt" />
+        <TextView
+            android:id="@+id/clickable_link_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/about_developers"
+            android:layout_alignLeft="@+id/about_developers"
+            android:layout_alignRight="@+id/about_developers"
+            android:layout_alignStart="@+id/about_developers"
+            android:layout_below="@+id/about_developers"
+            android:text="TextView" />
 
-    <TextView
-        android:id="@+id/citation1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/about_app"
-        android:layout_alignStart="@+id/about_app"
-        android:layout_below="@+id/about_app"
-        android:text="TextView" />
+        <TextView
+            android:id="@+id/about_app"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/clickable_link_txt"
+            android:layout_alignStart="@+id/clickable_link_txt"
+            android:layout_below="@+id/clickable_link_txt"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:text="TextView" />
 
-    <TextView
-        android:id="@+id/verNum"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="23dp"
-        android:layout_marginRight="23dp"
-        android:text="TextView"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginBottom="11dp" />
+        <TextView
+            android:id="@+id/citation1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/about_app"
+            android:layout_alignStart="@+id/about_app"
+            android:layout_below="@+id/about_app"
+            android:text="TextView" />
 
-    <TextView
-        android:id="@+id/citation2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/citation1"
-        android:layout_alignStart="@+id/citation1"
-        android:layout_below="@+id/citation1"
-        android:text="TextView" />
+        <TextView
+            android:id="@+id/verNum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:text="TextView" />
 
-    <TextView
-        android:id="@+id/citation3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/citation2"
-        android:layout_alignStart="@+id/citation2"
-        android:layout_below="@+id/citation2"
-        android:text="TextView" />
+        <TextView
+            android:id="@+id/citation2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/citation1"
+            android:layout_alignStart="@+id/citation1"
+            android:layout_below="@+id/citation1"
+            android:text="TextView" />
 
-    <TextView
-        android:id="@+id/citation4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/citation3"
-        android:layout_alignStart="@+id/citation3"
-        android:layout_below="@+id/citation3"
-        android:text="TextView" />
+        <TextView
+            android:id="@+id/citation3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/citation2"
+            android:layout_alignStart="@+id/citation2"
+            android:layout_below="@+id/citation2"
+            android:text="TextView" />
 
-    <TextView
-        android:id="@+id/citation5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/citation4"
-        android:layout_alignStart="@+id/citation4"
-        android:layout_below="@+id/citation4"
-        android:text="TextView" />
+        <TextView
+            android:id="@+id/citation4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/citation3"
+            android:layout_alignStart="@+id/citation3"
+            android:layout_below="@+id/citation3"
+            android:text="TextView" />
 
-    <TextView
-        android:id="@+id/citation6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/citation5"
-        android:layout_alignStart="@+id/citation5"
-        android:layout_below="@+id/citation5"
-        android:text="TextView" />
+        <TextView
+            android:id="@+id/citation5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/citation4"
+            android:layout_alignStart="@+id/citation4"
+            android:layout_below="@+id/citation4"
+            android:text="TextView" />
 
-    <TextView
-        android:id="@+id/citation7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/citation6"
-        android:layout_alignStart="@+id/citation6"
-        android:layout_below="@+id/citation6"
-        android:text="TextView" />
+        <TextView
+            android:id="@+id/citation6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/citation5"
+            android:layout_alignStart="@+id/citation5"
+            android:layout_below="@+id/citation5"
+            android:text="TextView" />
 
-    <TextView
-        android:id="@+id/web1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        android:layout_alignBaseline="@+id/citation1"
-        android:layout_alignBottom="@+id/citation1"
-        android:layout_toRightOf="@+id/citation1"
-        android:layout_toEndOf="@+id/citation1" />
+        <TextView
+            android:id="@+id/citation7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/citation6"
+            android:layout_alignStart="@+id/citation6"
+            android:layout_below="@+id/citation6"
+            android:text="TextView" />
 
-    <TextView
-        android:id="@+id/web2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        android:layout_alignBaseline="@+id/citation2"
-        android:layout_alignBottom="@+id/citation2"
-        android:layout_alignRight="@+id/web1"
-        android:layout_alignEnd="@+id/web1"
-        android:layout_marginRight="20dp"
-        android:layout_marginEnd="20dp" />
+        <TextView
+            android:id="@+id/web1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/citation1"
+            android:layout_alignBottom="@+id/citation1"
+            android:layout_toEndOf="@+id/citation1"
+            android:layout_toRightOf="@+id/citation1"
+            android:text="TextView" />
 
-    <TextView
-        android:id="@+id/web3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        android:layout_below="@+id/web2"
-        android:layout_alignLeft="@+id/web2"
-        android:layout_alignStart="@+id/web2" />
+        <TextView
+            android:id="@+id/web2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/citation2"
+            android:layout_alignBottom="@+id/citation2"
+            android:layout_alignEnd="@+id/web1"
+            android:layout_alignRight="@+id/web1"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
+            android:text="TextView" />
 
-    <TextView
-        android:id="@+id/web4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/web3"
-        android:layout_alignStart="@+id/web3"
-        android:layout_below="@+id/web3"
-        android:text="TextView" />
+        <TextView
+            android:id="@+id/web3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/web2"
+            android:layout_alignStart="@+id/web2"
+            android:layout_below="@+id/web2"
+            android:text="TextView" />
 
-    <TextView
-        android:id="@+id/web5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/web4"
-        android:layout_alignStart="@+id/web4"
-        android:layout_below="@+id/web4"
-        android:text="TextView" />
+        <TextView
+            android:id="@+id/web4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/web3"
+            android:layout_alignStart="@+id/web3"
+            android:layout_below="@+id/web3"
+            android:text="TextView" />
 
-    <TextView
-        android:id="@+id/web6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/web5"
-        android:layout_alignStart="@+id/web5"
-        android:layout_below="@+id/web5"
-        android:text="TextView" />
+        <TextView
+            android:id="@+id/web5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/web4"
+            android:layout_alignStart="@+id/web4"
+            android:layout_below="@+id/web4"
+            android:text="TextView" />
 
-    <TextView
-        android:id="@+id/web7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/web6"
-        android:layout_alignStart="@+id/web6"
-        android:layout_below="@+id/web6"
-        android:text="TextView" />
+        <TextView
+            android:id="@+id/web6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/web5"
+            android:layout_alignStart="@+id/web5"
+            android:layout_below="@+id/web5"
+            android:text="TextView" />
+
 
     <TextView
         android:id="@+id/citation8"
@@ -196,4 +189,14 @@
         android:layout_alignStart="@+id/web7"
         android:layout_below="@+id/citation7"
         android:text="TextView" />
+        <TextView
+            android:id="@+id/web7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/web6"
+            android:layout_alignStart="@+id/web6"
+            android:layout_below="@+id/web6"
+            android:text="TextView" />
+
+    </RelativeLayout>
 </RelativeLayout>
