@@ -50,7 +50,7 @@
     <string name="natural_gas_gj">Natural Gas (GJ)</string>
     <string name="TRANS_MODE">TransMode</string>
     <string name="EDIT_JOURNEY">EditJourney</string>
-    <string name="EDIT_JOURNEY_POSITION">EditJourneyPosition</string>
+    <string name="EDIT_JOURNEY_ID">EditJourneyID</string>
     <string name="edit_mode_route">Edit Transportation/Route</string>
     <string name="single_day">Single Day</string>
     <string name="_28_days">28 Days</string>
@@ -99,7 +99,7 @@
     <string name="monthly_utilities_bills">Monthly Utilities Bills</string>
     <string name="SKIP">Skip</string>
     <string name="TIP">Tip:</string>
-    <string name="NEXT_TIP">Next Tip</string>
+    <string name="NEXT_TIP">Try to take the bike!</string>
     <string name="CAR_TIP_1">Try to take the bike!</string>
     <string name="CAR_TIP_2">Try to walk!</string>
     <string name="CAR_TIP_3">Avoid areas with congested traffic!</string>
@@ -131,6 +131,7 @@
     <string name="trip">Trip</string>
     <string name="graphs">Graphs</string>
     <string name="journey">Journey</string>
+    <string name="your_trips">Your Trips</string>
     <string name="JOURNEY_ID">journeyId</string>
     <string name="KeepOnTIp">Good Job, Keep On!</string>
 </resources>

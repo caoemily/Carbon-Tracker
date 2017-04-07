@@ -2,7 +2,6 @@ package com.sfu276assg1.yancao.UI;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -11,7 +10,6 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.ActionBar;
-import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -42,8 +40,8 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
     private int unitChoice = 0;
     private int total;
-    private static int position;
-    private static List<Journey> journeyList;
+    private static int id;
+
     private SeparatedListAdapter adapter;
     private ListView journalListView;
     private JourneyListViewAdapter journeyAdapter;
@@ -180,10 +178,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void setUpJourney() {
-//       Collections.sort(CarbonModel.getInstance().getDb().getJourneyList().getCollection());
-//        Collections.sort(CarbonModel.getInstance().getJourneyCollection().getCollection());
-        journeyList = CarbonModel.getInstance().getJourneyCollection().getCollection();
-        Collections.sort(journeyList);
+        Collections.sort(CarbonModel.getInstance().getDb().getJourneyList().getCollection());
+        Collections.sort(CarbonModel.getInstance().getJourneyCollection().getCollection());
     }
 
     public void setUpTotalTrip() {
@@ -200,11 +196,11 @@ public class MainActivity extends AppCompatActivity {
     public void setJourneyList() {
         ArrayList<String> days = new ArrayList<>();
         if (total > 0) {
-            days.add(journeyList.get(0).getDate());
+            days.add(CarbonModel.getInstance().getJourneyCollection().getJourney(0).getDate());
         }
         int index = 0;
         for (int i = 1; i < total; i++) {
-            String currentDay = journeyList.get(i).getDate();
+            String currentDay = CarbonModel.getInstance().getJourneyCollection().getJourney(i).getDate();
             if (!currentDay.equals(days.get(index))) {
                 days.add(currentDay);
                 index++;
@@ -218,8 +214,8 @@ public class MainActivity extends AppCompatActivity {
         for (int i = 0; i < days.size(); i++) {
             List<Journey> journeys = new ArrayList<>();
             for (int j = 0; j < total; j++) {
-                if (days.get(i).equals(journeyList.get(j).getDate())) {
-                    journeys.add(journeyList.get(j));
+                if (days.get(i).equals(CarbonModel.getInstance().getJourneyCollection().getJourney(j).getDate())) {
+                    journeys.add(CarbonModel.getInstance().getJourneyCollection().getJourney(j));
                 }
             }
             journeyAdapter = new JourneyListViewAdapter(this, R.layout.list_item, journeys);
@@ -240,14 +236,14 @@ public class MainActivity extends AppCompatActivity {
         setJourneyList();
     }
 
-    public void editDate(int position) {
-        this.position = position;
+    public void editDate(int id) {
+        this.id = id;
         DialogFragment newFragment = new MainActivity.DatePickerFragment();
         newFragment.show(getSupportFragmentManager(), "datePicker");
     }
 
-    public void editJourney(int position) {
-        this.position = position;
+    public void editJourney(int id) {
+        this.id = id;
         Dialog dialog = onCreateDialogSingleChoice();
         dialog.show();
     }
@@ -269,12 +265,8 @@ public class MainActivity extends AppCompatActivity {
             String monthEdited = String.format("%02d", month + 1);
             String dayEdited = String.format("%02d", day);
             String dateEdited = "" + year + "-" + monthEdited + "-" + dayEdited;
-            //please check here, Steven
-            // also need to update delete in JourneyListViewAdapter,which should be based on id as well.
-            int id = journeyList.get(position).getId();
-            //CarbonModel.getInstance().getJourneyCollection().getJourney(position).setDate(dateEdited);
-            //int id = CarbonModel.getInstance().getJourneyCollection().getJourney(position).getId();
-            CarbonModel.getInstance().getDb().updateDateInJourney(id,dateEdited);
+            CarbonModel.getInstance().getJourneyCollection().getJourney(id).setDate(dateEdited);
+            CarbonModel.getInstance().getDb().updateDateInJourney(id, dateEdited);
             getActivity().finish();
             startActivity(new Intent(getActivity(), MainActivity.class));
         }
@@ -295,7 +287,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         if (mode_id == 0){
                             Intent intent = new Intent(MainActivity.this, SelectCarActivity.class);
-                            intent.putExtra(getResources().getString(R.string.EDIT_JOURNEY_POSITION), position);
+                            intent.putExtra(getResources().getString(R.string.EDIT_JOURNEY_ID), id);
                             intent.putExtra(getResources().getString(R.string.EDIT_JOURNEY), 2);
                             intent.putExtra(getResources().getString(R.string.TRANS_MODE), 0);
                             startActivity(intent);
@@ -303,14 +295,14 @@ public class MainActivity extends AppCompatActivity {
                         else if (mode_id == 1) {
                             Intent intent = new Intent(MainActivity.this, SelectRouteActivity.class);
                             intent.putExtra(getResources().getString(R.string.EDIT_JOURNEY), 1);
-                            intent.putExtra(getResources().getString(R.string.EDIT_JOURNEY_POSITION), position);
+                            intent.putExtra(getResources().getString(R.string.EDIT_JOURNEY_ID), id);
                             intent.putExtra(getResources().getString(R.string.TRANS_MODE), 1);
                             startActivity(intent);
                         }
                         else if (mode_id == 2) {
                             Intent intent = new Intent(MainActivity.this, SelectRouteActivity.class);
                             intent.putExtra(getResources().getString(R.string.EDIT_JOURNEY), 1);
-                            intent.putExtra(getResources().getString(R.string.EDIT_JOURNEY_POSITION), position);
+                            intent.putExtra(getResources().getString(R.string.EDIT_JOURNEY_ID), id);
                             intent.putExtra(getResources().getString(R.string.TRANS_MODE), 2);
                             startActivity(intent);
                         }

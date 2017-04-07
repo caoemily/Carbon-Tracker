@@ -37,7 +37,7 @@ public class Tips {
             total_gas_carbon=bill.getGasCarbonEmission();
         }
 
-        if(total_car_carbon > total_util_carbon){
+        if(total_car_carbon >= total_util_carbon){
             return CARTIPS;
         }
         else{
@@ -91,7 +91,7 @@ public class Tips {
                 context.getResources().getString(R.string.ELE_TIP_6),
                 context.getResources().getString(R.string.ELE_TIP_7)};
         int arraySize = tooMuchElectricity.length;
-        Double elecCarNum = 0.0;
+        Double elecCarNum;
         String electricityCarbon = "";
         String tip = "";
         if(CarbonModel.getInstance().getUnitChoice()==1){

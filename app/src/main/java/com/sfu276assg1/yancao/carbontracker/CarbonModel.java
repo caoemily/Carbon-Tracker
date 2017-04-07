@@ -33,7 +33,7 @@ public class CarbonModel {
         billCollection = new BillCollection();
         tips = new Tips();
         unitChoice = 0;
-        journeyId=0;
+        journeyId = 0;
     }
 
     public int getJourneyId() {
@@ -68,13 +68,10 @@ public class CarbonModel {
     public void removeLastJourney() {
         journeyCollection.removeLastJourney();
     }
-    public void changeCarInJourney(Car tempCar, Car car) {
-        journeyCollection.changeCar(tempCar, car);
-    }
     public void changeRouteInJourney(Route tempRoute, Route route) {
         journeyCollection.changeRoute(tempRoute, route);
     }
-    public void removeJourney(int index) {journeyCollection.remove(index);}
+    public void removeJourney(int id) {journeyCollection.removeJourney(id);}
 
 
     public CarCollection getCarCollection(){
