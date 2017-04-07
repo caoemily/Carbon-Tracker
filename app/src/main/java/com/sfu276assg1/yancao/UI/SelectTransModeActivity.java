@@ -26,7 +26,7 @@ public class SelectTransModeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_trans_mode);
 
-        getSupportActionBar().setTitle("");
+        getSupportActionBar().setTitle(R.string.journey);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         createRadioButtons();
