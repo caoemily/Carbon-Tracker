@@ -79,7 +79,7 @@ public class NotificationService extends Service {
 
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(this)
-                        .setSmallIcon(R.drawable.co2_cloud)
+                        .setSmallIcon(R.drawable.leaf)
                         .setWhen(System.currentTimeMillis())
                         .setContentTitle(notificationContentTitle)
                         .setAutoCancel(true)
