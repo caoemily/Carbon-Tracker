@@ -149,9 +149,9 @@ public class SelectRouteActivity extends AppCompatActivity {
         switch(mode){
             case 0: type += "Drive";
                 break;
-            case 1: type += "Public Transit";
+            case 1: type += getString(R.string.public_transit_trans);
                 break;
-            case 2: type += "Bile/Walk";
+            case 2: type += getString(R.string.bike_walk_trans);
                 break;
         }
     }

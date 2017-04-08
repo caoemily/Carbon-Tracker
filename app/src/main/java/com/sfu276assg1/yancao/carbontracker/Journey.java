@@ -96,7 +96,7 @@ public class Journey implements Comparable<Journey> {
                 carbonEmission = 0 * gasUsed;
             }
         }
-        else if(this.route.getType().equals("Public Transit")){
+        else if(this.route.getType().equals("Public Transit") || this.route.getType().equals("Tránsito público") || this.route.getType().equals("Transport en commun")){
             carbonEmission = (route.getLowEDis()*50 + route.getHighEDis()*89)/1000;
         }
         return carbonEmission;
@@ -113,29 +113,6 @@ public class Journey implements Comparable<Journey> {
     public String calculateCarbonTreeYear(){
         double treeYear = calculateCarbonDouble()/20;
         return String.format("%.2f", treeYear);
-    }
-
-    public String getJourneyDes(){
-        String des = "";
-        String carName = this.car.getNickname();
-        String routeName = this.route.getName();
-        if(routeName.equals(" ")) {
-            routeName = "no name";
-        }
-        String distance = Double.toString(this.route.getDistance());
-        if(this.route.getType().equals("Drive")){
-            des = "Current Journey Info: Emission: " + calculateCarbon() + " kg"+
-                    "; Car: " + carName + "; Route: " + routeName + "; Distance: " + distance + " km.";
-        }
-        else if (this.route.getType().equals("Public Transit")){
-            des = "Current Journey Info: Emission: " + calculateCarbon() + " kg"+
-                    "; Public Transit - Route: " + routeName + "; Distance: " + distance + " km.";
-        }
-        else
-        {
-            des = "Current Journey Info: Emission: 0kg; Bike/Walk - Route: " + routeName + "; Distance: " + distance + " km.";
-        }
-        return des;
     }
 
     public Date getDateTime() {

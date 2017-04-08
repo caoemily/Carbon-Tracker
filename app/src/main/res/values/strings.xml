@@ -144,16 +144,44 @@
     <string name="developers_info">The app, completed in 2017, is designed to track your Carbon Footprint. By inputting the routes you have taken, the different type of transportation modes you have used, and the utilities spent, the app will calculate the total emission and provide you with tips on how to decrease your carbon footprint.</string><string name="string_the_app_completed_in_2017_is_designed_to_track_your_carbon_footprint_by_inputting_the_routes_you_have_taken_the_different_type_of_transportation_modes_you_have_used_and_the_utilities_spent_the_app_will_calculate_the_total_emission_and_provide_you_with_tips_on_how_to_decrease_your_carbon_footprint"/>
     <string name="about_developer">Team Peach consists of Emily Cao, Jane Gao, Steven Ho and Vu Nguyen. They are university students who are in the faculty of Software Systems and Computing Science. The app was created as a project for CMPT276.</string>
     <string name="about_app">The app, completed in 2017,  is designed to track your Carbon Footprint. By inputting the routes you have taken, the different type of transportation modes you have used, and the utilities spent, the app will calculate the total emission and provide you with tips on how to decrease your carbon footprint.</string>
+    <string name="electricity_bill">electricity</string>
+    <string name="end_date_bill_xml">end date</string>
+    <string name="gas_bill_xml">gas</string>
+    <string name="start_date_bill_xml">start date</string>
+    <string name="make_xml">make</string>
+    <string name="model_xml">model</string>
+    <string name="name_xml">name</string>
+    <string name="year_xml">year</string>
+    <string name="route_name_xml">Route Name</string>
+    <string name="make_listitem">make</string>
+    <string name="model_listitem">model</string>
+    <string name="name_listitem">name</string>
+    <string name="bill_startdate">Please enter the start date of the bill</string>
+    <string name="bill_enddate">Please enter the end date of the bill</string>
+    <string name="bill_people">Please enter the number of people in the house</string>
+    <string name="bill_consumption">Please enter the consumptions</string>
+    <string name="car_nicknamecheck">Please enter a Nickname for the car.</string>
+    <string name="make_nicknamecheck">Please choose make.</string>
+    <string name="model_nicknamecheck">Please choose model</string>
+    <string name="year_carcheck">Please choose year.</string>
+    <string name="car_carcheck">Please select car.</string>
+    <string name="car_trans">Car</string>
+    <string name="public_transit_trans">Public Transit</string>
+    <string name="bike_walk_trans">Bike / Walk</string>
+    <string name="ask_to_select_trans_mode">Please Select Transportation Mode</string>
+    <string name="select_your_car_caractivity">Please select your car</string>
+    <string name="your_car_select">Your Car:</string>
     <string-array name="citations">
-        <item>Soo Line Garden Visual Design Inspiration,</item>
         <item>GraphicLoads,</item>
-        <item>Walltor,</item>
+        <item>IconArchive,</item>
+        <item>IconArchive,</item>
+        <item>IconArchive,</item>
+        <item>IconArchive,</item>
+        <item>Soo Line Garden,</item>
         <item>Vexels,</item>
-        <item>IconArchive,</item>
-        <item>IconArchive,</item>
-        <item>IconArchive,</item>
-        <item>IconArchive,</item>
+        <item>Walltor,</item>
     </string-array>
+
 </resources>
 
 

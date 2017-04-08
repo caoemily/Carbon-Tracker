@@ -92,32 +92,55 @@ public class SelectTransModeActivity extends AppCompatActivity {
         int idOfSelected = group.getCheckedRadioButtonId();
 
         if (idOfSelected < 0) {
-            Toast.makeText(getApplicationContext(),"Please Select Transportation Mode",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), R.string.ask_to_select_trans_mode,Toast.LENGTH_SHORT).show();
         }
-        else {
+       /* else {
             RadioButton radioButton = (RadioButton) findViewById(idOfSelected);
             String mode = radioButton.getText().toString();
             switch (mode) {
-                case "Car": {
+                case getString(R.string.car_trans): {
                     Intent intent = new Intent(SelectTransModeActivity.this, SelectCarActivity.class);
                     intent.putExtra(getResources().getString(R.string.TRANS_MODE), 0);
                     startActivity(intent);
                     break;
                 }
-                case "Public Transit": {
+                case getString(R.string.public_transit_trans): {
                     Intent intent = new Intent(SelectTransModeActivity.this, SelectRouteActivity.class);
                     intent.putExtra(getResources().getString(R.string.TRANS_MODE), 1);
                     startActivity(intent);
                     break;
                 }
-                case "Bike / Walk": {
+                case getString(R.string.bike_walk_trans): {
                     Intent intent = new Intent(SelectTransModeActivity.this, SelectRouteActivity.class);
                     intent.putExtra(getResources().getString(R.string.TRANS_MODE), 2);
                     startActivity(intent);
                     break;
                 }
-            }
-            finish();
+            }*/
+
+            else {
+                RadioButton radioButton = (RadioButton) findViewById(idOfSelected);
+                String mode = radioButton.getText().toString();
+                if (mode.equals(getString(R.string.car_trans)))
+                {
+                    Intent intent = new Intent(SelectTransModeActivity.this, SelectCarActivity.class);
+                    intent.putExtra(getResources().getString(R.string.TRANS_MODE), 0);
+                    startActivity(intent);
+                }
+
+                else if(mode.equals(getString(R.string.public_transit_trans)))
+                {
+                    Intent intent = new Intent(SelectTransModeActivity.this, SelectRouteActivity.class);
+                    intent.putExtra(getResources().getString(R.string.TRANS_MODE), 1);
+                    startActivity(intent);
+                }
+                else
+                {
+                    Intent intent = new Intent(SelectTransModeActivity.this, SelectRouteActivity.class);
+                    intent.putExtra(getResources().getString(R.string.TRANS_MODE), 2);
+                    startActivity(intent);
+                }
+                finish();
         }
     }
 

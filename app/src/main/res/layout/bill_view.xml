@@ -30,7 +30,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="start date"
+                    android:text="@string/start_date_bill_xml"
                     android:textAlignment="center" />
             </LinearLayout>
 
@@ -44,7 +44,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginTop="-3dp"
-                    android:text="end date"
+                    android:text="@string/end_date_bill_xml"
                     android:textAlignment="center" />
 
             </LinearLayout>
@@ -75,7 +75,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="9dp"
-                android:text="electricity"
+                android:text="@string/electricity_bill"
                 android:textAlignment="center" />
 
         </LinearLayout>
@@ -91,7 +91,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="9dp"
-                android:text="gas"
+                android:text="@string/gas_bill_xml"
                 android:textAlignment="center" />
 
         </LinearLayout>

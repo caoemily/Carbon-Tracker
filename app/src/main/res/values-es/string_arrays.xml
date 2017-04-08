@@ -1,0 +1,18 @@
+<resources>
+    <string-array name="transportations">
+        <item>"Coche"</item>
+        <item>"Tránsito público"</item>
+        <item>"Bicicleta / Walk"</item>
+    </string-array>
+
+    <string-array name="graphUnit_Other">
+        <item>"Año árbol (un año árbol necesita para secuestrar el CO2 emitido)"</item>
+        <item>"Kilogramo (el peso real de CO2 emitida)"</item>
+    </string-array>
+
+    <string-array name="graphUnit">
+        <item>"Año árbol"</item>
+        <item>"Kilogramo"</item>
+    </string-array>
+
+</resources>

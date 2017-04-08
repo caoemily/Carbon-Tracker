@@ -219,7 +219,7 @@ public class AddCarActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
                 year = carYear.get(pos);
                 generateListView();
-                Toast.makeText(AddCarActivity.this, "Please select your car", Toast.LENGTH_LONG).show();
+                Toast.makeText(AddCarActivity.this, R.string.select_your_car_caractivity, Toast.LENGTH_LONG).show();
             }
             @Override
             public void onNothingSelected(AdapterView<?> arg0) {
@@ -253,19 +253,19 @@ public class AddCarActivity extends AppCompatActivity {
 
     private void setupAcceptButton() {
         if (carName.length() == 0 || carName == null) {
-            Toast.makeText(getApplicationContext(), "Please enter a Nickname for the car.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), R.string.car_nicknamecheck, Toast.LENGTH_SHORT).show();
         }
         else if (make.length() == 0 || make == null) {
-            Toast.makeText(getApplicationContext(), "Please choose make.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), R.string.make_nicknamecheck, Toast.LENGTH_SHORT).show();
         }
         else if (model.length() == 0 || model == null) {
-            Toast.makeText(getApplicationContext(), "Please choose model", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), R.string.model_nicknamecheck, Toast.LENGTH_SHORT).show();
         }
         else if (year.length() == 0 || year == null) {
-            Toast.makeText(getApplicationContext(), "Please choose year.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), R.string.year_carcheck, Toast.LENGTH_SHORT).show();
         }
         else if (highWayE == 0 || cityE == 0 || fuelType.length() == 0 || fuelType == null) {
-            Toast.makeText(getApplicationContext(), "Please select car.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), R.string.car_carcheck, Toast.LENGTH_SHORT).show();
         }
         else {
             Car car = new Car(make, model, year, highWayE, cityE, fuelType, carName, icon);

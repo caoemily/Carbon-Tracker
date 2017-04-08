@@ -96,38 +96,38 @@ public class AppInfoActivity extends AppCompatActivity {
 
         TextView citationsTxt = (TextView)findViewById(R.id.citation1);
         TextView sourcesTxt = (TextView)findViewById(R.id.web1);
-        String alienImage = "<a href=    https://cdn2.iconfinder.com/data/icons/summer-olympic-sport/256/bike-street-512.png'> Bike Icon </a>";
+        String alienImage = "<a href=     http://www.iconarchive.com/show/100-flat-2-icons-by-graphicloads/bus-icon.html'> Bus Icon </a>";
         setupTextViews(citationsTxt, citations[0], sourcesTxt, alienImage );
 
 
         TextView citationsTxt2 = (TextView)findViewById(R.id.citation2);
         TextView sourcesTxt2 = (TextView)findViewById(R.id.web2);
-        String starbg = "<a href=     http://www.iconarchive.com/show/100-flat-2-icons-by-graphicloads/bus-icon.html'> Bus Icon </a>";
+        String starbg = "<a href=     http://icons.iconarchive.com/icons/icons8/windows-8/512/Time-Plus-1day-icon.png'> 1 Day </a>";
         setupTextViews(citationsTxt2, citations[1], sourcesTxt2, starbg);
 
         TextView citationsTxt3 = (TextView)findViewById(R.id.citation3);
         TextView sourcesTxt3 = (TextView)findViewById(R.id.web3);
-        String alienScanSound = "<a href=    http://www.walltor.com/images/wallpaper/cg-composite-summer--water-air-and-greeneryphoto-mnipulation--sunbeams-shining-through-trees-dreamy-effect-44877.jpg'> Composite Bg</a>";
+        String alienScanSound = "<a href=    http://icons.iconarchive.com/icons/icons8/windows-8/512/Time-Minus-1month-icon.png'> 1 Month</a>";
         setupTextViews(citationsTxt3, citations[2], sourcesTxt3, alienScanSound);
 
         TextView citationsTxt4 = (TextView)findViewById(R.id.citation4);
         TextView sourcesTxt4 = (TextView)findViewById(R.id.web4);
-        String alienFoundSound = "<a href=   https://www.vexels.com/download-vector/77467/flat-vintage-cars-icon-set'>Vintage Car </a>";
+        String alienFoundSound = "<a href=   http://icons.iconarchive.com/icons/icons8/windows-8/512/Time-Minus-1year-icon.png'>1 Year </a>";
         setupTextViews(citationsTxt4, citations[3], sourcesTxt4, alienFoundSound);
 
         TextView citationsTxt5 = (TextView)findViewById(R.id.citation5);
         TextView sourcesTxt5 = (TextView)findViewById(R.id.web5);
-        String radar = "<a href=    http://icons.iconarchive.com/icons/icons8/windows-8/512/Time-Plus-1day-icon.png'> One Day </a>";
+        String radar = "<a href=    https://cdn2.iconfinder.com/data/icons/summer-olympic-sport/256/bike-street-512.png'> 1 Year </a>";
         setupTextViews(citationsTxt5, citations[4], sourcesTxt5, radar);
 
         TextView citationsTxt6 = (TextView)findViewById(R.id.citation6);
         TextView sourcesTxt6 = (TextView)findViewById(R.id.web6);
-        String month = "<a href=    http://icons.iconarchive.com/icons/icons8/windows-8/512/Time-Minus-1month-icon.png'> One Month </a>";
+        String month = "<a href=    https://www.vexels.com/download-vector/77467/flat-vintage-cars-icon-set'> Vintage Car </a>";
         setupTextViews(citationsTxt6, citations[5], sourcesTxt6, month);
 
         TextView citationsTxt7 = (TextView)findViewById(R.id.citation7);
         TextView sourcesTxt7 = (TextView)findViewById(R.id.web7);
-        String year = "<a href=    http://icons.iconarchive.com/icons/icons8/windows-8/512/Time-Minus-1year-icon.png'> One Year </a>";
+        String year = "<a href=    http://apple.wallpapersfine.com/iPhone6/2229.html'> Graph Bg </a>";
         setupTextViews(citationsTxt7, citations[6], sourcesTxt7, year);
     }
 
