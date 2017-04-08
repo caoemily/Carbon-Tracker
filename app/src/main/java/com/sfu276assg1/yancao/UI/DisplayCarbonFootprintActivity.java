@@ -247,7 +247,6 @@ public class DisplayCarbonFootprintActivity extends AppCompatActivity {
     private void generatePieChart() {
         List<PieEntry> yEntries = new ArrayList<>();
         List<String> xEntries = new ArrayList<>();
-        //NEED TO CHANGE TO TREE!!!!!!!
         if(unitChose != 0) {
             carbonForUtilitiesElectrical = (float) CarbonModel.getInstance().getBillCollection().getElectricityCarbonEmission(chosenDate);
             carbonForUtilitiesGas = (float) CarbonModel.getInstance().getBillCollection().getGasCarbonEmission(chosenDate);
@@ -291,6 +290,7 @@ public class DisplayCarbonFootprintActivity extends AppCompatActivity {
             yEntries.add(new PieEntry(carbonForUtilitiesGas, getString(R.string.natural_gas)));
             xEntries.add(getString(R.string.natural_gas));
         }
+
         PieDataSet dataSet = new PieDataSet(yEntries, "");
         dataSet.setSliceSpace(5);
         dataSet.setValueTextSize(12);

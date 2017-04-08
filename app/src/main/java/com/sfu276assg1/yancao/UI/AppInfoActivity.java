@@ -29,6 +29,14 @@ public class AppInfoActivity extends AppCompatActivity {
         displayAboutApp();
         displayImageSources();
     }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
     @Override
     public void onWindowFocusChanged(boolean hasFocas) {
         super.onWindowFocusChanged(hasFocas);
@@ -52,16 +60,12 @@ public class AppInfoActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void displayAboutDevelopersLink()
-    {
+    public void displayAboutDevelopersLink() {
         TextView aboutTxt = (TextView) findViewById(R.id.clickable_link_txt);
-
         aboutTxt.setClickable(true);
         aboutTxt.setMovementMethod(LinkMovementMethod.getInstance());
         String coursehomepage = "<a href= 'https://www.sfu.ca/computing.html'> Homepage </a>";
         aboutTxt.setText(Html.fromHtml(coursehomepage));
-
-
     }
 
     private void displayVersionNum() {
@@ -77,22 +81,17 @@ public class AppInfoActivity extends AppCompatActivity {
         tv.setText(versionNum);
     }
 
-    private void displayAboutDevelopers()
-    {
+    private void displayAboutDevelopers() {
         TextView textView = (TextView) findViewById(R.id.about_developers);
         textView.setText(R.string.about_developer);
-
     }
 
-    private void displayAboutApp()
-    {
+    private void displayAboutApp() {
         TextView textView = (TextView) findViewById(R.id.about_app);
         textView.setText(R.string.about_app);
-
     }
 
-    public void displayImageSources()
-    {
+    public void displayImageSources() {
         String[] citations = getResources().getStringArray(R.array.citations);
 
         TextView citationsTxt = (TextView)findViewById(R.id.citation1);
@@ -130,17 +129,9 @@ public class AppInfoActivity extends AppCompatActivity {
         TextView sourcesTxt7 = (TextView)findViewById(R.id.web7);
         String year = "<a href=    http://apple.wallpapersfine.com/iPhone6/2229.html'> Graph Bg </a>";
         setupTextViews(citationsTxt7, citations[6], sourcesTxt7, year);
-
-        TextView citationsTxt8 = (TextView)findViewById(R.id.citation8);
-        TextView sourcesTxt8 = (TextView)findViewById(R.id.web8);
-        String walltor = "<a href=   http://www.walltor.com/images/wallpaper/cg-composite-summer--water-air-and-greeneryphoto-mnipulation--sunbeams-shining-through-trees-dreamy-effect-44877.jpg'> Composite Bg </a>";
-        setupTextViews(citationsTxt8, citations[7], sourcesTxt8, walltor);
-
-
     }
 
-    private void setupTextViews(TextView citationTxt, String citation,TextView sourcesTxt, String hyperlink)
-    {
+    private void setupTextViews(TextView citationTxt, String citation,TextView sourcesTxt, String hyperlink) {
         citationTxt.setText(citation);
 
         sourcesTxt.setClickable(true);
