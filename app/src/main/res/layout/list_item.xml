@@ -126,6 +126,7 @@
                 android:id="@+id/journeyName"
                 android:layout_width="match_parent"
                 android:layout_height="25dp"
+                android:lines="1"
                 android:scaleY="1.2"
                 android:text="@string/name_listitem"
                 android:textAllCaps="true"

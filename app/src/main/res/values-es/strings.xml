@@ -52,8 +52,8 @@
     <string name="EDIT_JOURNEY">"EditJourney"</string>
     <string name="EDIT_JOURNEY_ID">"EditJourneyID"</string>
     <string name="edit_mode_route">"Editar Transporte / Ruta"</string>
-    <string name="single_day">"Día sola"</string>
-    <string name="_28_days">"Días"</string>
+    <string name="single_day">"1 Días"</string>
+    <string name="_28_days">"28 Días"</string>
     <string name="_365_days">"365 Días"</string>
     <string name="add">"Añadid"</string>
     <string name="info">"Información"</string>
@@ -141,7 +141,6 @@
     <string name="select_car">"Elija un coche"</string>
     <string name="select_route">"Seleccione la ruta"</string>
     <string name="your_car_select">"Tu Carro:"</string>
-
     <string name="developers_info">"La aplicación, terminado en 2017, está diseñado para realizar un seguimiento de su huella de carbono. Al introducir las rutas que haya tomado, los diferentes tipos de medios de transporte que ha utilizado, y las utilidades pasado, la aplicación calculará la emisión total y ofrecerle consejos sobre cómo disminuir su huella de carbono."</string><string name="string_the_app_completed_in_2017_is_designed_to_track_your_carbon_footprint_by_inputting_the_routes_you_have_taken_the_different_type_of_transportation_modes_you_have_used_and_the_utilities_spent_the_app_will_calculate_the_total_emission_and_provide_you_with_tips_on_how_to_decrease_your_carbon_footprint">""</string>
     <string name="about_developer">"Equipo melocotón consta de Emily Cao, Jane Gao, Steven Ho y Vu Nguyen. Son estudiantes universitarios que están en la facultad de sistemas de software y Ciencias de la Computación. La aplicación fue creada como un proyecto para CMPT276."</string>
     <string name="about_app">"La aplicación, terminado en 2017, está diseñado para realizar un seguimiento de su huella de carbono. Al introducir las rutas que haya tomado, los diferentes tipos de medios de transporte que ha utilizado, y las utilidades pasado, la aplicación calculará la emisión total y ofrecerle consejos sobre cómo disminuir su huella de carbono."</string>
@@ -171,6 +170,8 @@
     <string name="bike_walk_trans">"Bicicleta / Walk"</string>
     <string name="ask_to_select_trans_mode">"Por favor, seleccione el modo de transporte"</string>
     <string name="select_your_car_caractivity">"Por favor seleccione su coche"</string>
+    <string name="resources">Recursos:</string>
+    <string name="about">Acerca de</string>
     <string-array name="citations">
         <item>GraphicLoads,</item>
         <item>IconArchive,</item>

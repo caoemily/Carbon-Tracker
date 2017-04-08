@@ -20,7 +20,7 @@ public class AppInfoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_app_info);
 
-        getSupportActionBar().setTitle("About");
+        getSupportActionBar().setTitle(R.string.about);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         displayAboutDevelopersLink();
@@ -73,7 +73,7 @@ public class AppInfoActivity extends AppCompatActivity {
         PackageInfo packageInfo;
         try {
             packageInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
-            versionNum = "ver:" + packageInfo.versionName;
+            versionNum = "ver: " + packageInfo.versionName;
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
@@ -131,7 +131,7 @@ public class AppInfoActivity extends AppCompatActivity {
         setupTextViews(citationsTxt7, citations[6], sourcesTxt7, year);
     }
 
-    private void setupTextViews(TextView citationTxt, String citation,TextView sourcesTxt, String hyperlink) {
+    private void setupTextViews(TextView citationTxt, String citation, TextView sourcesTxt, String hyperlink) {
         citationTxt.setText(citation);
 
         sourcesTxt.setClickable(true);

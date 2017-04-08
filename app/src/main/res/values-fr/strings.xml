@@ -39,26 +39,26 @@
     <string name="add_car">"Ajouter véhicule"</string>
     <string name="please_select_your_car">"S'il vous plaît Choisissez votre voiture"</string>
     <string name="year">"Année: "</string>
-    <string name="edit_date">"Date d'édition"</string>
+    <string name="edit_date">"Datte d'édition"</string>
     <string name="edit_journey">"Modifier Journey"</string>
     <string name="here_is_a_list_of_car">"Voici une liste de voiture"</string>
-    <string name="date_for_your_journey">"Date de votre voyage"</string>
+    <string name="date_for_your_journey">"Datte de votre voyage"</string>
     <string name="select_transpotation_mode">"Sélectionnez le mode transpotation"</string>
-    <string name="date">"date"</string>
-    <string name="people">"personnes"</string>
+    <string name="date">"Datte"</string>
+    <string name="people">"Personnes"</string>
     <string name="add_bill">"Ajouter une facture"</string>
     <string name="natural_gas_gj">"Gaz naturel (GJ)"</string>
     <string name="TRANS_MODE">"transmode"</string>
     <string name="EDIT_JOURNEY">"EditJourney"</string>
     <string name="EDIT_JOURNEY_ID">"EditJourneyID"</string>
     <string name="edit_mode_route">"Modifier Transport / Route"</string>
-    <string name="single_day">"Seule journée"</string>
-    <string name="_28_days">"JOURNÉES"</string>
-    <string name="_365_days">"JOURNÉES"</string>
+    <string name="single_day">"1 Journée"</string>
+    <string name="_28_days">"28 JOURNÉES"</string>
+    <string name="_365_days">"365 JOURNÉES"</string>
     <string name="add">"Ajouter"</string>
     <string name="info">"Informations"</string>
     <string name="unit">"Réglage de l'unité"</string>
-    <string name="tree">"arbre Année"</string>
+    <string name="tree">"Arbre Année"</string>
     <string name="kg">"1000 kg"</string>
     <string name="NOTIFICATION_CONTENT_TITLE">"Réduire ensemble les émissions de CO2."</string>
     <string name="NOTIFICATION_NOBILL_NOJOURNEY_PART1">"Vous n'êtes pas entré de voyage aujourd'hui,"</string>
@@ -68,8 +68,7 @@
     <string name="NOTIFICATION_OTHER">"Voulez-vous entrer plusieurs voyages pour aujourd'hui?"</string>
     <string name="HIGHWEY">"Autoroute"</string>
     <string name="CITY">"Ville"</string>
-    <string name="SKYTRAIN">"Train aérien
-"</string>
+    <string name="SKYTRAIN">"Train aérien"</string>
     <string name="BUS">"bus"</string>
     <string name="WALK">"Marche"</string>
     <string name="BIKE">"Vélo"</string>
@@ -88,8 +87,8 @@
     <string name="car">"Voiture"</string>
     <string name="select_icon">"Sélectionnez une icône"</string>
     <string name="billing_cycle">"Cycle de facturation"</string>
-    <string name="start_date">"Date du début :"</string>
-    <string name="end_date">"Date de fin :"</string>
+    <string name="start_date">"Datte du début :"</string>
+    <string name="end_date">"Datte de fin :"</string>
     <string name="bc_hydro_or_fortis_bc_bill">"(Facture d'Hydro ou Fortis BC BC)"</string>
     <string name="yyyy_mm_dd">"aaaa-MM-jj"</string>
     <string name="gas_gj">"Gaz (GJ):"</string>
@@ -137,19 +136,18 @@
     <string name="KeepOnTIp">"Bon travail, Keep On!"</string>
     <string name="mode">"Modalité"</string>
     <string name="route">"Trajet"</string>
-    <string name="single_day_chart">"Seule journée"</string>
+    <string name="single_day_chart">"1 JOURNÉE"</string>
     <string name="action_graph">"Graphique"</string>
     <string name="select_car">"Sélectionnez véhicule"</string>
     <string name="select_route">"Sélectionnez Itinéraire"</string>
     <string name="your_car_select">"Ta Voiture:"</string>
-
     <string name="developers_info">"L'application, achevée en 2017, est conçu pour suivre votre empreinte carbone. En entrant les itinéraires que vous avez prises, les différents types de modes de transport que vous avez utilisé, et les services publics dépensés, l'application calcule l'émission totale et vous donner des conseils sur la façon de réduire votre empreinte carbone."</string><string name="string_the_app_completed_in_2017_is_designed_to_track_your_carbon_footprint_by_inputting_the_routes_you_have_taken_the_different_type_of_transportation_modes_you_have_used_and_the_utilities_spent_the_app_will_calculate_the_total_emission_and_provide_you_with_tips_on_how_to_decrease_your_carbon_footprint">""</string>
     <string name="about_developer">"L'équipe Peach se compose d'Emily Cao, Jane Gao, Steven Ho et Vu Nguyen. Ce sont des étudiants universitaires qui sont à la faculté des systèmes logiciels et sciences informatiques. L'application a été créé comme un projet pour CMPT276."</string>
     <string name="about_app">"L'application, achevée en 2017, est conçu pour suivre votre empreinte carbone. En entrant les itinéraires que vous avez prises, les différents types de modes de transport que vous avez utilisé, et les services publics dépensés, l'application calcule l'émission totale et vous donner des conseils sur la façon de réduire votre empreinte carbone."</string>
     <string name="electricity_bill">"L'électricité"</string>
-    <string name="end_date_bill_xml">"Date de fin"</string>
+    <string name="end_date_bill_xml">"Datte de fin"</string>
     <string name="gas_bill_xml">"gaz"</string>
-    <string name="start_date_bill_xml">"Date de début"</string>
+    <string name="start_date_bill_xml">"Datte de début"</string>
     <string name="make_xml">"faire"</string>
     <string name="model_xml">"maquette"</string>
     <string name="name_xml">"nom"</string>
@@ -158,8 +156,8 @@
     <string name="make_listitem">"faire"</string>
     <string name="model_listitem">"maquette"</string>
     <string name="name_listitem">"nom"</string>
-    <string name="bill_startdate">"S'il vous plaît entrer la date de début du projet de loi"</string>
-    <string name="bill_enddate">"S'il vous plaît entrer la date de fin du projet de loi"</string>
+    <string name="bill_startdate">"S'il vous plaît entrer la datte de début du projet de loi"</string>
+    <string name="bill_enddate">"S'il vous plaît entrer la datte de fin du projet de loi"</string>
     <string name="bill_people">"S'il vous plaît entrer le nombre de personnes dans la maison"</string>
     <string name="bill_consumption">"S'il vous plaît entrer les consommations"</string>
     <string name="car_nicknamecheck">"S'il vous plaît entrer un surnom pour la voiture."</string>
@@ -172,6 +170,8 @@
     <string name="bike_walk_trans">"Vélo / Marche"</string>
     <string name="ask_to_select_trans_mode">"S'il vous plaît Sélectionnez le mode de transport"</string>
     <string name="select_your_car_caractivity">"S'il vous plaît choisir votre voiture"</string>
+    <string name="resources">Ressources:</string>
+    <string name="about">Quelque</string>
     <string-array name="citations">
         <item>GraphicLoads,</item>
         <item>IconArchive,</item>

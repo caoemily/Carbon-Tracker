@@ -47,7 +47,9 @@ public class JourneyListViewAdapter extends ArrayAdapter<Journey> {
             holder.name.setText(journeys.get(position).getCar().getNickname());
             holder.icon.setImageResource(journeys.get(position).getCar().getIcon());
         }
-        else if (journeys.get(position).getRoute().getType().equals("Public Transit")) {
+        else if (journeys.get(position).getRoute().getType().equals("Public Transit") ||
+                journeys.get(position).getRoute().getType().equals("Tránsito público") ||
+                journeys.get(position).getRoute().getType().equals("Transport en commun")) {
             holder.name.setText(journeys.get(position).getRoute().getType());
             holder.icon.setImageResource(R.drawable.bus_ic);
         }

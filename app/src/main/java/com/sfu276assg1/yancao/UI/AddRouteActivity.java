@@ -319,10 +319,10 @@ public class AddRouteActivity extends AppCompatActivity {
                 currentRoute.setType("Drive");
                 break;
             case 1:
-                currentRoute.setType("Public Transit");
+                currentRoute.setType(getResources().getString(R.string.public_trans));
                 break;
             case 2:
-                currentRoute.setType("Bike/Walk");
+                currentRoute.setType(getResources().getString(R.string.bike_walk_trans));
                 break;
         }
     }

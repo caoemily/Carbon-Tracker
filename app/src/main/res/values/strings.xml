@@ -140,7 +140,6 @@
     <string name="action_graph">Graph</string>
     <string name="select_car">Select Car</string>
     <string name="select_route">Select Route</string>
-
     <string name="developers_info">The app, completed in 2017, is designed to track your Carbon Footprint. By inputting the routes you have taken, the different type of transportation modes you have used, and the utilities spent, the app will calculate the total emission and provide you with tips on how to decrease your carbon footprint.</string><string name="string_the_app_completed_in_2017_is_designed_to_track_your_carbon_footprint_by_inputting_the_routes_you_have_taken_the_different_type_of_transportation_modes_you_have_used_and_the_utilities_spent_the_app_will_calculate_the_total_emission_and_provide_you_with_tips_on_how_to_decrease_your_carbon_footprint"/>
     <string name="about_developer">Team Peach consists of Emily Cao, Jane Gao, Steven Ho and Vu Nguyen. They are university students who are in the faculty of Software Systems and Computing Science. The app was created as a project for CMPT276.</string>
     <string name="about_app">The app, completed in 2017,  is designed to track your Carbon Footprint. By inputting the routes you have taken, the different type of transportation modes you have used, and the utilities spent, the app will calculate the total emission and provide you with tips on how to decrease your carbon footprint.</string>
@@ -171,6 +170,8 @@
     <string name="ask_to_select_trans_mode">Please Select Transportation Mode</string>
     <string name="select_your_car_caractivity">Please select your car</string>
     <string name="your_car_select">Your Car:</string>
+    <string name="resources">Resources:</string>
+    <string name="about">About</string>
     <string-array name="citations">
         <item>GraphicLoads,</item>
         <item>IconArchive,</item>
