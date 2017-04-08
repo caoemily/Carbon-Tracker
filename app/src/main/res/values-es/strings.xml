@@ -172,14 +172,14 @@
     <string name="ask_to_select_trans_mode">"Por favor, seleccione el modo de transporte"</string>
     <string name="select_your_car_caractivity">"Por favor seleccione su coche"</string>
     <string-array name="citations">
-        <item>"Soo Line Jardín Visual inspiración del diseño,"</item>
-        <item>"GraphicLoads,"</item>
-        <item>"Walltor,"</item>
-        <item>"Vexels,"</item>
-        <item>"IconArchive,"</item>
-        <item>"IconArchive,"</item>
-        <item>"IconArchive,"</item>
-        <item>"IconArchive,"</item>
+        <item>GraphicLoads,</item>
+        <item>IconArchive,</item>
+        <item>IconArchive,</item>
+        <item>IconArchive,</item>
+        <item>IconArchive,</item>
+        <item>Soo Line Garden,</item>
+        <item>Vexels,</item>
+        <item>Walltor,</item>
     </string-array>
 
 </resources>
