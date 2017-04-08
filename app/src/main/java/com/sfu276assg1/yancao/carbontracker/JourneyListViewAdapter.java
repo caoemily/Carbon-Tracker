@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.daimajia.swipe.SwipeLayout;
 import com.sfu276assg1.yancao.UI.MainActivity;
@@ -110,7 +109,6 @@ public class JourneyListViewAdapter extends ArrayAdapter<Journey> {
                 int id = journeys.get(position).getId();
                 CarbonModel.getInstance().removeJourney(id);
                 CarbonModel.getInstance().getDb().deleteJourneyRow(id);
-                Toast.makeText(activity, Integer.toString(id),Toast.LENGTH_SHORT).show();
                 holder.swipeLayout.close();
                 activity.updateAdapter();
             }

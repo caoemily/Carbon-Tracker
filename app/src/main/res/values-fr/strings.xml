@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">"Tracker Carbone"</string>
+    <string name="app_name">"greenEco"</string>
     <string name="pie_chart">"Graphique \"Camembert\""</string>
     <string name="go_to_main">"Aller à la page principale"</string>
     <string name="distance_km">"Distance (km): "</string>
@@ -141,6 +141,7 @@
     <string name="action_graph">"Graphique"</string>
     <string name="select_car">"Sélectionnez véhicule"</string>
     <string name="select_route">"Sélectionnez Itinéraire"</string>
+    <string name="your_car_select">"Ta Voiture:"</string>
 
     <string name="developers_info">"L'application, achevée en 2017, est conçu pour suivre votre empreinte carbone. En entrant les itinéraires que vous avez prises, les différents types de modes de transport que vous avez utilisé, et les services publics dépensés, l'application calcule l'émission totale et vous donner des conseils sur la façon de réduire votre empreinte carbone."</string><string name="string_the_app_completed_in_2017_is_designed_to_track_your_carbon_footprint_by_inputting_the_routes_you_have_taken_the_different_type_of_transportation_modes_you_have_used_and_the_utilities_spent_the_app_will_calculate_the_total_emission_and_provide_you_with_tips_on_how_to_decrease_your_carbon_footprint">""</string>
     <string name="about_developer">"L'équipe Peach se compose d'Emily Cao, Jane Gao, Steven Ho et Vu Nguyen. Ce sont des étudiants universitaires qui sont à la faculté des systèmes logiciels et sciences informatiques. L'application a été créé comme un projet pour CMPT276."</string>

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Carbon Tracker</string>
+    <string name="app_name">greenEco</string>
     <string name="pie_chart">Pie Chart</string>
     <string name="go_to_main">Go to Main</string>
     <string name="distance_km">Distance (km): </string>
@@ -170,6 +170,7 @@
     <string name="bike_walk_trans">Bike / Walk</string>
     <string name="ask_to_select_trans_mode">Please Select Transportation Mode</string>
     <string name="select_your_car_caractivity">Please select your car</string>
+    <string name="your_car_select">Your Car:</string>
     <string-array name="citations">
         <item>GraphicLoads,</item>
         <item>IconArchive,</item>

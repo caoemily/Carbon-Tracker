@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">"Rastreador de Carbono"</string>
+    <string name="app_name">"greenEco"</string>
     <string name="pie_chart">"Gráfico circular"</string>
     <string name="go_to_main">"Ir a Inicio"</string>
     <string name="distance_km">"La distancia (km): "</string>
@@ -140,6 +140,7 @@
     <string name="action_graph">"Grafico"</string>
     <string name="select_car">"Elija un coche"</string>
     <string name="select_route">"Seleccione la ruta"</string>
+    <string name="your_car_select">"Tu Carro:"</string>
 
     <string name="developers_info">"La aplicación, terminado en 2017, está diseñado para realizar un seguimiento de su huella de carbono. Al introducir las rutas que haya tomado, los diferentes tipos de medios de transporte que ha utilizado, y las utilidades pasado, la aplicación calculará la emisión total y ofrecerle consejos sobre cómo disminuir su huella de carbono."</string><string name="string_the_app_completed_in_2017_is_designed_to_track_your_carbon_footprint_by_inputting_the_routes_you_have_taken_the_different_type_of_transportation_modes_you_have_used_and_the_utilities_spent_the_app_will_calculate_the_total_emission_and_provide_you_with_tips_on_how_to_decrease_your_carbon_footprint">""</string>
     <string name="about_developer">"Equipo melocotón consta de Emily Cao, Jane Gao, Steven Ho y Vu Nguyen. Son estudiantes universitarios que están en la facultad de sistemas de software y Ciencias de la Computación. La aplicación fue creada como un proyecto para CMPT276."</string>

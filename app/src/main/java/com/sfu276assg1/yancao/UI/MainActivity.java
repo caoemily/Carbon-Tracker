@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowHomeEnabled(true);
-        actionBar.setIcon(R.drawable.co2_cloud1);
+        actionBar.setIcon(R.drawable.leaf);
 
         setupDatabase();
         setUpBottomNavigation();
