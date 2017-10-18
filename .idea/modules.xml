@@ -4,11 +4,6 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/carbon-tracker.iml" filepath="$PROJECT_DIR$/carbon-tracker.iml" />
-      <module fileurl="file://$PROJECT_DIR$/carbon-tracker-it2-d2.iml" filepath="$PROJECT_DIR$/carbon-tracker-it2-d2.iml" />
-      <module fileurl="file://$PROJECT_DIR$/carbon-tracker-it2-d3.iml" filepath="$PROJECT_DIR$/carbon-tracker-it2-d3.iml" />
-      <module fileurl="file://$PROJECT_DIR$/carbon-tracker-it2-d3.iml" filepath="$PROJECT_DIR$/carbon-tracker-it2-d3.iml" />
-      <module fileurl="file://$PROJECT_DIR$/carbon-tracker-it3-d5.iml" filepath="$PROJECT_DIR$/carbon-tracker-it3-d5.iml" />
-      <module fileurl="file://$PROJECT_DIR$/carbon-tracker-it3-d7.iml" filepath="$PROJECT_DIR$/carbon-tracker-it3-d7.iml" />
     </modules>
   </component>
 </project>
