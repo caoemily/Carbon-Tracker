@@ -83,7 +83,7 @@
     <string name="average_canadian">Average CO2/Canadian</string>
     <string name="target_co2">Target CO2</string>
     <string name="utilities">Utilities</string>
-    <string name="public_trans">Public Transportation</string>
+    <string name="public_trans">Public Transit</string>
     <string name="car">Car</string>
     <string name="select_icon">Select Icon</string>
     <string name="billing_cycle">Billing Cycle</string>
@@ -130,7 +130,7 @@
     <string name="trips">Trips</string>
     <string name="trip">Trip</string>
     <string name="graphs">Graphs</string>
-    <string name="journey">Journey</string>
+    <string name="journey">Trips</string>
     <string name="your_trips">Your Trips</string>
     <string name="JOURNEY_ID">journeyId</string>
     <string name="KeepOnTIp">Good Job, Keep On!</string>
